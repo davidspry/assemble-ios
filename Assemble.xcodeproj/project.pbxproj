@@ -1,0 +1,914 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		141DDA51243F81140020386C /* AHREnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA4F243F81140020386C /* AHREnvelope.cpp */; };
+		141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA5C243F91610020386C /* SineOscillator.cpp */; };
+		141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA60243F918D0020386C /* SquareOscillator.cpp */; };
+		141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA62243F918E0020386C /* TriangleOscillator.cpp */; };
+		141DDA68243F918E0020386C /* SawtoothOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA64243F918E0020386C /* SawtoothOscillator.cpp */; };
+		141DDA6B243F95D00020386C /* Voice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA69243F95D00020386C /* Voice.cpp */; };
+		141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA6D243F96470020386C /* HuovilainenFilter.cpp */; };
+		143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */; };
+		143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */; };
+		143FB005243F301C0058AE40 /* Attribution.md in Resources */ = {isa = PBXBuildFile; fileRef = 143FB004243F301C0058AE40 /* Attribution.md */; };
+		143FB008243F360D0058AE40 /* ASDSPBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB007243F360D0058AE40 /* ASDSPBase.mm */; };
+		143FB00B243F3DD10058AE40 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */; };
+		143FB00D243F3DD90058AE40 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */; };
+		143FB00F243F3DE40058AE40 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB00E243F3DE40058AE40 /* CGSizeExtensions.swift */; };
+		143FB011243F3E2A0058AE40 /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB010243F3E2A0058AE40 /* FloatExtensions.swift */; };
+		143FB013243F3E7D0058AE40 /* FourCharCodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */; };
+		143FB017243F400B0058AE40 /* ASCommanderAU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB016243F400B0058AE40 /* ASCommanderAU.swift */; };
+		143FB01E243F52820058AE40 /* ASCommanderCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01C243F52820058AE40 /* ASCommanderCore.cpp */; };
+		143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01B243F50520058AE40 /* ASCommanderDSP.mm */; };
+		143FB021243F63620058AE40 /* ASCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB020243F63620058AE40 /* ASCommander.swift */; };
+		143FB023243F67500058AE40 /* ASComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB022243F67500058AE40 /* ASComponent.swift */; };
+		144A11672457166C000F2B4C /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 144A11662457166C000F2B4C /* Clock.cpp */; };
+		1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D1272452C5110093B541 /* KeyboardHandler.swift */; };
+		1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */; };
+		1458D12E24531FFD0093B541 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12C24531FFD0093B541 /* OFL.txt */; };
+		1458D12F24531FFD0093B541 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12D24531FFD0093B541 /* SpaceMono-Regular.ttf */; };
+		1458D131245328550093B541 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D130245328550093B541 /* PaddedLabel.swift */; };
+		1458D13424532F050093B541 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1458D13324532F050093B541 /* StereoDelay.cpp */; };
+		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
+		146EC662244CC143009025E4 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC660244CC143009025E4 /* Pattern.cpp */; };
+		1470F72E2432047E00E751B7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* Note.swift */; };
+		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
+		148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148E7E26244D5B72003C1DCF /* Synthesiser.cpp */; };
+		14915BC02434B75B008E8147 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
+		14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
+		149ACC1B24542209009DA18F /* UIBezierPathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */; };
+		149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */; };
+		149ACC1F24542483009DA18F /* ComputerKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1E24542483009DA18F /* ComputerKeyboard.swift */; };
+		149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */; };
+		149ACC242454330E009DA18F /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC232454330E009DA18F /* KeyboardListener.swift */; };
+		149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2624543615009DA18F /* MulticastDelegate.swift */; };
+		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
+		149ACC2B24543CE9009DA18F /* OscillatorSelectorListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2A24543CE9009DA18F /* OscillatorSelectorListener.swift */; };
+		14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */; };
+		14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBEB2436233B00822139 /* SequencerScene.swift */; };
+		14ADCBEE2436265300822139 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBED2436265300822139 /* Sequencer.swift */; };
+		14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89224520D8800F5AD3A /* Delay.cpp */; };
+		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
+		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
+		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
+		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
+		14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
+		14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9D243313210095B587 /* NoteShapeNode.swift */; };
+		14DAC3892417772C005654EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC3882417772C005654EA /* AppDelegate.swift */; };
+		14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC38A2417772C005654EA /* SceneDelegate.swift */; };
+		14DAC38D2417772C005654EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC38C2417772C005654EA /* ViewController.swift */; };
+		14DAC3902417772C005654EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC38E2417772C005654EA /* Main.storyboard */; };
+		14DAC3922417772E005654EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC3912417772E005654EA /* Assets.xcassets */; };
+		14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC3932417772E005654EA /* LaunchScreen.storyboard */; };
+		14DAC39D241777DF005654EA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC39C241777DF005654EA /* Engine.swift */; };
+		14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */; };
+		14EFEDA9242E350100242298 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
+		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		14755A392448494C00A8C858 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14CA4FEC243EF32A00F3C685 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		141DDA4F243F81140020386C /* AHREnvelope.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AHREnvelope.cpp; sourceTree = "<group>"; };
+		141DDA50243F81140020386C /* AHREnvelope.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AHREnvelope.hpp; sourceTree = "<group>"; };
+		141DDA5A243F90900020386C /* ASConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
+		141DDA5C243F91610020386C /* SineOscillator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SineOscillator.cpp; sourceTree = "<group>"; };
+		141DDA5D243F91610020386C /* SineOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SineOscillator.hpp; sourceTree = "<group>"; };
+		141DDA5F243F918D0020386C /* TriangleOscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TriangleOscillator.hpp; sourceTree = "<group>"; };
+		141DDA60243F918D0020386C /* SquareOscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SquareOscillator.cpp; sourceTree = "<group>"; };
+		141DDA61243F918E0020386C /* Oscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Oscillator.hpp; sourceTree = "<group>"; };
+		141DDA62243F918E0020386C /* TriangleOscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TriangleOscillator.cpp; sourceTree = "<group>"; };
+		141DDA63243F918E0020386C /* SawtoothOscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SawtoothOscillator.hpp; sourceTree = "<group>"; };
+		141DDA64243F918E0020386C /* SawtoothOscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SawtoothOscillator.cpp; sourceTree = "<group>"; };
+		141DDA65243F918E0020386C /* SquareOscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SquareOscillator.hpp; sourceTree = "<group>"; };
+		141DDA69243F95D00020386C /* Voice.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Voice.cpp; sourceTree = "<group>"; };
+		141DDA6A243F95D00020386C /* Voice.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Voice.hpp; sourceTree = "<group>"; };
+		141DDA6D243F96470020386C /* HuovilainenFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HuovilainenFilter.cpp; sourceTree = "<group>"; };
+		141DDA6E243F96470020386C /* HuovilainenFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HuovilainenFilter.hpp; sourceTree = "<group>"; };
+		143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioUnitBase.m; sourceTree = "<group>"; };
+		143FAFFD243F17DF0058AE40 /* ASAudioUnitBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioUnitBase.h; sourceTree = "<group>"; };
+		143FB000243F2E940058AE40 /* ASAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAudioUnit.h; sourceTree = "<group>"; };
+		143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASAudioUnit.mm; sourceTree = "<group>"; };
+		143FB003243F2F800058AE40 /* ASDSPBase.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASDSPBase.hpp; sourceTree = "<group>"; };
+		143FB004243F301C0058AE40 /* Attribution.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Attribution.md; sourceTree = "<group>"; };
+		143FB006243F30BB0058AE40 /* ASInteroperability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASInteroperability.h; sourceTree = "<group>"; };
+		143FB007243F360D0058AE40 /* ASDSPBase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASDSPBase.mm; sourceTree = "<group>"; };
+		143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
+		143FB00E243F3DE40058AE40 /* CGSizeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSizeExtensions.swift; sourceTree = "<group>"; };
+		143FB010243F3E2A0058AE40 /* FloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatExtensions.swift; sourceTree = "<group>"; };
+		143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourCharCodeExtensions.swift; sourceTree = "<group>"; };
+		143FB016243F400B0058AE40 /* ASCommanderAU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommanderAU.swift; sourceTree = "<group>"; };
+		143FB018243F41220058AE40 /* Assemble.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Assemble.h; sourceTree = "<group>"; };
+		143FB01A243F4C470058AE40 /* ASCommanderDSP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASCommanderDSP.hpp; sourceTree = "<group>"; };
+		143FB01B243F50520058AE40 /* ASCommanderDSP.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASCommanderDSP.mm; sourceTree = "<group>"; };
+		143FB01C243F52820058AE40 /* ASCommanderCore.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ASCommanderCore.cpp; sourceTree = "<group>"; };
+		143FB01D243F52820058AE40 /* ASCommanderCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASCommanderCore.hpp; sourceTree = "<group>"; };
+		143FB020243F63620058AE40 /* ASCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommander.swift; sourceTree = "<group>"; };
+		143FB022243F67500058AE40 /* ASComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASComponent.swift; sourceTree = "<group>"; };
+		144A11652456CF4A000F2B4C /* ASParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASParameters.h; sourceTree = "<group>"; };
+		144A11662457166C000F2B4C /* Clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
+		1458D1272452C5110093B541 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
+		1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
+		1458D12C24531FFD0093B541 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		1458D12D24531FFD0093B541 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		1458D130245328550093B541 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
+		1458D13224532D720093B541 /* StereoDelay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StereoDelay.hpp; sourceTree = "<group>"; };
+		1458D13324532F050093B541 /* StereoDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
+		146EC65A244CBC60009025E4 /* ASHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHeaders.h; sourceTree = "<group>"; };
+		146EC65B244CBE7F009025E4 /* ASOscillators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASOscillators.h; sourceTree = "<group>"; };
+		146EC65D244CBF49009025E4 /* Sequencer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sequencer.cpp; sourceTree = "<group>"; };
+		146EC65E244CBF49009025E4 /* Sequencer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sequencer.hpp; sourceTree = "<group>"; };
+		146EC660244CC143009025E4 /* Pattern.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Pattern.cpp; sourceTree = "<group>"; };
+		146EC661244CC143009025E4 /* Pattern.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pattern.hpp; sourceTree = "<group>"; };
+		146EC665244CC3B1009025E4 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
+		146EC668244CC624009025E4 /* Note.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Note.hpp; sourceTree = "<group>"; };
+		146EC66A244CC6DC009025E4 /* ASFrequencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASFrequencies.h; sourceTree = "<group>"; };
+		1470F72D2432047E00E751B7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		1474EC462442114F00D2BA79 /* OscillatorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorShape.swift; sourceTree = "<group>"; };
+		148E7E26244D5B72003C1DCF /* Synthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Synthesiser.cpp; sourceTree = "<group>"; };
+		148E7E27244D5B72003C1DCF /* Synthesiser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Synthesiser.hpp; sourceTree = "<group>"; };
+		148E7E2B244D5C88003C1DCF /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
+		14915BBF2434B75B008E8147 /* Assemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assemble.swift; sourceTree = "<group>"; };
+		14915BC12434BB3A008E8147 /* CellSelectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelectShape.swift; sourceTree = "<group>"; };
+		149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensions.swift; sourceTree = "<group>"; };
+		149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedRangeExtensions.swift; sourceTree = "<group>"; };
+		149ACC1E24542483009DA18F /* ComputerKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerKeyboard.swift; sourceTree = "<group>"; };
+		149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		149ACC232454330E009DA18F /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
+		149ACC2624543615009DA18F /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsListener.swift; sourceTree = "<group>"; };
+		149ACC2A24543CE9009DA18F /* OscillatorSelectorListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorSelectorListener.swift; sourceTree = "<group>"; };
+		14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerDelegate.swift; sourceTree = "<group>"; };
+		14ADCBEB2436233B00822139 /* SequencerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerScene.swift; sourceTree = "<group>"; };
+		14ADCBED2436265300822139 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		14AFB89224520D8800F5AD3A /* Delay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Delay.cpp; sourceTree = "<group>"; };
+		14AFB89324520D8800F5AD3A /* Delay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Delay.hpp; sourceTree = "<group>"; };
+		14AFB89524520D9100F5AD3A /* Vibrato.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vibrato.cpp; sourceTree = "<group>"; };
+		14AFB89624520D9100F5AD3A /* Vibrato.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vibrato.hpp; sourceTree = "<group>"; };
+		14AFB8982452155000F5AD3A /* ASEffects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASEffects.h; sourceTree = "<group>"; };
+		14AFB899245218A600F5AD3A /* ASUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASUtilities.h; sourceTree = "<group>"; };
+		14B2315B24362D970012F32F /* SequencerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerGestures.swift; sourceTree = "<group>"; };
+		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
+		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
+		14D3AE9B2433088E0095B587 /* DotGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGridRow.swift; sourceTree = "<group>"; };
+		14D3AE9D243313210095B587 /* NoteShapeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteShapeNode.swift; sourceTree = "<group>"; };
+		14DAC3852417772C005654EA /* Assemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14DAC3882417772C005654EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		14DAC38A2417772C005654EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		14DAC38C2417772C005654EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		14DAC38F2417772C005654EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		14DAC3912417772E005654EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		14DAC3942417772E005654EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		14DAC3962417772E005654EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14DAC39C241777DF005654EA /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ValueTransition.cpp; sourceTree = "<group>"; };
+		14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ValueTransition.hpp; sourceTree = "<group>"; };
+		14EFEDA8242E350100242298 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDrawing.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14DAC3822417772C005654EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		141DDA4E243F81070020386C /* AHR Envelope */ = {
+			isa = PBXGroup;
+			children = (
+				141DDA4F243F81140020386C /* AHREnvelope.cpp */,
+				141DDA50243F81140020386C /* AHREnvelope.hpp */,
+			);
+			path = "AHR Envelope";
+			sourceTree = "<group>";
+		};
+		141DDA55243F85AC0020386C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */,
+				143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */,
+				143FB00E243F3DE40058AE40 /* CGSizeExtensions.swift */,
+				143FB010243F3E2A0058AE40 /* FloatExtensions.swift */,
+				143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */,
+				149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */,
+				149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */,
+				149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		141DDA59243F8BA30020386C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				14AFB89124520D5A00F5AD3A /* Delay Line */,
+				148E7E29244D5C7F003C1DCF /* Clock */,
+				148E7E25244D5B65003C1DCF /* Synthesiser */,
+				146EC65C244CBF2D009025E4 /* Sequencer */,
+				141DDA5B243F914A0020386C /* Oscillators */,
+				141DDA6C243F962B0020386C /* Lowpass Filter */,
+				141DDA4E243F81070020386C /* AHR Envelope */,
+				143FAFF8243F06B90058AE40 /* Commander */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		141DDA5B243F914A0020386C /* Oscillators */ = {
+			isa = PBXGroup;
+			children = (
+				141DDA61243F918E0020386C /* Oscillator.hpp */,
+				141DDA64243F918E0020386C /* SawtoothOscillator.cpp */,
+				141DDA63243F918E0020386C /* SawtoothOscillator.hpp */,
+				141DDA60243F918D0020386C /* SquareOscillator.cpp */,
+				141DDA65243F918E0020386C /* SquareOscillator.hpp */,
+				141DDA62243F918E0020386C /* TriangleOscillator.cpp */,
+				141DDA5F243F918D0020386C /* TriangleOscillator.hpp */,
+				141DDA5C243F91610020386C /* SineOscillator.cpp */,
+				141DDA5D243F91610020386C /* SineOscillator.hpp */,
+			);
+			path = Oscillators;
+			sourceTree = "<group>";
+		};
+		141DDA6C243F962B0020386C /* Lowpass Filter */ = {
+			isa = PBXGroup;
+			children = (
+				141DDA6D243F96470020386C /* HuovilainenFilter.cpp */,
+				141DDA6E243F96470020386C /* HuovilainenFilter.hpp */,
+			);
+			path = "Lowpass Filter";
+			sourceTree = "<group>";
+		};
+		1436CE51245404A000670E3E /* SK Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				1470F72D2432047E00E751B7 /* Note.swift */,
+				14ADCBED2436265300822139 /* Sequencer.swift */,
+				14ADCBEB2436233B00822139 /* SequencerScene.swift */,
+				14B2315B24362D970012F32F /* SequencerGestures.swift */,
+			);
+			path = "SK Sequencer";
+			sourceTree = "<group>";
+		};
+		1436CE5224541BB800670E3E /* Keyboard */ = {
+			isa = PBXGroup;
+			children = (
+				14EFEDA8242E350100242298 /* Keyboard.swift */,
+				14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */,
+				14B2315E243660940012F32F /* KeyboardTouches.swift */,
+			);
+			path = Keyboard;
+			sourceTree = "<group>";
+		};
+		143FAFF7243F066C0058AE40 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				143FB009243F3D990058AE40 /* Utilities */,
+				146EC663244CC39C009025E4 /* Data Structures */,
+				143FAFFF243F2DF00058AE40 /* AudioUnit */,
+				141DDA59243F8BA30020386C /* Components */,
+				144A116824571957000F2B4C /* Interface */,
+			);
+			path = Core;
+			sourceTree = SOURCE_ROOT;
+		};
+		143FAFF8243F06B90058AE40 /* Commander */ = {
+			isa = PBXGroup;
+			children = (
+				143FB01C243F52820058AE40 /* ASCommanderCore.cpp */,
+				143FB01D243F52820058AE40 /* ASCommanderCore.hpp */,
+			);
+			path = Commander;
+			sourceTree = "<group>";
+		};
+		143FAFFF243F2DF00058AE40 /* AudioUnit */ = {
+			isa = PBXGroup;
+			children = (
+				143FB004243F301C0058AE40 /* Attribution.md */,
+				143FAFFD243F17DF0058AE40 /* ASAudioUnitBase.h */,
+				143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */,
+				143FB000243F2E940058AE40 /* ASAudioUnit.h */,
+				143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */,
+				143FB003243F2F800058AE40 /* ASDSPBase.hpp */,
+				143FB007243F360D0058AE40 /* ASDSPBase.mm */,
+				143FB022243F67500058AE40 /* ASComponent.swift */,
+				143FB006243F30BB0058AE40 /* ASInteroperability.h */,
+			);
+			path = AudioUnit;
+			sourceTree = "<group>";
+		};
+		143FB009243F3D990058AE40 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				14DC8D232456AF30001FDC43 /* Headers */,
+				14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */,
+				14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		144A116824571957000F2B4C /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				143FB020243F63620058AE40 /* ASCommander.swift */,
+				143FB016243F400B0058AE40 /* ASCommanderAU.swift */,
+				143FB01A243F4C470058AE40 /* ASCommanderDSP.hpp */,
+				143FB01B243F50520058AE40 /* ASCommanderDSP.mm */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		1458D12B24531DA30093B541 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				1458D12C24531FFD0093B541 /* OFL.txt */,
+				14DAC3962417772E005654EA /* Info.plist */,
+				14DAC3912417772E005654EA /* Assets.xcassets */,
+				1458D12D24531FFD0093B541 /* SpaceMono-Regular.ttf */,
+				1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		146B55EB242CDA90001163B3 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				14915BBF2434B75B008E8147 /* Assemble.swift */,
+				14DAC39C241777DF005654EA /* Engine.swift */,
+				1474EC462442114F00D2BA79 /* OscillatorShape.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		146EC65C244CBF2D009025E4 /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				146EC65D244CBF49009025E4 /* Sequencer.cpp */,
+				146EC65E244CBF49009025E4 /* Sequencer.hpp */,
+				146EC660244CC143009025E4 /* Pattern.cpp */,
+				146EC661244CC143009025E4 /* Pattern.hpp */,
+				146EC668244CC624009025E4 /* Note.hpp */,
+			);
+			path = Sequencer;
+			sourceTree = "<group>";
+		};
+		146EC663244CC39C009025E4 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				146EC665244CC3B1009025E4 /* Matrix.hpp */,
+			);
+			path = "Data Structures";
+			sourceTree = "<group>";
+		};
+		1470F72C2432045B00E751B7 /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				1436CE51245404A000670E3E /* SK Sequencer */,
+				14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */,
+			);
+			path = Sequencer;
+			sourceTree = "<group>";
+		};
+		148E7E25244D5B65003C1DCF /* Synthesiser */ = {
+			isa = PBXGroup;
+			children = (
+				148E7E26244D5B72003C1DCF /* Synthesiser.cpp */,
+				148E7E27244D5B72003C1DCF /* Synthesiser.hpp */,
+				141DDA69243F95D00020386C /* Voice.cpp */,
+				141DDA6A243F95D00020386C /* Voice.hpp */,
+			);
+			path = Synthesiser;
+			sourceTree = "<group>";
+		};
+		148E7E29244D5C7F003C1DCF /* Clock */ = {
+			isa = PBXGroup;
+			children = (
+				144A11662457166C000F2B4C /* Clock.cpp */,
+				148E7E2B244D5C88003C1DCF /* Clock.hpp */,
+			);
+			path = Clock;
+			sourceTree = "<group>";
+		};
+		149ACC20245424B0009DA18F /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				149ACC1E24542483009DA18F /* ComputerKeyboard.swift */,
+				1458D1272452C5110093B541 /* KeyboardHandler.swift */,
+				149ACC232454330E009DA18F /* KeyboardListener.swift */,
+				149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */,
+				149ACC2A24543CE9009DA18F /* OscillatorSelectorListener.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		149ACC2524543602009DA18F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				149ACC2624543615009DA18F /* MulticastDelegate.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		14AFB89124520D5A00F5AD3A /* Delay Line */ = {
+			isa = PBXGroup;
+			children = (
+				14AFB89224520D8800F5AD3A /* Delay.cpp */,
+				14AFB89324520D8800F5AD3A /* Delay.hpp */,
+				14AFB89524520D9100F5AD3A /* Vibrato.cpp */,
+				14AFB89624520D9100F5AD3A /* Vibrato.hpp */,
+				1458D13324532F050093B541 /* StereoDelay.cpp */,
+				1458D13224532D720093B541 /* StereoDelay.hpp */,
+			);
+			path = "Delay Line";
+			sourceTree = "<group>";
+		};
+		14AFB89A2452361E00F5AD3A /* AppSceneDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				14DAC3882417772C005654EA /* AppDelegate.swift */,
+				14DAC38A2417772C005654EA /* SceneDelegate.swift */,
+			);
+			path = AppSceneDelegate;
+			sourceTree = "<group>";
+		};
+		14AFB89B2452362400F5AD3A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				14DAC38C2417772C005654EA /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		14AFB89C2452363000F5AD3A /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				14DAC38E2417772C005654EA /* Main.storyboard */,
+				14DAC3932417772E005654EA /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		14B2315D2436597E0012F32F /* SK Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				14D3AE9D243313210095B587 /* NoteShapeNode.swift */,
+				14915BC12434BB3A008E8147 /* CellSelectShape.swift */,
+				14D3AE972432F3AC0095B587 /* DotGrid.swift */,
+				14D3AE9B2433088E0095B587 /* DotGridRow.swift */,
+			);
+			path = "SK Nodes";
+			sourceTree = "<group>";
+		};
+		14CA4FE9243EF32A00F3C685 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14DAC37C2417772C005654EA = {
+			isa = PBXGroup;
+			children = (
+				143FAFF7243F066C0058AE40 /* Core */,
+				14DAC3872417772C005654EA /* Assemble */,
+				14DAC3862417772C005654EA /* Products */,
+				14CA4FE9243EF32A00F3C685 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		14DAC3862417772C005654EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14DAC3852417772C005654EA /* Assemble.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14DAC3872417772C005654EA /* Assemble */ = {
+			isa = PBXGroup;
+			children = (
+				149ACC2524543602009DA18F /* Utilities */,
+				149ACC20245424B0009DA18F /* Interface */,
+				1458D12B24531DA30093B541 /* Assets */,
+				141DDA55243F85AC0020386C /* Extensions */,
+				146B55EB242CDA90001163B3 /* Audio */,
+				1470F72C2432045B00E751B7 /* Sequencer */,
+				14EFEDA5242DBA5200242298 /* UI */,
+				14AFB89A2452361E00F5AD3A /* AppSceneDelegate */,
+				14AFB89B2452362400F5AD3A /* View Controllers */,
+				14AFB89C2452363000F5AD3A /* Storyboards */,
+			);
+			path = Assemble;
+			sourceTree = "<group>";
+		};
+		14DC8D232456AF30001FDC43 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				143FB018243F41220058AE40 /* Assemble.h */,
+				141DDA5A243F90900020386C /* ASConstants.h */,
+				146EC65A244CBC60009025E4 /* ASHeaders.h */,
+				14AFB899245218A600F5AD3A /* ASUtilities.h */,
+				14AFB8982452155000F5AD3A /* ASEffects.h */,
+				146EC65B244CBE7F009025E4 /* ASOscillators.h */,
+				146EC66A244CC6DC009025E4 /* ASFrequencies.h */,
+				144A11652456CF4A000F2B4C /* ASParameters.h */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		14EFEDA5242DBA5200242298 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1458D130245328550093B541 /* PaddedLabel.swift */,
+				14B2315D2436597E0012F32F /* SK Nodes */,
+				1436CE5224541BB800670E3E /* Keyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		14DAC3842417772C005654EA /* Assemble */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14DAC3992417772E005654EA /* Build configuration list for PBXNativeTarget "Assemble" */;
+			buildPhases = (
+				14DAC3812417772C005654EA /* Sources */,
+				14DAC3822417772C005654EA /* Frameworks */,
+				14DAC3832417772C005654EA /* Resources */,
+				14CA4FEC243EF32A00F3C685 /* Embed Frameworks */,
+				14755A392448494C00A8C858 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Assemble;
+			productName = SimpleSynthesiser;
+			productReference = 14DAC3852417772C005654EA /* Assemble.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14DAC37D2417772C005654EA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "David Spry";
+				TargetAttributes = {
+					14DAC3842417772C005654EA = {
+						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1140;
+					};
+				};
+			};
+			buildConfigurationList = 14DAC3802417772C005654EA /* Build configuration list for PBXProject "Assemble" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14DAC37C2417772C005654EA;
+			productRefGroup = 14DAC3862417772C005654EA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14DAC3842417772C005654EA /* Assemble */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14DAC3832417772C005654EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1458D12E24531FFD0093B541 /* OFL.txt in Resources */,
+				14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */,
+				1458D12F24531FFD0093B541 /* SpaceMono-Regular.ttf in Resources */,
+				14DAC3922417772E005654EA /* Assets.xcassets in Resources */,
+				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
+				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
+				1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14DAC3812417772C005654EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */,
+				1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */,
+				14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */,
+				14DAC38D2417772C005654EA /* ViewController.swift in Sources */,
+				14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */,
+				149ACC2B24543CE9009DA18F /* OscillatorSelectorListener.swift in Sources */,
+				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
+				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
+				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
+				143FB01E243F52820058AE40 /* ASCommanderCore.cpp in Sources */,
+				149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */,
+				14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */,
+				141DDA51243F81140020386C /* AHREnvelope.cpp in Sources */,
+				1458D13424532F050093B541 /* StereoDelay.cpp in Sources */,
+				149ACC242454330E009DA18F /* KeyboardListener.swift in Sources */,
+				143FB023243F67500058AE40 /* ASComponent.swift in Sources */,
+				143FB011243F3E2A0058AE40 /* FloatExtensions.swift in Sources */,
+				14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */,
+				141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */,
+				143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */,
+				1470F72E2432047E00E751B7 /* Note.swift in Sources */,
+				141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */,
+				14DAC39D241777DF005654EA /* Engine.swift in Sources */,
+				143FB017243F400B0058AE40 /* ASCommanderAU.swift in Sources */,
+				14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */,
+				141DDA6B243F95D00020386C /* Voice.cpp in Sources */,
+				14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */,
+				141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */,
+				14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */,
+				141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */,
+				14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */,
+				14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */,
+				14DAC3892417772C005654EA /* AppDelegate.swift in Sources */,
+				14EFEDA9242E350100242298 /* Keyboard.swift in Sources */,
+				143FB00B243F3DD10058AE40 /* UIColorExtensions.swift in Sources */,
+				14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */,
+				149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */,
+				149ACC1F24542483009DA18F /* ComputerKeyboard.swift in Sources */,
+				146EC662244CC143009025E4 /* Pattern.cpp in Sources */,
+				143FB013243F3E7D0058AE40 /* FourCharCodeExtensions.swift in Sources */,
+				143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */,
+				1458D131245328550093B541 /* PaddedLabel.swift in Sources */,
+				143FB008243F360D0058AE40 /* ASDSPBase.mm in Sources */,
+				149ACC1B24542209009DA18F /* UIBezierPathExtensions.swift in Sources */,
+				141DDA68243F918E0020386C /* SawtoothOscillator.cpp in Sources */,
+				143FB00F243F3DE40058AE40 /* CGSizeExtensions.swift in Sources */,
+				148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */,
+				14915BC02434B75B008E8147 /* Assemble.swift in Sources */,
+				14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */,
+				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
+				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
+				149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */,
+				14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */,
+				143FB00D243F3DD90058AE40 /* CGPointExtensions.swift in Sources */,
+				144A11672457166C000F2B4C /* Clock.cpp in Sources */,
+				1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		14DAC38E2417772C005654EA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14DAC38F2417772C005654EA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		14DAC3932417772E005654EA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14DAC3942417772E005654EA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		14DAC3972417772E005654EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		14DAC3982417772E005654EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		14DAC39A2417772E005654EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W2VC5BW82H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Assemble/Assets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2;
+				OTHER_LDFLAGS = "-lc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.Assemble;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		14DAC39B2417772E005654EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W2VC5BW82H;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = Assemble/Assets/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.2;
+				OTHER_LDFLAGS = "-lc++";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ds.Assemble;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14DAC3802417772C005654EA /* Build configuration list for PBXProject "Assemble" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14DAC3972417772E005654EA /* Debug */,
+				14DAC3982417772E005654EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14DAC3992417772E005654EA /* Build configuration list for PBXNativeTarget "Assemble" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14DAC39A2417772E005654EA /* Debug */,
+				14DAC39B2417772E005654EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 14DAC37D2417772C005654EA /* Project object */;
+}

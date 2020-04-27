@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="JetBrainsMono-Regular.ttf">
+            <string>JetBrainsMono-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Assemble" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
+                                <rect key="frame" x="393" y="845" width="580" height="145"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="12:3" id="6UH-cy-BR1"/>
+                                    <constraint firstAttribute="height" constant="145" id="F3N-Ii-KQp"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYZ-hz-xZ4">
+                                <rect key="frame" x="1254" y="48" width="64" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="2nn-bQ-dlX"/>
+                                    <constraint firstAttribute="width" constant="64" id="4Mt-mu-F50"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" image="play" catalog="system">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="light"/>
+                                </state>
+                                <connections>
+                                    <action selector="playOrPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z16-Ti-gfb"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-ew-lo6" customClass="Sequencer" customModule="Assemble" customModuleProvider="target">
+                                <rect key="frame" x="491" y="290" width="384" height="384"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="384" placeholder="YES" id="ik0-0w-fm8"/>
+                                    <constraint firstAttribute="height" constant="384" placeholder="YES" id="tyI-F5-5g5"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz">
+                                <rect key="frame" x="48" y="48" width="50.5" height="16.5"/>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
+                                <rect key="frame" x="652" y="690" width="62" height="36"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="topInset">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="bottomInset">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="UYS-gy-cCN">
+                                <rect key="frame" x="489" y="196" width="388" height="31"/>
+                                <color key="minimumTrackTintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="maximumTrackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="AA9-FJ-X01"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="65t-Kf-01O">
+                                <rect key="frame" x="489" y="117" width="388" height="31"/>
+                                <color key="minimumTrackTintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="maximumTrackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <action selector="resonanceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="ErW-bY-CcC"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UYS-gy-cCN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3V9-OQ-06G"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UYZ-hz-xZ4" secondAttribute="trailing" constant="48" id="8yQ-Bt-XYB"/>
+                            <constraint firstItem="X2r-1G-AL6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="AcQ-Yd-t5h"/>
+                            <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
+                            <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
+                            <constraint firstItem="UYS-gy-cCN" firstAttribute="top" secondItem="65t-Kf-01O" secondAttribute="bottom" constant="48" id="ClJ-Ra-Xlt"/>
+                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="GD3-XH-mph"/>
+                            <constraint firstItem="UYS-gy-cCN" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" id="QIk-yS-dA1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="14" id="R9f-RX-Bfk"/>
+                            <constraint firstItem="65t-Kf-01O" firstAttribute="width" secondItem="UYS-gy-cCN" secondAttribute="width" id="Z19-dE-kqZ"/>
+                            <constraint firstItem="UYZ-hz-xZ4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="bL6-3I-9ku"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X2r-1G-AL6" secondAttribute="trailing" constant="35" id="d5Y-F4-QNL"/>
+                            <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
+                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="mRi-XD-P1g"/>
+                            <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="pDd-HK-iyj"/>
+                            <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="UYS-gy-cCN" secondAttribute="bottom" constant="64" id="tNS-yL-Dcs"/>
+                            <constraint firstItem="65t-Kf-01O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xAf-Ue-u1M"/>
+                            <constraint firstItem="X2r-1G-AL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yAo-Uo-CYW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="OmY-3G-tcI" id="eo5-Iy-KO7"/>
+                        <outlet property="frequencySlider" destination="UYS-gy-cCN" id="YK9-uz-uyy"/>
+                        <outlet property="keyboard" destination="X2r-1G-AL6" id="sKe-tV-LFf"/>
+                        <outlet property="resonanceSlider" destination="65t-Kf-01O" id="gVr-sc-Rqa"/>
+                        <outlet property="sequencer" destination="OJS-ew-lo6" id="Lgx-hR-5VB"/>
+                        <outlet property="tempoLabel" destination="Ulx-iT-Ybz" id="ONg-7p-RzG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="128.57142857142858"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="play" catalog="system" width="120" height="128"/>
+    </resources>
+</document>

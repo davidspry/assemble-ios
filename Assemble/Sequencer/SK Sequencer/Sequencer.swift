@@ -44,6 +44,9 @@ class Sequencer : SKView, KeyboardListener
         SK.didNavigate(by: direction)
     }
 
+    /**
+     Determine the size of the `SequencerScene` from the device's screen size.
+     */
     internal func determineSizeForDevice()
     {
         var scalar: CGFloat = 0.0
@@ -71,9 +74,14 @@ class Sequencer : SKView, KeyboardListener
         self.bounds.size = .init(width: width, height: height)
     }
     
-    // Author: Noam
-    // Source: <https://stackoverflow.com/a/14875673/9611538>
+    /**
+     Include subviews who fall outside the bounds of the view in the hit test. In Assemble,
+     this allows the delete icon to be pressed if it happens to appear outside the bounds of the
+     `SKScene`.
 
+     - Author: Noam
+     - Note: Source: <https://stackoverflow.com/a/14875673/9611538>
+     */
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView?
     {
         guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }

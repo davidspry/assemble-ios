@@ -9,8 +9,6 @@ struct Assemble
 {
     public static let core = ASCommander()
     
-    public static var bpm : UInt = 120;
-    
     public static var format: AVAudioFormat!
     
     public static var channelCount: UInt32 = 2;

@@ -13,6 +13,7 @@ class ViewController : UIViewController
 
     @IBOutlet weak var keyboard: Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
+    @IBOutlet weak var waveform: Waveform!
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
@@ -26,6 +27,7 @@ class ViewController : UIViewController
         tempoLabel.text = Assemble.core.getParameter(kClockBPM).description
         let row = Assemble.core.getCurrentRow()
         sequencer.SK.row.moveTo(row: row)
+        waveform.setNeedsDisplay()
     }
     
     internal func desiredInitialFrequency(_ frequency: Float) -> Float {
@@ -67,7 +69,8 @@ class ViewController : UIViewController
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
-        engine.start();
+        engine.start()
+        waveform.start()
     }
 
     @IBAction func playOrPause(_ sender: UIButton)

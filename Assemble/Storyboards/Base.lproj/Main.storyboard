@@ -51,7 +51,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz">
-                                <rect key="frame" x="48" y="48" width="50.5" height="16.5"/>
+                                <rect key="frame" x="32" y="98" width="50.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -89,31 +89,41 @@
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="65t-Kf-01O">
-                                <rect key="frame" x="489" y="117" width="388" height="31"/>
+                                <rect key="frame" x="489" y="118" width="388" height="31"/>
                                 <color key="minimumTrackTintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="maximumTrackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <action selector="resonanceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="ErW-bY-CcC"/>
                                 </connections>
                             </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3i-2N-gT6" customClass="Waveform" customModule="Assemble" customModuleProvider="target">
+                                <rect key="frame" x="32" y="32" width="100" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="R7o-62-b6U"/>
+                                    <constraint firstAttribute="height" constant="50" id="ixE-HM-g5j"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UYS-gy-cCN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3V9-OQ-06G"/>
+                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="3i6-b6-gff"/>
+                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="16" id="7QF-1B-WOl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UYZ-hz-xZ4" secondAttribute="trailing" constant="48" id="8yQ-Bt-XYB"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="AcQ-Yd-t5h"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
                             <constraint firstItem="UYS-gy-cCN" firstAttribute="top" secondItem="65t-Kf-01O" secondAttribute="bottom" constant="48" id="ClJ-Ra-Xlt"/>
-                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="48" id="GD3-XH-mph"/>
                             <constraint firstItem="UYS-gy-cCN" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" id="QIk-yS-dA1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="14" id="R9f-RX-Bfk"/>
                             <constraint firstItem="65t-Kf-01O" firstAttribute="width" secondItem="UYS-gy-cCN" secondAttribute="width" id="Z19-dE-kqZ"/>
                             <constraint firstItem="UYZ-hz-xZ4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="bL6-3I-9ku"/>
+                            <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X2r-1G-AL6" secondAttribute="trailing" constant="35" id="d5Y-F4-QNL"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
-                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="mRi-XD-P1g"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="pDd-HK-iyj"/>
+                            <constraint firstItem="K3i-2N-gT6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="scF-YI-kja"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="UYS-gy-cCN" secondAttribute="bottom" constant="64" id="tNS-yL-Dcs"/>
                             <constraint firstItem="65t-Kf-01O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xAf-Ue-u1M"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yAo-Uo-CYW"/>
@@ -127,6 +137,7 @@
                         <outlet property="resonanceSlider" destination="65t-Kf-01O" id="gVr-sc-Rqa"/>
                         <outlet property="sequencer" destination="OJS-ew-lo6" id="Lgx-hR-5VB"/>
                         <outlet property="tempoLabel" destination="Ulx-iT-Ybz" id="ONg-7p-RzG"/>
+                        <outlet property="waveform" destination="K3i-2N-gT6" id="UJi-1U-sG7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

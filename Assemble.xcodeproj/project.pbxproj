@@ -57,6 +57,7 @@
 		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
 		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
+		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
 		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
 		14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
 		14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9D243313210095B587 /* NoteShapeNode.swift */; };
@@ -177,6 +178,7 @@
 		14AFB899245218A600F5AD3A /* ASUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASUtilities.h; sourceTree = "<group>"; };
 		14B2315B24362D970012F32F /* SequencerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerGestures.swift; sourceTree = "<group>"; };
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
+		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
 		14D3AE9B2433088E0095B587 /* DotGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGridRow.swift; sourceTree = "<group>"; };
 		14D3AE9D243313210095B587 /* NoteShapeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteShapeNode.swift; sourceTree = "<group>"; };
@@ -497,6 +499,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		14CE044A2457366900B0220C /* Waveform */ = {
+			isa = PBXGroup;
+			children = (
+				14CE044B2457367E00B0220C /* Waveform.swift */,
+			);
+			path = Waveform;
+			sourceTree = "<group>";
+		};
 		14DAC37C2417772C005654EA = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +563,7 @@
 				1458D130245328550093B541 /* PaddedLabel.swift */,
 				14B2315D2436597E0012F32F /* SK Nodes */,
 				1436CE5224541BB800670E3E /* Keyboard */,
+				14CE044A2457366900B0220C /* Waveform */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -646,6 +657,7 @@
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
 				143FB01E243F52820058AE40 /* ASCommanderCore.cpp in Sources */,
 				149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */,
+				14CE044C2457367E00B0220C /* Waveform.swift in Sources */,
 				14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */,
 				141DDA51243F81140020386C /* AHREnvelope.cpp in Sources */,
 				1458D13424532F050093B541 /* StereoDelay.cpp in Sources */,

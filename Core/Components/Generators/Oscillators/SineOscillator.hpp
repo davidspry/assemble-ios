@@ -9,18 +9,19 @@
 #include "ASConstants.h"
 #include <numeric>
 
-/// \author Rob Clifton Harvey
-/// This oscillator is based on an oscillator written by Rob Clifton Harvey.
+/// \author This oscillator is based on an oscillator written by Rob Clifton Harvey.
 /// <https://github.com/rcliftonharvey/rchoscillators/>
+/// \note ASConstants.h is required to access the TWO_PI constant.
+/// \note The C++ Numeric module is required to access std::sinf
 
 class SineOscillator : public Oscillator
 {
 public:
-    SineOscillator();
-    SineOscillator(float);
+    SineOscillator() {};
+    SineOscillator(const float);
     
 public:
-    const float nextSample() override;
+    const float nextSample() noexcept override;
     void load(const float frequency) override;
 };
 

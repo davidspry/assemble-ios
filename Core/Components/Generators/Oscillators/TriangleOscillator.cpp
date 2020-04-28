@@ -4,14 +4,12 @@
 
 #include "TriangleOscillator.hpp"
 
-TriangleOscillator::TriangleOscillator() {}
-
-TriangleOscillator::TriangleOscillator(float frequency)
+TriangleOscillator::TriangleOscillator(const float frequency)
 {
     load(frequency);
 }
 
-const float TriangleOscillator::nextSample()
+inline const float TriangleOscillator::nextSample() noexcept
 {
     float sample;
     phase += translation;

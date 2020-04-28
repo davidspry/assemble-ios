@@ -27,7 +27,7 @@ public:
     void eraseNote(int x, int y)                      { sequencer.erase(x, y); }
     
 public:
-    const bool clockIsTicking() { return clock.isTicking();   }
+    const bool clockIsTicking() { return clock.isTicking(); }
     const bool playOrPause();
     
 public:

@@ -4,21 +4,18 @@
 
 #include "SineOscillator.hpp"
 
-SineOscillator::SineOscillator() {}
-
-SineOscillator::SineOscillator(float frequency)
+SineOscillator::SineOscillator(const float frequency)
 {
     load(frequency);
 }
 
 void SineOscillator::load(const float frequency)
 {
-    phase = phase - 0.75F;
-    phase = phase + static_cast<int>(phase < -TWO_PI) * TWO_PI;
+    phase = distribution(twister);
     translation = TWO_PI * frequency / sampleRate;
 }
 
-const float SineOscillator::nextSample()
+inline const float SineOscillator::nextSample() noexcept
 {
     phase += translation;
     phase += static_cast<int>(phase >= TWO_PI) * -TWO_PI;

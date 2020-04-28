@@ -15,11 +15,6 @@ extern "C" void * makeASCommanderDSP(int channels, double sampleRate)
     return new ASCommanderDSP();
 }
 
-extern "C" const bool __interop__IsTicking(void *DSP)
-{
-    return ((ASCommanderDSP*) DSP)->clockIsTicking();
-}
-
 extern "C" const bool __interop__PlayOrPause(void *DSP)
 {
     return ((ASCommanderDSP*) DSP)->playOrPause();
@@ -40,22 +35,17 @@ extern "C" void __interop__EraseNote(void *DSP, const int x, const int y)
     ((ASCommanderDSP*) DSP)->eraseNote(x, y);
 }
 
-extern "C" void __interop__SetParameter(void *DSP, uint32_t parameter, float value)
-{
-    ((ASCommanderDSP*) DSP)->setParameter(parameter, value, true);
-}
-
-extern "C" float __interop__GetParameter(void *DSP, uint32_t parameter)
-{
-    return ((ASCommanderDSP*) DSP)->getParameter(parameter);
-}
-
 // ============================================================ //
 
 void ASCommanderDSP::init(int channels, double sampleRate)
 {
     ASDSPBase::init(channels, sampleRate);
     ASCommanderCore::init(sampleRate);
+}
+
+bool ASCommanderDSP::isPlaying()
+{
+    return ASCommanderCore::clockIsTicking();
 }
 
 void ASCommanderDSP::setParameter(uint64_t parameter, float value, bool immediate)

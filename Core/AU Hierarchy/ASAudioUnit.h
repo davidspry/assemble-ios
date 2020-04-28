@@ -25,10 +25,6 @@
 - (void)setParameterWithAddress:(AUParameterAddress)address value:(AUValue)value;
 - (void)setParameterImmediatelyWithAddress:(AUParameterAddress)address value:(AUValue)value;
 
-- (void)start;
-- (void)stop;
-- (void)clear;
-
 @property (readonly) BOOL isPlaying;
 @property (readonly) BOOL isSetUp;
 

@@ -35,21 +35,6 @@
     self.kernel->setParameter(address, value, true);
 }
 
-- (void)start
-{
-    self.kernel->start();
-}
-
-- (void)stop
-{
-    self.kernel->stop();
-}
-
-- (void)clear
-{
-    self.kernel->clear();
-}
-
 - (BOOL)isPlaying
 {
     return self.kernel->isPlaying();
@@ -102,7 +87,6 @@
 
     AVAudioFormat *format = self.outputBusses[0].format;
     self.kernel->init(format.channelCount, format.sampleRate);
-    self.kernel->reset();
 
     return YES;
 }
@@ -124,7 +108,6 @@
 
 - (void)deallocateRenderResources
 {
-    self.kernel->deinit();
     [super deallocateRenderResources];
 }
 

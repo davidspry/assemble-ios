@@ -8,21 +8,20 @@
 #include "Oscillator.hpp"
 #include <array>
 
-/// \author Rob Clifton Harvey
-/// This oscillator is based on an oscillator written by Rob Clifton Harvey.
+/// \author This oscillator is based on an oscillator written by Rob Clifton Harvey.
 /// <https://github.com/rcliftonharvey/rchoscillators/>
 
 class SquareOscillator : public Oscillator
 {
 public:
-    SquareOscillator();
-    SquareOscillator(float);
+    SquareOscillator() {};
+    SquareOscillator(const float);
     
 public:
-    const float nextSample() override;
+    const float nextSample() noexcept override;
 
 private:
-    std::array<float,2> wavetable = {-0.5, 0.5};
+    constexpr const static std::array<float,2> wavetable = {-0.5, 0.5};
 };
 
 #endif

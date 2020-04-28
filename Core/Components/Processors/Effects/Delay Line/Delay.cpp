@@ -4,8 +4,6 @@
 
 #include "Delay.hpp"
 
-// TODO: ADD MIX; ADD MODULATION WAVETABLE.
-
 Delay::Delay(Clock *clock)
 {
     this->clock = clock;
@@ -72,6 +70,11 @@ void Delay::set(uint64_t parameter, float value)
             set(time);
             break;
         }
+        case kDelayMix:
+        {
+            const float mix = Assemble::Utilities::bound(value, 0.F, 1.F);
+            this->mix = mix;
+        }
         default: return;
     }
 }
@@ -124,15 +127,14 @@ const float Delay::process(const float sample)
 
     delay = delay + 5e-5f * (target - delay);
     samples[whead] = gain * sample + feedback * samples[  rhead];
-    const float lerp = Assemble::Utilities::lerp(rhead, samples.data(), capacity);
+    const float lerp = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
 
     whead = whead + 1;
     if (whead >= capacity) whead = 0;
-    
-    rhead = whead - delay;
+
+    rhead = whead - delay + modulationDepth * (150 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 
-    // TODO: ADD MIX
-    return 0.75F * sample + 0.25F * lerp;
+    return (1.F - mix) * sample + mix * lerp;
 }

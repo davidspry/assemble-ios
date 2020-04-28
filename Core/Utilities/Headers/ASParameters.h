@@ -82,6 +82,7 @@ static const int kDelayToggle             = 0xEF10;
 static const int kDelayFeedback           = 0xEF11;
 static const int kDelayTimeInMs           = 0xEF12;
 static const int kDelayMusicalTime        = 0xEF13;
+static const int kDelayMix                = 0xEF14;
 
 // Stereo Delay
 static const int kStereoDelayLTime        = 0xEF20;

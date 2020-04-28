@@ -9,7 +9,6 @@ import AudioUnit
 @objc open class ASCommander : ASComponent, KeyboardListener, SequencerDelegate
 {
     @objc public var commander: ASCommanderAU?
-    
     public static var acd = AudioComponentDescription()
 
     @objc public override init()
@@ -34,18 +33,53 @@ import AudioUnit
             self.commander = avAudioUnit.auAudioUnit as? ASCommanderAU
             print("[Commander] AVAudioUnit Instantiated!")
         }
+        
+        
+        
+        /**
+         If saving a new song...
+         ~~~
+         let preset = AUAudioUnitPreset()
+         preset.name = userSelectedName
+         preset.number = someGeneratedNumber
+         commander.saveUserPreset(preset)
+         ~~~
+         
+         If updating an old song, replace the existing song with a new song, as above, in CoreData.
+         
+         If loading a song...
+         ~~~
+         let preset = loadPresetFromCoreData(id: presetID)
+         commander.currentPreset = preset
+         ~~~
+         */
     }
     
-    lazy public var length: Int = {
-        return self.commander?.length ?? 0
-    }()
+    public var length: Int {
+        return commander?.length ?? 0
+    }
+    
+    public var currentRow: Int {
+        return commander?.currentRow ?? 0
+    }
+    
+    public var currentPattern: Int {
+        return commander?.currentPattern ?? 0
+    }
+    
+    public var ticking: Bool {
+        guard let commander = commander else { return false }
+        return commander.ticking
+    }
     
     func setParameter(_ parameter: Int32, to value: Float) {
-        commander?.setParameterWithAddress(parameter, value: value)
+//        commander?.setParameterWithAddress(parameter, value: value)
+        commander?.setParameterWithAddress(AUParameterAddress(parameter), value: value)
     }
     
     func getParameter(_ parameter: Int32) -> Float {
-        return commander?.getParameterWithAddress(parameter) ?? 0.0
+//        return commander?.getParameterWithAddress(parameter) ?? 0.0
+        return commander?.parameter(withAddress: AUParameterAddress(parameter)) ?? 0.0
     }
     
     func setFilter(frequency value: Float, oscillator: OscillatorShape) {
@@ -76,24 +110,9 @@ import AudioUnit
         commander?.setParameterImmediatelyWithAddress(parameter, value: value)
     }
     
-    func getCurrentRow() -> Int {
-        return commander?.getCurrentRow() ?? 0
-    }
-    
-    func getCurrentPattern() -> Int {
-        return commander?.getCurrentPattern() ?? 0
-    }
-    
     func load(_ note: Note)
     {
         commander?.playNote(note: note.note, shape: note.oscillator.rawValue)
-    }
-    
-    public func isTicking() -> Bool
-    {
-        guard let commander = commander else { return false }
-        
-        return commander.isTicking()
     }
     
     @discardableResult
@@ -120,6 +139,6 @@ import AudioUnit
     
     func pressNote(_ note: Int, shape: OscillatorShape) {
          guard let commander = commander else { return }
-         if !commander.isTicking() { commander.playNote(note: note, shape: shape.rawValue) }
+         if !commander.ticking { commander.playNote(note: note, shape: shape.rawValue) }
      }
 }

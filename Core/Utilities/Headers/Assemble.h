@@ -7,8 +7,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-FOUNDATION_EXPORT double ASMVersionNumber;
-FOUNDATION_EXPORT const unsigned char ASMVersionString[];
+FOUNDATION_EXPORT double ASVersionNumber;
+FOUNDATION_EXPORT const unsigned char ASVersionString[];
 
 // AudioUnit
 #import "ASAudioUnit.h"

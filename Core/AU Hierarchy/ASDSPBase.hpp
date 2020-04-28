@@ -24,18 +24,8 @@ public:
         this->channels = channels;
         this->sampleRate = sampleRate;
     }
-    
-    virtual void deinit() {}
-    
-    virtual void clear()  {}
-    
-    virtual void reset()  {}
 
-    virtual void start() { isStarted = true; }
-    
-    virtual void stop()  { isStarted = false; }
-
-    virtual bool isPlaying() { return isStarted; }
+    virtual bool isPlaying() = 0;
     
     virtual bool isSetup()   { return isInitialized; }
 
@@ -67,7 +57,6 @@ protected:
     AudioBufferList *inBufferListPtr = nullptr;
     AudioBufferList *outBufferListPtr = nullptr;
 
-    bool isStarted = true;
     bool isInitialized = true;
 };
 

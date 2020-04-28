@@ -22,6 +22,7 @@ public:
     void set(float target, float timeInSeconds) noexcept(false);
     void set(float value, float target, float timeinSeconds) noexcept(false);
     void setSampleRate(const float sampleRate);
+    inline const float getTarget() { return target; }
     inline const bool complete() { return !(timeInSamples > 0); }
     
 private:

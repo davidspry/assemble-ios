@@ -40,6 +40,7 @@
 		1470F72E2432047E00E751B7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* Note.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
 		148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148E7E26244D5B72003C1DCF /* Synthesiser.cpp */; };
+		14909DA324585635003C6F03 /* SineWTOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14909DA124585635003C6F03 /* SineWTOscillator.cpp */; };
 		14915BC02434B75B008E8147 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
 		14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
 		149ACC1B24542209009DA18F /* UIBezierPathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */; };
@@ -134,7 +135,7 @@
 		143FB01D243F52820058AE40 /* ASCommanderCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASCommanderCore.hpp; sourceTree = "<group>"; };
 		143FB020243F63620058AE40 /* ASCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommander.swift; sourceTree = "<group>"; };
 		143FB022243F67500058AE40 /* ASComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASComponent.swift; sourceTree = "<group>"; };
-		144A11652456CF4A000F2B4C /* ASParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASParameters.h; sourceTree = "<group>"; };
+		144A11652456CF4A000F2B4C /* ASParameters.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = ASParameters.h; sourceTree = "<group>"; };
 		144A11662457166C000F2B4C /* Clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		1458D1272452C5110093B541 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -157,6 +158,9 @@
 		148E7E26244D5B72003C1DCF /* Synthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Synthesiser.cpp; sourceTree = "<group>"; };
 		148E7E27244D5B72003C1DCF /* Synthesiser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Synthesiser.hpp; sourceTree = "<group>"; };
 		148E7E2B244D5C88003C1DCF /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
+		14909DA124585635003C6F03 /* SineWTOscillator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SineWTOscillator.cpp; sourceTree = "<group>"; };
+		14909DA224585635003C6F03 /* SineWTOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SineWTOscillator.hpp; sourceTree = "<group>"; };
+		14909DA42458585D003C6F03 /* ASSineWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSineWaveTable.h; sourceTree = "<group>"; };
 		14915BBF2434B75B008E8147 /* Assemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assemble.swift; sourceTree = "<group>"; };
 		14915BC12434BB3A008E8147 /* CellSelectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelectShape.swift; sourceTree = "<group>"; };
 		149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensions.swift; sourceTree = "<group>"; };
@@ -235,13 +239,10 @@
 		141DDA59243F8BA30020386C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				14AFB89124520D5A00F5AD3A /* Delay Line */,
+				14909D9F24585490003C6F03 /* Processors */,
+				14909D9D2458544B003C6F03 /* Generators */,
 				148E7E29244D5C7F003C1DCF /* Clock */,
-				148E7E25244D5B65003C1DCF /* Synthesiser */,
 				146EC65C244CBF2D009025E4 /* Sequencer */,
-				141DDA5B243F914A0020386C /* Oscillators */,
-				141DDA6C243F962B0020386C /* Lowpass Filter */,
-				141DDA4E243F81070020386C /* AHR Envelope */,
 				143FAFF8243F06B90058AE40 /* Commander */,
 			);
 			path = Components;
@@ -259,6 +260,8 @@
 				141DDA5F243F918D0020386C /* TriangleOscillator.hpp */,
 				141DDA5C243F91610020386C /* SineOscillator.cpp */,
 				141DDA5D243F91610020386C /* SineOscillator.hpp */,
+				14909DA124585635003C6F03 /* SineWTOscillator.cpp */,
+				14909DA224585635003C6F03 /* SineWTOscillator.hpp */,
 			);
 			path = Oscillators;
 			sourceTree = "<group>";
@@ -296,11 +299,11 @@
 		143FAFF7243F066C0058AE40 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				143FB009243F3D990058AE40 /* Utilities */,
 				146EC663244CC39C009025E4 /* Data Structures */,
-				143FAFFF243F2DF00058AE40 /* AudioUnit */,
+				143FAFFF243F2DF00058AE40 /* AU Hierarchy */,
 				141DDA59243F8BA30020386C /* Components */,
 				144A116824571957000F2B4C /* Interface */,
+				143FB009243F3D990058AE40 /* Utilities */,
 			);
 			path = Core;
 			sourceTree = SOURCE_ROOT;
@@ -314,7 +317,7 @@
 			path = Commander;
 			sourceTree = "<group>";
 		};
-		143FAFFF243F2DF00058AE40 /* AudioUnit */ = {
+		143FAFFF243F2DF00058AE40 /* AU Hierarchy */ = {
 			isa = PBXGroup;
 			children = (
 				143FB004243F301C0058AE40 /* Attribution.md */,
@@ -324,10 +327,8 @@
 				143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */,
 				143FB003243F2F800058AE40 /* ASDSPBase.hpp */,
 				143FB007243F360D0058AE40 /* ASDSPBase.mm */,
-				143FB022243F67500058AE40 /* ASComponent.swift */,
-				143FB006243F30BB0058AE40 /* ASInteroperability.h */,
 			);
-			path = AudioUnit;
+			path = "AU Hierarchy";
 			sourceTree = "<group>";
 		};
 		143FB009243F3D990058AE40 /* Utilities */ = {
@@ -343,6 +344,7 @@
 		144A116824571957000F2B4C /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				143FB022243F67500058AE40 /* ASComponent.swift */,
 				143FB020243F63620058AE40 /* ASCommander.swift */,
 				143FB016243F400B0058AE40 /* ASCommanderAU.swift */,
 				143FB01A243F4C470058AE40 /* ASCommanderDSP.hpp */,
@@ -420,6 +422,33 @@
 				148E7E2B244D5C88003C1DCF /* Clock.hpp */,
 			);
 			path = Clock;
+			sourceTree = "<group>";
+		};
+		14909D9C2458532A003C6F03 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				14AFB89124520D5A00F5AD3A /* Delay Line */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		14909D9D2458544B003C6F03 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				141DDA4E243F81070020386C /* AHR Envelope */,
+				148E7E25244D5B65003C1DCF /* Synthesiser */,
+				141DDA5B243F914A0020386C /* Oscillators */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		14909D9F24585490003C6F03 /* Processors */ = {
+			isa = PBXGroup;
+			children = (
+				14909D9C2458532A003C6F03 /* Effects */,
+				141DDA6C243F962B0020386C /* Lowpass Filter */,
+			);
+			path = Processors;
 			sourceTree = "<group>";
 		};
 		149ACC20245424B0009DA18F /* Interface */ = {
@@ -553,6 +582,8 @@
 				146EC65B244CBE7F009025E4 /* ASOscillators.h */,
 				146EC66A244CC6DC009025E4 /* ASFrequencies.h */,
 				144A11652456CF4A000F2B4C /* ASParameters.h */,
+				143FB006243F30BB0058AE40 /* ASInteroperability.h */,
+				14909DA42458585D003C6F03 /* ASSineWaveTable.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -647,6 +678,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */,
+				14909DA324585635003C6F03 /* SineWTOscillator.cpp in Sources */,
 				1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */,
 				14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */,
 				14DAC38D2417772C005654EA /* ViewController.swift in Sources */,

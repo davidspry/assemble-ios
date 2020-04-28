@@ -53,7 +53,6 @@ public:
         }
 
         if (!valueTransition.complete()) {
-            bpm = valueTransition.get();
             update();
         }
         
@@ -65,7 +64,7 @@ public:
     inline const bool playOrPause() { return (ticking = !ticking); }
 
 private:
-    inline void update() { tick = sampleRate * 60 / bpm / subdivision; }
+    inline void update() { tick = sampleRate * 60 / valueTransition.get() / subdivision; }
 
 private:
     bool  ticking = false;

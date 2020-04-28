@@ -28,9 +28,9 @@ public:
 
 private:
     std::atomic<bool> bypassed = {false};
-    std::atomic<float> depth = {0.35F};
+    std::atomic<float> depth = {0.25F};
     std::atomic<float> speed = {2.00F};
-    SineOscillator modulator = {2.00F};
+    SineWTOscillator modulator = {2.00F};
 
 private:
     /// There must be a buffer between the whead, which increases linearly,

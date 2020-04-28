@@ -19,10 +19,7 @@ ASDSPRef makeASCommanderDSP(int channels, double sampleRate);
 void __interop__LoadNote(ASDSPRef, const int note, const int shape);
 void __interop__WriteNote(ASDSPRef, const int x, const int y, const int note, const int shape);
 void __interop__EraseNote(ASDSPRef, const int x, const int y);
-const bool __interop__IsTicking(ASDSPRef);
 const bool __interop__PlayOrPause(ASDSPRef);
-void __interop__SetParameter(ASDSPRef, int parameter, float value);
-float __interop__GetParameter(ASDSPRef, int parameter);
 
 #else
 
@@ -36,11 +33,13 @@ struct ASCommanderDSP : ASDSPBase, ASCommanderCore
     ASCommanderDSP() : ASCommanderCore() {}
     
     void init(int channelCount, double sampleRate) override;
+    
+    bool isPlaying() override;
 
     float getParameter(uint64_t address) override;
     
     void setParameter(uint64_t address, float value, bool immediate) override;
-
+    
     void process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset) override;
 };
 

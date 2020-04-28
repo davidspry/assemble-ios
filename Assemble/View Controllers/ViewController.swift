@@ -24,9 +24,11 @@ class ViewController : UIViewController
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
         
-        tempoLabel.text = Assemble.core.getParameter(kClockBPM).description
-        let row = Assemble.core.getCurrentRow()
+        let bpm = Int(Assemble.core.getParameter(kClockBPM))
+        let row = Assemble.core.currentRow
         sequencer.SK.row.moveTo(row: row)
+        tempoLabel.text = "\(bpm)BPM"
+        
         waveform.setNeedsDisplay()
     }
     

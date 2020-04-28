@@ -9,6 +9,7 @@
 #include "SawtoothOscillator.hpp"
 #include "TriangleOscillator.hpp"
 #include "SquareOscillator.hpp"
+#include "SineWTOscillator.hpp"
 #include "SineOscillator.hpp"
 
 #endif

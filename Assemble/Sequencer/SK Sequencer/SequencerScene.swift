@@ -140,13 +140,13 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         let node = NoteShapeNode(type: oscillator)!;
         node.position = pointFromIndices(xy);
         node.name = xy.debugDescription
-        noteShapes[Assemble.core.getCurrentPattern()].append(node)
+        noteShapes[Assemble.core.currentPattern].append(node)
         addChild(node);
     }
 
     internal func modifyNote(xy: CGPoint, oscillator: OscillatorShape) {
         DispatchQueue.main.async {
-            self.noteShapes[Assemble.core.getCurrentPattern()].forEach { node in
+            self.noteShapes[Assemble.core.currentPattern].forEach { node in
                 if node.name == xy.debugDescription { node.recolour(type: oscillator) }
             }
         }
@@ -155,7 +155,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     func eraseNote() {
         let xy = selected
         DispatchQueue.main.async {
-            self.noteShapes[Assemble.core.getCurrentPattern()].forEach { node in
+            self.noteShapes[Assemble.core.currentPattern].forEach { node in
                 if node.name == xy.debugDescription {
                     node.removeFromParent()
                     self.noteStrings[xy.ny][xy.nx] = nil

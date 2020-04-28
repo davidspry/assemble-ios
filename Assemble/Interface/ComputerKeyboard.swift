@@ -19,7 +19,7 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorS
         }
     }
 
-    var oscillator: OscillatorShape = .sawtooth
+    var oscillator: OscillatorShape = .square
 
     func didChangeOctave(to octave: Int) {
         self.octave = octave

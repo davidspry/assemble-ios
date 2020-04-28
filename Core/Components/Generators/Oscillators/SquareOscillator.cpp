@@ -4,17 +4,15 @@
 
 #include "SquareOscillator.hpp"
 
-SquareOscillator::SquareOscillator() {}
-
-SquareOscillator::SquareOscillator(float frequency)
+SquareOscillator::SquareOscillator(const float frequency)
 {
     load(frequency);
 }
 
-const float SquareOscillator::nextSample()
+inline const float SquareOscillator::nextSample() noexcept
 {
     phase += translation;
     phase += (phase > 1.0F) * -1.0F;
     const int index = static_cast<int>(phase < 0.5F);
-    return wavetable[index];
+    return SquareOscillator::wavetable[index];
 }

@@ -18,7 +18,7 @@ public:
         distribution.param(range);
     }
 
-    virtual const float nextSample() = 0;
+    virtual inline const float nextSample() noexcept = 0;
 
     /// \brief Begin oscillating at a new frequency.
     /// The phase is randomised whenever it is initialised to a new frequency
@@ -34,7 +34,7 @@ public:
         translation = frequency / sampleRate;
     }
     
-private:
+protected:
     std::mt19937 twister;
     std::random_device rd;
     std::uniform_real_distribution<float> distribution;
@@ -43,14 +43,14 @@ public:
     /// \brief Set the sample rate of the oscillator.
     /// \param sampleRate The sample rate of the oscillator.
     
-    void setSampleRate(float sampleRate) {
-        this->sampleRate = sampleRate;
+    virtual void setSampleRate(const float sampleRate) {
+        Oscillator::sampleRate = sampleRate;
     }
 
 protected:
     float phase = 0.F;
     float translation = 0.F;
-    float sampleRate  = 48000.F;
+    static inline float sampleRate = 48000.F;
 };
 
 #endif

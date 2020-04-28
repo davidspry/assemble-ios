@@ -7,19 +7,17 @@
 
 #include "Oscillator.hpp"
 
-/// \author Rob Clifton Harvey
-/// This oscillator is based on an oscillator written by Rob Clifton Harvey.
+/// \author This oscillator is based on an oscillator written by Rob Clifton Harvey.
 /// <https://github.com/rcliftonharvey/rchoscillators/>
 
 class TriangleOscillator : public Oscillator {
 
 public:
-    TriangleOscillator();
-    TriangleOscillator(float);
+    TriangleOscillator() {};
+    TriangleOscillator(const float);
     
 public:
-    const float nextSample() override;
-
+    const float nextSample() noexcept override;
 };
 
 #endif

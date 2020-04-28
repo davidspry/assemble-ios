@@ -9,12 +9,12 @@
 
 struct Note
 {
-    Note()
+    Note ()
     {
-        this->null = true;
+        null = true;
     }
     
-    Note(int x, int y, int note, int shape)
+    Note (int x, int y, int note, int shape)
     {
         modify(x, y, note, shape);
     }
@@ -31,6 +31,7 @@ struct Note
     int x, y;
     int note;
     int shape;
+
     bool null;
 };
 

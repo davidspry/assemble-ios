@@ -4,14 +4,12 @@
 
 #include "SawtoothOscillator.hpp"
 
-SawtoothOscillator::SawtoothOscillator() {}
-
-SawtoothOscillator::SawtoothOscillator(float frequency)
+SawtoothOscillator::SawtoothOscillator(const float frequency)
 {
     load(frequency);
 }
 
-const float SawtoothOscillator::nextSample()
+const float SawtoothOscillator::nextSample() noexcept
 {
     phase += translation;
     phase += static_cast<int>(phase > 1.0F) * -1.0F;

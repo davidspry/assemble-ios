@@ -6,8 +6,8 @@
 
 Voice::Voice()
 {
-    vca.set(5, 0, 850);
-    vcf.set(25, 0, 650);
+    vca.set(5, 0, 550);
+    vcf.set(15, 0, 550);
 }
 
 void Voice::load(float frequency)

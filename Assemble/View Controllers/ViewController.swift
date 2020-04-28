@@ -1,5 +1,4 @@
-//  ViewController.swift
-//  SimpleSynthesiser
+//  Assemble
 //  Created by David Spry on 10/3/20.
 //  Copyright © 2020 David Spry. All rights reserved.
 
@@ -10,7 +9,7 @@ class ViewController : UIViewController
     let engine = Engine()
     var updater : CADisplayLink!
     var computerKeyboard = ComputerKeyboard()
-
+    
     @IBOutlet weak var keyboard: Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
     @IBOutlet weak var waveform: Waveform!
@@ -24,18 +23,17 @@ class ViewController : UIViewController
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
         
-        let bpm = Int(Assemble.core.getParameter(kClockBPM))
+        // Update this from the setParameter(...) function instead
+        let bpm = Assemble.core.getParameter(kClockBPM)
         let row = Assemble.core.currentRow
         sequencer.SK.row.moveTo(row: row)
         tempoLabel.text = "\(bpm)BPM"
-        
-        waveform.setNeedsDisplay()
     }
     
     internal func desiredInitialFrequency(_ frequency: Float) -> Float {
         return (log(frequency) - log(20)) / (log(20E3) - log(20))
     }
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()

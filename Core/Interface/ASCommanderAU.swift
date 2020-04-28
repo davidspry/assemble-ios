@@ -45,8 +45,7 @@ public class ASCommanderAU : ASAudioUnit
     override init(componentDescription: AudioComponentDescription,
                   options: AudioComponentInstantiationOptions = []) throws {
         try super.init(componentDescription: componentDescription, options: options);
-        
-        
+
 //        print(userPresets)
 //        let newPreset = AUAudioUnitPreset()
 //        newPreset.name = "Test number 2"
@@ -56,10 +55,28 @@ public class ASCommanderAU : ASAudioUnit
 //
 //        userPresets.forEach( {print($0.name) } )
         
+        
+        
+        /**
+        If saving a new song...
+        ~~~
+        let preset = AUAudioUnitPreset()
+        preset.name = userSelectedName
+        preset.number = someGeneratedNumber
+        commander.saveUserPreset(preset)
+        ~~~
+        
+        If updating an old song, replace the existing song with a new song, as above, in CoreData.
+        
+        If loading a song...
+        ~~~
+        let preset = loadPresetFromCoreData(id: presetID)
+        commander.currentPreset = preset
+        ~~~
+        */
     }
     
-    public func playOrPause() -> Bool
-    {
+    public func playOrPause() -> Bool {
         return __interop__PlayOrPause(dsp)
     }
 

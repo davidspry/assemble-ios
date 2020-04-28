@@ -33,26 +33,6 @@ import AudioUnit
             self.commander = avAudioUnit.auAudioUnit as? ASCommanderAU
             print("[Commander] AVAudioUnit Instantiated!")
         }
-        
-        
-        
-        /**
-         If saving a new song...
-         ~~~
-         let preset = AUAudioUnitPreset()
-         preset.name = userSelectedName
-         preset.number = someGeneratedNumber
-         commander.saveUserPreset(preset)
-         ~~~
-         
-         If updating an old song, replace the existing song with a new song, as above, in CoreData.
-         
-         If loading a song...
-         ~~~
-         let preset = loadPresetFromCoreData(id: presetID)
-         commander.currentPreset = preset
-         ~~~
-         */
     }
     
     public var length: Int {

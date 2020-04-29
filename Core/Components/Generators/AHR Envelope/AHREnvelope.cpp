@@ -97,10 +97,10 @@ const float AHREnvelope::nextSample()
 
 double AHREnvelope::computeAttack(int &time)
 {
-    return (double) time / attackInSamples;
+    return (double) time / (attackInSamples + 1);
 }
 
 double AHREnvelope::computeRelease(int &time)
 {
-    return (double) time * -(1.0F / releaseInSamples) + 1.0F;
+    return (double) 1.0 + time * -(1.0 / (releaseInSamples + 1));
 }

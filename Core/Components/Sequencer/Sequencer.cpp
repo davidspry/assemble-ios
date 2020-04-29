@@ -10,7 +10,7 @@ Sequencer::Sequencer()
     
     auto firstPattern = patterns.at(pattern);
     patternLength = firstPattern.length();
-    activePatterns = static_cast<int>(firstPattern.toggle() == true);
+    activePatterns = PATTERNS;//static_cast<int>(firstPattern.toggle() == true);
 }
 
 /// \brief Get a parameter value from the Sequencer
@@ -20,6 +20,7 @@ const float Sequencer::get(uint64_t parameter)
 {
     switch (parameter)
     {
+        case kSequencerMode: return (float) mode;
         case kSequencerLength: return (float) patternLength;
         case kSequencerCurrentRow: return (float) row;
         case kSequencerCurrentPattern: return (float) pattern;
@@ -35,7 +36,7 @@ std::pair<int, iterator&> Sequencer::nextRow()
     if (mode && (row + 1) == patternLength)
     {
         selectNextActivePattern();
-        printf("Selected Pattern %d", pattern);
+        printf("Selected Pattern %d\n", pattern);
         row = 0;
     }
 

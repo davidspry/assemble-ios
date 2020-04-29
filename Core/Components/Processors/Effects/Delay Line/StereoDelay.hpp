@@ -19,11 +19,11 @@ public:
     {
         ldelay.set(1.F);
         rdelay.set(1.F);
-        inject(4, static_cast<bool>(0));
+        inject(offsetInMs, static_cast<bool>(0));
     }
 
 public:
-    const float process(const float sample, const bool left)
+    inline const float process(const float sample, const bool left)
     { return left ? ldelay.process(sample) : rdelay.process(sample); }
     
 public:

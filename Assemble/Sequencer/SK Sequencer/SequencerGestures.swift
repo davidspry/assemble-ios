@@ -25,7 +25,7 @@ extension SequencerScene
     
     @objc func doubleTapped(_ gesture: UITapGestureRecognizer) {
         selected = pointFromGesture(gesture)
-        guard noteStrings[selected.ny][selected.nx] != nil else { return }
+        guard noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx] != nil else { return }
         eraseButtonView.center = viewPointFromIndices(selected)
         eraseButtonView.center = eraseButtonView.center.applying(.init(translationX: 0, y: -45))
         showEraseNoteView()
@@ -36,14 +36,14 @@ extension SequencerScene
         guard let touch = touches.first else { return }
         selected = pointFromTouch(touch);
         cursor.position = pointFromIndices(selected)
-        noteString = noteStrings[selected.ny][selected.nx]
+        noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         hideEraseNoteView()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         selected = pointFromTouch(touch);
-        noteString = noteStrings[selected.ny][selected.nx]
+        noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         let position = pointFromIndices(selected)
         let move = SKAction.move(to: position, duration: 0.05);
         cursor.run(move);

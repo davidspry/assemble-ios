@@ -1,4 +1,3 @@
-//  SequencerDelegate.swift
 //  Assemble
 //  Created by David Spry on 26/4/20.
 //  Copyright © 2020 David Spry. All rights reserved.

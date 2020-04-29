@@ -18,7 +18,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     var noteShapes = [[NoteShapeNode]]()
     
     var noteString: String?
-    var noteStrings = [[String?]]()
+    var noteStrings = [[[String?]]]()
     
     var spacing: CGSize = .zero
     var selected: CGPoint = .zero
@@ -44,12 +44,17 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         DispatchQueue.main.async(execute: {
             let patterns = Int(PATTERNS)
             let width = Int(SEQUENCER_WIDTH)
+            let length = Assemble.core.length
             let nilArray: [String?] = Array.init(repeating: nil, count: width)
+            self.cursor.position = self.pointFromIndices(self.selected)
             self.noteShapes.reserveCapacity(patterns)
             self.noteStrings.reserveCapacity(patterns)
             self.noteShapes.append(contentsOf: Array.init(repeating: [], count: patterns))
-            self.noteStrings.append(contentsOf: Array.init(repeating: nilArray, count: width))
-            self.cursor.position = self.pointFromIndices(self.selected)
+            self.noteStrings.append(contentsOf: Array.init(repeating: [], count: patterns))
+            for k in 0 ..< patterns {
+                self.noteStrings[k].append(contentsOf: Array.init(repeating: nilArray,
+                                                                  count: length))
+            }
         })
 
         addChild(grid);
@@ -100,7 +105,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         if selected.x >= w { selected.x = selected.x - w }
         if selected.x <  0 { selected.x = selected.x + w }
 
-        noteString = noteStrings[selected.ny][selected.nx]
+        noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         cursor.position = pointFromIndices(selected)
     }
     
@@ -128,9 +133,10 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     // MARK: - User Interaction
 
     func addOrModifyNote(xy: CGPoint, note: Int, oscillator: OscillatorShape) {
-        let existingNote: String? = noteStrings[selected.ny][selected.nx]
-        noteStrings[selected.ny][selected.nx] = Note.describe(note, oscillator: oscillator)
-        noteString = noteStrings[selected.ny][selected.nx]
+        let p = Assemble.core.currentPattern
+        let existingNote: String? = noteStrings[p][selected.ny][selected.nx]
+        noteStrings[p][selected.ny][selected.nx] = Note.describe(note, oscillator: oscillator)
+        noteString = noteStrings[p][selected.ny][selected.nx]
 
         guard existingNote == nil else {
             modifyNote(xy: xy, oscillator: oscillator)
@@ -140,7 +146,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         let node = NoteShapeNode(type: oscillator)!;
         node.position = pointFromIndices(xy);
         node.name = xy.debugDescription
-        noteShapes[Assemble.core.currentPattern].append(node)
+        noteShapes[p].append(node)
         addChild(node);
     }
 
@@ -154,11 +160,12 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
     func eraseNote() {
         let xy = selected
+        let p = Assemble.core.currentPattern
         DispatchQueue.main.async {
-            self.noteShapes[Assemble.core.currentPattern].forEach { node in
+            self.noteShapes[p].forEach { node in
                 if node.name == xy.debugDescription {
                     node.removeFromParent()
-                    self.noteStrings[xy.ny][xy.nx] = nil
+                    self.noteStrings[p][xy.ny][xy.nx] = nil
                     self.noteString = nil
                 }
             }
@@ -167,6 +174,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
     func patternDidChange(to pattern: Int, from lastPattern: Int) {
         grid.redrawIfNeeded()
+        noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         DispatchQueue.main.async {
             self.noteShapes[lastPattern].forEach { node in
                 node.isHidden = true

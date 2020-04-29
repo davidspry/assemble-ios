@@ -97,7 +97,7 @@ class Keyboard : UIView, KeyboardSettingsListener, OscillatorSelectorListener
     }
     
     internal func initialiseControls(in frame: CGRect) {
-        let button: Int = 25
+        let button: Int = 35
         let controlMargin: CGFloat = 5.0
         var origin = CGPoint(x: 0, y: frame.midY - CGFloat(button) * 0.5)
         let weight = UIImage.SymbolConfiguration(weight: .medium)
@@ -107,7 +107,7 @@ class Keyboard : UIView, KeyboardSettingsListener, OscillatorSelectorListener
         let octaveD = UIButton()
         
         origin.x = controlMargin
-        arrow = UIImage(systemName: "chevron.left", withConfiguration: weight)
+        arrow = UIImage(systemName: "minus", withConfiguration: weight)
         octaveD.frame = CGRect(origin: origin, size: .square(button))
         octaveD.setImage(arrow, for: .normal)
         octaveD.tintColor = .white
@@ -115,8 +115,8 @@ class Keyboard : UIView, KeyboardSettingsListener, OscillatorSelectorListener
         octaveD.addTarget(self, action: #selector(setOctave), for: .touchDown)
         addSubview(octaveD)
         
-        origin.x = bounds.width - controlMargin - 25
-        arrow = UIImage(systemName: "chevron.right", withConfiguration: weight)
+        origin.x = bounds.width - controlMargin - CGFloat(button)
+        arrow = UIImage(systemName: "plus", withConfiguration: weight)
         octaveU.frame = CGRect(origin: origin, size: .square(button))
         octaveU.setImage(arrow, for: .normal)
         octaveU.tintColor = .white

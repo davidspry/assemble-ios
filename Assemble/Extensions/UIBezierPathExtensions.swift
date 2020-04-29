@@ -14,4 +14,26 @@ extension  UIBezierPath {
         addArc(withCenter: centre, radius: radius, startAngle: 0, endAngle: 360, clockwise: true);
     }
     
+    func addSquare(withCentre centre: CGPoint, length: CGFloat) {
+        var origin = CGPoint()
+        origin.x = centre.x - length * 0.5
+        origin.y = centre.y - length * 0.5
+        
+        move(to: origin)
+        
+        origin.x = origin.x + length
+        addLine(to: origin)
+        
+        origin.y = origin.y + length
+        addLine(to: origin)
+        
+        origin.x = origin.x - length
+        addLine(to: origin)
+        
+//        origin.y = origin.y - length
+//        addLine(to: origin)
+        
+        close()
+    }
+    
 }

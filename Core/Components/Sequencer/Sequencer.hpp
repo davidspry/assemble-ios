@@ -51,7 +51,7 @@ private:
     int pattern = 0;
     int patternLength;
     int activePatterns = 1;
-    bool mode = 0;
+    bool mode = 1;
 };
 
 #endif

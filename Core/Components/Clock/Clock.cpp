@@ -6,7 +6,6 @@
 
 Clock::Clock(int tempo)
 {
-    valueTransition.setSampleRate(sampleRate);
     bpm = std::max(1, tempo);
     update();
     time = tick;

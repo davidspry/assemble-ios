@@ -108,6 +108,7 @@ const float Delay::parseMusicalTimeParameterIndex(const int index)
 void Delay::inject(int milliseconds)
 {
     offsetInSamples = Assemble::Utilities::samples(milliseconds, clock->sampleRate);
+    set(time);
 }
 
 void Delay::cycleDelayTime(const bool shorter)
@@ -126,13 +127,13 @@ const float Delay::process(const float sample)
     else           fadeIn();
 
     delay = delay + 5e-5f * (target - delay);
-    samples[whead] = gain * sample + feedback * samples[  rhead];
+    samples[whead] = gain * sample + feedback * samples[rhead];
     const float lerp = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
 
     whead = whead + 1;
     if (whead >= capacity) whead = 0;
 
-    rhead = whead - delay + modulationDepth * (150 * modulator.nextSample());
+    rhead = whead - delay + modulationDepth * (200 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 

@@ -43,6 +43,7 @@
 		14909DA324585635003C6F03 /* SineWTOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14909DA124585635003C6F03 /* SineWTOscillator.cpp */; };
 		14915BC02434B75B008E8147 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
 		14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
+		149A1D2E2459E0C900F083D0 /* PatternOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A1D2D2459E0C900F083D0 /* PatternOverview.swift */; };
 		149ACC1B24542209009DA18F /* UIBezierPathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */; };
 		149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */; };
 		149ACC1F24542483009DA18F /* ComputerKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1E24542483009DA18F /* ComputerKeyboard.swift */; };
@@ -163,6 +164,7 @@
 		14909DA42458585D003C6F03 /* ASSineWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSineWaveTable.h; sourceTree = "<group>"; };
 		14915BBF2434B75B008E8147 /* Assemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assemble.swift; sourceTree = "<group>"; };
 		14915BC12434BB3A008E8147 /* CellSelectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelectShape.swift; sourceTree = "<group>"; };
+		149A1D2D2459E0C900F083D0 /* PatternOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternOverview.swift; sourceTree = "<group>"; };
 		149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtensions.swift; sourceTree = "<group>"; };
 		149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosedRangeExtensions.swift; sourceTree = "<group>"; };
 		149ACC1E24542483009DA18F /* ComputerKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputerKeyboard.swift; sourceTree = "<group>"; };
@@ -451,6 +453,14 @@
 			path = Processors;
 			sourceTree = "<group>";
 		};
+		149A1D2C2459E0AE00F083D0 /* PatternOverview */ = {
+			isa = PBXGroup;
+			children = (
+				149A1D2D2459E0C900F083D0 /* PatternOverview.swift */,
+			);
+			path = PatternOverview;
+			sourceTree = "<group>";
+		};
 		149ACC20245424B0009DA18F /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -594,6 +604,7 @@
 				1458D130245328550093B541 /* PaddedLabel.swift */,
 				14B2315D2436597E0012F32F /* SK Nodes */,
 				1436CE5224541BB800670E3E /* Keyboard */,
+				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
 				14CE044A2457366900B0220C /* Waveform */,
 			);
 			path = UI;
@@ -731,6 +742,7 @@
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
 				149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */,
+				149A1D2E2459E0C900F083D0 /* PatternOverview.swift in Sources */,
 				14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */,
 				143FB00D243F3DD90058AE40 /* CGPointExtensions.swift in Sources */,
 				144A11672457166C000F2B4C /* Clock.cpp in Sources */,

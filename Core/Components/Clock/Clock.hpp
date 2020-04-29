@@ -37,7 +37,6 @@ public:
     inline void setBPM(int tempo)
     {
         bpm = std::max(0, tempo);
-        valueTransition.set(bpm);
         update();
     }
     
@@ -52,10 +51,6 @@ public:
             return true;
         }
 
-        if (!valueTransition.complete()) {
-            update();
-        }
-        
         return false;
     }
 
@@ -64,7 +59,7 @@ public:
     inline const bool playOrPause() { return (ticking = !ticking); }
 
 private:
-    inline void update() { tick = sampleRate * 60 / valueTransition.get() / subdivision; }
+    inline void update() { tick = sampleRate * 60 / bpm / subdivision; }
 
 private:
     bool  ticking = false;
@@ -75,9 +70,6 @@ private:
     uint8_t  subdivision = 4;
     uint32_t tick;
     uint32_t time;
-    
-private:
-    ValueTransition valueTransition = {140.0F, 140.0F, 0.5F};
     
 friend class Delay;
 };

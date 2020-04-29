@@ -92,7 +92,7 @@ class Note : Equatable
     }
     
     class func octave(of note: Int) -> Int {
-        return note / 12
+        return note / 12 - 1
     }
     
     class func notename(of note: Int) -> String {

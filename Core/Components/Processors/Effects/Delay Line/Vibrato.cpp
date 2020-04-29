@@ -1,4 +1,3 @@
-//  Vibrato.cpp
 //  Assemble
 //  Created by David Spry on 24/4/20.
 //  Copyright © 2020 David Spry. All rights reserved.
@@ -29,17 +28,18 @@ void Vibrato::set(uint64_t parameter, float value)
     {
         case kVibratoToggle:
         {
-            this->bypassed = !bypassed;
+            bypassed = !bypassed;
             break;
         }
         case kVibratoSpeed:
         {
-            this->speed.store(Assemble::Utilities::bound(value, 0.1F, 10.F));
+            speed.store(Assemble::Utilities::bound(value, 0.1F, 10.F));
+            modulator.load(speed);
             break;
         }
         case kVibratoDepth:
         {
-            this->depth.store(Assemble::Utilities::bound(value, 0.0F, 1.0F));
+            depth.store(Assemble::Utilities::bound(value, 0.0F, 1.0F));
             break;
         }
         default: return;

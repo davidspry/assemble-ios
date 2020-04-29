@@ -13,6 +13,7 @@
 static const int kSequencerLength         = 0xAA01;
 static const int kSequencerCurrentRow     = 0xAA02;
 static const int kSequencerCurrentPattern = 0xAA03;
+static const int kSequencerMode           = 0xAA04;
 
 // [CLOCK] 0xCA0[Parameter]
 // ===========================================

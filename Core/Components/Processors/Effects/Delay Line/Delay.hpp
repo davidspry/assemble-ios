@@ -101,7 +101,7 @@ private:
 private:
     float mix      = 0.25F;
     float gain     = 1.F;
-    float feedback = 0.55F;
+    float feedback = 0.65F;
     float modulationSpeed = 4.0F;
     float modulationDepth = 0.5F;
     std::atomic<bool> bypassed = {false};

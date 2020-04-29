@@ -34,6 +34,7 @@ class DotGrid : SKSpriteNode
         if  shape != currentShape {
             self.texture = DotGrid.drawDotGrid(shape: shape, spacing: spacing);
             currentShape = shape
+            print("[DotGrid] Redraw!")
         }
     }
     

@@ -103,13 +103,13 @@ extension Keyboard
     
     internal func whiteKeyPressed(_ k: Int, octave: Int) -> Bool
     {
-        let note = (self.octave + octave) * 12 + whiteKeyIndices[k];
+        let note = (self.octave + octave + 1) * 12 + whiteKeyIndices[k];
         return pressedKey == note
     }
     
     internal func blackKeyPressed(_ k: Int, octave: Int) -> Bool
     {
-        let note = (self.octave + octave) * 12 + blackKeyIndices[k];
+        let note = (self.octave + octave + 1) * 12 + blackKeyIndices[k];
         return pressedKey == note
     }
 }

@@ -40,7 +40,7 @@ private:
     
 private:
     float sampleRate = 48000.F;
-    std::atomic<float> targetFrequency = { 6E3F };
+    std::atomic<float> targetFrequency = { 4E3F };
     std::atomic<float> targetResonance = { 0.0F };
     float frequency = targetFrequency;
     float resonance = targetResonance;

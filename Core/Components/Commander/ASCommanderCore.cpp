@@ -135,15 +135,16 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
                 loadNote(note.note, note.shape);
                 std::advance(notes, 1);
             }
+            
         }
 
         sample = {0.f, 0.f};
         sample[0] = sample[1] = synthesiser.nextSample();
         sample[0] = sample[1] = vibrato.process(sample[0]);
-        sample[0] = delay.process(sample[0], static_cast<bool>(0));
-        sample[1] = delay.process(sample[1], static_cast<bool>(1));
+        sample[0] = delay.process(sample[0], static_cast<bool>(1));
+        sample[1] = delay.process(sample[1], static_cast<bool>(0));
         
-        for (size_t c = 0; c < channels; c++)
+        for (size_t c = 0; c < 2; c++)
             output[c][t] = sample[c & 1];
     }
 }

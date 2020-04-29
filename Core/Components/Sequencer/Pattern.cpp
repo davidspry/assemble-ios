@@ -10,7 +10,7 @@ Pattern::Pattern()
     h = SEQUENCER_WIDTH;
     beats = 4;
     ticks = 4;
-    active = false;
+    active = true;
 }
 
 void Pattern::setTimeSignature(int beats, int subdivision)

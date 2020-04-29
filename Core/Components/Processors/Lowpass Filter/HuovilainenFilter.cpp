@@ -18,7 +18,7 @@ void HuovilainenFilter::initialise()
     ::set(0.F, tanhStage.size(), tanhStage.data());
 
     thermal = 25E-6F;
-    set(12E3F, 0.F);
+    set(8E3F, 1E-1F);
 }
 
 /// \brief Get a parameter value from the Huovilainen Filter
@@ -68,8 +68,8 @@ float HuovilainenFilter::quicktanh(float x)
     float sign = x < 0 ? -1.F : 1.F;
     
     x = std::abs(x);
-    if (x >= 4.F) return sign;
-    if (x <  0.5) return sign * x;
+    if (x >= 4.0F) return sign;
+    if (x <  0.5F) return sign * x;
     return sign * std::tanh(x);
 }
 

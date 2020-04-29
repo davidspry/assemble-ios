@@ -15,7 +15,7 @@ extension Keyboard
         pressNote(note);
         self.layer.setNeedsDisplay();
     }
-    
+
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         guard let touch = touches.first else { return }
@@ -76,6 +76,6 @@ extension Keyboard
             if key == 0 { return nil }
         }
 
-        return max(0, localOctave * 12 + key)
+        return max(0, (localOctave + 1) * 12 + key)
     }
 }

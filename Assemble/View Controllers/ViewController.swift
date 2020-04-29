@@ -10,18 +10,38 @@ class ViewController : UIViewController
     var updater : CADisplayLink!
     var computerKeyboard = ComputerKeyboard()
     
+    var pttrn = 0
+    
     @IBOutlet weak var keyboard: Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
     @IBOutlet weak var waveform: Waveform!
+    @IBOutlet weak var patterns: PatternOverview!
+
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
+    @IBOutlet weak var modeLabel: UILabel!
+    
     @IBOutlet weak var resonanceSlider: UISlider!
     @IBOutlet weak var frequencySlider: UISlider!
     
     @objc func refreshInterface() {
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
+        
+        // Listen for mode, pattern
+        let mode = Assemble.core.getParameter(kSequencerMode)
+        if mode == 0 { modeLabel.text = "PATTERN MODE" }
+        else         { modeLabel.text = "SONG MODE" }
+        
+        // listening for pattern...
+        let pattern = Assemble.core.currentPattern
+        if pttrn != pattern {
+            sequencer.SK.patternDidChange(to: pattern, from: pttrn)
+            pttrn = pattern
+        }
+        
+        patterns.setNeedsDisplay()
+        // ==========
         
         // Update this from the setParameter(...) function instead
         let bpm = Assemble.core.getParameter(kClockBPM)

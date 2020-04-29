@@ -10,9 +10,6 @@
 #include "ASParameters.h"
 #include "ASOscillators.h"
 
-// TODO: Add static sine wavetable to codebase
-// TODO: Add modulation by looking up the sine wavetable
-
 class Vibrato
 {
 public:
@@ -27,8 +24,8 @@ public:
     const float get(uint64_t parameter);
 
 private:
-    std::atomic<bool> bypassed = {false};
-    std::atomic<float> depth = {0.25F};
+    std::atomic<bool> bypassed = {true};
+    std::atomic<float> depth = {0.20F};
     std::atomic<float> speed = {2.00F};
     SineWTOscillator modulator = {2.00F};
 

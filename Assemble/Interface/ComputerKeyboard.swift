@@ -10,11 +10,11 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorS
     
     var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
-    private var _octave: Int = 48
+    private var _octave: Int = 60
     
     var octave: Int = 4 {
         didSet {
-            _octave = octave * 12
+            _octave = (octave + 1) * 12
             settingsListeners.invoke({$0.didChangeOctave(to: octave)})
         }
     }
@@ -41,7 +41,10 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorS
                     Assemble.core.playOrPause(); break
                 
                 case .place:
-                    self.listeners.invoke({ $0.pressNote(self._octave + value, shape: self.oscillator) }); break
+                    self.listeners.invoke({
+                        $0.pressNote(self._octave + value, shape: self.oscillator)
+                    });
+                    break
                 
                 case .erase:
                     self.listeners.invoke({ $0.eraseNote() }); break

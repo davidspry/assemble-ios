@@ -27,7 +27,7 @@ Synthesiser::Synthesiser()
     
     for (auto &voice : voices)
         voice.setSampleRate(sampleRate);
-    
+
     for (auto &vtrns : frequency)
     { vtrns.setSampleRate(sampleRate); vtrns.set(1.0F, 0.5F); }
     
@@ -59,8 +59,7 @@ const float Synthesiser::nextSample()
     for (auto &voice : voices)
     {
         const int osc = std::floor(bank);
-        if (!frequency[osc].complete())
-            voice.set(kFrequencyType, frequency[osc].get());
+        if (!frequency[osc].complete()) voice.set(kFrequencyType, frequency[osc].get());
         if (!resonance[osc].complete()) voice.set(kResonanceType, resonance[osc].get());
         sample += voice.nextSample();
         bank = bank + delta;

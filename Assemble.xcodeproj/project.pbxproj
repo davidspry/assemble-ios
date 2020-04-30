@@ -59,6 +59,8 @@
 		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
 		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
+		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
+		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
 		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
 		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
 		14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
@@ -184,6 +186,8 @@
 		14AFB899245218A600F5AD3A /* ASUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASUtilities.h; sourceTree = "<group>"; };
 		14B2315B24362D970012F32F /* SequencerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerGestures.swift; sourceTree = "<group>"; };
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
+		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
+		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
 		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
 		14D3AE9B2433088E0095B587 /* DotGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGridRow.swift; sourceTree = "<group>"; };
@@ -281,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				1470F72D2432047E00E751B7 /* Note.swift */,
-				14ADCBED2436265300822139 /* Sequencer.swift */,
 				14ADCBEB2436233B00822139 /* SequencerScene.swift */,
 				14B2315B24362D970012F32F /* SequencerGestures.swift */,
 			);
@@ -400,7 +403,7 @@
 		1470F72C2432045B00E751B7 /* Sequencer */ = {
 			isa = PBXGroup;
 			children = (
-				1436CE51245404A000670E3E /* SK Sequencer */,
+				14ADCBED2436265300822139 /* Sequencer.swift */,
 				14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */,
 			);
 			path = Sequencer;
@@ -531,6 +534,15 @@
 			path = "SK Nodes";
 			sourceTree = "<group>";
 		};
+		14C38EE9245B29A100180810 /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				14C38EEA245B29B800180810 /* Transport.swift */,
+				14C38EEC245B2A1F00180810 /* TransportViews.swift */,
+			);
+			path = Transport;
+			sourceTree = "<group>";
+		};
 		14CA4FE9243EF32A00F3C685 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -602,10 +614,12 @@
 			isa = PBXGroup;
 			children = (
 				1458D130245328550093B541 /* PaddedLabel.swift */,
+				1436CE51245404A000670E3E /* SK Sequencer */,
 				14B2315D2436597E0012F32F /* SK Nodes */,
 				1436CE5224541BB800670E3E /* Keyboard */,
 				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
 				14CE044A2457366900B0220C /* Waveform */,
+				14C38EE9245B29A100180810 /* Transport */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -695,6 +709,7 @@
 				14DAC38D2417772C005654EA /* ViewController.swift in Sources */,
 				14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */,
 				149ACC2B24543CE9009DA18F /* OscillatorSelectorListener.swift in Sources */,
+				14C38EEB245B29B800180810 /* Transport.swift in Sources */,
 				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
@@ -745,6 +760,7 @@
 				149A1D2E2459E0C900F083D0 /* PatternOverview.swift in Sources */,
 				14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */,
 				143FB00D243F3DD90058AE40 /* CGPointExtensions.swift in Sources */,
+				14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */,
 				144A11672457166C000F2B4C /* Clock.cpp in Sources */,
 				1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */,
 			);

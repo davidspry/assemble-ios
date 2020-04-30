@@ -35,7 +35,17 @@ const float Delay::get(uint64_t parameter)
         {
             return Assemble::Utilities::milliseconds(target, clock->sampleRate);
         }
+         
+        case kDelayModulationSpeed:
+        {
+            return modulationSpeed;
+        }
             
+        case kDelayModulationDepth:
+        {
+            return modulationDepth;
+        }
+
         default: return 0.F;
     }
 }
@@ -74,6 +84,17 @@ void Delay::set(uint64_t parameter, float value)
         {
             const float mix = Assemble::Utilities::bound(value, 0.F, 1.F);
             this->mix = mix;
+        }
+        case kDelayModulationSpeed:
+        {
+            const float speed = Assemble::Utilities::bound(value, 0.1F, 25.F);
+            this->modulationSpeed = speed;
+            modulator.load(speed);
+        }
+        case kDelayModulationDepth:
+        {
+            const float depth = Assemble::Utilities::bound(value, 0.F, 2.F);
+            this->modulationDepth = depth;
         }
         default: return;
     }
@@ -133,7 +154,7 @@ const float Delay::process(const float sample)
     whead = whead + 1;
     if (whead >= capacity) whead = 0;
 
-    rhead = whead - delay + modulationDepth * (200 * modulator.nextSample());
+    rhead = whead - delay + modulationDepth * (150 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 

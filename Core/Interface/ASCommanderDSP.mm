@@ -62,9 +62,9 @@ void ASCommanderDSP::process(AUAudioFrameCount frameCount, AUAudioFrameCount buf
 {
     const auto channels = outBufferListPtr->mNumberBuffers;
     
-    float *output[2];
-    output[0] = (float *) outBufferListPtr->mBuffers[0].mData + bufferOffset;
-    output[1] = (float *) outBufferListPtr->mBuffers[1].mData + bufferOffset;
+    float *output[channels];
+    for (auto c = 0; c < channels; ++c)
+        output[c] = (float *) outBufferListPtr->mBuffers[c].mData + bufferOffset;
     
     ASCommanderCore::render(channels, frameCount, output);
 }

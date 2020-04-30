@@ -20,17 +20,6 @@ void SineWTOscillator::load(const float frequency)
     translation = frequency * SineWTOscillator::tableDelta;
 }
 
-inline const float SineWTOscillator::nextSample() noexcept
-{
-    using namespace Assemble::Utilities;
-    const float sample = lerp(tableIndex, &wt_sine[0], tableSize);
-
-    tableIndex = tableIndex + tableDelta;
-    tableIndex = tableIndex - static_cast<int>(tableIndex >= tableSize) * tableSize;
-
-    return sample;
-}
-
 void SineWTOscillator::setSampleRate(const float sampleRate)
 {
     Oscillator::sampleRate = sampleRate;

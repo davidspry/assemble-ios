@@ -100,10 +100,10 @@ private:
 
 private:
     float mix      = 0.25F;
-    float gain     = 1.F;
+    float gain     = 1.00F;
     float feedback = 0.65F;
-    float modulationSpeed = 4.0F;
-    float modulationDepth = 0.5F;
+    float modulationSpeed = 10.0F;
+    float modulationDepth = 0.50F;
     std::atomic<bool> bypassed = {false};
 
 private:
@@ -114,7 +114,7 @@ private:
     uint16_t bpm;
     float time;
     Clock *clock;
-    SineWTOscillator modulator = {4.00F};
+    SineWTOscillator modulator = {10.00F};
 };
 
 #endif

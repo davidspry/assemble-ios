@@ -14,6 +14,7 @@ static const int kSequencerLength         = 0xAA01;
 static const int kSequencerCurrentRow     = 0xAA02;
 static const int kSequencerCurrentPattern = 0xAA03;
 static const int kSequencerMode           = 0xAA04;
+static const int kSequencerPatternState   = 0xAA05;
 
 // [CLOCK] 0xCA0[Parameter]
 // ===========================================
@@ -84,6 +85,8 @@ static const int kDelayFeedback           = 0xEF11;
 static const int kDelayTimeInMs           = 0xEF12;
 static const int kDelayMusicalTime        = 0xEF13;
 static const int kDelayMix                = 0xEF14;
+static const int kDelayModulationSpeed    = 0xEF15;
+static const int kDelayModulationDepth    = 0xEF16;
 
 // Stereo Delay
 static const int kStereoDelayLTime        = 0xEF20;

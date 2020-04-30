@@ -26,9 +26,20 @@ public:
     SineWTOscillator(const float frequency);
 
 public:
-    inline const float nextSample() noexcept override;
     void load(const float frequency) override;
     void setSampleRate(const float sampleRate) override;
+    
+public:
+    inline const float nextSample() noexcept override
+    {
+        using namespace Assemble::Utilities;
+        const float sample = lerp(tableIndex, &wt_sine[0], tableSize);
+
+        tableIndex = tableIndex + tableDelta;
+        tableIndex = tableIndex - static_cast<int>(tableIndex >= tableSize) * tableSize;
+
+        return sample;
+    }
 
 private:
     void computeTableDelta();

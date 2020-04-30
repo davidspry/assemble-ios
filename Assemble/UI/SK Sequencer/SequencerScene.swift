@@ -72,23 +72,22 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         view.addGestureRecognizer(self.tapRecogniser)
         tapRecogniser.addTarget(self, action: #selector(SequencerScene.doubleTapped(_:)))
         
-        let frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        let width: CGFloat = 35
         let button = UIButton(frame: frame)
-        button.setImage(UIImage(systemName: "bin.xmark"), for: .normal)
-        button.layer.cornerRadius = button.frame.height / 2
-        button.adjustsImageWhenHighlighted = true
-        button.layer.cornerCurve = .continuous
-        button.backgroundColor = .white
-        button.tintColor = .black
+        let size = UIImage.SymbolConfiguration(pointSize: width)
+        let frame = CGRect(x: 0, y: 0, width: width, height: width)
+        button.frame = frame
+        button.tintColor = .white
         button.addTarget(self, action: #selector(binPressed), for: .touchDown)
+        button.setImage(UIImage(systemName: "xmark.circle.fill",
+                                withConfiguration: size), for: .normal)
 
-        eraseButtonView.backgroundColor = .clear
         eraseButtonView.frame = frame
         eraseButtonView.addSubview(button)
         eraseButtonView.isHidden = true
         view.addSubview(eraseButtonView)
     }
-    
+
     // MARK: - Computer Keyboard
     
     func didNavigate(by direction: Int)
@@ -175,6 +174,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
     func patternDidChange(to pattern: Int) {
         guard pattern != self.pattern else { return }
+        hideEraseNoteView()
         grid.redrawIfNeeded()
         noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         DispatchQueue.main.async {
@@ -185,7 +185,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
             self.noteShapes[pattern].forEach { node in
                 node.isHidden = false
             }
-            
+
             self.pattern = pattern
         }
     }

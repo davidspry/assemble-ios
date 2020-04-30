@@ -4,15 +4,6 @@
 
 #include "Pattern.hpp"
 
-Pattern::Pattern()
-{
-    w = SEQUENCER_WIDTH;
-    h = SEQUENCER_WIDTH;
-    beats = 4;
-    ticks = 4;
-    active = true;
-}
-
 void Pattern::setTimeSignature(int beats, int subdivision)
 {
     if (beats < 1 || beats > 7) { return; }

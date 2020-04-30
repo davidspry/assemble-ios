@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="393" y="845" width="580" height="145"/>
+                                <rect key="frame" x="393" y="759" width="580" height="145"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="12:3" id="6UH-cy-BR1"/>
                                     <constraint firstAttribute="height" constant="145" id="F3N-Ii-KQp"/>
@@ -33,9 +33,8 @@
                                     <constraint firstAttribute="height" constant="64" id="2nn-bQ-dlX"/>
                                     <constraint firstAttribute="width" constant="64" id="4Mt-mu-F50"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="play" catalog="system">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="light"/>
                                 </state>
                                 <connections>
@@ -53,7 +52,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz">
                                 <rect key="frame" x="32" y="131" width="50.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
@@ -62,7 +61,7 @@
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="topInset">
@@ -87,14 +86,6 @@
                                     <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="AA9-FJ-X01"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="65t-Kf-01O">
-                                <rect key="frame" x="489" y="118" width="388" height="31"/>
-                                <color key="minimumTrackTintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="maximumTrackTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <connections>
-                                    <action selector="resonanceChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="ErW-bY-CcC"/>
-                                </connections>
-                            </slider>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3i-2N-gT6" customClass="Waveform" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="32" y="32" width="101" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -113,9 +104,17 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATTERN MODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBU-mM-6OQ">
                                 <rect key="frame" x="32" y="98" width="101" height="17"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1n-M5-aq6" customClass="Transport" customModule="Assemble" customModuleProvider="target">
+                                <rect key="frame" x="545.5" y="933" width="275" height="75"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="275" id="6re-7h-bxu"/>
+                                    <constraint firstAttribute="height" constant="75" id="Oxd-NU-iBq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -123,26 +122,23 @@
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="width" secondItem="kBU-mM-6OQ" secondAttribute="width" id="4PH-jl-Pyg"/>
                             <constraint firstItem="kBU-mM-6OQ" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="16" id="6rq-VX-pkg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UYZ-hz-xZ4" secondAttribute="trailing" constant="48" id="8yQ-Bt-XYB"/>
-                            <constraint firstItem="X2r-1G-AL6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="AcQ-Yd-t5h"/>
+                            <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="16" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
-                            <constraint firstItem="UYS-gy-cCN" firstAttribute="top" secondItem="65t-Kf-01O" secondAttribute="bottom" constant="48" id="ClJ-Ra-Xlt"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="kBU-mM-6OQ" secondAttribute="bottom" constant="16" id="Gcz-zB-Czu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="kBU-mM-6OQ" firstAttribute="centerX" secondItem="K3i-2N-gT6" secondAttribute="centerX" id="KIW-X9-boF"/>
                             <constraint firstItem="UYS-gy-cCN" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" id="QIk-yS-dA1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="14" id="R9f-RX-Bfk"/>
-                            <constraint firstItem="65t-Kf-01O" firstAttribute="width" secondItem="UYS-gy-cCN" secondAttribute="width" id="Z19-dE-kqZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="100" id="R9f-RX-Bfk"/>
+                            <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
                             <constraint firstItem="UYZ-hz-xZ4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="bL6-3I-9ku"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X2r-1G-AL6" secondAttribute="trailing" constant="35" id="d5Y-F4-QNL"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="kBU-mM-6OQ" secondAttribute="leading" id="dza-1o-LaC"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="O4G-8C-h7M" secondAttribute="bottom" constant="16" id="oZL-NT-XfH"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="pDd-HK-iyj"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="scF-YI-kja"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="UYS-gy-cCN" secondAttribute="bottom" constant="64" id="tNS-yL-Dcs"/>
-                            <constraint firstItem="65t-Kf-01O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xAf-Ue-u1M"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yAo-Uo-CYW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -153,9 +149,9 @@
                         <outlet property="keyboard" destination="X2r-1G-AL6" id="sKe-tV-LFf"/>
                         <outlet property="modeLabel" destination="kBU-mM-6OQ" id="Mda-Dk-EZi"/>
                         <outlet property="patterns" destination="O4G-8C-h7M" id="ggh-Ec-jnL"/>
-                        <outlet property="resonanceSlider" destination="65t-Kf-01O" id="gVr-sc-Rqa"/>
                         <outlet property="sequencer" destination="OJS-ew-lo6" id="Lgx-hR-5VB"/>
                         <outlet property="tempoLabel" destination="Ulx-iT-Ybz" id="ONg-7p-RzG"/>
+                        <outlet property="transport" destination="Z1n-M5-aq6" id="jfo-Uo-XCd"/>
                         <outlet property="waveform" destination="K3i-2N-gT6" id="UJi-1U-sG7"/>
                     </connections>
                 </viewController>

@@ -14,12 +14,12 @@ class ViewController : UIViewController
     @IBOutlet weak var sequencer: Sequencer!
     @IBOutlet weak var waveform: Waveform!
     @IBOutlet weak var patterns: PatternOverview!
-
+    @IBOutlet weak var transport: Transport!
+    
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
     
-    @IBOutlet weak var resonanceSlider: UISlider!
     @IBOutlet weak var frequencySlider: UISlider!
     
     @objc func refreshInterface() {
@@ -50,19 +50,16 @@ class ViewController : UIViewController
         patterns.setNeedsDisplay()
         // ==========
         
-        // Updates pushed by the parameter queue is too slow. However,
-        // this value only needs to be updated when the BPM changes.
-        // TODO: Find a way to push the BPM value rather than polling for it.
-        // This would reduce the number of function calls by at least 60
-        // per second.
-        let bpm = Int(Assemble.core.getParameter(kClockBPM))
         let row = Assemble.core.currentRow
         sequencer.SK.row.moveTo(row: row)
-        tempoLabel.text = "\(bpm)BPM"
     }
 
     internal func desiredInitialFrequency(_ frequency: Float) -> Float {
         return (log(frequency) - log(20)) / (log(20E3) - log(20))
+    }
+    
+    internal func desiredInitialTempo(_ tempo: Int) -> Float {
+        return Float(tempo - 30) / Float(300 - 30)
     }
 
     override func viewDidLoad()
@@ -79,15 +76,9 @@ class ViewController : UIViewController
         
         // Test: Set filter frequency
         frequencySlider.maximumValue = 1
-        frequencySlider.minimumValue = 0.55
+        frequencySlider.minimumValue = 0
         frequencySlider.isContinuous = true
-        frequencySlider.setValue(desiredInitialFrequency(8000), animated: true)
-        
-        // Test: Set filter resonance
-        resonanceSlider.maximumValue = 1
-        resonanceSlider.minimumValue = 0.0
-        resonanceSlider.setValue(0.0, animated: true)
-        resonanceSlider.isContinuous = true
+        frequencySlider.setValue(desiredInitialTempo(140), animated: true)
         
         keyboard.listeners.add(sequencer)
         keyboard.listeners.add(Assemble.core)
@@ -95,6 +86,8 @@ class ViewController : UIViewController
         computerKeyboard.listeners.add(sequencer)
         computerKeyboard.listeners.add(Assemble.core)
         computerKeyboard.settingsListeners.add(keyboard)
+        transport.listeners.add(keyboard)
+        transport.listeners.add(computerKeyboard)
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -111,13 +104,10 @@ class ViewController : UIViewController
     }
 
     @IBAction func sliderChanged(_ sender: UISlider) {
-        let tempo = sender.value.map(from: 0.55...1, to: 30...300)
+        let tempo = sender.value.map(from: 0...1, to: 30...300)
+        let bpm = Int(tempo)
+        tempoLabel.text = "\(bpm)BPM"
         Assemble.core.setParameter(kClockBPM, to: tempo)
-//        Assemble.core.setFilter(frequency: sender.value, oscillator: .triangle)
-    }
-    
-    @IBAction func resonanceChanged(_ sender: UISlider) {
-        Assemble.core.setFilter(resonance: sender.value, oscillator: .triangle)
     }
 }
 

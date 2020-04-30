@@ -13,7 +13,7 @@
 class Pattern
 {
 public:
-    Pattern();
+    Pattern() {};
 
 public:
     int width()  { return w; }
@@ -22,8 +22,8 @@ public:
     std::pair<int,int> getTimeSignature() { return {beats, ticks}; }
 
 public:
-    bool toggle() { return (active = !active); }
-    bool isActive() { return active; }
+    inline const bool toggle()   { return (active = !active); }
+    inline const bool isActive() { return active; }
     
 public:
     void erase(int, int);
@@ -41,9 +41,11 @@ private:
     Matrix <SEQUENCER_WIDTH, SEQUENCER_WIDTH> pattern;
 
 private:
-    int h, w;
-    int beats, ticks;
-    bool active = false;
+    int h = SEQUENCER_WIDTH;
+    int w = SEQUENCER_WIDTH;
+    int beats = 4;
+    int ticks = 4;
+    bool active = true;
 };
 
 #endif

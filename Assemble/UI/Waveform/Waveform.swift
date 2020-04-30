@@ -17,7 +17,7 @@ class Waveform: UIView {
     
     private let _bufferSize: UInt32 = 1024
     
-    private var gain: CGFloat = 20
+    private var gain: CGFloat = 15
     
     private let points: Int = 32
     

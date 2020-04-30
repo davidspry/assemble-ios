@@ -46,7 +46,7 @@ private:
     Synthesiser synthesiser;
     Vibrato     vibrato;
     StereoDelay delay = {&clock};
-    
+
 private:
     float sampleRate;
     std::array<float, 2> sample;

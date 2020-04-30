@@ -8,7 +8,7 @@ Sequencer::Sequencer()
 {
     patterns.resize(PATTERNS);
     
-    auto firstPattern = patterns.at(pattern);
+    auto &firstPattern = patterns[pattern];
     patternLength = firstPattern.length();
     activePatterns = PATTERNS;//static_cast<int>(firstPattern.toggle() == true);
 }
@@ -24,6 +24,7 @@ const float Sequencer::get(uint64_t parameter)
         case kSequencerLength: return (float) patternLength;
         case kSequencerCurrentRow: return (float) row;
         case kSequencerCurrentPattern: return (float) pattern;
+        case kSequencerPatternState: return (float) patterns.at(pattern).isActive();
         default: return 0.F;
     }
 }

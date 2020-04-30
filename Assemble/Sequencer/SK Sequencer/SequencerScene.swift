@@ -16,6 +16,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     let row    = DotGridRow()
     let cursor = CellSelectShape(size: 20)
     var noteShapes = [[NoteShapeNode]]()
+    var pattern: Int = 0
     
     var noteString: String?
     var noteStrings = [[[String?]]]()
@@ -172,17 +173,20 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
     }
 
-    func patternDidChange(to pattern: Int, from lastPattern: Int) {
+    func patternDidChange(to pattern: Int) {
+        guard pattern != self.pattern else { return }
         grid.redrawIfNeeded()
         noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         DispatchQueue.main.async {
-            self.noteShapes[lastPattern].forEach { node in
+            self.noteShapes[self.pattern].forEach { node in
                 node.isHidden = true
             }
             
             self.noteShapes[pattern].forEach { node in
                 node.isHidden = false
             }
+            
+            self.pattern = pattern
         }
     }
 

@@ -10,8 +10,6 @@ class ViewController : UIViewController
     var updater : CADisplayLink!
     var computerKeyboard = ComputerKeyboard()
     
-    var pttrn = 0
-    
     @IBOutlet weak var keyboard: Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
     @IBOutlet weak var waveform: Waveform!
@@ -27,29 +25,42 @@ class ViewController : UIViewController
     @objc func refreshInterface() {
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
-        
-        // Listen for mode, pattern
+
+        // A mode parameter should be listened to. Swift cannot
+        // cast between Bool and numeric values, so this should be
+        // done in either the C++ or Objective-C context.
         let mode = Assemble.core.getParameter(kSequencerMode)
-        if mode == 0 { modeLabel.text = "PATTERN MODE" }
-        else         { modeLabel.text = "SONG MODE" }
+        if  mode == 0 { modeLabel.text = "PATTERN MODE" }
+        else          { modeLabel.text = "SONG MODE"    }
+
+        // Rather than CADisplayLink, Sequencer should listen for
+        // changes in the value of the Pattern parameter
+        sequencer.SK.patternDidChange(to: Assemble.core.currentPattern)
         
-        // listening for pattern...
-        let pattern = Assemble.core.currentPattern
-        if pttrn != pattern {
-            sequencer.SK.patternDidChange(to: pattern, from: pttrn)
-            pttrn = pattern
-        }
-        
+        // This does not need to be redrawn at 60fps.
+        // This needs to be redrawn whenever the pattern changes
+        // Consequently, Patterns should listen for changes in the
+        // currentPattern parameter, and it should also listen for
+        // changes in parameters that describe whether each pattern
+        // is on or off, i.e. (address: 0x..., value: [Pattern][State],
+        // e.g. [PatternNumber] * 10 + static_cast<int>(pattern == active),
+        // which would be equal to the value 101
+        // To read it, take the value mod 10 to retrieve the state (101 % 10 = 1), then
+        // divide by 10 in order to retrieve the pattern number (101 / 10 = 10).
         patterns.setNeedsDisplay()
         // ==========
         
-        // Update this from the setParameter(...) function instead
-        let bpm = Assemble.core.getParameter(kClockBPM)
+        // Updates pushed by the parameter queue is too slow. However,
+        // this value only needs to be updated when the BPM changes.
+        // TODO: Find a way to push the BPM value rather than polling for it.
+        // This would reduce the number of function calls by at least 60
+        // per second.
+        let bpm = Int(Assemble.core.getParameter(kClockBPM))
         let row = Assemble.core.currentRow
         sequencer.SK.row.moveTo(row: row)
         tempoLabel.text = "\(bpm)BPM"
     }
-    
+
     internal func desiredInitialFrequency(_ frequency: Float) -> Float {
         return (log(frequency) - log(20)) / (log(20E3) - log(20))
     }

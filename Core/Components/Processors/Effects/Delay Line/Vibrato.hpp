@@ -24,23 +24,30 @@ public:
     const float get(uint64_t parameter);
 
 private:
-    std::atomic<bool> bypassed = {true};
-    std::atomic<float> depth = {0.20F};
-    std::atomic<float> speed = {2.00F};
-    SineWTOscillator modulator = {2.00F};
+    std::atomic<bool> bypassed = {false};
+    std::atomic<float> speed = {3.0F};
+    std::atomic<float> depth = {1.0F};
+    std::atomic<float> targetDepth = {1.0F};
+    SineWTOscillator modulator = {3.0F};
+
+private:
+    inline void fadeOut(const float t) { depth = std::max(t, depth - 0.001F); }
+    inline void  fadeIn(const float t) { depth = std::min(t, depth + 0.001F); }
+    void update();
 
 private:
     /// There must be a buffer between the whead, which increases linearly,
     /// and the rhead, which is modulated by a sine wave. If the buffer is not
-    /// large enough, the rhead can move beyond the whead, which causes
+    /// large enough, the rhead may move beyond the whead, which causes
     /// a glitching effect.
 
-    int   whead = 550;
-    float rhead = 0.F;
+    int   buffer = 50;
+    int   whead = 0;
+    float rhead;
     
 private:
     int capacity;
-    float scalar = 0.05F;
+    float scalar = 125.0F;
     float sampleRate = 48000.F;
     std::vector<float> samples;
 };

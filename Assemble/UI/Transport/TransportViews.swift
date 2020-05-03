@@ -8,13 +8,13 @@ import UIKit
 extension Transport {
 
     func initialisePlayButton() {
-        play.backgroundColor = UIColor.init(white: 0.1, alpha: 1)
+        play.backgroundColor = UIColor.init(white: 0.15, alpha: 1)
         play.translatesAutoresizingMaskIntoConstraints = false
         play.addTarget(self, action: #selector(didPressPlay), for: .touchUpInside)
+        play.setImage(UIImage(systemName: "play"), for: .normal)
         play.layer.cornerCurve = .continuous
         play.layer.cornerRadius = 15
-        play.setImage(UIImage(systemName: "play"), for: .normal)
-        play.tintColor = .triangleNoteColour
+        play.tintColor = .white
         addSubview(play)
         
         NSLayoutConstraint.activate([
@@ -33,13 +33,17 @@ extension Transport {
         oscillators.backgroundColor = .clear
         oscillators.selectedSegmentTintColor = .clear
         oscillators.translatesAutoresizingMaskIntoConstraints = false
-        oscillators.addTarget(self, action: #selector(didChangeOscillator), for: .valueChanged)
+        oscillators.addTarget(self, action: #selector(didSelectOscillator), for: .valueChanged)
         
+        let clearImage = UIImage(color: .clear, size: .init(width: 1, height: 32))
+        oscillators.setBackgroundImage(clearImage, for: .normal, barMetrics: .default)
+        oscillators.setDividerImage(clearImage)
+
         selected.translatesAutoresizingMaskIntoConstraints = false
         selected.backgroundColor = .sineNoteColour
         selected.layer.cornerCurve = .continuous
-        selected.layer.cornerRadius = 10
-        
+        selected.layer.cornerRadius = 15
+
         addSubview(selected)
         addSubview(oscillators)
 
@@ -53,9 +57,11 @@ extension Transport {
         ])
         
         oscillators.selectedSegmentIndex = 0
-        oscillators.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.lightText], for: .normal)
-        oscillators.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.white], for: .selected)
-        oscillators.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.lightText], for: .highlighted)
+        let font = UIFont.init(name: "JetBrainsMono-Regular", size: 14)
+        oscillators.setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .normal)
+        oscillators.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
+        oscillators.setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .highlighted)
+        oscillators.setTitleTextAttributes([.font : font as Any], for: .normal)
         oscillators.layoutIfNeeded()
 
         let width = oscillators.bounds.width / CGFloat(oscillators.numberOfSegments) * 0.8
@@ -63,9 +69,11 @@ extension Transport {
         
         NSLayoutConstraint.activate([
             selectedX,
-            selected.widthAnchor.constraint(equalToConstant: width),
+            selected.widthAnchor.constraint(equalToConstant: 55),
             selected.centerYAnchor.constraint(equalTo: centerYAnchor),
-            selected.heightAnchor.constraint(equalTo: oscillators.heightAnchor, multiplier: 0.8),
+            selected.heightAnchor.constraint(equalTo: heightAnchor),
+            selected.topAnchor.constraint(equalTo: topAnchor),
+            selected.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         selected.layoutIfNeeded()

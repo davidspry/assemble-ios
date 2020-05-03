@@ -53,12 +53,10 @@ import AudioUnit
     }
     
     func setParameter(_ parameter: Int32, to value: Float) {
-//        commander?.setParameterWithAddress(parameter, value: value)
         commander?.setParameterWithAddress(AUParameterAddress(parameter), value: value)
     }
     
     func getParameter(_ parameter: Int32) -> Float {
-//        return commander?.getParameterWithAddress(parameter) ?? 0.0
         return commander?.parameter(withAddress: AUParameterAddress(parameter)) ?? 0.0
     }
     

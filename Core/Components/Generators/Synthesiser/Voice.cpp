@@ -15,7 +15,6 @@ void Voice::load(float frequency)
     vca.prepare();
     vcf.prepare();
     osc->load(frequency);
-    free = false;
 }
 
 const float Voice::get(uint64_t parameter)
@@ -52,7 +51,7 @@ void Voice::setSampleRate(float sampleRate)
 
 const float Voice::nextSample()
 {
-    if ((free = vca.closed())) return 0.0F;
+    if (vca.closed()) return 0.0F;
 
     float sample, envelope;
     envelope = vca.nextSample();

@@ -65,7 +65,7 @@ const float Synthesiser::nextSample()
         bank = bank + delta;
     }
 
-    return sample * 0.0625F;
+    return sample * 0.5;//0.0625F;
 }
 
 const float Synthesiser::get(uint64_t parameter)

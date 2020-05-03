@@ -8,8 +8,10 @@ protocol KeyboardListener
 {
     func pressNote(_ note: Int, shape: OscillatorShape)
     func eraseNote()
-    func setOctave(_ octave: Int)
     func didNavigate(by direction: Int)
+    func setOctave(_ octave: Int)
+    func setOscillator(_ next: Bool)
+    func pressPlayOrPause()
 }
 
 /**
@@ -21,5 +23,7 @@ extension KeyboardListener {
     func pressNote(_ note: Int, shape: OscillatorShape) {}
     func eraseNote() {}
     func setOctave(_ octave: Int) {}
+    func setOscillator(_ next: Bool) {}
     func didNavigate(by direction: Int) {}
+    func pressPlayOrPause() {}
 }

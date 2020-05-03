@@ -1,15 +1,16 @@
-//  PatternOverview.swift
 //  Assemble
 //  Created by David Spry on 30/4/20.
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
 
-class PatternOverview: UIView {
+class PatternOverview: UIView, UIGestureRecognizerDelegate {
 
     let activeColour    : UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     let patternOnColour : UIColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     let patternOffColour: UIColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+
+    var lastTappedNode: Int?
 
     private let patterns: Int = Int(PATTERNS)
     private var states = [Bool]()
@@ -20,15 +21,16 @@ class PatternOverview: UIView {
             shapes[newPattern].strokeColor = activeColour.cgColor
         }
     }
-    
 
     private let scalar = CGFloat(0.55)
     lazy private var rows = CGFloat(patterns / 4)
     lazy private var cols = CGFloat(patterns / Int(rows))
     lazy private var radius = min(0.5 * bounds.height / rows, 0.5 * bounds.width / cols)
-
+    lazy private var diameter = radius * 2
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        isMultipleTouchEnabled = false
         shapes.reserveCapacity(patterns)
         states.reserveCapacity(patterns)
         
@@ -37,8 +39,8 @@ class PatternOverview: UIView {
                 let path = UIBezierPath()
                 let layer = CAShapeLayer()
                 
-                let x = c * (2 * radius) + radius
-                let y = r * (2 * radius) + radius
+                let x = c * diameter + radius
+                let y = r * diameter + radius
                 path.addArc(withCentre: CGPoint(x: x, y: y), radius: radius * scalar)
 
                 layer.path = path.cgPath
@@ -54,33 +56,80 @@ class PatternOverview: UIView {
             }
         }
 
-        states[0] = true
-        shapes.first?.fillColor = patternOnColour.cgColor
-        shapes.first?.strokeColor = activeColour.cgColor
+        loadStates()
+    }
+    
+    /// Poll the core for the state of each pattern. This should be called whenever a song is loaded.
+
+    public func loadStates() {
+        let pattern = self.pattern
+        DispatchQueue.main.async {
+            for pattern in 0 ..< self.patterns {
+                Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(pattern))
+                let state = Bool(Int(Assemble.core.getParameter(kSequencerPatternState)))
+                self.set(pattern: pattern, to: state)
+            }
+
+            Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(pattern))
+        }
+    }
+
+    /// Toggle the state of a `Pattern` and update its icon.
+    /// - Parameter pattern: The index of the `Pattern` whose state should be toggled, starting from `0`.
+
+    public func toggle(pattern: Int) {
+        guard pattern > -1 && pattern < patterns else { return }
+        let state = !states[pattern]
+        set(pattern: pattern, to: state)
+        Assemble.core.setParameter(kSequencerPatternState, to: Float(pattern))
     }
 
     /**
-     Set the state of a `Pattern` icon. This should be called whenever the user toggles a `Pattern`'s state.
+     Set the state of a `Pattern` icon.
+
      Setting the state of a `Pattern` in the Swift context obviates the need to regularly poll the C++ context
      for the state of each `Pattern`.
-     
+
      - Parameter pattern: The index of the `Pattern` whose state should be set, starting from `0`.
-     - Parameter state: The Boolean state to set: `true` if the `Pattern` is enabled; `false` otherwise.
+     - Parameter state: The desired state to set.
      */
 
-    public func set(pattern: Int, to state: Bool) {
-        if pattern > -1 && pattern < patterns {
-            states[pattern] = state
-            shapes[pattern].fillColor = state ? patternOnColour.cgColor :
-                                                patternOffColour.cgColor
-        }
+    private func set(pattern: Int, to state: Bool) {
+        guard pattern > -1 && pattern < patterns else { return }
+        states[pattern] = state
+        shapes[pattern].fillColor = state ? patternOnColour.cgColor :
+                                            patternOffColour.cgColor
     }
     
-//        let square = UIBezierPath()
-//        let x = CGFloat(Int(pattern % Int(cols))) * (2 * radius) + radius
-//        let y = CGFloat(Int(pattern / Int(cols))) * (2 * radius) + radius
-//        square.addSquare(withCentre: CGPoint(x: x, y: y), length: 2 * radius * 0.85)
-    
+    internal func nodeFromTouchLocation(_ touch: CGPoint) -> Int? {
+        if touch.x > diameter * (cols + 1) { return nil }
+        if touch.y > diameter * (rows + 1) { return nil }
+        
+        let y = Int(touch.y / diameter)
+        let x = Int(touch.x / diameter)
+        
+        return y * Int(cols) + x
+    }
+
+    private func handleDoubleTap(for node: Int) {
+        if node == lastTappedNode {
+            toggle(pattern: node)
+            lastTappedNode = nil
+        }
+        
+        else {
+            lastTappedNode = node
+            Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(node))
+        }
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        guard let node = nodeFromTouchLocation(touch.location(in: self)) else { return }
+        guard node > -1 && node < patterns else { return }
+        handleDoubleTap(for: node)
+    }
+
     override func draw(_ rect: CGRect) {}
     override func draw(_ layer: CALayer, in ctx: CGContext) {
         let currentPattern = Assemble.core.currentPattern

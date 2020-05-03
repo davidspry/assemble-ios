@@ -51,10 +51,12 @@
 		149ACC242454330E009DA18F /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC232454330E009DA18F /* KeyboardListener.swift */; };
 		149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2624543615009DA18F /* MulticastDelegate.swift */; };
 		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
-		149ACC2B24543CE9009DA18F /* OscillatorSelectorListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2A24543CE9009DA18F /* OscillatorSelectorListener.swift */; };
 		14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */; };
 		14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBEB2436233B00822139 /* SequencerScene.swift */; };
 		14ADCBEE2436265300822139 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBED2436265300822139 /* Sequencer.swift */; };
+		14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE019B245DA04C003EB586 /* BoolExtensions.swift */; };
+		14AE01A2245DFF02003EB586 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE01A1245DFF02003EB586 /* UIImageExtensions.swift */; };
+		14AE01A4245E014D003EB586 /* UISegmentedControlExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */; };
 		14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89224520D8800F5AD3A /* Delay.cpp */; };
 		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
 		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
@@ -174,10 +176,12 @@
 		149ACC232454330E009DA18F /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		149ACC2624543615009DA18F /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsListener.swift; sourceTree = "<group>"; };
-		149ACC2A24543CE9009DA18F /* OscillatorSelectorListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorSelectorListener.swift; sourceTree = "<group>"; };
 		14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerDelegate.swift; sourceTree = "<group>"; };
 		14ADCBEB2436233B00822139 /* SequencerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerScene.swift; sourceTree = "<group>"; };
 		14ADCBED2436265300822139 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
+		14AE019B245DA04C003EB586 /* BoolExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensions.swift; sourceTree = "<group>"; };
+		14AE01A1245DFF02003EB586 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISegmentedControlExtensions.swift; sourceTree = "<group>"; };
 		14AFB89224520D8800F5AD3A /* Delay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Delay.cpp; sourceTree = "<group>"; };
 		14AFB89324520D8800F5AD3A /* Delay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Delay.hpp; sourceTree = "<group>"; };
 		14AFB89524520D9100F5AD3A /* Vibrato.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Vibrato.cpp; sourceTree = "<group>"; };
@@ -230,14 +234,17 @@
 		141DDA55243F85AC0020386C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				14AE019B245DA04C003EB586 /* BoolExtensions.swift */,
 				143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */,
 				143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */,
 				143FB00E243F3DE40058AE40 /* CGSizeExtensions.swift */,
 				143FB010243F3E2A0058AE40 /* FloatExtensions.swift */,
+				14AE01A1245DFF02003EB586 /* UIImageExtensions.swift */,
 				143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */,
 				149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */,
 				149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */,
 				149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */,
+				14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -471,7 +478,6 @@
 				1458D1272452C5110093B541 /* KeyboardHandler.swift */,
 				149ACC232454330E009DA18F /* KeyboardListener.swift */,
 				149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */,
-				149ACC2A24543CE9009DA18F /* OscillatorSelectorListener.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -708,7 +714,6 @@
 				14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */,
 				14DAC38D2417772C005654EA /* ViewController.swift in Sources */,
 				14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */,
-				149ACC2B24543CE9009DA18F /* OscillatorSelectorListener.swift in Sources */,
 				14C38EEB245B29B800180810 /* Transport.swift in Sources */,
 				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
@@ -726,12 +731,14 @@
 				141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */,
 				143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */,
 				1470F72E2432047E00E751B7 /* Note.swift in Sources */,
+				14AE01A4245E014D003EB586 /* UISegmentedControlExtensions.swift in Sources */,
 				141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */,
 				14DAC39D241777DF005654EA /* Engine.swift in Sources */,
 				143FB017243F400B0058AE40 /* ASCommanderAU.swift in Sources */,
 				14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */,
 				141DDA6B243F95D00020386C /* Voice.cpp in Sources */,
 				14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */,
+				14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */,
 				141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */,
 				14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */,
 				141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */,
@@ -763,6 +770,7 @@
 				14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */,
 				144A11672457166C000F2B4C /* Clock.cpp in Sources */,
 				1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */,
+				14AE01A2245DFF02003EB586 /* UIImageExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

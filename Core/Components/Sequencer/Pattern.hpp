@@ -45,7 +45,7 @@ private:
     int w = SEQUENCER_WIDTH;
     int beats = 4;
     int ticks = 4;
-    bool active = true;
+    bool active = false;
 };
 
 #endif

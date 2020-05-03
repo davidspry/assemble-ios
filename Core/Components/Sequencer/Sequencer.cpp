@@ -10,7 +10,41 @@ Sequencer::Sequencer()
     
     auto &firstPattern = patterns[pattern];
     patternLength = firstPattern.length();
-    activePatterns = PATTERNS;//static_cast<int>(firstPattern.toggle() == true);
+    activePatterns = static_cast<int>(firstPattern.toggle() == true);
+}
+
+/// \brief Set a value for a Sequencer parameter
+/// \param parameter The hexadecimal address of the parameter to set
+/// \param value The value to be set
+
+void Sequencer::set(uint64_t parameter, float value)
+{
+    switch (parameter)
+    {
+        case kSequencerMode:
+        {
+            mode = static_cast<bool>(value);
+            return;
+        }
+
+        case kSequencerCurrentPattern:
+        {
+            const int pattern = Assemble::Utilities::bound(value, 0, PATTERNS - 1);
+            selectPattern(pattern);
+            return;
+        }
+            
+        case kSequencerPatternState:
+        {
+            const int pattern = Assemble::Utilities::bound(value, 0, PATTERNS - 1);
+            const bool active = patterns.at(pattern).toggle();
+            activePatterns = activePatterns + (active ? 1 : -1);
+            printf("Active patterns: %d\n", activePatterns);
+            return;
+        }
+
+        default: return;
+    }
 }
 
 /// \brief Get a parameter value from the Sequencer
@@ -44,6 +78,14 @@ std::pair<int, iterator&> Sequencer::nextRow()
     else   row = (row + 1) % patternLength;
     
     return patterns.at(pattern).window(0, row);
+}
+
+void Sequencer::prepare()
+{
+    if (mode && !patterns[pattern].isActive())
+        selectNextActivePattern();
+
+    row = -1;
 }
 
 void Sequencer::selectPattern(const int pattern) noexcept(false)

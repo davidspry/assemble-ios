@@ -9,11 +9,12 @@ class Engine
     private let engine = AVAudioEngine()
 
     init() {
-        Assemble.sampleRate = engine.outputNode.outputFormat(forBus: 0).sampleRate;
-        Assemble.format = engine.outputNode.outputFormat(forBus: 0);
+        Assemble.sampleRate   = engine.outputNode.outputFormat(forBus: 0).sampleRate;
+        Assemble.format       = engine.outputNode.outputFormat(forBus: 0);
         Assemble.channelCount = Assemble.format.channelCount;
+        connect(Assemble.core)
     }
-    
+
     func start() {
         engine.prepare();
         do    { try engine.start(); }

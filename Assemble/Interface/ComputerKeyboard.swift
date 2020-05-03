@@ -4,13 +4,13 @@
 
 import UIKit
 
-class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorSelectorListener
+class ComputerKeyboard : UIViewController, KeyboardSettingsListener
 {
     var listeners = MulticastDelegate<KeyboardListener>()
     
     var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
-    private var _octave: Int = 60
+    lazy private var _octave: Int = 60
     
     var octave: Int = 4 {
         didSet {
@@ -19,7 +19,7 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorS
         }
     }
 
-    var oscillator: OscillatorShape = .square
+    var oscillator: OscillatorShape = .sine
 
     func didChangeOctave(to octave: Int) {
         self.octave = octave
@@ -38,14 +38,14 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorS
                     self.listeners.invoke({ $0.didNavigate(by: value) }); break
                 
                 case .transport:
-                    Assemble.core.playOrPause(); break
+                    self.listeners.invoke({ $0.pressPlayOrPause() }); break
                 
                 case .place:
                     self.listeners.invoke({
                         $0.pressNote(self._octave + value, shape: self.oscillator)
                     });
                     break
-                
+
                 case .erase:
                     self.listeners.invoke({ $0.eraseNote() }); break
                 
@@ -59,11 +59,13 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener, OscillatorS
                     break
 
                 case .noscillator:
-                    break
-                
+                    self.listeners.invoke({ $0.setOscillator(Bool(value)) }); break
+
                 case .uoscillator:
+                    self.oscillator = value == 0 ? self.oscillator.previous() : self.oscillator.next()
+                    self.settingsListeners.invoke({ $0.didChangeOscillator(to: self.oscillator)})
                     break
-                
+
                 default: break
                 }
             }

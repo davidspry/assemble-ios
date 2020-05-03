@@ -23,11 +23,6 @@ public:
     const float get(uint64_t parameter);
     void set(uint64_t parameter, float value);
     void setSampleRate(float sampleRate);
-    void makeFree() { free = true; }
-    bool isFree()   { return free; }
-    
-protected:
-    bool free = true;
 
 protected:
     Oscillator        *osc;

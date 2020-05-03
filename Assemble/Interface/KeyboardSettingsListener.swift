@@ -6,4 +6,15 @@ import Foundation
 
 protocol KeyboardSettingsListener: AnyObject {
     func didChangeOctave(to octave: Int)
+    func didChangeOscillator(to oscillator: OscillatorShape)
+}
+
+/**
+ This extension provides default implementations for the KeyboardSettingsListener protocol,
+ thereby relaxing the requirement for subclassers to implement each one.
+*/
+
+extension KeyboardSettingsListener {
+    func didChangeOctave(to octave: Int) {}
+    func didChangeOscillator(to oscillator: OscillatorShape) {}
 }

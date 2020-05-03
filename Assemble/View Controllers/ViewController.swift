@@ -8,7 +8,7 @@ class ViewController : UIViewController
 {
     let engine = Engine()
     var updater : CADisplayLink!
-    var computerKeyboard = ComputerKeyboard()
+    let computerKeyboard = ComputerKeyboard()
     
     @IBOutlet weak var keyboard: Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
@@ -16,27 +16,29 @@ class ViewController : UIViewController
     @IBOutlet weak var patterns: PatternOverview!
     @IBOutlet weak var transport: Transport!
     
+    @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var modeLabel: UILabel!
-    
+
     @IBOutlet weak var frequencySlider: UISlider!
-    
+
     @objc func refreshInterface() {
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
 
+        // TODO:
         // A mode parameter should be listened to. Swift cannot
         // cast between Bool and numeric values, so this should be
         // done in either the C++ or Objective-C context.
-        let mode = Assemble.core.getParameter(kSequencerMode)
-        if  mode == 0 { modeLabel.text = "PATTERN MODE" }
-        else          { modeLabel.text = "SONG MODE"    }
+        let mode = Int(Assemble.core.getParameter(kSequencerMode))
+        let modes = ["PATTERN MODE", "SONG MODE"]
+        modeLabel.text = modes[mode & 1]
 
+        // TRY THIS -- OTHERWISE 10-20fps DISPLAYLINK
         // Rather than CADisplayLink, Sequencer should listen for
         // changes in the value of the Pattern parameter
         sequencer.SK.patternDidChange(to: Assemble.core.currentPattern)
-        
+
         // This does not need to be redrawn at 60fps.
         // This needs to be redrawn whenever the pattern changes
         // Consequently, Patterns should listen for changes in the
@@ -54,21 +56,23 @@ class ViewController : UIViewController
         sequencer.SK.row.moveTo(row: row)
     }
 
+    // all of this will go into the effects / settings menu
+    // ========================================================================
     internal func desiredInitialFrequency(_ frequency: Float) -> Float {
         return (log(frequency) - log(20)) / (log(20E3) - log(20))
     }
-    
+
+    let tempo = 30...300
     internal func desiredInitialTempo(_ tempo: Int) -> Float {
-        return Float(tempo - 30) / Float(300 - 30)
+        return Float(tempo - self.tempo.lowerBound) / Float(self.tempo.upperBound - self.tempo.lowerBound)
     }
+    // ========================================================================
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        engine.connect(Assemble.core);
         addInBackground(computerKeyboard)
-        
+
         // Test: Update Sequencer position
         updater = CADisplayLink(target: self, selector: #selector(refreshInterface))
         updater.add(to: .main, forMode: .default)
@@ -83,24 +87,23 @@ class ViewController : UIViewController
         keyboard.listeners.add(sequencer)
         keyboard.listeners.add(Assemble.core)
         keyboard.settingsListeners.add(computerKeyboard)
+        
         computerKeyboard.listeners.add(sequencer)
+        computerKeyboard.listeners.add(transport)
         computerKeyboard.listeners.add(Assemble.core)
         computerKeyboard.settingsListeners.add(keyboard)
+        computerKeyboard.settingsListeners.add(transport)
+
         transport.listeners.add(keyboard)
         transport.listeners.add(computerKeyboard)
+
+        engine.start()
     }
-    
+
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
-        engine.start()
         waveform.start()
-    }
-
-    @IBAction func playOrPause(_ sender: UIButton)
-    {
-        // Returns Bool (for play button animation)
-        Assemble.core.playOrPause()
     }
 
     @IBAction func sliderChanged(_ sender: UISlider) {
@@ -110,4 +113,3 @@ class ViewController : UIViewController
         Assemble.core.setParameter(kClockBPM, to: tempo)
     }
 }
-

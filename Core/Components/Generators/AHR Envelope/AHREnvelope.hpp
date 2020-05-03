@@ -30,7 +30,7 @@ public:
     
 private:
     enum Mode { Attack, Hold, Release, Closed };
-    Mode mode;
+    Mode mode = Closed;
     
 public:
     const bool closed() { return mode == Closed; }

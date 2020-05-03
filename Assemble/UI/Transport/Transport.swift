@@ -1,4 +1,3 @@
-//  Transport.swift
 //  Assemble
 //  Created by David Spry on 12/4/20.
 //  Copyright © 2020 David Spry. All rights reserved.
@@ -10,31 +9,26 @@ fileprivate struct Icons {
     static let pause = UIImage(systemName: "pause")
 }
 
-class Transport : UIView {
+class Transport : UIView, KeyboardListener, KeyboardSettingsListener {
 
     let play = UIButton()
     let selected = UIView()
     var selectedX: NSLayoutConstraint!
     var oscillators: UISegmentedControl!
-    let listeners = MulticastDelegate<OscillatorSelectorListener>()
+    let listeners = MulticastDelegate<KeyboardSettingsListener>()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = UIColor.init(white: 0.1, alpha: 1)
-        layer.cornerCurve = .continuous
-        layer.masksToBounds = true
-        layer.cornerRadius = 10
-
         initialisePlayButton()
         initialiseSegmentedControl()
     }
-    
+
     @objc func didPressPlay(sender: UIButton)
     {
         let playing = Assemble.core.playOrPause()
         let image = playing ? Icons.pause : Icons.play
-
+        
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.play.imageView?.layer.setAffineTransform(.init(scaleX: 0.85, y: 0.85))
@@ -47,7 +41,7 @@ class Transport : UIView {
         }
     }
     
-    @objc func didChangeOscillator(sender: UISegmentedControl)
+    @objc func didSelectOscillator(sender: UISegmentedControl)
     {
         let index = oscillators.selectedSegmentIndex
         let oscillator = OscillatorShape(rawValue: index) ?? .sine
@@ -63,5 +57,18 @@ class Transport : UIView {
                 self.layoutIfNeeded()
             }, completion: nil)
         }
+    }
+    
+    // MARK: - Keyboard Listener
+
+    func pressPlayOrPause() {
+        didPressPlay(sender: play)
+    }
+    
+    // MARK: - Keyboard Settings Listener
+
+    func didChangeOscillator(to oscillator: OscillatorShape) {
+        oscillators.selectedSegmentIndex = oscillator.rawValue
+        oscillators.sendActions(for: .valueChanged)
     }
 }

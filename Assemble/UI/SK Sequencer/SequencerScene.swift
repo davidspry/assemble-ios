@@ -172,8 +172,20 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
     }
 
+    /**
+     Update the scene to reflect the next pattern, `pattern`.
+     
+     `SequencerScene` stores each `NoteShapeNode` for each pattern in order that they can be
+     quickly shown or hidden. At any time, only the notes that belong to the pattern that's currently playing are visible.
+
+     This method shows the new pattern and hides the previous pattern.
+     
+     - Complexity: O(nm), where `n` and `m` are the dimensions of a pattern.
+     */
+
     func patternDidChange(to pattern: Int) {
         guard pattern != self.pattern else { return }
+        
         hideEraseNoteView()
         grid.redrawIfNeeded()
         noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]

@@ -83,8 +83,8 @@ private:
 
 public:
     inline bool toggle()  { return (bypassed = !bypassed); }
-    inline void fadeIn()  { gain = std::min(1.F, gain + 0.001F); }
     inline void fadeOut() { gain = std::max(0.F, gain - 0.001F); }
+    inline void  fadeIn() { gain = std::min(1.F, gain + 0.001F); }
 
 private:
     inline void update()  { set(time); }

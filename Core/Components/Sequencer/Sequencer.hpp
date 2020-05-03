@@ -6,6 +6,7 @@
 #define SEQUENCER_HPP
 
 #include "ASParameters.h"
+#include "ASUtilities.h"
 #include "ASHeaders.h"
 #include "Pattern.hpp"
 
@@ -15,8 +16,15 @@ public:
     Sequencer();
 
 public:
+    /// \brief Set a parameter value. If the parameter does not exist, nothing will happen.
+    /// \param parameter The address of the parameter to set
+    /// \param value The value to be set
+    void set(uint64_t parameter, float value);
+
+    /// \brief Return a parameter value. If the parameter does not exist, 0 will be returned.
+    /// \param parameter The address of the parameter whose parameter should be returned.
     const float get(uint64_t parameter);
-    
+
 public:
     template <typename ...N>
     void addOrModify(int x, int y, N... note)
@@ -27,8 +35,8 @@ public:
     void erase(const int x, const int y) { patterns.at(pattern).erase(x, y); }
 
 public:
+    void prepare();
     void reset()   { row =  0; }
-    void prepare() { row = -1; }
     void toggle()  { mode = !mode; }
     std::pair<int,int> state() { return {row, pattern}; }
 

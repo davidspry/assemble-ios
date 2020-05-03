@@ -154,7 +154,8 @@ const float Delay::process(const float sample)
     whead = whead + 1;
     if (whead >= capacity) whead = 0;
 
-    rhead = whead - delay + modulationDepth * (150 * modulator.nextSample());
+    rhead = whead - delay;
+    rhead = rhead + modulationDepth * (150 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 

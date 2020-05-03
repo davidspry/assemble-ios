@@ -8,12 +8,6 @@ import AVFoundation
  
 public class ASCommanderAU : ASAudioUnit
 {
-    public override var canProcessInPlace: Bool           { return true  }
-    
-    public override var supportsUserPresets: Bool         { return true  }
-    
-    public override func shouldAllocateInputBus() -> Bool { return false }
-
     public var length: Int {
         return Int(parameter(withAddress: AUParameterAddress(kSequencerLength)))
     }
@@ -54,26 +48,6 @@ public class ASCommanderAU : ASAudioUnit
 //        catch { print("Failed to save! \(error)") }
 //
 //        userPresets.forEach( {print($0.name) } )
-        
-        
-        
-        /**
-        If saving a new song...
-        ~~~
-        let preset = AUAudioUnitPreset()
-        preset.name = userSelectedName
-        preset.number = someGeneratedNumber
-        commander.saveUserPreset(preset)
-        ~~~
-        
-        If updating an old song, replace the existing song with a new song, as above, in CoreData.
-        
-        If loading a song...
-        ~~~
-        let preset = loadPresetFromCoreData(id: presetID)
-        commander.currentPreset = preset
-        ~~~
-        */
     }
     
     public func playOrPause() -> Bool {
@@ -91,8 +65,15 @@ public class ASCommanderAU : ASAudioUnit
     public func eraseNote(x: Int, y: Int) {
         __interop__EraseNote(dsp, Int32(x), Int32(y))
     }
-    
+
     public override func shouldClearOutputBuffer() -> Bool {
-        return true
+        return false
     }
+
+    public override var supportsUserPresets: Bool         { return true  }
+    
+    public override var canProcessInPlace: Bool           { return true  }
+    
+    
+    public override func shouldAllocateInputBus() -> Bool { return false }
 }

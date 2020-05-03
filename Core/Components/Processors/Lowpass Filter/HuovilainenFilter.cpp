@@ -3,19 +3,11 @@
 
 #include "HuovilainenFilter.hpp"
 
-/// \brief Fill an array with floats
-
-inline void set(const float element, const size_t length, float *array)
-{
-    for (size_t i = 0; i < length; ++i)
-        array[i] = element;
-}
-
 void HuovilainenFilter::initialise()
 {
-    ::set(0.F, stage.size(), stage.data());
-    ::set(0.F, delay.size(), delay.data());
-    ::set(0.F, tanhStage.size(), tanhStage.data());
+    std::fill(stage.begin(), stage.end(), 0.F);
+    std::fill(delay.begin(), delay.end(), 0.F);
+    std::fill(tanhStage.begin(), tanhStage.end(), 0.F);
 
     thermal = 25E-6F;
     set(8E3F, 1E-1F);

@@ -12,20 +12,20 @@ import UIKit
          which was written by Aurelius Prochazka.
  */
 
-class Keyboard : UIView, KeyboardSettingsListener, OscillatorSelectorListener
+class Keyboard : UIView, KeyboardSettingsListener
 {
-    var keyOnColour  : UIColor = UIColor.sawtoothNoteColour
+    var keyOnColour  : UIColor = UIColor.sineNoteColour
     var keyOffColour : UIColor = UIColor.white
 
     var shapeLayers = [CAShapeLayer]()
     var octaveLabel = UILabel()
-    
+
     var listeners = MulticastDelegate<KeyboardListener>()
     var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
     var octave : Int = 4
     let octaves: Int = 2
-    var oscillator: OscillatorShape = .triangle
+    var oscillator: OscillatorShape = .sine
 
     internal var margins: UIEdgeInsets {
         return UIEdgeInsets(top: 25.0, left: 25.0, bottom: 25.0, right: 25.0)
@@ -64,20 +64,20 @@ class Keyboard : UIView, KeyboardSettingsListener, OscillatorSelectorListener
     {
         pressedKey = nil
     }
-    
-    // MARK: - Oscillator Selector Listener
+
+    // MARK: - Keyboard Settings Listener
+
+    func didChangeOctave(to octave: Int) {
+        self.octave = octave
+        octaveLabel.text = octave.description
+    }
     
     func didChangeOscillator(to oscillator: OscillatorShape) {
         self.oscillator = oscillator
         keyOnColour = .from(oscillator)
     }
     
-    // MARK: - Keyboard Settings Listener
-    
-    func didChangeOctave(to octave: Int) {
-        self.octave = octave
-        octaveLabel.text = octave.description
-    }
+    // MARK: Keyboard Settings Listener End -
     
     @objc internal func setOctave(sender: UIButton) {
         switch sender.tag {

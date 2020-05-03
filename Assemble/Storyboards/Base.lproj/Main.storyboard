@@ -21,26 +21,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="393" y="759" width="580" height="145"/>
+                                <rect key="frame" x="393" y="799" width="580" height="145"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="12:3" id="6UH-cy-BR1"/>
                                     <constraint firstAttribute="height" constant="145" id="F3N-Ii-KQp"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UYZ-hz-xZ4">
-                                <rect key="frame" x="1254" y="48" width="64" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="2nn-bQ-dlX"/>
-                                    <constraint firstAttribute="width" constant="64" id="4Mt-mu-F50"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="play" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="light"/>
-                                </state>
-                                <connections>
-                                    <action selector="playOrPause:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z16-Ti-gfb"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-ew-lo6" customClass="Sequencer" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="491" y="290" width="384" height="384"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -56,7 +43,7 @@
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="652" y="690" width="62" height="36"/>
+                                <rect key="frame" x="662" y="690" width="42" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
                                 </constraints>
@@ -108,11 +95,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1n-M5-aq6" customClass="Transport" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="545.5" y="933" width="275" height="75"/>
+                                <rect key="frame" x="545.5" y="926" width="275" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="275" id="6re-7h-bxu"/>
-                                    <constraint firstAttribute="height" constant="75" id="Oxd-NU-iBq"/>
+                                    <constraint firstAttribute="height" constant="50" id="Oxd-NU-iBq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -121,17 +108,15 @@
                             <constraint firstItem="UYS-gy-cCN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3V9-OQ-06G"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="width" secondItem="kBU-mM-6OQ" secondAttribute="width" id="4PH-jl-Pyg"/>
                             <constraint firstItem="kBU-mM-6OQ" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="16" id="6rq-VX-pkg"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UYZ-hz-xZ4" secondAttribute="trailing" constant="48" id="8yQ-Bt-XYB"/>
-                            <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="16" id="BUz-DE-yER"/>
+                            <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="48" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="kBU-mM-6OQ" secondAttribute="bottom" constant="16" id="Gcz-zB-Czu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="kBU-mM-6OQ" firstAttribute="centerX" secondItem="K3i-2N-gT6" secondAttribute="centerX" id="KIW-X9-boF"/>
                             <constraint firstItem="UYS-gy-cCN" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" id="QIk-yS-dA1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="100" id="R9f-RX-Bfk"/>
+                            <constraint firstItem="Z1n-M5-aq6" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="32" id="R9f-RX-Bfk"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
-                            <constraint firstItem="UYZ-hz-xZ4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="bL6-3I-9ku"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="kBU-mM-6OQ" secondAttribute="leading" id="dza-1o-LaC"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
@@ -160,7 +145,4 @@
             <point key="canvasLocation" x="140" y="128.57142857142858"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="play" catalog="system" width="120" height="128"/>
-    </resources>
 </document>

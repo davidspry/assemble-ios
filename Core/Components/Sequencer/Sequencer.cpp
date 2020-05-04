@@ -27,13 +27,20 @@ void Sequencer::set(uint64_t parameter, float value)
             return;
         }
 
+        case kSequencerNextPattern:
+        {
+            const int pattern = Assemble::Utilities::bound(value, 0, PATTERNS - 1);
+            nextPattern = pattern;
+            return;
+        }
+    
         case kSequencerCurrentPattern:
         {
             const int pattern = Assemble::Utilities::bound(value, 0, PATTERNS - 1);
             selectPattern(pattern);
             return;
         }
-            
+
         case kSequencerPatternState:
         {
             const int pattern = Assemble::Utilities::bound(value, 0, PATTERNS - 1);
@@ -58,27 +65,41 @@ const float Sequencer::get(uint64_t parameter)
         case kSequencerLength: return (float) patternLength;
         case kSequencerCurrentRow: return (float) row;
         case kSequencerCurrentPattern: return (float) pattern;
+        case kSequencerNextPattern: return (float) nextPattern;
         case kSequencerPatternState: return (float) patterns.at(pattern).isActive();
         default: return 0.F;
     }
 }
 
-typedef std::vector<Note>::iterator iterator;
+
+/// \brief Move to the next row, which may be on another Pattern,
+/// and return the next row of notes.
+/// \returns A std::pair containing the number of notes in the current row
+/// and a reference to an iterator over the next row of notes.
+
 std::pair<int, iterator&> Sequencer::nextRow()
 {
     row = std::min(row, patternLength - 1);
-
-    if (mode && (row + 1) == patternLength)
+    
+    if ((row + 1) == patternLength)
     {
-        selectNextActivePattern();
-        printf("Selected Pattern %d\n", pattern);
         row = 0;
+        if (mode && pattern == nextPattern)
+            selectNextActivePattern();
+
+        else
+            selectPattern(nextPattern);
     }
 
     else   row = (row + 1) % patternLength;
     
     return patterns.at(pattern).window(0, row);
 }
+
+/// \brief Prepare the sequencer to play
+/// \note  If the sequencer is in song mode but the current
+/// pattern isn't active, then the next active pattern should be selected.
+/// If there are no active patterns, pattern mode should be enabled.
 
 void Sequencer::prepare()
 {
@@ -88,20 +109,30 @@ void Sequencer::prepare()
     row = -1;
 }
 
+/// \brief Select a pattern immediately.
+/// \note This method will throw in the case where an invalid pattern index is given.
+
 void Sequencer::selectPattern(const int pattern) noexcept(false)
 {
     if (pattern < 0 || pattern >= PATTERNS)
         throw "Invalid Pattern index";
     
     this->pattern = pattern;
+    this->nextPattern = pattern;
     this->patternLength = patterns.at(pattern).length();
 }
 
+/// \brief Select the next active pattern.
+/// Beginning from the current pattern, search each of the sequencer's
+/// patterns linearly until an active pattern has been found.
+/// If no other active patterns are found, then the current pattern
+/// will be selected again. If there are no active patterns, then
+/// pattern mode will be selected.
+
 void Sequencer::selectNextActivePattern()
 {
-    if (activePatterns == 0)
-        return toggle();
-    
+    if (activePatterns == 0) { toggle(); return; }
+
     int p = pattern;
     for (int i = 0; i < PATTERNS; ++i)
     {

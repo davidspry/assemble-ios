@@ -23,12 +23,12 @@ class Keyboard : UIView, KeyboardSettingsListener
     var listeners = MulticastDelegate<KeyboardListener>()
     var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
-    var octave : Int = 4
-    let octaves: Int = 2
+    var octave : Int = 3
+    let octaves: Int = 1
     var oscillator: OscillatorShape = .sine
 
     internal var margins: UIEdgeInsets {
-        return UIEdgeInsets(top: 25.0, left: 25.0, bottom: 25.0, right: 25.0)
+        return UIEdgeInsets(top: 5.0, left: 35.0, bottom: 5.0, right: 35.0)
     }
 
     internal var octaveSize: CGSize {
@@ -43,7 +43,7 @@ class Keyboard : UIView, KeyboardSettingsListener
     }
     
     var keyRadius: CGFloat {
-        return keySize.height * 0.5
+        return keySize.width / 2.0
     }
     
     var keySize: CGSize {
@@ -54,14 +54,12 @@ class Keyboard : UIView, KeyboardSettingsListener
     let blackKeyIndices = [0, 1, 3, 0, 6, 8, 10]
     var pressedKey: Int?
 
-    internal func pressNote(_ note: Int)
-    {
+    internal func pressNote(_ note: Int) {
         pressedKey = note
         listeners.invoke({$0.pressNote(note, shape: oscillator)});
     }
 
-    internal func releaseNote(_ note: Int)
-    {
+    internal func releaseNote(_ note: Int) {
         pressedKey = nil
     }
 
@@ -100,14 +98,14 @@ class Keyboard : UIView, KeyboardSettingsListener
         let button: Int = 35
         let controlMargin: CGFloat = 5.0
         var origin = CGPoint(x: 0, y: frame.midY - CGFloat(button) * 0.5)
-        let weight = UIImage.SymbolConfiguration(weight: .medium)
+        let weight = UIImage.SymbolConfiguration(weight: .semibold)
         var arrow: UIImage!
         
         let octaveU = UIButton()
         let octaveD = UIButton()
         
         origin.x = controlMargin
-        arrow = UIImage(systemName: "minus", withConfiguration: weight)
+        arrow = UIImage(systemName: "arrowtriangle.down.fill", withConfiguration: weight)
         octaveD.frame = CGRect(origin: origin, size: .square(button))
         octaveD.setImage(arrow, for: .normal)
         octaveD.tintColor = .white
@@ -116,7 +114,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         addSubview(octaveD)
         
         origin.x = bounds.width - controlMargin - CGFloat(button)
-        arrow = UIImage(systemName: "plus", withConfiguration: weight)
+        arrow = UIImage(systemName: "arrowtriangle.up.fill", withConfiguration: weight)
         octaveU.frame = CGRect(origin: origin, size: .square(button))
         octaveU.setImage(arrow, for: .normal)
         octaveU.tintColor = .white
@@ -124,9 +122,9 @@ class Keyboard : UIView, KeyboardSettingsListener
         octaveU.addTarget(self, action: #selector(setOctave), for: .touchDown)
         addSubview(octaveU)
         
-        origin.x = frame.midX
-        origin.y = controlMargin
-        octaveLabel.frame = CGRect(origin: origin, size: .square(10))
+//        origin.x = frame.midX
+//        origin.y = controlMargin
+        octaveLabel.frame = CGRect(origin: origin, size: .square(15))
         octaveLabel.text = octave.description
         octaveLabel.font = UIFont(name: "JetBrainsMono-Regular", size: 16)
         octaveLabel.textAlignment = .center

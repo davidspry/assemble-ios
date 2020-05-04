@@ -24,32 +24,25 @@ class ViewController : UIViewController
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
 
-        // TODO:
-        // A mode parameter should be listened to. Swift cannot
-        // cast between Bool and numeric values, so this should be
-        // done in either the C++ or Objective-C context.
+        // Either:
+        // 1. Listen for changes on the kSequencerMode parameter
+        // 2. Set this at the same time as pushing a value to the core
         let mode = Int(Assemble.core.getParameter(kSequencerMode))
         let modes = ["PATTERN MODE", "SONG MODE"]
         modeLabel.text = modes[mode & 1]
 
-        // TRY THIS -- OTHERWISE 10-20fps DISPLAYLINK
-        // Rather than CADisplayLink, Sequencer should listen for
-        // changes in the value of the Pattern parameter
+        
         sequencer.SK.patternDidChange(to: Assemble.core.currentPattern)
 
-        // This does not need to be redrawn at 60fps.
-        // This needs to be redrawn whenever the pattern changes
-        // Consequently, Patterns should listen for changes in the
-        // currentPattern parameter, and it should also listen for
-        // changes in parameters that describe whether each pattern
-        // is on or off, i.e. (address: 0x..., value: [Pattern][State],
-        // e.g. [PatternNumber] * 10 + static_cast<int>(pattern == active),
-        // which would be equal to the value 101
-        // To read it, take the value mod 10 to retrieve the state (101 % 10 = 1), then
-        // divide by 10 in order to retrieve the pattern number (101 / 10 = 10).
+        // Test out listening to parameters that aren't tweaked by the user.
+        // If it works, Pattern could listen to the core. Otherwise,
+        // there should be two CADisplayLinks: 60fps, and 20fps, perhaps.
+        // One for smooth animation; one for continuous polling.
         patterns.setNeedsDisplay()
         // ==========
-        
+
+        // The current row needs to be refreshed at a frame rate
+        // that's at least as fast as the BPM.
         let row = Assemble.core.currentRow
         sequencer.SK.row.moveTo(row: row)
     }

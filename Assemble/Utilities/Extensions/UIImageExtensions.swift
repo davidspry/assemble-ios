@@ -5,8 +5,8 @@
 import UIKit
 
 extension UIImage {
-    
-    /// Author: rmaddy
+
+    /// Author: 'rmaddy'
     /// Source: <https://stackoverflow.com/a/57454731/9611538>
 
     public convenience init(color: UIColor, size: CGSize) {

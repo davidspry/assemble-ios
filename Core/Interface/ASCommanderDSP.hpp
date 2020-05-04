@@ -20,6 +20,7 @@ void __interop__LoadNote(ASDSPRef, const int note, const int shape);
 void __interop__WriteNote(ASDSPRef, const int x, const int y, const int note, const int shape);
 void __interop__EraseNote(ASDSPRef, const int x, const int y);
 const bool __interop__PlayOrPause(ASDSPRef);
+const bool __interop__ToggleMode(ASDSPRef);
 
 #else
 

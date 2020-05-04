@@ -24,12 +24,14 @@ public class ASCommanderAU : ASAudioUnit
         return isPlaying;
     }
     
-    /**
-     Initialise the DSP layer for the specified number of channels and the given sample rate.
-     
-     - Parameter sampleRate: The sample rate of the DSP layer
-     - Parameter count: The number of channels required
-     */
+    public var mode: Float {
+        return parameter(withAddress: AUParameterAddress(kSequencerMode))
+    }
+
+    
+    /// Initialise the DSP layer for the specified number of channels and the given sample rate.
+    /// - Parameter sampleRate: The sample rate of the DSP layer
+    /// - Parameter count: The number of channels required
 
     public override func initDSP(withSampleRate sampleRate: Double,
                                  channelCount count: AVAudioChannelCount) -> ASDSPRef {
@@ -52,6 +54,10 @@ public class ASCommanderAU : ASAudioUnit
     
     public func playOrPause() -> Bool {
         return __interop__PlayOrPause(dsp)
+    }
+    
+    public func toggleMode() -> Bool {
+        return __interop__ToggleMode(dsp)
     }
 
     public func playNote(note: Int, shape: Int) {

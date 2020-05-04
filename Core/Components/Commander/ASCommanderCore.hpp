@@ -27,8 +27,9 @@ public:
     void eraseNote(int x, int y)                      { sequencer.erase(x, y); }
     
 public:
-    const bool clockIsTicking() { return clock.isTicking(); }
     const bool playOrPause();
+    const bool clockIsTicking() { return clock.isTicking();  }
+    const bool toggleMode()     { return sequencer.toggle(); }
     
 public:
     /// \brief Set a parameter value. If the parameter does not exist, nothing will happen.

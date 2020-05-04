@@ -48,10 +48,12 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
 
                 case .erase:
                     self.listeners.invoke({ $0.eraseNote() }); break
+                    
+                case .mode:
+                    self.listeners.invoke({ $0.didToggleMode() }); break
                 
                 case .noctave:
-                    self.listeners.invoke({ $0.setOctave(value) })
-                    break
+                    self.listeners.invoke({ $0.setOctave(value) }); break
                 
                 case .uoctave:
                     self.octave = value

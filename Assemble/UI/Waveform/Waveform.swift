@@ -146,11 +146,11 @@ class Waveform: UIView {
 
     private func drawLissajous(on path: inout CGMutablePath) {
         let r: Int = Int(self.r)
-        let x = bounds.midX + CGFloat(ldata[r][0]) * bounds.midX * self.gain
+        let x = bounds.midX + CGFloat(ldata[r][0]) * bounds.midY * self.gain
         let y = bounds.midY + CGFloat(rdata[r][0]) * bounds.midY * self.gain
         path.move(to: CGPoint(x: x, y: y))
         for i in 0 ..< points {
-            let x = bounds.midX + CGFloat(ldata[r][i]) * bounds.midX * self.gain
+            let x = bounds.midX + CGFloat(ldata[r][i]) * bounds.midY * self.gain
             let y = bounds.midY + CGFloat(rdata[r][i]) * bounds.midY * self.gain
             let point = CGPoint(x: x, y: y)
             path.addLine(to: point)

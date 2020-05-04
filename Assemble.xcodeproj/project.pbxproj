@@ -31,8 +31,7 @@
 		144A11672457166C000F2B4C /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 144A11662457166C000F2B4C /* Clock.cpp */; };
 		1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D1272452C5110093B541 /* KeyboardHandler.swift */; };
 		1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */; };
-		1458D12E24531FFD0093B541 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12C24531FFD0093B541 /* OFL.txt */; };
-		1458D12F24531FFD0093B541 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12D24531FFD0093B541 /* SpaceMono-Regular.ttf */; };
+		1458D12E24531FFD0093B541 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12C24531FFD0093B541 /* License.txt */; };
 		1458D131245328550093B541 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D130245328550093B541 /* PaddedLabel.swift */; };
 		1458D13424532F050093B541 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1458D13324532F050093B541 /* StereoDelay.cpp */; };
 		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
@@ -144,8 +143,7 @@
 		144A11662457166C000F2B4C /* Clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		1458D1272452C5110093B541 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
-		1458D12C24531FFD0093B541 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
-		1458D12D24531FFD0093B541 /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpaceMono-Regular.ttf"; sourceTree = "<group>"; };
+		1458D12C24531FFD0093B541 /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		1458D130245328550093B541 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		1458D13224532D720093B541 /* StereoDelay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StereoDelay.hpp; sourceTree = "<group>"; };
 		1458D13324532F050093B541 /* StereoDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
@@ -368,10 +366,9 @@
 		1458D12B24531DA30093B541 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				1458D12C24531FFD0093B541 /* OFL.txt */,
+				1458D12C24531FFD0093B541 /* License.txt */,
 				14DAC3962417772E005654EA /* Info.plist */,
 				14DAC3912417772E005654EA /* Assets.xcassets */,
-				1458D12D24531FFD0093B541 /* SpaceMono-Regular.ttf */,
 				1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */,
 			);
 			path = Assets;
@@ -485,6 +482,7 @@
 		149ACC2524543602009DA18F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				141DDA55243F85AC0020386C /* Extensions */,
 				149ACC2624543615009DA18F /* MulticastDelegate.swift */,
 			);
 			path = Utilities;
@@ -588,7 +586,6 @@
 				149ACC2524543602009DA18F /* Utilities */,
 				149ACC20245424B0009DA18F /* Interface */,
 				1458D12B24531DA30093B541 /* Assets */,
-				141DDA55243F85AC0020386C /* Extensions */,
 				146B55EB242CDA90001163B3 /* Audio */,
 				1470F72C2432045B00E751B7 /* Sequencer */,
 				14EFEDA5242DBA5200242298 /* UI */,
@@ -691,9 +688,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1458D12E24531FFD0093B541 /* OFL.txt in Resources */,
+				1458D12E24531FFD0093B541 /* License.txt in Resources */,
 				14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */,
-				1458D12F24531FFD0093B541 /* SpaceMono-Regular.ttf in Resources */,
 				14DAC3922417772E005654EA /* Assets.xcassets in Resources */,
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,

@@ -98,7 +98,7 @@ extension Keyboard
 
     internal func computeKeyX(_ k: Int, octave: CGFloat) -> CGFloat
     {
-        return margins.left + margins.right + CGFloat(k) * keyStep + octave * octaveSize.width;
+        return margins.left + CGFloat(k) * keyStep + octave * octaveSize.width;
     }
     
     internal func whiteKeyPressed(_ k: Int, octave: Int) -> Bool

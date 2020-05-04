@@ -20,6 +20,11 @@ extern "C" const bool __interop__PlayOrPause(void *DSP)
     return ((ASCommanderDSP*) DSP)->playOrPause();
 }
 
+extern "C" const bool __interop__ToggleMode(void *DSP)
+{
+    return ((ASCommanderDSP*) DSP)->toggleMode();
+}
+
 extern "C" void __interop__LoadNote(void *DSP, const int note, const int shape)
 {
     ((ASCommanderDSP*) DSP)->loadNote(note, shape);

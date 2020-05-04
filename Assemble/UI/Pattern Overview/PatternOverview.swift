@@ -19,6 +19,15 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
         willSet (newPattern) {
             shapes[pattern].strokeColor = nil
             shapes[newPattern].strokeColor = activeColour.cgColor
+            shapes[newPattern].removeAllAnimations()
+        }
+    }
+    
+    private var nextPattern : Int = 0 {
+        willSet (newPattern) {
+            if newPattern  == pattern { return }
+            if nextPattern != pattern { dequeue(&shapes[nextPattern]) }
+            enqueue(&shapes[newPattern])
         }
     }
 
@@ -44,7 +53,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
                 path.addArc(withCentre: CGPoint(x: x, y: y), radius: radius * scalar)
 
                 layer.path = path.cgPath
-                layer.lineWidth = 2.0
+                layer.lineWidth = 3.0
                 layer.strokeColor = nil
                 layer.shouldRasterize = true
                 layer.allowsEdgeAntialiasing = true
@@ -101,6 +110,22 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
                                             patternOffColour.cgColor
     }
     
+    private func enqueue(_ layer: inout CAShapeLayer) {
+        let animation = CABasicAnimation()
+        animation.fromValue = 0.0
+        animation.toValue = 3.0
+        animation.duration = 0.35
+        animation.autoreverses = true
+        animation.repeatCount = .greatestFiniteMagnitude
+        layer.add(animation, forKey: "lineWidth")
+        layer.strokeColor = activeColour.cgColor
+    }
+    
+    private func dequeue(_ layer: inout CAShapeLayer) {
+        layer.removeAllAnimations()
+        layer.strokeColor = nil
+    }
+    
     internal func nodeFromTouchLocation(_ touch: CGPoint) -> Int? {
         if touch.x > diameter * (cols + 1) { return nil }
         if touch.y > diameter * (rows + 1) { return nil }
@@ -116,7 +141,13 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
             toggle(pattern: node)
             lastTappedNode = nil
         }
-        
+            
+        else if Assemble.core.ticking {
+            nextPattern = node
+            lastTappedNode = node
+            Assemble.core.setParameter(kSequencerNextPattern, to: Float(node))
+        }
+
         else {
             lastTappedNode = node
             Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(node))
@@ -135,6 +166,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
         let currentPattern = Assemble.core.currentPattern
         if pattern != currentPattern {
             pattern = currentPattern
+            nextPattern = pattern
         }
     }
     

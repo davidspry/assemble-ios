@@ -36,8 +36,8 @@ public:
 
 public:
     void prepare();
-    void reset()   { row =  0; }
-    void toggle()  { mode = !mode; }
+    void reset() { row =  0; }
+    const bool toggle() { return (mode = !mode); }
     std::pair<int,int> state() { return {row, pattern}; }
 
 public:
@@ -48,6 +48,8 @@ public:
 public:
     typedef std::vector<Note>::iterator iterator;
     std::pair<int, iterator&> nextRow();
+    
+private:
     void selectNextActivePattern();
     void selectPattern(const int);
     
@@ -57,6 +59,7 @@ private:
 private:
     int row = 0;
     int pattern = 0;
+    int nextPattern = 0;
     int patternLength;
     int activePatterns = 1;
     bool mode = 1;

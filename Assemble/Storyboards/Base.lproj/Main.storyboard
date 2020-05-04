@@ -21,11 +21,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="393" y="799" width="580" height="145"/>
+                                <rect key="frame" x="499" y="825" width="368" height="85"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="12:3" id="6UH-cy-BR1"/>
-                                    <constraint firstAttribute="height" constant="145" id="F3N-Ii-KQp"/>
+                                    <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="13:3" id="6UH-cy-BR1"/>
+                                    <constraint firstAttribute="height" constant="85" id="F3N-Ii-KQp"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-ew-lo6" customClass="Sequencer" customModule="Assemble" customModuleProvider="target">
@@ -37,8 +37,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140BPM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz">
-                                <rect key="frame" x="32" y="131" width="50.5" height="16.5"/>
-                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
+                                <rect key="frame" x="32" y="145" width="47" height="15"/>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
                             </label>
@@ -66,7 +66,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3i-2N-gT6" customClass="Waveform" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="32" y="32" width="101" height="50"/>
+                                <rect key="frame" x="32" y="32" width="94" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ixE-HM-g5j"/>
@@ -81,8 +81,8 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PATTERN MODE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBU-mM-6OQ">
-                                <rect key="frame" x="32" y="98" width="101" height="17"/>
-                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="14"/>
+                                <rect key="frame" x="32" y="114" width="94" height="15"/>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -98,14 +98,14 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="width" secondItem="kBU-mM-6OQ" secondAttribute="width" id="4PH-jl-Pyg"/>
-                            <constraint firstItem="kBU-mM-6OQ" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="16" id="6rq-VX-pkg"/>
+                            <constraint firstItem="kBU-mM-6OQ" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="32" id="6rq-VX-pkg"/>
                             <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="48" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="kBU-mM-6OQ" secondAttribute="bottom" constant="16" id="Gcz-zB-Czu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="kBU-mM-6OQ" firstAttribute="centerX" secondItem="K3i-2N-gT6" secondAttribute="centerX" id="KIW-X9-boF"/>
-                            <constraint firstItem="Z1n-M5-aq6" firstAttribute="bottom" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="32" id="R9f-RX-Bfk"/>
+                            <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="kBU-mM-6OQ" secondAttribute="leading" id="dza-1o-LaC"/>

@@ -116,7 +116,12 @@ import AudioUnit
     // MARK: - Keyboard Listener
     
     func pressNote(_ note: Int, shape: OscillatorShape) {
-         guard let commander = commander else { return }
-         if !commander.ticking { commander.playNote(note: note, shape: shape.rawValue) }
+        guard let commander = commander else { return }
+        if !commander.ticking { commander.playNote(note: note, shape: shape.rawValue) }
      }
+    
+    func didToggleMode() {
+        guard let commander = commander else { return }
+        commander.toggleMode()
+    }
 }

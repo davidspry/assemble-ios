@@ -8,11 +8,12 @@ import UIKit
 enum KeyCommand : Int
 {
     case none
+    case mode
     case place
     case erase
     case navigate
     case transport
-    
+
     case uoctave
     case noctave
     case uoscillator
@@ -49,7 +50,8 @@ struct KeyboardHandler
         .keyboardG : (.place, 0x07),
         .keyboardDeleteOrBackspace : (.erase, 0),
         .keyboardOpenBracket  : (.noscillator, 0),
-        .keyboardCloseBracket : (.noscillator, 1)
+        .keyboardCloseBracket : (.noscillator, 1),
+        .keyboardTab : (.mode, 0)
     ]
 
     /**

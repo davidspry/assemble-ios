@@ -43,7 +43,7 @@ extension Keyboard
     
     internal func noteFromTouchLocation(_ location: CGPoint) -> Int?
     {
-        let padding = margins.left + margins.right
+        let padding = margins.left
         guard bounds.contains(location) else { return nil }
         guard location.x > padding      else { return nil }
         guard location.x < padding + octaveSize.width * CGFloat(self.octaves)

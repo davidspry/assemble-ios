@@ -463,12 +463,12 @@
 			path = Processors;
 			sourceTree = "<group>";
 		};
-		149A1D2C2459E0AE00F083D0 /* PatternOverview */ = {
+		149A1D2C2459E0AE00F083D0 /* Pattern Overview */ = {
 			isa = PBXGroup;
 			children = (
 				149A1D2D2459E0C900F083D0 /* PatternOverview.swift */,
 			);
-			path = PatternOverview;
+			path = "Pattern Overview";
 			sourceTree = "<group>";
 		};
 		149ACC20245424B0009DA18F /* Interface */ = {
@@ -623,7 +623,7 @@
 				1436CE51245404A000670E3E /* SK Sequencer */,
 				14B2315D2436597E0012F32F /* SK Nodes */,
 				1436CE5224541BB800670E3E /* Keyboard */,
-				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
+				149A1D2C2459E0AE00F083D0 /* Pattern Overview */,
 				14CE044A2457366900B0220C /* Waveform */,
 				14C38EE9245B29A100180810 /* Transport */,
 			);

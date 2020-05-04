@@ -20,8 +20,6 @@ class ViewController : UIViewController
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
-    @IBOutlet weak var frequencySlider: UISlider!
-
     @objc func refreshInterface() {
         descriptionLabel.text = sequencer.SK.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
@@ -78,12 +76,6 @@ class ViewController : UIViewController
         updater.add(to: .main, forMode: .default)
         updater.preferredFramesPerSecond = 40
         
-        // Test: Set filter frequency
-        frequencySlider.maximumValue = 1
-        frequencySlider.minimumValue = 0
-        frequencySlider.isContinuous = true
-        frequencySlider.setValue(desiredInitialTempo(140), animated: true)
-        
         keyboard.listeners.add(sequencer)
         keyboard.listeners.add(Assemble.core)
         keyboard.settingsListeners.add(computerKeyboard)
@@ -104,12 +96,5 @@ class ViewController : UIViewController
     {
         super.viewDidAppear(animated);
         waveform.start()
-    }
-
-    @IBAction func sliderChanged(_ sender: UISlider) {
-        let tempo = sender.value.map(from: 0...1, to: 30...300)
-        let bpm = Int(tempo)
-        tempoLabel.text = "\(bpm)BPM"
-        Assemble.core.setParameter(kClockBPM, to: tempo)
     }
 }

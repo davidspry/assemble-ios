@@ -9,8 +9,8 @@ void HuovilainenFilter::initialise()
     std::fill(delay.begin(), delay.end(), 0.F);
     std::fill(tanhStage.begin(), tanhStage.end(), 0.F);
 
-    thermal = 25E-6F;
-    set(8E3F, 1E-1F);
+    targetFrequencyNormal.store(1.0F);
+    set(20E3F, 1.0F);
 }
 
 /// \brief Get a parameter value from the Huovilainen Filter
@@ -22,7 +22,7 @@ const float HuovilainenFilter::get(uint64_t parameter)
     const int subtype = (int) parameter % 16;
     switch (subtype)
     {
-        case 0:  return targetFrequency;
+        case 0:  return targetFrequencyNormal;
         case 1:  return targetResonance;
         default: return 0.F;
     }
@@ -35,9 +35,11 @@ const float HuovilainenFilter::get(uint64_t parameter)
 /// range is [0, 1] in the Swift context. In order to map this range to the frequency
 /// of the filter, which is [20Hz, 20kHz], the function e ** [ln(20) + x * (ln(20e3) - ln(20)] is used.
 /// The natural logs of 20 and 20,000 are defined as macros in ASConstants.h.
+/// The input value is stored in `targetFrequencyNormal` for later retrieval.
 
 void HuovilainenFilter::set(uint64_t parameter, float value)
 {
+    value = Assemble::Utilities::bound(value, 0.0F, 1.0F);
     const int subtype = (int) parameter % 16;
     switch (subtype)
     {
@@ -45,9 +47,11 @@ void HuovilainenFilter::set(uint64_t parameter, float value)
         case 0:
         {
             const float map = std::exp(LN20 + value * (LN20E3 - LN20));
+            targetFrequencyNormal.store(value);
             targetFrequency.store(map);
             return;
         }
+
         default: return;
     }
 }

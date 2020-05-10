@@ -4,14 +4,16 @@
 
 import Foundation
 
-enum OscillatorShape : Int
+enum OscillatorShape : Int, CustomStringConvertible
 {
     case sine
     case triangle
     case square
     case sawtooth
     case oscillators
-    
+
+    var description: String { return name }
+
     var name: String {
         switch self {
         case .sine:     return "Sine"

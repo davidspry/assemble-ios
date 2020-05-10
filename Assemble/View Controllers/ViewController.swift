@@ -3,7 +3,7 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
-
+import AVFoundation
 class ViewController : UIViewController
 {
     let engine = Engine()
@@ -19,9 +19,19 @@ class ViewController : UIViewController
     @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var tempoLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
+    
+    @IBAction func didTrySave(_ sender: UIButton) {
+        Assemble.core.commander?.saveState(named: "Test Two", at: 1)
+    }
+    
+    @IBAction func didTryLoad(_ sender: UIButton) {
+        Assemble.core.commander?.loadFromPreset(number: 0)
+        sequencer.initialiseFromUnderlyingState()
+        patterns.loadStates()
+    }
+    
     @objc func refreshInterface() {
-        descriptionLabel.text = sequencer.SK.noteString
+        descriptionLabel.text = sequencer.UI.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
 
         // Either:
@@ -32,7 +42,7 @@ class ViewController : UIViewController
         modeLabel.text = modes[mode & 1]
 
         
-        sequencer.SK.patternDidChange(to: Assemble.core.currentPattern)
+        sequencer.UI.patternDidChange(to: Assemble.core.currentPattern)
 
         // Test out listening to parameters that aren't tweaked by the user.
         // If it works, Pattern could listen to the core. Otherwise,
@@ -44,7 +54,7 @@ class ViewController : UIViewController
         // The current row needs to be refreshed at a frame rate
         // that's at least as fast as the BPM.
         let row = Assemble.core.currentRow
-        sequencer.SK.row.moveTo(row: row)
+        sequencer.UI.row.moveTo(row: row)
     }
 
     // all of this will go into the effects / settings menu
@@ -58,7 +68,7 @@ class ViewController : UIViewController
         return Float(tempo - self.tempo.lowerBound) / Float(self.tempo.upperBound - self.tempo.lowerBound)
     }
     // ========================================================================
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -83,6 +93,11 @@ class ViewController : UIViewController
         transport.listeners.add(computerKeyboard)
 
         engine.start()
+        
+        let bpm = Int(Assemble.core.getParameter(kClockBPM))
+        tempoLabel.text = bpm.description
+        
+        print(Assemble.core.getParameter(kDelayToggle))
     }
 
     override func viewDidAppear(_ animated: Bool)

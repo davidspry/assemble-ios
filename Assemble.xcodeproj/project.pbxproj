@@ -36,10 +36,9 @@
 		1458D13424532F050093B541 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1458D13324532F050093B541 /* StereoDelay.cpp */; };
 		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
 		146EC662244CC143009025E4 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC660244CC143009025E4 /* Pattern.cpp */; };
-		1470F72E2432047E00E751B7 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* Note.swift */; };
+		1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
 		148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148E7E26244D5B72003C1DCF /* Synthesiser.cpp */; };
-		14909DA324585635003C6F03 /* SineWTOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14909DA124585635003C6F03 /* SineWTOscillator.cpp */; };
 		14915BC02434B75B008E8147 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
 		14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
 		149A1D2E2459E0C900F083D0 /* PatternOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A1D2D2459E0C900F083D0 /* PatternOverview.swift */; };
@@ -50,6 +49,8 @@
 		149ACC242454330E009DA18F /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC232454330E009DA18F /* KeyboardListener.swift */; };
 		149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2624543615009DA18F /* MulticastDelegate.swift */; };
 		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
+		14A36FD52463D79400D85393 /* CoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD42463D79400D85393 /* CoreState.swift */; };
+		14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */; };
 		14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */; };
 		14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBEB2436233B00822139 /* SequencerScene.swift */; };
 		14ADCBEE2436265300822139 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBED2436265300822139 /* Sequencer.swift */; };
@@ -62,6 +63,7 @@
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
 		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
+		14C70807246472CF008E84A3 /* NoteState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C70806246472CF008E84A3 /* NoteState.swift */; };
 		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
 		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
 		14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
@@ -73,6 +75,7 @@
 		14DAC3922417772E005654EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC3912417772E005654EA /* Assets.xcassets */; };
 		14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC3932417772E005654EA /* LaunchScreen.storyboard */; };
 		14DAC39D241777DF005654EA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC39C241777DF005654EA /* Engine.swift */; };
+		14DB9E71246538E0000AAD79 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DB9E70246538E0000AAD79 /* AudioToolbox.framework */; };
 		14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */; };
 		14EFEDA9242E350100242298 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
 		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
@@ -139,6 +142,7 @@
 		143FB01D243F52820058AE40 /* ASCommanderCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASCommanderCore.hpp; sourceTree = "<group>"; };
 		143FB020243F63620058AE40 /* ASCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommander.swift; sourceTree = "<group>"; };
 		143FB022243F67500058AE40 /* ASComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASComponent.swift; sourceTree = "<group>"; };
+		144354152466E57200F3142D /* ASSawtoothTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSawtoothTable.h; sourceTree = "<group>"; };
 		144A11652456CF4A000F2B4C /* ASParameters.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = ASParameters.h; sourceTree = "<group>"; };
 		144A11662457166C000F2B4C /* Clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
 		1458D1272452C5110093B541 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		1458D130245328550093B541 /* PaddedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedLabel.swift; sourceTree = "<group>"; };
 		1458D13224532D720093B541 /* StereoDelay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StereoDelay.hpp; sourceTree = "<group>"; };
 		1458D13324532F050093B541 /* StereoDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
+		145CDEE02467BD0B001A56B1 /* BandlimitedOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BandlimitedOscillator.hpp; sourceTree = "<group>"; };
+		145CDEE12467BDEF001A56B1 /* WaveTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WaveTable.hpp; sourceTree = "<group>"; };
 		146EC65A244CBC60009025E4 /* ASHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHeaders.h; sourceTree = "<group>"; };
 		146EC65B244CBE7F009025E4 /* ASOscillators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASOscillators.h; sourceTree = "<group>"; };
 		146EC65D244CBF49009025E4 /* Sequencer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sequencer.cpp; sourceTree = "<group>"; };
@@ -156,14 +162,13 @@
 		146EC665244CC3B1009025E4 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		146EC668244CC624009025E4 /* Note.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Note.hpp; sourceTree = "<group>"; };
 		146EC66A244CC6DC009025E4 /* ASFrequencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASFrequencies.h; sourceTree = "<group>"; };
-		1470F72D2432047E00E751B7 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		1470F72D2432047E00E751B7 /* NoteUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtilities.swift; sourceTree = "<group>"; };
 		1474EC462442114F00D2BA79 /* OscillatorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorShape.swift; sourceTree = "<group>"; };
 		148E7E26244D5B72003C1DCF /* Synthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Synthesiser.cpp; sourceTree = "<group>"; };
 		148E7E27244D5B72003C1DCF /* Synthesiser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Synthesiser.hpp; sourceTree = "<group>"; };
 		148E7E2B244D5C88003C1DCF /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
-		14909DA124585635003C6F03 /* SineWTOscillator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SineWTOscillator.cpp; sourceTree = "<group>"; };
 		14909DA224585635003C6F03 /* SineWTOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SineWTOscillator.hpp; sourceTree = "<group>"; };
-		14909DA42458585D003C6F03 /* ASSineWaveTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSineWaveTable.h; sourceTree = "<group>"; };
+		14909DA42458585D003C6F03 /* ASSineTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSineTable.h; sourceTree = "<group>"; };
 		14915BBF2434B75B008E8147 /* Assemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assemble.swift; sourceTree = "<group>"; };
 		14915BC12434BB3A008E8147 /* CellSelectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelectShape.swift; sourceTree = "<group>"; };
 		149A1D2D2459E0C900F083D0 /* PatternOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternOverview.swift; sourceTree = "<group>"; };
@@ -174,6 +179,10 @@
 		149ACC232454330E009DA18F /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		149ACC2624543615009DA18F /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsListener.swift; sourceTree = "<group>"; };
+		14A3317F24671A61009A1B47 /* ASSquareTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSquareTable.h; sourceTree = "<group>"; };
+		14A3318024671A6B009A1B47 /* ASTriangleTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTriangleTable.h; sourceTree = "<group>"; };
+		14A36FD42463D79400D85393 /* CoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreState.swift; sourceTree = "<group>"; };
+		14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommanderAUParameters.swift; sourceTree = "<group>"; };
 		14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerDelegate.swift; sourceTree = "<group>"; };
 		14ADCBEB2436233B00822139 /* SequencerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerScene.swift; sourceTree = "<group>"; };
 		14ADCBED2436265300822139 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
@@ -190,6 +199,7 @@
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
+		14C70806246472CF008E84A3 /* NoteState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteState.swift; sourceTree = "<group>"; };
 		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
 		14D3AE9B2433088E0095B587 /* DotGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGridRow.swift; sourceTree = "<group>"; };
@@ -203,6 +213,8 @@
 		14DAC3942417772E005654EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DAC3962417772E005654EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14DAC39C241777DF005654EA /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
+		14DB9E6F2465239E000AAD79 /* Assemble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Assemble.entitlements; sourceTree = "<group>"; };
+		14DB9E70246538E0000AAD79 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ValueTransition.cpp; sourceTree = "<group>"; };
 		14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ValueTransition.hpp; sourceTree = "<group>"; };
 		14EFEDA8242E350100242298 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
@@ -214,12 +226,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14DB9E71246538E0000AAD79 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		141D5CA42467FE5900FA6CF3 /* Wavetables */ = {
+			isa = PBXGroup;
+			children = (
+				14909DA42458585D003C6F03 /* ASSineTable.h */,
+				144354152466E57200F3142D /* ASSawtoothTable.h */,
+				14A3317F24671A61009A1B47 /* ASSquareTable.h */,
+				14A3318024671A6B009A1B47 /* ASTriangleTable.h */,
+			);
+			path = Wavetables;
+			sourceTree = "<group>";
+		};
 		141DDA4E243F81070020386C /* AHR Envelope */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,16 +287,8 @@
 			isa = PBXGroup;
 			children = (
 				141DDA61243F918E0020386C /* Oscillator.hpp */,
-				141DDA64243F918E0020386C /* SawtoothOscillator.cpp */,
-				141DDA63243F918E0020386C /* SawtoothOscillator.hpp */,
-				141DDA60243F918D0020386C /* SquareOscillator.cpp */,
-				141DDA65243F918E0020386C /* SquareOscillator.hpp */,
-				141DDA62243F918E0020386C /* TriangleOscillator.cpp */,
-				141DDA5F243F918D0020386C /* TriangleOscillator.hpp */,
-				141DDA5C243F91610020386C /* SineOscillator.cpp */,
-				141DDA5D243F91610020386C /* SineOscillator.hpp */,
-				14909DA124585635003C6F03 /* SineWTOscillator.cpp */,
-				14909DA224585635003C6F03 /* SineWTOscillator.hpp */,
+				14A3317D24671724009A1B47 /* Naive */,
+				14A3317E2467172C009A1B47 /* Bandlimited */,
 			);
 			path = Oscillators;
 			sourceTree = "<group>";
@@ -289,7 +305,7 @@
 		1436CE51245404A000670E3E /* SK Sequencer */ = {
 			isa = PBXGroup;
 			children = (
-				1470F72D2432047E00E751B7 /* Note.swift */,
+				1470F72D2432047E00E751B7 /* NoteUtilities.swift */,
 				14ADCBEB2436233B00822139 /* SequencerScene.swift */,
 				14B2315B24362D970012F32F /* SequencerGestures.swift */,
 			);
@@ -309,6 +325,7 @@
 		143FAFF7243F066C0058AE40 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				14A36FD32463D78400D85393 /* State Persistence */,
 				146EC663244CC39C009025E4 /* Data Structures */,
 				143FAFFF243F2DF00058AE40 /* AU Hierarchy */,
 				141DDA59243F8BA30020386C /* Components */,
@@ -359,6 +376,7 @@
 				143FB016243F400B0058AE40 /* ASCommanderAU.swift */,
 				143FB01A243F4C470058AE40 /* ASCommanderDSP.hpp */,
 				143FB01B243F50520058AE40 /* ASCommanderDSP.mm */,
+				14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -468,7 +486,7 @@
 			path = "Pattern Overview";
 			sourceTree = "<group>";
 		};
-		149ACC20245424B0009DA18F /* Interface */ = {
+		149ACC20245424B0009DA18F /* KeyboardInterface */ = {
 			isa = PBXGroup;
 			children = (
 				149ACC1E24542483009DA18F /* ComputerKeyboard.swift */,
@@ -476,7 +494,7 @@
 				149ACC232454330E009DA18F /* KeyboardListener.swift */,
 				149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */,
 			);
-			path = Interface;
+			path = KeyboardInterface;
 			sourceTree = "<group>";
 		};
 		149ACC2524543602009DA18F /* Utilities */ = {
@@ -486,6 +504,40 @@
 				149ACC2624543615009DA18F /* MulticastDelegate.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		14A3317D24671724009A1B47 /* Naive */ = {
+			isa = PBXGroup;
+			children = (
+				141DDA64243F918E0020386C /* SawtoothOscillator.cpp */,
+				141DDA63243F918E0020386C /* SawtoothOscillator.hpp */,
+				141DDA60243F918D0020386C /* SquareOscillator.cpp */,
+				141DDA65243F918E0020386C /* SquareOscillator.hpp */,
+				141DDA62243F918E0020386C /* TriangleOscillator.cpp */,
+				141DDA5F243F918D0020386C /* TriangleOscillator.hpp */,
+				141DDA5C243F91610020386C /* SineOscillator.cpp */,
+				141DDA5D243F91610020386C /* SineOscillator.hpp */,
+			);
+			path = Naive;
+			sourceTree = "<group>";
+		};
+		14A3317E2467172C009A1B47 /* Bandlimited */ = {
+			isa = PBXGroup;
+			children = (
+				14909DA224585635003C6F03 /* SineWTOscillator.hpp */,
+				145CDEE02467BD0B001A56B1 /* BandlimitedOscillator.hpp */,
+				145CDEE12467BDEF001A56B1 /* WaveTable.hpp */,
+			);
+			path = Bandlimited;
+			sourceTree = "<group>";
+		};
+		14A36FD32463D78400D85393 /* State Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				14A36FD42463D79400D85393 /* CoreState.swift */,
+				14C70806246472CF008E84A3 /* NoteState.swift */,
+			);
+			path = "State Persistence";
 			sourceTree = "<group>";
 		};
 		14AFB89124520D5A00F5AD3A /* Delay Line */ = {
@@ -501,13 +553,13 @@
 			path = "Delay Line";
 			sourceTree = "<group>";
 		};
-		14AFB89A2452361E00F5AD3A /* AppSceneDelegate */ = {
+		14AFB89A2452361E00F5AD3A /* UIResponder */ = {
 			isa = PBXGroup;
 			children = (
 				14DAC3882417772C005654EA /* AppDelegate.swift */,
 				14DAC38A2417772C005654EA /* SceneDelegate.swift */,
 			);
-			path = AppSceneDelegate;
+			path = UIResponder;
 			sourceTree = "<group>";
 		};
 		14AFB89B2452362400F5AD3A /* View Controllers */ = {
@@ -550,6 +602,7 @@
 		14CA4FE9243EF32A00F3C685 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14DB9E70246538E0000AAD79 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -583,13 +636,14 @@
 		14DAC3872417772C005654EA /* Assemble */ = {
 			isa = PBXGroup;
 			children = (
-				149ACC2524543602009DA18F /* Utilities */,
-				149ACC20245424B0009DA18F /* Interface */,
+				14DB9E6F2465239E000AAD79 /* Assemble.entitlements */,
 				1458D12B24531DA30093B541 /* Assets */,
+				14AFB89A2452361E00F5AD3A /* UIResponder */,
+				149ACC2524543602009DA18F /* Utilities */,
+				149ACC20245424B0009DA18F /* KeyboardInterface */,
 				146B55EB242CDA90001163B3 /* Audio */,
 				1470F72C2432045B00E751B7 /* Sequencer */,
 				14EFEDA5242DBA5200242298 /* UI */,
-				14AFB89A2452361E00F5AD3A /* AppSceneDelegate */,
 				14AFB89B2452362400F5AD3A /* View Controllers */,
 				14AFB89C2452363000F5AD3A /* Storyboards */,
 			);
@@ -608,19 +662,27 @@
 				146EC66A244CC6DC009025E4 /* ASFrequencies.h */,
 				144A11652456CF4A000F2B4C /* ASParameters.h */,
 				143FB006243F30BB0058AE40 /* ASInteroperability.h */,
-				14909DA42458585D003C6F03 /* ASSineWaveTable.h */,
+				141D5CA42467FE5900FA6CF3 /* Wavetables */,
 			);
 			path = Headers;
+			sourceTree = "<group>";
+		};
+		14E459462461417000F26667 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				1458D130245328550093B541 /* PaddedLabel.swift */,
+			);
+			path = Elements;
 			sourceTree = "<group>";
 		};
 		14EFEDA5242DBA5200242298 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1458D130245328550093B541 /* PaddedLabel.swift */,
+				14E459462461417000F26667 /* Elements */,
 				1436CE51245404A000670E3E /* SK Sequencer */,
 				14B2315D2436597E0012F32F /* SK Nodes */,
-				1436CE5224541BB800670E3E /* Keyboard */,
 				149A1D2C2459E0AE00F083D0 /* Pattern Overview */,
+				1436CE5224541BB800670E3E /* Keyboard */,
 				14CE044A2457366900B0220C /* Waveform */,
 				14C38EE9245B29A100180810 /* Transport */,
 			);
@@ -705,7 +767,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */,
-				14909DA324585635003C6F03 /* SineWTOscillator.cpp in Sources */,
 				1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */,
 				14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */,
 				14DAC38D2417772C005654EA /* ViewController.swift in Sources */,
@@ -715,6 +776,7 @@
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
 				143FB01E243F52820058AE40 /* ASCommanderCore.cpp in Sources */,
+				14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */,
 				149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */,
 				14CE044C2457367E00B0220C /* Waveform.swift in Sources */,
 				14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */,
@@ -726,12 +788,13 @@
 				14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */,
 				141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */,
 				143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */,
-				1470F72E2432047E00E751B7 /* Note.swift in Sources */,
+				1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */,
 				14AE01A4245E014D003EB586 /* UISegmentedControlExtensions.swift in Sources */,
 				141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */,
 				14DAC39D241777DF005654EA /* Engine.swift in Sources */,
 				143FB017243F400B0058AE40 /* ASCommanderAU.swift in Sources */,
 				14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */,
+				14C70807246472CF008E84A3 /* NoteState.swift in Sources */,
 				141DDA6B243F95D00020386C /* Voice.cpp in Sources */,
 				14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */,
 				14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */,
@@ -756,6 +819,7 @@
 				143FB00F243F3DE40058AE40 /* CGSizeExtensions.swift in Sources */,
 				148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */,
 				14915BC02434B75B008E8147 /* Assemble.swift in Sources */,
+				14A36FD52463D79400D85393 /* CoreState.swift in Sources */,
 				14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */,
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
@@ -912,6 +976,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Assemble/Assemble.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -928,6 +993,7 @@
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ds.Assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -941,6 +1007,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Assemble/Assemble.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -957,6 +1024,7 @@
 				OTHER_LDFLAGS = "-lc++";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ds.Assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;

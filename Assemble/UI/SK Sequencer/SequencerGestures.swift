@@ -29,7 +29,6 @@ extension SequencerScene
         eraseButtonView.center = viewPointFromIndices(selected)
         eraseButtonView.center = eraseButtonView.center.applying(.init(translationX: 0, y: -45))
         showEraseNoteView()
-        
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

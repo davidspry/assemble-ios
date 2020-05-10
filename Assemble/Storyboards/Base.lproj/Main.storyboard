@@ -94,6 +94,34 @@
                                     <constraint firstAttribute="height" constant="50" id="Oxd-NU-iBq"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j">
+                                <rect key="frame" x="491" y="208" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BaZ-3G-8Wh"/>
+                                    <constraint firstAttribute="width" constant="100" id="I94-B9-QK7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
+                                <state key="normal" title="TRY SAVE">
+                                    <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTrySave:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W4g-W2-uHz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="La5-QL-stQ">
+                                <rect key="frame" x="775" y="208" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="RHX-hT-fE6"/>
+                                    <constraint firstAttribute="width" constant="100" id="diu-U8-zun"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
+                                <state key="normal" title="TRY LOAD">
+                                    <color key="titleColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="didTryLoad:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c19-1r-Zos"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -102,16 +130,20 @@
                             <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="48" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
+                            <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="La5-QL-stQ" secondAttribute="bottom" constant="32" id="G8A-Hk-fdz"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="kBU-mM-6OQ" secondAttribute="bottom" constant="16" id="Gcz-zB-Czu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="kBU-mM-6OQ" firstAttribute="centerX" secondItem="K3i-2N-gT6" secondAttribute="centerX" id="KIW-X9-boF"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
+                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="OJS-ew-lo6" secondAttribute="leading" id="U0C-u8-9rw"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="kBU-mM-6OQ" secondAttribute="leading" id="dza-1o-LaC"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
+                            <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="qbC-Vu-c5j" secondAttribute="bottom" constant="32" id="ez8-Vj-qBh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="O4G-8C-h7M" secondAttribute="bottom" constant="16" id="oZL-NT-XfH"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="pDd-HK-iyj"/>
+                            <constraint firstItem="La5-QL-stQ" firstAttribute="trailing" secondItem="OJS-ew-lo6" secondAttribute="trailing" id="s2U-OO-gnZ"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="scF-YI-kja"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yAo-Uo-CYW"/>
                         </constraints>

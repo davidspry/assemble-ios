@@ -141,6 +141,7 @@ static void    bufferListPointChannelDataToBuffer(AudioBufferList *, float *);
 
         // Guard against potential stack overflow.
         assert(channelCount <= kMaxChannelCount);
+        assert(channelCount >= 1);
 
         const char inputBufferAllocation[bufferListByteSize(outputBufferList->mNumberBuffers)];
 

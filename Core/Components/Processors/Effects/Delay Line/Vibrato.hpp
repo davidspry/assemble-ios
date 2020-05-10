@@ -25,10 +25,10 @@ public:
 
 private:
     std::atomic<bool> bypassed = {false};
-    std::atomic<float> speed = {3.0F};
+    std::atomic<float> speed = {1.0F};
     std::atomic<float> depth = {1.0F};
     std::atomic<float> targetDepth = {1.0F};
-    SineWTOscillator modulator = {3.0F};
+    SineWTOscillator modulator = {1.0F};
 
 private:
     inline void fadeOut(const float t) { depth = std::max(t, depth - 0.001F); }
@@ -41,7 +41,6 @@ private:
     /// large enough, the rhead may move beyond the whead, which causes
     /// a glitching effect.
 
-    int   buffer = 50;
     int   whead = 0;
     float rhead;
     

@@ -18,8 +18,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     var noteShapes = [[NoteShapeNode]]()
     var pattern: Int = 0
     
-    var noteString: String?
     var noteStrings = [[[String?]]]()
+    var noteString: String?
     
     var spacing: CGSize = .zero
     var selected: CGPoint = .zero
@@ -44,17 +44,16 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
         DispatchQueue.main.async(execute: {
             let patterns = Int(PATTERNS)
-            let width = Int(SEQUENCER_WIDTH)
-            let length = Assemble.core.length
-            let nilArray: [String?] = Array.init(repeating: nil, count: width)
+            let W = Int(SEQUENCER_WIDTH)
+            let H = Assemble.core.length
+            let empty: [String?] = Array.init(repeating: nil, count: W)
             self.cursor.position = self.pointFromIndices(self.selected)
             self.noteShapes.reserveCapacity(patterns)
             self.noteStrings.reserveCapacity(patterns)
             self.noteShapes.append(contentsOf: Array.init(repeating: [], count: patterns))
             self.noteStrings.append(contentsOf: Array.init(repeating: [], count: patterns))
             for k in 0 ..< patterns {
-                self.noteStrings[k].append(contentsOf: Array.init(repeating: nilArray,
-                                                                  count: length))
+                self.noteStrings[k].append(contentsOf: Array.init(repeating: empty, count: H))
             }
         })
 
@@ -86,6 +85,26 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         eraseButtonView.addSubview(button)
         eraseButtonView.isHidden = true
         view.addSubview(eraseButtonView)
+    }
+
+    private func reset()
+    {
+        self.noteShapes = self.noteShapes.map { pattern in
+            pattern.forEach { $0.removeFromParent() }
+            return []
+        }
+
+        self.noteString = nil
+        self.noteStrings = self.noteStrings.map { pattern in pattern.map { row in row.map { _ in nil } } }
+    }
+    
+    private func updateNoteString()
+    {
+        guard pattern < noteStrings.count,
+              selected.ny < noteStrings[pattern].count,
+              selected.nx < noteStrings[pattern][selected.ny].count
+              else { noteString = nil; return }
+        noteString = noteStrings[pattern][selected.ny][selected.nx]
     }
 
     // MARK: - Computer Keyboard
@@ -132,11 +151,11 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     
     // MARK: - User Interaction
 
-    func addOrModifyNote(xy: CGPoint, note: Int, oscillator: OscillatorShape) {
-        let p = Assemble.core.currentPattern
-        let existingNote: String? = noteStrings[p][selected.ny][selected.nx]
-        noteStrings[p][selected.ny][selected.nx] = Note.describe(note, oscillator: oscillator)
-        noteString = noteStrings[p][selected.ny][selected.nx]
+    func addOrModifyNote(xy: CGPoint, note: Int, oscillator: OscillatorShape, pattern: Int? = nil) {
+        let pattern = pattern ?? Assemble.core.currentPattern
+        let existingNote: String? = noteStrings[pattern][xy.ny][xy.nx]
+        noteStrings[pattern][xy.ny][xy.nx] = NoteUtilities.describe(note, oscillator: oscillator)
+        noteString = noteStrings[pattern][xy.ny][xy.nx]
 
         guard existingNote == nil else {
             modifyNote(xy: xy, oscillator: oscillator)
@@ -144,9 +163,10 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
 
         let node = NoteShapeNode(type: oscillator)!;
+        node.isHidden = pattern != self.pattern
         node.position = pointFromIndices(xy);
         node.name = xy.debugDescription
-        noteShapes[p].append(node)
+        noteShapes[pattern].append(node)
         addChild(node);
     }
 
@@ -171,17 +191,38 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
             }
         }
     }
+    
+    /// Poll the Assemble core for its state and initialise the scene from its contents.
+    ///
+    /// - Note: Each state string begins with a character that denotes whether the underlying Pattern
+    /// is active or not. This character should be dropped from the data before passing it to the NoteUtilities
+    /// class for decoding.
 
-    /**
-     Update the scene to reflect the next pattern, `pattern`.
-     
-     `SequencerScene` stores each `NoteShapeNode` for each pattern in order that they can be
-     quickly shown or hidden. At any time, only the notes that belong to the pattern that's currently playing are visible.
+    public func initialiseFromUnderlyingState() {
+        guard let state = Assemble.core.commander?.collateCoreState() else { return }
+        reset()
 
-     This method shows the new pattern and hides the previous pattern.
-     
-     - Complexity: O(nm), where `n` and `m` are the dimensions of a pattern.
-     */
+        for (key, data) in state {
+            let data = (data as? String)?.dropFirst() ?? ""
+            let pattern = Int(key.suffix(1))
+            let notes: [NoteUtilities.Note?] = NoteUtilities.decode(from: data)
+            
+            for case let note? in notes {
+                addOrModifyNote(xy: note.xy, note: note.note, oscillator: note.shape, pattern: pattern)
+            }
+        }
+
+        updateNoteString()
+    }
+
+    /// Update the scene to reflect the next pattern, `pattern`.
+    ///
+    /// `SequencerScene` stores each `NoteShapeNode` for each pattern in order that they can be
+    /// quickly shown or hidden. At any time, only the notes that belong to the pattern that's currently playing are visible.
+    ///
+    /// This method shows the new pattern and hides the previous pattern.
+    ///
+    /// - Complexity: O(nm), where `n` and `m` are the dimensions of a pattern.
 
     func patternDidChange(to pattern: Int) {
         guard pattern != self.pattern else { return }
@@ -204,6 +245,15 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
     // MARK: - Coordinate Space Conversion
     
+    /// Return a point in scene space from a coordinate, (x, y).
+    /// SceneKit maps (0, 0) to the screen centre, but this function assumes
+    /// the standard top-left orientation:
+    /// ~~~
+    /// (0,0)  (0,1)
+    /// (1,0)  (1,1)
+    /// ~~~
+    /// - Parameter xy: A point containing column and row indices
+
     internal func pointFromIndices(_ xy: CGPoint) -> CGPoint
     {
         let x = (xy.x + 1) * spacing.width - spacing.width * 0.5;
@@ -212,13 +262,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         return convertPoint(fromView: .init(x: x, y: y));
     }
     
-    internal func pointFromIndices(x: Int, y: Int) -> CGPoint
-    {
-        let x = CGFloat(x + 1) * spacing.width - spacing.width * 0.5;
-        let y = CGFloat(y + 1) * spacing.height - spacing.height * 0.5;
-
-        return convertPoint(fromView: .init(x: x, y: y));
-    }
+    /// Convert a point from the scene (such as the location of a tap) to a point on the grid.
+    /// - Parameter xy: A point in scene space
     
     internal func viewPointFromIndices(_ xy: CGPoint) -> CGPoint
     {
@@ -227,6 +272,10 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
         return .init(x: x, y: y);
     }
+    
+    /// Given a point in scene space, return the matching grid coordinate.
+    /// - Parameter x: The x-coordinate of the point in scene space
+    /// - Parameter y: The y-coordinate of the point in scene space
     
     internal func indicesFromPoint(x: CGFloat, y: CGFloat) -> CGPoint
     {

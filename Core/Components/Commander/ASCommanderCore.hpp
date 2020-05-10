@@ -32,6 +32,11 @@ public:
     const bool toggleMode()     { return sequencer.toggle(); }
     
 public:
+    void prepareToLoadPatternState();
+    void loadFromEncodedPatternState(const char* state, const int pattern);
+    const char* encodePatternState(const int pattern) noexcept(false);
+
+public:
     /// \brief Set a parameter value. If the parameter does not exist, nothing will happen.
     /// \param parameter The address of the parameter to set
     /// \param value The value to be set
@@ -42,7 +47,7 @@ public:
     const float get(uint64_t parameter);
 
 private:
-    Clock       clock = { 140 };
+    Clock       clock = { 90 };
     Sequencer   sequencer;
     Synthesiser synthesiser;
     Vibrato     vibrato;
@@ -51,6 +56,9 @@ private:
 private:
     float sampleRate;
     std::array<float, 2> sample;
+    
+private:
+    std::string __state__;
 };
 
 #endif

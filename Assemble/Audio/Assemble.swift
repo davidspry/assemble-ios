@@ -11,10 +11,6 @@ struct Assemble
     
     public static var format: AVAudioFormat!
     
-    public static var channelCount: UInt32 = 2;
-    
-    public static var sampleRate: Double = 48_000;
-    
     public static let patternWidth : CGFloat = {
         return CGFloat(SEQUENCER_WIDTH)
     }()

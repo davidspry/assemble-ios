@@ -12,7 +12,7 @@ SquareOscillator::SquareOscillator(const float frequency)
 inline const float SquareOscillator::nextSample() noexcept
 {
     phase += translation;
-    phase += (phase > 1.0F) * -1.0F;
+    phase += static_cast<int>(phase >= 1.0F) * -1.0F;
     const int index = static_cast<int>(phase < 0.5F);
     return SquareOscillator::wavetable[index];
 }

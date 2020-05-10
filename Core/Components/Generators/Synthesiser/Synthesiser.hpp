@@ -31,10 +31,10 @@ private:
     
 private:
     std::array<Voice, OSCILLATORS * POLYPHONY> voices;
-    std::array<SineOscillator, POLYPHONY> sine;
-    std::array<TriangleOscillator, POLYPHONY> triangle;
-    std::array<SquareOscillator, POLYPHONY> square;
-    std::array<SawtoothOscillator, POLYPHONY> sawtooth;
+    std::array<BandlimitedOscillator<SIN>, POLYPHONY> sine;
+    std::array<BandlimitedOscillator<TRI>, POLYPHONY> triangle;
+    std::array<BandlimitedOscillator<SQR>, POLYPHONY> square;
+    std::array<BandlimitedOscillator<SAW>, POLYPHONY> sawtooth;
     
 private:
     std::array<ValueTransition, OSCILLATORS> frequency;

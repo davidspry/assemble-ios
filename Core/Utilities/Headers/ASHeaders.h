@@ -9,6 +9,7 @@
 #include <array>
 #include <atomic>
 #include <vector>
+#include <sstream>
 #include <numeric>
 #include <iterator>
 

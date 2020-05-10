@@ -4,7 +4,7 @@
 
 #include "Pattern.hpp"
 
-void Pattern::setTimeSignature(int beats, int subdivision)
+void Pattern::setTimeSignature(const int beats, const int subdivision)
 {
     if (beats < 1 || beats > 7) { return; }
     if (subdivision < 1 || subdivision > 7) { return; }
@@ -12,11 +12,6 @@ void Pattern::setTimeSignature(int beats, int subdivision)
     this->h = beats * subdivision;
     this->beats = beats;
     this->ticks = subdivision;
-}
-
-void Pattern::erase(int x, int y)
-{
-    pattern.erase(x, y);
 }
 
 typedef std::vector<Note>::iterator iterator;

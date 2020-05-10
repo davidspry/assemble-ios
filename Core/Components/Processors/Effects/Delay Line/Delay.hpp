@@ -16,7 +16,7 @@ class Delay
 {
 public:
     Delay(Clock *clock);
-    
+
 public:
     /// \brief Consume a new sample and return the next sample
     /// \param sample The sample to consume
@@ -82,7 +82,11 @@ private:
     const float parseMusicalTimeParameterIndex(const int index);
 
 public:
-    inline bool toggle()  { return (bypassed = !bypassed); }
+    inline bool toggle(const bool status)
+    {
+        return !(bypassed = !status);
+    }
+
     inline void fadeOut() { gain = std::max(0.F, gain - 0.001F); }
     inline void  fadeIn() { gain = std::min(1.F, gain + 0.001F); }
 
@@ -95,6 +99,7 @@ private:
 
 private:
     int offsetInSamples = 0;
+    int targetAsIndex;
     float delay;
     float target;
 
@@ -102,8 +107,8 @@ private:
     float mix      = 0.25F;
     float gain     = 1.00F;
     float feedback = 0.65F;
-    float modulationSpeed = 10.0F;
-    float modulationDepth = 0.50F;
+    float modulationSpeed = 0.65F;
+    float modulationDepth = 0.25F;
     std::atomic<bool> bypassed = {false};
 
 private:
@@ -114,7 +119,7 @@ private:
     uint16_t bpm;
     float time;
     Clock *clock;
-    SineWTOscillator modulator = {10.00F};
+    SineWTOscillator modulator = {0.65F};
 };
 
 #endif

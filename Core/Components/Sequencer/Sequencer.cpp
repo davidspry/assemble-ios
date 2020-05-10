@@ -13,6 +13,15 @@ Sequencer::Sequencer()
     activePatterns = static_cast<int>(firstPattern.toggle() == true);
 }
 
+void Sequencer::hardReset()
+{
+    row = 0;
+    pattern = 0;
+    activePatterns = 0;
+    for (size_t i = 0; i < PATTERNS; ++i)
+        patterns.at(i).clear();
+}
+
 /// \brief Set a value for a Sequencer parameter
 /// \param parameter The hexadecimal address of the parameter to set
 /// \param value The value to be set

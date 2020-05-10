@@ -34,12 +34,12 @@ protocol KeyboardListener
 
     func setOscillator(_ next: Bool)
     
-    ///
-    
+    /// Broadcast a play or pause signal.
+
     func pressPlayOrPause()
     
-    
-    
+    /// Indicate that the current mode should be toggled.
+
     func didToggleMode()
 }
 

@@ -1,8 +1,5 @@
 //  Assemble
 //  ============================
-//  Original author: Aurelius Prochazka.
-//  Copyright 2018 AudioKit. All rights reserved.
-//  License: <https://github.com/AudioKit/AudioKit/blob/master/LICENSE>
 
 import AVFoundation
 

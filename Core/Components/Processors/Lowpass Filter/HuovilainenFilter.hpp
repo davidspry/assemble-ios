@@ -40,10 +40,12 @@ private:
     
 private:
     float sampleRate = 48000.F;
-    std::atomic<float> targetFrequency = { 4E3F };
-    std::atomic<float> targetResonance = { 0.0F };
-    float frequency = targetFrequency;
-    float resonance = targetResonance;
+    std::atomic<float> targetFrequency;
+    std::atomic<float> targetResonance;
+    std::atomic<float> targetFrequencyNormal;
+    float frequency;
+    float resonance;
+    
     
 private:
     std::array<float, 6> delay;
@@ -53,7 +55,7 @@ private:
 private:
     float G = 0.0F;
     float A = 0.0F;
-    float thermal = 0.0F;
+    float thermal = 25E-6F;
     float resonanceFour = 0.0F;
 
 private:

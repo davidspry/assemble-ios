@@ -29,10 +29,16 @@ Synthesiser::Synthesiser()
         voice.setSampleRate(sampleRate);
 
     for (auto &vtrns : frequency)
-    { vtrns.setSampleRate(sampleRate); vtrns.set(1.0F, 0.5F); }
-    
+    {
+        vtrns.setSampleRate(sampleRate);
+        vtrns.set(0.75F, 0.5F);
+    }
+
     for (auto &vtrns : resonance)
-    { vtrns.setSampleRate(sampleRate); vtrns.set(0.1F, 0.5F); }
+    {
+        vtrns.setSampleRate(sampleRate);
+        vtrns.set(0.01F, 0.5F);
+    }
 }
 
 /// \brief Load a new note into the least recently used Voice whose oscillator
@@ -40,9 +46,9 @@ Synthesiser::Synthesiser()
 
 void Synthesiser::loadNote(const int note, const int shape)
 {
+    const auto& frequency = frequencies[note];
     const auto index = shape * POLYPHONY + nextVoice[shape];
     nextVoice[shape] = (nextVoice[shape] + 1) % POLYPHONY;
-    const auto frequency = frequencies[note];
     voices[index].load(frequency);
 }
 
@@ -68,14 +74,30 @@ const float Synthesiser::nextSample()
     return sample * 0.5;//0.0625F;
 }
 
+/// \brief Get the parameter values of the Synthesiser.
+/// \param parameter The hexadecimal address of the desired parameter
+
 const float Synthesiser::get(uint64_t parameter)
 {
-    return 0.F;
+    const int type = (int) parameter / (2 << 7);
+    const int bank = (int) parameter / 16 % 16 - 1;
+    switch (type)
+    {
+        /// Get the amplitude or filter envelope values for the target Voice
+            
+        case 0xAE: // Fallthrough
+        case 0xFE: // Fallthrough
+        case 0xF0:
+        {
+            const int oscillator = POLYPHONY * bank;
+            return voices[oscillator].get(parameter);
+        }
+   
+        default: return 0.0F;
+    }
 }
 
-/// \brief Set the parameters of the synhesiser, including its Voice banks and
-/// its ValueTransition objects, which define smooth transitions between values
-/// for each Voice's filter.
+/// \brief Set the parameters of the Synthesiser.
 /// \param parameter The hexadecimal address of the parameter to set
 /// \param value The value to set for the parameter
 

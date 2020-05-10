@@ -8,7 +8,7 @@ import SpriteKit
 
 class Sequencer : SKView, KeyboardListener
 {
-    var SK : SequencerScene!
+    var UI : SequencerScene!
 
     required init?(coder: NSCoder)
     {
@@ -21,32 +21,39 @@ class Sequencer : SKView, KeyboardListener
             layoutIfNeeded();
         }
 
-        SK = SequencerScene(size: self.bounds.size)
+        UI = SequencerScene(size: self.bounds.size)
 
-        presentScene(SK);
+        presentScene(UI);
     }
     
     // MARK: - Keyboard Listener
     
     func pressNote(_ note: Int, shape: OscillatorShape) {
-        SK.addOrModifyNote(xy: SK.selected, note: note, oscillator: shape)
-        Assemble.core.addOrModifyNote(xy: SK.selected, note: note, shape: shape)
+        UI.addOrModifyNote(xy: UI.selected, note: note, oscillator: shape)
+        Assemble.core.addOrModifyNote(xy: UI.selected, note: note, shape: shape)
     }
     
     func eraseNote() {
-        SK.eraseNote()
-        Assemble.core.eraseNote(xy: SK.selected)
+        UI.eraseNote()
+        Assemble.core.eraseNote(xy: UI.selected)
     }
     
     func setOctave(_ octave: Int) {}
     
     func didNavigate(by direction: Int) {
-        SK.didNavigate(by: direction)
+        UI.didNavigate(by: direction)
     }
+    
+    // MARK: Keyboard Listener End -
 
-    /**
-     Determine the size of the `SequencerScene` from the device's screen size.
-     */
+    /// After loading state from a preset, the Sequencer
+    /// needs to poll the Assemble core
+    func initialiseFromUnderlyingState() {
+        UI.initialiseFromUnderlyingState()
+    }
+    
+    /// Determine the size of the `SequencerScene` from the device's screen size.
+
     internal func determineSizeForDevice()
     {
         var scalar: CGFloat = 0.0

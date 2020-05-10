@@ -3,6 +3,7 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 #include "ASCommanderCore.hpp"
+#include <iostream>
 
 /// \brief Initialise the Commander. This is called by `init` from the DSP layer.
 /// \param sampleRate The sample rate to propagate to the audio components
@@ -17,6 +18,9 @@ void ASCommanderCore::init(double sampleRate)
         synthesiser.setSampleRate(audioRate);
         clock.setSampleRate(audioRate);
     }
+
+    printf("[ASCommanderCore] Updating sample rate to %.0f\n", audioRate);
+    __state__.reserve(6000);
 }
 
 /// \brief Toggle the state of the Clock, which drives the Sequencer.
@@ -136,16 +140,84 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
                 loadNote(note.note, note.shape);
                 std::advance(notes, 1);
             }
-            
         }
 
         sample = {0.f, 0.f};
         sample[0] = sample[1] = synthesiser.nextSample();
-//        sample[0] = sample[1] = vibrato.process(sample[0]);
-//        sample[0] = delay.process(sample[0], static_cast<bool>(1));
-//        sample[1] = delay.process(sample[1], static_cast<bool>(0));
+        sample[0] = sample[1] = vibrato.process(sample[0]);
+        sample[0] = delay.process(sample[0], static_cast<bool>(1));
+        sample[1] = delay.process(sample[1], static_cast<bool>(0));
 
         for (size_t c = 0; c < channels; c++)
             output[c][t] = sample[c & 1];
     }
+}
+
+/// \brief From an encoded Pattern state, decode the on-off state and each Note, and initialise
+/// the corresponding Pattern accordingly.
+///
+/// \note  See that when Notes are encoded, they are represented as a string of characters whose
+/// values are derived from integers. As `static_cast<char>(0)` is the null terminator character, and some
+/// integer values may be 0, each attribute in Note is increased by 1 before encoding. This prevents
+/// null-terminator characters from appearing before the end of the data, which effectively preserves
+/// information. In order to decode the correct value, the positive offset of 1 must be subtracted from the
+/// decoded value.
+///
+/// \param state The encoded data for a Pattern
+/// \param pattern The Pattern who should be initialised
+
+void ASCommanderCore::loadFromEncodedPatternState(const char* state, const int pattern)
+{
+    const char* n = strchr(state, '#');
+    
+    sequencer.hardReset(pattern);
+
+    /// Decode the Pattern's on-off state
+    const bool status = static_cast<bool>(std::atoi(&state[0]));
+    sequencer.activePatterns += static_cast<int>(status);
+    sequencer.patterns.at(pattern).set(status);
+
+    /// Decode each encoded Note: "#<NumberOfAttributes><x><y><Note><Shape>"
+    while (n != nullptr)
+    {
+        size_t index = n - state;
+        const int x     = static_cast<int>((char) *(state + index + 2) - 1);
+        const int y     = static_cast<int>((char) *(state + index + 3) - 1);
+        const int note  = static_cast<int>((char) *(state + index + 4) - 1);
+        const int shape = static_cast<int>((char) *(state + index + 5) - 1);
+        sequencer.addOrModifyNonCurrent(pattern, x, y, note, shape);
+
+        n = strchr(n + 1, '#');
+    }
+}
+
+/// \brief Encode a Pattern's state as a string for the purpose of persistence.
+///
+/// \note  Each state string ends with "#0" or "#1" to denote whether the Pattern is active or not.
+/// Encoding of Notes is performed by the Note class. Each attribute in Note is encoded as an ASCII
+/// character, and each Note's encoded data begins with the pound sign character, '#'. Only non-null Notes are saved.
+///
+/// \param pattern The Pattern whose state should be encoded and returned.
+
+const char* ASCommanderCore::encodePatternState(const int pattern) noexcept(false)
+{
+    if (pattern < 0 || pattern >= PATTERNS)
+        throw "[ASCommanderCore] Invalid Pattern index";
+
+    __state__.clear();
+    __state__ += sequencer.patterns.at(pattern).isActive() ? '1' : '0';
+    
+    auto length = sequencer.patterns.at(pattern).length();
+    for (size_t i = 0; i < length; ++i)
+    {
+        const auto row = sequencer.patterns.at(pattern).window(0, (int) i);
+        std::vector<Note>::iterator notes = row.second;
+        for (size_t n = 0; n < row.first; ++n)
+        {
+            __state__.append((*notes).repr());
+            std::advance(notes, 1);
+        }
+    }
+
+    return __state__.c_str();
 }

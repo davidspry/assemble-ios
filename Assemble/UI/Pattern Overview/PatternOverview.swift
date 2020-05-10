@@ -11,6 +11,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
     let patternOffColour: UIColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
 
     var lastTappedNode: Int?
+    
 
     private let patterns: Int = Int(PATTERNS)
     private var states = [Bool]()
@@ -80,6 +81,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
             }
 
             Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(pattern))
+            self.pattern = pattern
         }
     }
 

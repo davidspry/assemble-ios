@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import <algorithm>
+#import <string>
 
 #include "ASInteroperability.h"
 
@@ -35,7 +36,7 @@ public:
 
     virtual void setParameter(AUParameterAddress, float, bool immediate = false) {}
     
-    virtual float getParameter(AUParameterAddress) { return 0.0; }
+    virtual float getParameter(AUParameterAddress) = 0;
     
     virtual void setBuffer(AudioBufferList *out) { outBufferListPtr = out; }
     
@@ -58,6 +59,7 @@ protected:
     AudioBufferList *outBufferListPtr = nullptr;
 
     bool isInitialized = true;
+    std::string teststring;
 };
 
 #endif

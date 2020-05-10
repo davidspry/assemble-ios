@@ -12,11 +12,10 @@ const float StereoDelay::get(uint64_t parameter)
 {
     switch (parameter)
     {
-        case kDelayToggle:       return static_cast<float>(bypassed);
-        case kDelayFeedback:     return ldelay.get(kDelayFeedback);
+        case kDelayToggle:       return static_cast<float>(!bypassed);
         case kStereoDelayLTime:  return ldelay.get(kDelayMusicalTime);
         case kStereoDelayRTime:  return rdelay.get(kDelayMusicalTime);
-        default: return 0.F;
+        default:                 return ldelay.get(parameter);
     }
 }
 
@@ -28,6 +27,13 @@ void StereoDelay::set(uint64_t parameter, const float value)
 {
     switch (parameter)
     {
+        case kDelayToggle:
+        {
+            const bool status = static_cast<bool>(value);
+            bypassed = !(rdelay.toggle(status) && ldelay.toggle(status));
+            return;
+        }
+
         case kDelayMix:
         case kDelayFeedback:
         case kDelayTimeInMs:
@@ -40,7 +46,6 @@ void StereoDelay::set(uint64_t parameter, const float value)
             return;
         }
 
-        case kDelayToggle: bypassed = (rdelay.toggle() && ldelay.toggle()); return;
         case kStereoDelayLTime: return ldelay.set(kDelayMusicalTime, value); return;
         case kStereoDelayRTime: return rdelay.set(kDelayMusicalTime, value); return;
         default: return;

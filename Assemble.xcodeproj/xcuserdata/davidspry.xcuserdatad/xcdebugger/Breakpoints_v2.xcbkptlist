@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6FBC9A67-B984-4D89-B525-1219637E0EBC"
-            shouldBeEnabled = "No"
+            uuid = "048C8ACD-DF5F-47AE-878D-184DF7C7E0C1"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Assemble/UI/Pattern Overview/PatternView.swift"
+            filePath = "Core/Components/Processors/Effects/Delay Line/Delay.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "doubleTapped(_:)"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "Delay::process(sample)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

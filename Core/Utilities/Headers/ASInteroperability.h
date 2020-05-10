@@ -16,4 +16,4 @@
 
 #endif
 
-typedef void* ASDSPRef  AS_SWIFT_TYPE;
+typedef void* ASDSPRef AS_SWIFT_TYPE;

@@ -11,12 +11,16 @@
 class Oscillator
 {
 public:
+    /// \brief Initialise an Oscillator capable of randomising its phase within the range [0, 1].
+    
     Oscillator()
     {
-        std::uniform_real_distribution<float>::param_type range(-1.F, 1.F);
-        twister.seed(rd());
+        std::uniform_real_distribution<float>::param_type range(0.F, 1.F);
         distribution.param(range);
+        twister.seed(rd());
     }
+
+    /// \brief Compute the next sample.
 
     virtual inline const float nextSample() noexcept = 0;
 
@@ -26,6 +30,7 @@ public:
     /// step takes about 400 nanoseconds to compute, which is likely preferable
     /// to incrementing the phase of each oscillator continually and will achieve
     /// a similar effect.
+    ///
     /// \param frequency The frequency, in Hz, to load in the oscillator
 
     virtual void load(const float frequency)

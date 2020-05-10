@@ -21,9 +21,14 @@ const float Delay::get(uint64_t parameter)
 {
     switch (parameter)
     {
+        case kDelayMix:
+        {
+            return mix;
+        }
+            
         case kDelayMusicalTime:
         {
-            return target;
+            return targetAsIndex;
         }
             
         case kDelayFeedback:
@@ -46,7 +51,7 @@ const float Delay::get(uint64_t parameter)
             return modulationDepth;
         }
 
-        default: return 0.F;
+        default: return 0.0F;
     }
 }
 
@@ -60,7 +65,7 @@ void Delay::set(uint64_t parameter, float value)
     {
         case kDelayToggle:
         {
-            bypassed = !bypassed;
+            bypassed = static_cast<bool>(value);
             break;
         }
         case kDelayFeedback:
@@ -77,6 +82,7 @@ void Delay::set(uint64_t parameter, float value)
         case kDelayMusicalTime:
         {
             const float time = parseMusicalTimeParameterIndex((int) value);
+            targetAsIndex = time;
             set(time);
             break;
         }
@@ -144,7 +150,8 @@ const float Delay::process(const float sample)
 {
     if (bpm != clock->bpm) update();
     
-    if (bypassed) fadeOut();
+    if (bypassed)
+        fadeOut();
     else           fadeIn();
 
     delay = delay + 5e-5f * (target - delay);
@@ -155,7 +162,7 @@ const float Delay::process(const float sample)
     if (whead >= capacity) whead = 0;
 
     rhead = whead - delay;
-    rhead = rhead + modulationDepth * (150 * modulator.nextSample());
+//    rhead = rhead + modulationDepth * (150 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 

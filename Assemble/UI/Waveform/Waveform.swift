@@ -94,11 +94,14 @@ class Waveform: UIView {
     private func installTap() {
         Assemble.core.unit?.installTap(onBus: 0, bufferSize: _bufferSize, format: Assemble.format, block: { buffer, time in
             buffer.frameLength = self._bufferSize
+            let channels = buffer.audioBufferList.pointee.mNumberBuffers
             if let floatBuffer = buffer.floatChannelData {
                 let w = Int(self.w)
+                let L = 0
+                let R = channels > 1 ? 1 : 0
                 for (i, block) in stride(from: 0, to: Int(self.bufferSize), by: self.step).enumerated() {
-                    vDSP_meanv(&floatBuffer[0][block], 1, &self.ldata[w][i], vDSP_Length(self.step))
-                    vDSP_meanv(&floatBuffer[1][block], 1, &self.rdata[w][i], vDSP_Length(self.step))
+                    vDSP_meanv(&floatBuffer[L][block], 1, &self.ldata[w][i], vDSP_Length(self.step))
+                    vDSP_meanv(&floatBuffer[R][block], 1, &self.rdata[w][i], vDSP_Length(self.step))
                     OSAtomicOr32(1, &self.n)
                 }
                 return

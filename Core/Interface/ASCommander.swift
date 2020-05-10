@@ -1,14 +1,12 @@
 //  Assemble
 //  ============================
-//  Original author: Shane Dunne.
-//  Copyright 2019 AudioKit. All rights reserved.
-//  License: <https://github.com/AudioKit/AudioKit/blob/master/LICENSE>
 
 import AudioUnit
 
 @objc open class ASCommander : ASComponent, KeyboardListener, SequencerDelegate
 {
     @objc public var commander: ASCommanderAU?
+
     public static var acd = AudioComponentDescription()
 
     @objc public override init()
@@ -86,11 +84,6 @@ import AudioUnit
         }
         
         commander?.setParameterImmediatelyWithAddress(parameter, value: value)
-    }
-    
-    func load(_ note: Note)
-    {
-        commander?.playNote(note: note.note, shape: note.oscillator.rawValue)
     }
     
     @discardableResult

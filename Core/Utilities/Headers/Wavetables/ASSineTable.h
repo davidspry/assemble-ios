@@ -1,12 +1,13 @@
-//  ASSineWaveTable.h
 //  Assemble
 //  Created by David Spry on 28/4/20.
 //  Copyright © 2020 David Spry. All rights reserved.
 
-#ifndef ASSINEWAVETABLE_H
-#define ASSINEWAVETABLE_H
+#ifndef ASSINETABLE_H
+#define ASSINETABLE_H
 
 #include <array>
+
+const static int kSineTableLength = 512;
 
 const static std::array<float, 512> wt_sine =
 {

@@ -40,6 +40,16 @@ extern "C" void __interop__EraseNote(void *DSP, const int x, const int y)
     ((ASCommanderDSP*) DSP)->eraseNote(x, y);
 }
 
+extern "C" const char* __interop__GetPatternState(void *DSP, const int pattern)
+{
+    return ((ASCommanderDSP*) DSP)->encodePatternState(pattern);
+}
+
+extern "C" void __interop__LoadPatternState(void *DSP, const char* state, const int pattern)
+{
+    ((ASCommanderDSP*) DSP)->loadFromEncodedPatternState(state, pattern);
+}
+
 // ============================================================ //
 
 void ASCommanderDSP::init(int channels, double sampleRate)

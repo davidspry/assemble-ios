@@ -32,11 +32,25 @@ public:
         patterns.at(pattern).make(x, y, note...);
     }
 
+    template <typename ...N>
+    void addOrModifyNonCurrent(const int pattern, N... note)
+    {
+        patterns.at(pattern).make(note...);
+    }
+
     void erase(const int x, const int y) { patterns.at(pattern).erase(x, y); }
 
 public:
-    void prepare();
     void reset() { row =  0; }
+    void prepare();
+    void hardReset();
+    void hardReset(const int pattern)
+    {
+        const auto active = patterns.at(pattern).isActive();
+        patterns.at(pattern).clear();
+        activePatterns = activePatterns - (active ? 1 : 0);
+    }
+    
     const bool toggle() { return (mode = !mode); }
     std::pair<int,int> state() { return {row, pattern}; }
 
@@ -63,6 +77,8 @@ private:
     int patternLength;
     int activePatterns = 1;
     bool mode = 1;
+    
+friend class ASCommanderCore;
 };
 
 #endif

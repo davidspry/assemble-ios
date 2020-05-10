@@ -12,7 +12,7 @@ SawtoothOscillator::SawtoothOscillator(const float frequency)
 const float SawtoothOscillator::nextSample() noexcept
 {
     phase += translation;
-    phase += static_cast<int>(phase > 1.0F) * -1.0F;
+    phase += static_cast<int>(phase >= 1.0F) * -1.0F;
 
     return phase * 2.0F - 1.0F;
 }

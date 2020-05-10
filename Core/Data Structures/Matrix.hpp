@@ -9,7 +9,7 @@
 #include "ASHeaders.h"
 
 // ===================================================== //
-// ================== Template header ================== //
+// =============== Template declaration ================ //
 // ===================================================== //
 
 /// \brief This structure represents an NxM matrix of Notes.
@@ -48,7 +48,7 @@ public:
     
     
     void clearRow(int);
-    
+
     
     void reset();
     
@@ -62,6 +62,10 @@ public:
     /// \param x The column of the window
     /// \param y The row of the window
     iterator window(int x, int y);
+
+    /// \brief Return a const reference to the underlying vector.
+    /// This is useful for persisting data from a higher layer.
+    const std::vector<Note>& state() { return vector; }
 
 private:
     void swap(int, int);
@@ -149,8 +153,8 @@ template <int N,  int M>
 template <typename ...A>
 void Matrix<N,M>::include(int x, int y, A... arguments) noexcept(false)
 {
-    if (y < 0 || y > M)  throw "Invalid row";
-    if (lengths[y] >= M) throw "Row is full";
+    if (y < 0 || y > M)  throw "[Matrix] Invalid row";
+    if (lengths[y] >= M) throw "[Matrix] Row is full";
     
     int position = find(x, y);
     if (position == -1) {
@@ -176,6 +180,7 @@ void Matrix<N,M>::erase(int x, int y)
     const int note = find(x, y);
     const int length = lengths[y];
     if (note != -1) {
+        vector.at(note).null = true;
         swap(note, row + length - 1);
         lengths[y] -= 1;
     }

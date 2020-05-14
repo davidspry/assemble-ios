@@ -32,8 +32,8 @@ private:
     SineWTOscillator modulator = {1.0F};
 
 private:
-    inline void fadeOut(const float t) { depth = std::max(t, depth - 0.1F); }
-    inline void  fadeIn(const float t) { depth = std::min(t, depth + 0.1F); }
+    inline void fadeOut(const float t) { depth = std::max(t, depth - 0.01F); }
+    inline void  fadeIn(const float t) { depth = std::min(t, depth + 0.01F); }
     void update();
 
 private:
@@ -47,7 +47,7 @@ private:
     
 private:
     int capacity;
-    float scalar = 115.0F;
+    float scalar = 425.0F;
     float sampleRate = 48000.F;
     std::vector<float> samples;
 };

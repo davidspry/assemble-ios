@@ -60,7 +60,6 @@
 		149ACC242454330E009DA18F /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC232454330E009DA18F /* KeyboardListener.swift */; };
 		149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2624543615009DA18F /* MulticastDelegate.swift */; };
 		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
-		14A36FD52463D79400D85393 /* CoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD42463D79400D85393 /* CoreState.swift */; };
 		14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */; };
 		14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */; };
 		14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBEB2436233B00822139 /* SequencerScene.swift */; };
@@ -74,7 +73,6 @@
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
 		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
-		14C70807246472CF008E84A3 /* NoteState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C70806246472CF008E84A3 /* NoteState.swift */; };
 		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
 		14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2D5C5246C747C003675C2 /* ParameterLabel.swift */; };
 		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
@@ -205,7 +203,6 @@
 		149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsListener.swift; sourceTree = "<group>"; };
 		14A3317F24671A61009A1B47 /* ASSquareTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSquareTable.h; sourceTree = "<group>"; };
 		14A3318024671A6B009A1B47 /* ASTriangleTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTriangleTable.h; sourceTree = "<group>"; };
-		14A36FD42463D79400D85393 /* CoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreState.swift; sourceTree = "<group>"; };
 		14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommanderAUParameters.swift; sourceTree = "<group>"; };
 		14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerDelegate.swift; sourceTree = "<group>"; };
 		14ADCBEB2436233B00822139 /* SequencerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerScene.swift; sourceTree = "<group>"; };
@@ -223,7 +220,6 @@
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
-		14C70806246472CF008E84A3 /* NoteState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteState.swift; sourceTree = "<group>"; };
 		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		14D2D5C5246C747C003675C2 /* ParameterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterLabel.swift; sourceTree = "<group>"; };
 		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
@@ -329,7 +325,7 @@
 			path = "Lowpass Filter";
 			sourceTree = "<group>";
 		};
-		1428034E246C3D9A006775AE /* ParameterMenu */ = {
+		1428034E246C3D9A006775AE /* Parameter Menus */ = {
 			isa = PBXGroup;
 			children = (
 				144D8636246D72D200F6EDD4 /* Header Cells */,
@@ -338,7 +334,7 @@
 				144D862C246D3A9300F6EDD4 /* StereoDelayParameters.swift */,
 				144D862E246D3B2A00F6EDD4 /* VibratoParameters.swift */,
 			);
-			path = ParameterMenu;
+			path = "Parameter Menus";
 			sourceTree = "<group>";
 		};
 		1436CE51245404A000670E3E /* SK Sequencer */ = {
@@ -367,7 +363,6 @@
 		143FAFF7243F066C0058AE40 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				14A36FD32463D78400D85393 /* State Persistence */,
 				146EC663244CC39C009025E4 /* Data Structures */,
 				143FAFFF243F2DF00058AE40 /* AU Hierarchy */,
 				141DDA59243F8BA30020386C /* Components */,
@@ -575,15 +570,6 @@
 			path = Bandlimited;
 			sourceTree = "<group>";
 		};
-		14A36FD32463D78400D85393 /* State Persistence */ = {
-			isa = PBXGroup;
-			children = (
-				14A36FD42463D79400D85393 /* CoreState.swift */,
-				14C70806246472CF008E84A3 /* NoteState.swift */,
-			);
-			path = "State Persistence";
-			sourceTree = "<group>";
-		};
 		14AFB89124520D5A00F5AD3A /* Delay Line */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,7 +717,7 @@
 				1436CE5224541BB800670E3E /* Keyboard */,
 				14CE044A2457366900B0220C /* Waveform */,
 				14C38EE9245B29A100180810 /* Transport */,
-				1428034E246C3D9A006775AE /* ParameterMenu */,
+				1428034E246C3D9A006775AE /* Parameter Menus */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -849,7 +835,6 @@
 				143FB017243F400B0058AE40 /* ASCommanderAU.swift in Sources */,
 				144D862B246D1F4100F6EDD4 /* TransportListener.swift in Sources */,
 				14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */,
-				14C70807246472CF008E84A3 /* NoteState.swift in Sources */,
 				141DDA6B243F95D00020386C /* Voice.cpp in Sources */,
 				14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */,
 				14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */,
@@ -877,7 +862,6 @@
 				143FB00F243F3DE40058AE40 /* CGSizeExtensions.swift in Sources */,
 				148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */,
 				14915BC02434B75B008E8147 /* Assemble.swift in Sources */,
-				14A36FD52463D79400D85393 /* CoreState.swift in Sources */,
 				14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */,
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,

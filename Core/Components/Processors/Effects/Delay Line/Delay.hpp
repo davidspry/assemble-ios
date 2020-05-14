@@ -87,8 +87,8 @@ public:
         return !(bypassed = !status);
     }
 
-    inline void fadeOut() { gain = std::max(0.F, gain - 0.001F); }
-    inline void  fadeIn() { gain = std::min(1.F, gain + 0.001F); }
+    inline void fadeOut() { gain = std::max(0.F, gain - 0.0001F); }
+    inline void  fadeIn() { gain = std::min(1.F, gain + 0.0001F); }
 
 private:
     inline void update()  { set(time); }

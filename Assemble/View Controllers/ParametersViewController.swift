@@ -11,9 +11,9 @@ class ParametersViewController: UIViewController {
     @IBOutlet weak var tableDelay: UITableView!
     @IBOutlet weak var tableVibrato: UITableView!
     
-    internal let menuOscillators = OscillatorParameters()
-    internal let menuDelay = StereoDelayParameters()
-    internal let menuVibrato = VibratoParameters()
+    internal var menuOscillators = OscillatorParameters()
+    internal var menuDelay = StereoDelayParameters()
+    internal var menuVibrato = VibratoParameters()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +25,20 @@ class ParametersViewController: UIViewController {
     }
     
     @objc func didSelectOscillator(_ selector: OscillatorSelector) {
-        print(selector.selectedSegmentIndex)
+        if let oscillator = OscillatorShape(rawValue: selector.selectedSegmentIndex) {
+            menuOscillators.oscillator = oscillator
+            tableOscillators.reloadData()
+        } 
     }
 
     @objc func didToggle(_ button: UIButton) {
         switch (button.tag)
         {
-        case 0x1: // Delay
-            print("Delay toggle")
+        case 0x1:
+            print("[ParametersViewController] Delay toggle")
             break
-        case 0x2: // Vibrato
-            print("Vibrato toggle")
+        case 0x2:
+            print("[ParametersViewController] Vibrato toggle")
             break
         default: return
         }

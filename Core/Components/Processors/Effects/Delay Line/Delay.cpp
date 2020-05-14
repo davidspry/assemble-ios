@@ -153,7 +153,7 @@ const float Delay::process(const float sample)
     if (bypassed) fadeOut();
     else           fadeIn();
 
-    delay = delay + 5e-5f * (target - delay);
+    delay = delay + 5E-5F * (target - delay);
     samples[whead] = gain * sample + feedback * samples[rhead];
     const float lerp = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
 

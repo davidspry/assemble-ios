@@ -24,7 +24,7 @@ struct VibratoParameters : ParameterMenu {
     
     var parameters: [(address: Int32, type: ParameterLabelScale)] =
     [
-        (address: kVibratoSpeed, type: .continuousSlow),
+        (address: kVibratoSpeed, type: .continuousRegular),
         (address: kVibratoDepth, type: .continuousSlow)
     ]
     

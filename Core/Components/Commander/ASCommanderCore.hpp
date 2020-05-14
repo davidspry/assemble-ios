@@ -29,7 +29,7 @@ public:
 public:
     const bool playOrPause();
     const bool clockIsTicking() { return clock.isTicking();  }
-    const bool toggleMode()     { return sequencer.toggle(); }
+//    const bool toggleMode()     { return sequencer.toggle(); }
     
 public:
     void prepareToLoadPatternState();

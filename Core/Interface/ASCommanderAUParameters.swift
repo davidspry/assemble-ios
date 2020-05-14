@@ -17,14 +17,13 @@ struct ASCommanderAUParameters {
     static private let defaultFilterResonance: Float = 0
     
     // MARK: - Parameter Groups
-
     static public let parametersClock =
         AUParameterTree.createGroup(withIdentifier: "parametersClock",
                                     name: "Clock",
                                     children: [
                                     ASCommanderAUParameters.clockBPM,
                                     ASCommanderAUParameters.clockSubdivision
-                                    ])
+        ])
 
     static public let parametersFilter =
         AUParameterTree.createGroup(withIdentifier: "parametersFilter",
@@ -109,7 +108,7 @@ struct ASCommanderAUParameters {
                                     ASCommanderAUParameters.vibratoSpeed,
                                     ASCommanderAUParameters.vibratoDepth
         ])
-
+    
     // MARK: - Clock Parameters
     
     static var clockBPM: AUParameter = {
@@ -149,7 +148,7 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinFilterFrequency",
                                             name: "[SIN] Filter frequency",
                                             address: AUParameterAddress(kSinFilterFrequency),
-                                            min: 20, max: 20_000,
+                                            min: 0, max: 1,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -277,7 +276,7 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriFilterFrequency",
                                             name: "[TRI] Filter frequency",
                                             address: AUParameterAddress(kTriFilterFrequency),
-                                            min: 20, max: 20_000,
+                                            min: 0, max: 1,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -533,7 +532,7 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawFilterFrequency",
                                             name: "[SAW] Filter frequency",
                                             address: AUParameterAddress(kSawFilterFrequency),
-                                            min: 20, max: 20_000,
+                                            min: 0, max: 1,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -660,7 +659,7 @@ struct ASCommanderAUParameters {
         let parameter =
             AUParameterTree.createParameter(withIdentifier: "kDelayToggle",
                                             name: "Stereo Delay Toggle",
-                                            address: AUParameterAddress(kDelayToggle),
+                                            address: AUParameterAddress(kStereoDelayToggle),
                                             min: 0, max: 1,
                                             unit: .boolean,
                                             unitName: nil,
@@ -672,13 +671,7 @@ struct ASCommanderAUParameters {
     }()
 
     static private let delayTimes =
-    [
-        "Whole note",
-        "Dotted half note",      "Half note",
-        "Dotted quarter note",   "Quarter note",
-        "Dotted eighth note",    "Eighth note",
-        "Dotted sixteenth note", "Sixteenth note"
-    ]
+    [ "1/1", "1/2D", "1/2", "1/4D", "1/4", "1/8D", "1/8", "1/16D", "1/16" ]
 
     static var stereoDelayTimeLeft: AUParameter = {
         let parameter =
@@ -689,9 +682,9 @@ struct ASCommanderAUParameters {
                                             unit: .indexed,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
-                                            valueStrings: nil,
+                                            valueStrings: ASCommanderAUParameters.delayTimes,
                                             dependentParameters: nil)
-        parameter.value = 4
+        parameter.value = 6
         return parameter
     }()
     
@@ -704,9 +697,9 @@ struct ASCommanderAUParameters {
                                             unit: .indexed,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
-                                            valueStrings: nil,
+                                            valueStrings: ASCommanderAUParameters.delayTimes,
                                             dependentParameters: nil)
-        parameter.value = 4
+        parameter.value = 6
         return parameter
     }()
     
@@ -716,7 +709,7 @@ struct ASCommanderAUParameters {
                                             name: "Stereo Delay Feedback",
                                             address: AUParameterAddress(kDelayFeedback),
                                             min: 0, max: 1,
-                                            unit: .ratio,
+                                            unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
@@ -731,7 +724,7 @@ struct ASCommanderAUParameters {
                                             name: "Stereo Delay Mix",
                                             address: AUParameterAddress(kDelayMix),
                                             min: 0, max: 1,
-                                            unit: .ratio,
+                                            unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
@@ -761,7 +754,7 @@ struct ASCommanderAUParameters {
                                             name: "Stereo Delay Modulation Depth",
                                             address: AUParameterAddress(kDelayModulationDepth),
                                             min: 0, max: 1,
-                                            unit: .ratio,
+                                            unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
@@ -808,7 +801,7 @@ struct ASCommanderAUParameters {
                                             name: "Vibrato Depth",
                                             address: AUParameterAddress(kVibratoDepth),
                                             min: 0, max: 1,
-                                            unit: .ratio,
+                                            unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,

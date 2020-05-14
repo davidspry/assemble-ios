@@ -86,11 +86,6 @@ public class ASCommanderAU : ASAudioUnit
     public func playOrPause() -> Bool {
         return __interop__PlayOrPause(dsp)
     }
-    
-    @discardableResult
-    public func toggleMode() -> Bool {
-        return __interop__ToggleMode(dsp)
-    }
 
     public func playNote(note: Int, shape: Int) {
         __interop__LoadNote(dsp, Int32(note), Int32(shape))
@@ -177,7 +172,7 @@ public class ASCommanderAU : ASAudioUnit
     @discardableResult
     public func saveState(named name: String, at number: Int) -> Bool {
         guard number > 0 else { return false }
-        
+
         let preset = AUAudioUnitPreset()
         preset.name = name
         preset.number = -(number)

@@ -44,6 +44,7 @@ class Engine
 
     @objc private func tryEngineRestart() {
         stop()
+        engine.reset()
         start()
         Assemble.format = engine.outputNode.outputFormat(forBus: 0)
     }

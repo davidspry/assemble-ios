@@ -8,7 +8,7 @@
 
 #define PI          3.1415926535
 #define TWO_PI      6.2831853071
-#define LN20        2.9957322735
+#define LN100       4.6051701859
 #define LN20E3      9.9034875525
 
 // Synthesiser

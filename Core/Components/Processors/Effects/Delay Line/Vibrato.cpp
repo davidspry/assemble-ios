@@ -16,9 +16,9 @@ const float Vibrato::get(uint64_t parameter)
 {
     switch (parameter)
     {
-        case kVibratoToggle: return static_cast<float>(bypassed);
+        case kVibratoToggle: return static_cast<float>(!bypassed);
+        case kVibratoDepth:  return depthNormal;
         case kVibratoSpeed:  return speed;
-        case kVibratoDepth:  return depth;
         default: return 0.F;
     }
 }
@@ -29,7 +29,8 @@ void Vibrato::set(uint64_t parameter, float value)
     {
         case kVibratoToggle:
         {
-            bypassed = !bypassed;
+            const bool status = static_cast<bool>(value);
+            bypassed = !status;
             break;
         }
         case kVibratoSpeed:
@@ -41,7 +42,8 @@ void Vibrato::set(uint64_t parameter, float value)
         case kVibratoDepth:
         {
             targetDepth.store(Assemble::Utilities::bound(value, 0.0F, 1.0F));
-            targetDepth.store(depth * scalar);
+            depthNormal.store(targetDepth.load());
+            targetDepth.store(value * scalar);
             break;
         }
         default: return;
@@ -60,8 +62,8 @@ inline void Vibrato::update()
     const float y = bypassed ? 0.F : targetDepth.load();
     
     if (x == y) return;
-    if (depth.load() > x) fadeOut(x);
-    else                   fadeIn(x);
+    if (depth.load() > y) fadeOut(y);
+    else                   fadeIn(y);
 }
 
 const float Vibrato::process(float sample)

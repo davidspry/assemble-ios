@@ -33,14 +33,6 @@ protocol KeyboardListener
     /// previous oscillator should is desired by the user
 
     func setOscillator(_ next: Bool)
-    
-    /// Broadcast a play or pause signal.
-
-    func pressPlayOrPause()
-    
-    /// Indicate that the current mode should be toggled.
-
-    func didToggleMode()
 }
 
 /**
@@ -54,6 +46,4 @@ extension KeyboardListener {
     func setOctave(_ octave: Int) {}
     func setOscillator(_ next: Bool) {}
     func didNavigate(by direction: Int) {}
-    func pressPlayOrPause() {}
-    func didToggleMode() {}
 }

@@ -17,6 +17,8 @@ class Keyboard : UIView, KeyboardSettingsListener
     var keyOnColour  : UIColor = UIColor.sineNoteColour
     var keyOffColour : UIColor = UIColor.white
 
+    var isVisible: Bool = true
+    
     var shapeLayers = [CAShapeLayer]()
     var octaveLabel = UILabel()
 
@@ -75,6 +77,20 @@ class Keyboard : UIView, KeyboardSettingsListener
         keyOnColour = .from(oscillator)
     }
     
+    /// Hide or show the keyboard view in an animated fashion
+
+    func didToggleKeyboardDisplay(_ show: Bool) {
+        isVisible = show
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.15) {
+                self.alpha = self.isVisible ? 1.0 : 0.0
+                let dy: CGFloat = self.isVisible ? 0 : 50
+                let translation = CGAffineTransform(translationX: 0, y: dy)
+                self.layer.setAffineTransform(translation)
+            }
+        }
+    }
+    
     // MARK: Keyboard Settings Listener End -
     
     @objc internal func setOctave(sender: UIButton) {
@@ -92,8 +108,9 @@ class Keyboard : UIView, KeyboardSettingsListener
         isMultipleTouchEnabled = false;
         initialiseControls(in: frame)
         initialisePaths()
+        didToggleKeyboardDisplay(false)
     }
-    
+
     internal func initialiseControls(in frame: CGRect) {
         let button: Int = 35
         let controlMargin: CGFloat = 5.0
@@ -122,11 +139,11 @@ class Keyboard : UIView, KeyboardSettingsListener
         octaveU.addTarget(self, action: #selector(setOctave), for: .touchDown)
         addSubview(octaveU)
         
-//        origin.x = frame.midX
-//        origin.y = controlMargin
+        origin.x = frame.midX
+        origin.y = controlMargin
         octaveLabel.frame = CGRect(origin: origin, size: .square(15))
         octaveLabel.text = octave.description
-        octaveLabel.font = UIFont(name: "JetBrainsMono-Regular", size: 16)
+        octaveLabel.font = UIFont(name: "JetBrainsMono-Regular", size: 13)
         octaveLabel.textAlignment = .center
         octaveLabel.textColor = .white
         addSubview(octaveLabel)

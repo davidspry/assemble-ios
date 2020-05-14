@@ -3,7 +3,7 @@
 
 import AudioUnit
 
-@objc open class ASCommander : ASComponent, KeyboardListener, SequencerDelegate
+@objc open class ASCommander : ASComponent, KeyboardListener, TransportListener
 {
     @objc public var commander: ASCommanderAU?
 
@@ -51,51 +51,22 @@ import AudioUnit
     }
     
     func setParameter(_ parameter: Int32, to value: Float) {
-        commander?.setParameterWithAddress(AUParameterAddress(parameter), value: value)
+        let address = AUParameterAddress(parameter)
+        let parameter = commander?.parameterTree?.parameter(withAddress: address)
+        if let parameter = parameter { return parameter.value = value }
+        commander?.setParameterWithAddress(address, value: value)
     }
-    
+
     func getParameter(_ parameter: Int32) -> Float {
         return commander?.parameter(withAddress: AUParameterAddress(parameter)) ?? 0.0
     }
-    
-    func setFilter(frequency value: Float, oscillator: OscillatorShape) {
-        var parameter: AUParameterAddress
-        switch oscillator
-        {
-        case .sine:     parameter = AUParameterAddress(kSinFilterFrequency); break
-        case .triangle: parameter = AUParameterAddress(kTriFilterFrequency); break
-        case .square:   parameter = AUParameterAddress(kSqrFilterFrequency); break
-        case .sawtooth: parameter = AUParameterAddress(kSawFilterFrequency); break
-        default: return
-        }
-        
-        commander?.setParameterImmediatelyWithAddress(parameter, value: value)
-    }
-    
-    func setFilter(resonance value: Float, oscillator: OscillatorShape) {
-        var parameter: AUParameterAddress
-        switch oscillator
-        {
-        case .sine:     parameter = AUParameterAddress(kSinFilterResonance); break
-        case .triangle: parameter = AUParameterAddress(kTriFilterResonance); break
-        case .square:   parameter = AUParameterAddress(kSqrFilterResonance); break
-        case .sawtooth: parameter = AUParameterAddress(kSawFilterResonance); break
-        default: return
-        }
-        
-        commander?.setParameterImmediatelyWithAddress(parameter, value: value)
-    }
-    
+
     @discardableResult
-    public func playOrPause() -> Bool
-    {
+    public func playOrPause() -> Bool {
         guard let commander = commander else { return false }
-        
         return commander.playOrPause()
     }
-    
-    // MARK: - Sequencer Delegate
-    
+
     func addOrModifyNote(xy: CGPoint, note: Int, shape: OscillatorShape) {
         guard let commander = commander else { return }
         commander.addNote(x: xy.nx, y: xy.ny, note: note, shape: shape.rawValue)
@@ -113,8 +84,10 @@ import AudioUnit
         if !commander.ticking { commander.playNote(note: note, shape: shape.rawValue) }
      }
     
+    // MARK: - Transport Listener
+
     func didToggleMode() {
-        guard let commander = commander else { return }
-        commander.toggleMode()
+        let mode = Int(getParameter(kSequencerMode))
+        setParameter(kSequencerMode, to: Float((mode + 1) & 1))
     }
 }

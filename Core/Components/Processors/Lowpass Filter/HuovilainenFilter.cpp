@@ -46,7 +46,7 @@ void HuovilainenFilter::set(uint64_t parameter, float value)
         case 1: targetResonance.store(value); return;
         case 0:
         {
-            const float map = std::exp(LN20 + value * (LN20E3 - LN20));
+            const float map = std::exp(LN100 + value * (LN20E3 - LN100));
             targetFrequencyNormal.store(value);
             targetFrequency.store(map);
             return;

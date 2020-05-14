@@ -8,7 +8,7 @@ import SpriteKit
 
 class Sequencer : SKView, KeyboardListener
 {
-    var UI : SequencerScene!
+    private(set) var UI : SequencerScene!
 
     required init?(coder: NSCoder)
     {
@@ -38,7 +38,13 @@ class Sequencer : SKView, KeyboardListener
         Assemble.core.eraseNote(xy: UI.selected)
     }
     
-    func setOctave(_ octave: Int) {}
+    func setOctave(_ octave: Int) {
+        fatalError("[Sequencer] Unimplemented")
+    }
+    
+    func setOscillator(_ next: Bool) {
+        fatalError("[Sequencer] Unimplemented")
+    }
     
     func didNavigate(by direction: Int) {
         UI.didNavigate(by: direction)
@@ -47,7 +53,10 @@ class Sequencer : SKView, KeyboardListener
     // MARK: Keyboard Listener End -
 
     /// After loading state from a preset, the Sequencer
-    /// needs to poll the Assemble core
+    /// needs to poll the Assemble core. This method should be called
+    /// in order to synchronise the SK Sequencer scene with the underlying
+    /// Sequencer.
+
     func initialiseFromUnderlyingState() {
         UI.initialiseFromUnderlyingState()
     }
@@ -81,14 +90,13 @@ class Sequencer : SKView, KeyboardListener
         self.bounds.size = .init(width: width, height: height)
     }
     
-    /**
-     Include subviews who fall outside the bounds of the view in the hit test. In Assemble,
-     this allows the delete icon to be pressed if it happens to appear outside the bounds of the
-     `SKScene`.
+    /// Include subviews who fall outside the bounds of the view in the hit test. In Assemble,
+    /// this allows the delete icon to be pressed if it happens to appear outside the bounds of the
+    /// `SKScene`.
+    ///
+    /// - Author: Noam
+    /// - Note: Source: <https://stackoverflow.com/a/14875673/9611538>
 
-     - Author: Noam
-     - Note: Source: <https://stackoverflow.com/a/14875673/9611538>
-     */
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView?
     {
         guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }

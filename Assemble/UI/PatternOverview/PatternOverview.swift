@@ -10,12 +10,15 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
     let patternOnColour : UIColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     let patternOffColour: UIColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
 
-    var lastTappedNode: Int?
-    
+    private var lastTappedNode: Int?
+    private var lastTappedTime: TimeInterval?
+    private var tapSpeedThreshold: TimeInterval = 0.5
+    private var nodeDestination: Int?
 
     private let patterns: Int = Int(PATTERNS)
     private var states = [Bool]()
     private var shapes = [CAShapeLayer]()
+    
     private var pattern : Int = 0 {
         willSet (newPattern) {
             shapes[pattern].strokeColor = nil
@@ -23,10 +26,14 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
             shapes[newPattern].removeAllAnimations()
         }
     }
-    
+
     private var nextPattern : Int = 0 {
         willSet (newPattern) {
-            if newPattern  == pattern { return }
+            if newPattern == pattern {
+                dequeue(&shapes[nextPattern])
+                pattern = newPattern
+                return
+            }
             if nextPattern != pattern { dequeue(&shapes[nextPattern]) }
             enqueue(&shapes[newPattern])
         }
@@ -72,7 +79,6 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
     /// Poll the core for the state of each pattern. This should be called whenever a song is loaded.
 
     public func loadStates() {
-        let pattern = self.pattern
         DispatchQueue.main.async {
             for pattern in 0 ..< self.patterns {
                 Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(pattern))
@@ -80,9 +86,13 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
                 self.set(pattern: pattern, to: state)
             }
 
-            Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(pattern))
-            self.pattern = pattern
+            self.reset()
         }
+    }
+    
+    public func reset() {
+        Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(0))
+        self.pattern = 0
     }
 
     /// Toggle the state of a `Pattern` and update its icon.
@@ -139,21 +149,30 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
     }
 
     private func handleDoubleTap(for node: Int) {
-        if node == lastTappedNode {
+        if node == lastTappedNode, let time = lastTappedTime,
+            (ProcessInfo.processInfo.systemUptime - time) < tapSpeedThreshold {
             toggle(pattern: node)
             lastTappedNode = nil
+            nodeDestination = nil
         }
-            
-        else if Assemble.core.ticking {
-            nextPattern = node
-            lastTappedNode = node
-            Assemble.core.setParameter(kSequencerNextPattern, to: Float(node))
-        }
-
+        
         else {
             lastTappedNode = node
-            Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(node))
+            nodeDestination = node
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(175)) {
+                guard let node = self.nodeDestination else { return }
+                if Assemble.core.ticking {
+                    self.nextPattern = node
+                    Assemble.core.setParameter(kSequencerNextPattern, to: Float(node))
+                }
+
+                else {
+                    Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(node))
+                }
+            }
         }
+
+        lastTappedTime = ProcessInfo.processInfo.systemUptime
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -168,7 +187,6 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate {
         let currentPattern = Assemble.core.currentPattern
         if pattern != currentPattern {
             pattern = currentPattern
-            nextPattern = pattern
         }
     }
     

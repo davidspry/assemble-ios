@@ -12,7 +12,7 @@ const float StereoDelay::get(uint64_t parameter)
 {
     switch (parameter)
     {
-        case kDelayToggle:       return static_cast<float>(!bypassed);
+        case kStereoDelayToggle: return static_cast<float>(!bypassed);
         case kStereoDelayLTime:  return ldelay.get(kDelayMusicalTime);
         case kStereoDelayRTime:  return rdelay.get(kDelayMusicalTime);
         default:                 return ldelay.get(parameter);
@@ -27,10 +27,12 @@ void StereoDelay::set(uint64_t parameter, const float value)
 {
     switch (parameter)
     {
-        case kDelayToggle:
+        case kStereoDelayToggle:
         {
             const bool status = static_cast<bool>(value);
-            bypassed = !(rdelay.toggle(status) && ldelay.toggle(status));
+            rdelay.toggle(status);
+            ldelay.toggle(status);
+            bypassed = !status;
             return;
         }
 

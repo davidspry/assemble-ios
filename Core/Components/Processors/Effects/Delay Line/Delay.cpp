@@ -11,7 +11,7 @@ Delay::Delay(Clock *clock)
     capacity = clock->sampleRate * 4;
     samples.reserve(capacity);
     samples.assign(capacity, 0.F);
-    set(1.5F);
+    set(0.5F);
 }
 
 /// \brief Get the value of the Delay Line's parameters
@@ -63,7 +63,7 @@ void Delay::set(uint64_t parameter, float value)
 {
     switch (parameter)
     {
-        case kDelayToggle:
+        case kStereoDelayToggle:
         {
             bypassed = static_cast<bool>(value);
             break;
@@ -81,8 +81,8 @@ void Delay::set(uint64_t parameter, float value)
         }
         case kDelayMusicalTime:
         {
-            const float time = parseMusicalTimeParameterIndex((int) value);
-            targetAsIndex = time;
+            targetAsIndex = (int) value;
+            const float time = parseMusicalTimeParameterIndex(targetAsIndex);
             set(time);
             break;
         }
@@ -115,14 +115,14 @@ const float Delay::parseMusicalTimeParameterIndex(const int index)
     switch (index)
     {
         case 0:  return fDelayWholeNote;
-        case 1:  return fDelayHalfNote;
-        case 2:  return fDelayHalfDotted;
-        case 3:  return fDelayEighthNote;
-        case 4:  return fDelayEighthDotted;
-        case 5:  return fDelayQuarterNote;
-        case 6:  return fDelayQuarterDotted;
-        case 7:  return fDelaySixteenthNote;
-        case 8:  return fDelaySixteenthDotted;
+        case 1:  return fDelayHalfDotted;
+        case 2:  return fDelayHalfNote;
+        case 3:  return fDelayEighthDotted;
+        case 4:  return fDelayEighthNote;
+        case 5:  return fDelayQuarterDotted;
+        case 6:  return fDelayQuarterNote;
+        case 7:  return fDelaySixteenthDotted;
+        case 8:  return fDelaySixteenthNote;
         default: return 1.F;
     }
 }
@@ -150,8 +150,7 @@ const float Delay::process(const float sample)
 {
     if (bpm != clock->bpm) update();
     
-    if (bypassed)
-        fadeOut();
+    if (bypassed) fadeOut();
     else           fadeIn();
 
     delay = delay + 5e-5f * (target - delay);
@@ -162,6 +161,7 @@ const float Delay::process(const float sample)
     if (whead >= capacity) whead = 0;
 
     rhead = whead - delay;
+//    This is causing aliasing. Modulated delay needs over-sampling.
 //    rhead = rhead + modulationDepth * (150 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;

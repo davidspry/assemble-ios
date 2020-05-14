@@ -28,11 +28,12 @@ private:
     std::atomic<float> speed = {1.0F};
     std::atomic<float> depth = {1.0F};
     std::atomic<float> targetDepth = {1.0F};
+    std::atomic<float> depthNormal = {1.0F};
     SineWTOscillator modulator = {1.0F};
 
 private:
-    inline void fadeOut(const float t) { depth = std::max(t, depth - 0.001F); }
-    inline void  fadeIn(const float t) { depth = std::min(t, depth + 0.001F); }
+    inline void fadeOut(const float t) { depth = std::max(t, depth - 0.1F); }
+    inline void  fadeIn(const float t) { depth = std::min(t, depth + 0.1F); }
     void update();
 
 private:
@@ -46,7 +47,7 @@ private:
     
 private:
     int capacity;
-    float scalar = 125.0F;
+    float scalar = 115.0F;
     float sampleRate = 48000.F;
     std::vector<float> samples;
 };

@@ -10,6 +10,8 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
     
     var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
+    var transportListeners = MulticastDelegate<TransportListener>()
+
     lazy private var _octave: Int = 60
     
     var octave: Int = 4 {
@@ -35,10 +37,12 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
             KeyboardHandler.parse(press) { action, value in
                 switch (action) {
                 case .navigate:
-                    self.listeners.invoke({ $0.didNavigate(by: value) }); break
+                    self.listeners.invoke({ $0.didNavigate(by: value) })
+                    break
                 
                 case .transport:
-                    self.listeners.invoke({ $0.pressPlayOrPause() }); break
+                    self.transportListeners.invoke({ $0.pressPlayOrPause() })
+                    break
                 
                 case .place:
                     self.listeners.invoke({
@@ -47,13 +51,16 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
                     break
 
                 case .erase:
-                    self.listeners.invoke({ $0.eraseNote() }); break
+                    self.listeners.invoke({ $0.eraseNote() })
+                    break
                     
                 case .mode:
-                    self.listeners.invoke({ $0.didToggleMode() }); break
-                
+                    self.transportListeners.invoke({ $0.didToggleMode() })
+                    break
+
                 case .noctave:
-                    self.listeners.invoke({ $0.setOctave(value) }); break
+                    self.listeners.invoke({ $0.setOctave(value) })
+                    break
                 
                 case .uoctave:
                     self.octave = value
@@ -61,7 +68,8 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
                     break
 
                 case .noscillator:
-                    self.listeners.invoke({ $0.setOscillator(Bool(value)) }); break
+                    self.listeners.invoke({ $0.setOscillator(Bool(value)) })
+                    break
 
                 case .uoscillator:
                     self.oscillator = value == 0 ? self.oscillator.previous() : self.oscillator.next()

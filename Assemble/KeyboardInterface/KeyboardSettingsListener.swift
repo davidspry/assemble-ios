@@ -7,6 +7,7 @@ import Foundation
 protocol KeyboardSettingsListener: AnyObject {
     func didChangeOctave(to octave: Int)
     func didChangeOscillator(to oscillator: OscillatorShape)
+    func didToggleKeyboardDisplay(_ show: Bool)
 }
 
 /**
@@ -17,4 +18,5 @@ protocol KeyboardSettingsListener: AnyObject {
 extension KeyboardSettingsListener {
     func didChangeOctave(to octave: Int) {}
     func didChangeOscillator(to oscillator: OscillatorShape) {}
+    func didToggleKeyboardDisplay(_ show: Bool) {}
 }

@@ -81,22 +81,22 @@ static const int kSawFilterRelease        = 0xFE42;
 // [EFFECTS] 0xEF[Effect][Parameter
 // ===========================================
 // Delay Line
-static const int kDelayToggle             = 0xEF10;
-static const int kDelayFeedback           = 0xEF11;
-static const int kDelayTimeInMs           = 0xEF12;
-static const int kDelayMusicalTime        = 0xEF13;
-static const int kDelayMix                = 0xEF14;
-static const int kDelayModulationSpeed    = 0xEF15;
-static const int kDelayModulationDepth    = 0xEF16;
+static const int kDelayFeedback           = 0xEF01;
+static const int kDelayTimeInMs           = 0xEF02;
+static const int kDelayMusicalTime        = 0xEF03;
+static const int kDelayMix                = 0xEF04;
+static const int kDelayModulationSpeed    = 0xEF05;
+static const int kDelayModulationDepth    = 0xEF06;
 
 // Stereo Delay
-static const int kStereoDelayLTime        = 0xEF20;
-static const int kStereoDelayRTime        = 0xEF21;
+static const int kStereoDelayToggle       = 0xEF10;
+static const int kStereoDelayLTime        = 0xEF11;
+static const int kStereoDelayRTime        = 0xEF12;
 
 // Vibrato
-static const int kVibratoToggle           = 0xEF30;
-static const int kVibratoSpeed            = 0xEF31;
-static const int kVibratoDepth            = 0xEF32;
+static const int kVibratoToggle           = 0xEF20;
+static const int kVibratoSpeed            = 0xEF21;
+static const int kVibratoDepth            = 0xEF22;
 // ===========================================
 
 // DISCRETE PARAMETERS
@@ -105,12 +105,12 @@ static const int kVibratoDepth            = 0xEF32;
 // Delay Line: Musical Time Factors
 static const float fDelayWholeNote        = 4.000F;
 static const float fDelayHalfDotted       = 2.500F;
-static const float fDelayHalfNote         = 2.500F;
-static const float fDelayQuarterDotted    = 2.500F;
-static const float fDelayQuarterNote      = 2.500F;
-static const float fDelayEighthDotted     = 2.500F;
-static const float fDelayEighthNote       = 2.500F;
-static const float fDelaySixteenthDotted  = 2.500F;
-static const float fDelaySixteenthNote    = 2.500F;
+static const float fDelayHalfNote         = 2.000F;
+static const float fDelayQuarterDotted    = 1.500F;
+static const float fDelayQuarterNote      = 1.000F;
+static const float fDelayEighthDotted     = 0.750F;
+static const float fDelayEighthNote       = 0.500F;
+static const float fDelaySixteenthDotted  = 0.375F;
+static const float fDelaySixteenthNote    = 0.250F;
 
 #endif

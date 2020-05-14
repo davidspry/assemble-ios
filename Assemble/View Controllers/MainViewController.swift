@@ -4,7 +4,8 @@
 
 import UIKit
 import AVFoundation
-class ViewController : UIViewController
+
+class MainViewController : UIViewController
 {
     let engine = Engine()
     var updater : CADisplayLink!
@@ -17,7 +18,7 @@ class ViewController : UIViewController
     @IBOutlet weak var transport: Transport!
     
     @IBOutlet weak var modeLabel: UILabel!
-    @IBOutlet weak var tempoLabel: UILabel!
+    @IBOutlet weak var tempoLabel: ParameterLabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     @IBAction func didTrySave(_ sender: UIButton) {
@@ -25,9 +26,7 @@ class ViewController : UIViewController
     }
     
     @IBAction func didTryLoad(_ sender: UIButton) {
-        Assemble.core.commander?.loadFromPreset(number: 0)
-        sequencer.initialiseFromUnderlyingState()
-        patterns.loadStates()
+        loadState()
     }
     
     @objc func refreshInterface() {
@@ -56,18 +55,6 @@ class ViewController : UIViewController
         let row = Assemble.core.currentRow
         sequencer.UI.row.moveTo(row: row)
     }
-
-    // all of this will go into the effects / settings menu
-    // ========================================================================
-    internal func desiredInitialFrequency(_ frequency: Float) -> Float {
-        return (log(frequency) - log(20)) / (log(20E3) - log(20))
-    }
-
-    let tempo = 30...300
-    internal func desiredInitialTempo(_ tempo: Int) -> Float {
-        return Float(tempo - self.tempo.lowerBound) / Float(self.tempo.upperBound - self.tempo.lowerBound)
-    }
-    // ========================================================================
     
     override func viewDidLoad()
     {
@@ -77,27 +64,26 @@ class ViewController : UIViewController
         // Test: Update Sequencer position
         updater = CADisplayLink(target: self, selector: #selector(refreshInterface))
         updater.add(to: .main, forMode: .default)
-        updater.preferredFramesPerSecond = 40
+        updater.preferredFramesPerSecond = 20
+        
+        // Move this into separate class perhaps
+        tempoLabel.initialise(with: kClockBPM, and: .discreteFast)
+        //
         
         keyboard.listeners.add(sequencer)
         keyboard.listeners.add(Assemble.core)
         keyboard.settingsListeners.add(computerKeyboard)
         
         computerKeyboard.listeners.add(sequencer)
-        computerKeyboard.listeners.add(transport)
         computerKeyboard.listeners.add(Assemble.core)
         computerKeyboard.settingsListeners.add(keyboard)
         computerKeyboard.settingsListeners.add(transport)
+        computerKeyboard.transportListeners.add(transport)
 
         transport.listeners.add(keyboard)
         transport.listeners.add(computerKeyboard)
 
         engine.start()
-        
-        let bpm = Int(Assemble.core.getParameter(kClockBPM))
-        tempoLabel.text = bpm.description
-        
-        print(Assemble.core.getParameter(kDelayToggle))
     }
 
     override func viewDidAppear(_ animated: Bool)
@@ -105,4 +91,14 @@ class ViewController : UIViewController
         super.viewDidAppear(animated);
         waveform.start()
     }
+    
+    func loadState() {
+        if Assemble.core.ticking { transport.pressPlayOrPause() }
+        Assemble.core.commander?.loadFromPreset(number: 0)
+        sequencer.initialiseFromUnderlyingState()
+        patterns.loadStates()
+        transport.initialiseModeButton()
+        tempoLabel.reinitialise()
+    }
+    
 }

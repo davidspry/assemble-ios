@@ -10,6 +10,7 @@ import UIKit
  - Author: Tai Le
  - Note: Source: <https://stackoverflow.com/a/32368958/9611538>
  */
+
 @IBDesignable
 class PaddedLabel: UILabel {
     @IBInspectable var topInset    : CGFloat = 5.0

@@ -8,6 +8,19 @@ import Foundation
 struct NoteUtilities
 {
     typealias Note = (xy: CGPoint, note: Int, shape: OscillatorShape)
+
+    /// Decode Note attributes from an encoded string and return an array of note attributes.
+    ///
+    /// - Parameter encoded: A substring containing encoded Notes.
+    ///
+    /// - Note:
+    /// The value of each note attribute is added with one prior
+    /// to encoding in order to preclude the inclusion of zeroes, which are
+    /// encoded as a null terminator character. Therefore, one should be
+    /// subtracted from the decoded ASCII value.
+    ///
+    /// - SeeAlso:
+    /// `./Core/Components/Sequencer/Note.hpp`
     
     public static func decode(from encoded: Substring) -> [Note] {
         var notes = [Note]()
@@ -16,18 +29,9 @@ struct NoteUtilities
         if !range.isEmpty {
             for note in range {
                 if (note.count < 5) || (note.first?.asciiValue ?? 0) < 4 {
-                    print("[NoteUtilities] Note encoded with fewer than 4 attributes")
+                    print("[NoteUtilities] Note encoded with fewer than 4 attributes: \(note.map{ $0.asciiValue })")
                     continue
                 }
-
-                /// - Note:
-                /// The value of each note attribute is added with one prior
-                /// to encoding in order to preclude the inclusion of zeroes, which are
-                /// encoded as a null terminator character. Therefore, one should be
-                /// subtracted from the decoded ASCII value.
-                ///
-                /// - SeeAlso:
-                /// `./Core/Components/Sequencer/Note.hpp`
 
                 let data = note.map { Int($0.asciiValue ?? 1) - 1 }
                 let xy = CGPoint(x: data[1], y: data[2])

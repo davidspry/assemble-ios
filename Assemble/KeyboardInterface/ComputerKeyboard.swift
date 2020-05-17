@@ -55,7 +55,7 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
                     break
                     
                 case .mode:
-                    self.transportListeners.invoke({ $0.didToggleMode() })
+                    Assemble.core.didToggleMode()
                     break
 
                 case .noctave:

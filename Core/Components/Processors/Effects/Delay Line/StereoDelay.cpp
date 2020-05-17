@@ -15,6 +15,7 @@ const float StereoDelay::get(uint64_t parameter)
         case kStereoDelayToggle: return static_cast<float>(!bypassed);
         case kStereoDelayLTime:  return ldelay.get(kDelayMusicalTime);
         case kStereoDelayRTime:  return rdelay.get(kDelayMusicalTime);
+        case kStereoDelayOffset: return offsetInMs;
         default:                 return ldelay.get(parameter);
     }
 }
@@ -40,16 +41,21 @@ void StereoDelay::set(uint64_t parameter, const float value)
         case kDelayFeedback:
         case kDelayTimeInMs:
         case kDelayMusicalTime:
-        case kDelayModulationDepth:
-        case kDelayModulationSpeed:
         {
             ldelay.set(parameter, value);
             rdelay.set(parameter, value);
             return;
         }
+            
+        case kStereoDelayLTime: { return ldelay.set(kDelayMusicalTime, value); }
+        case kStereoDelayRTime: { return rdelay.set(kDelayMusicalTime, value); }
+        case kStereoDelayOffset:
+        {
+            inject(value, false);
+            offsetInMs = value;
+            return;
+        }
 
-        case kStereoDelayLTime: return ldelay.set(kDelayMusicalTime, value); return;
-        case kStereoDelayRTime: return rdelay.set(kDelayMusicalTime, value); return;
         default: return;
     }
 }

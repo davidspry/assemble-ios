@@ -1,5 +1,6 @@
 //  Assemble
 //  ============================
+//  Copyright © 2020 David Spry. All rights reserved.
 
 import AudioUnit
 

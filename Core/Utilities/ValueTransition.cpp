@@ -28,9 +28,9 @@ void ValueTransition::set(float target, float timeInSeconds) noexcept(false)
 
 void ValueTransition::set(float value, float target, float timeInSeconds) noexcept(false)
 {
-    if (value <= 0.F) throw "The initial value cannot be less than or equal to 0.";
-    if (target <= 0.F) throw "The target value cannot be less than or equal to 0.";
-    
+    value  = std::fmax(0.001F, value);
+    target = std::fmax(0.001F, target);
+
     if (timeInSeconds <= 0.F) timeInSeconds = 0.F;
     if (timeInSeconds == 0.F) this->value = target;
     else

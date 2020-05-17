@@ -9,7 +9,9 @@ Vibrato::Vibrato()
     capacity = sampleRate * 2;
     samples.reserve(capacity);
     samples.assign(capacity, 0.F);
-    depth.store(depth * scalar);
+    
+    set(kVibratoDepth, 0.5F);
+    set(kVibratoSpeed, 0.5F);
 }
 
 const float Vibrato::get(uint64_t parameter)
@@ -35,7 +37,7 @@ void Vibrato::set(uint64_t parameter, float value)
         }
         case kVibratoSpeed:
         {
-            speed.store(Assemble::Utilities::bound(value, 0.1F, 10.F));
+            speed.store(Assemble::Utilities::bound(value, 0.1F, 15.F));
             modulator.load(speed);
             break;
         }
@@ -66,13 +68,13 @@ inline void Vibrato::update()
     else                   fadeIn(y);
 }
 
-const float Vibrato::process(float sample)
+void Vibrato::process(float& sample)
 {
     update();
 
     samples[whead] = sample;
 
-    const float modulated = Assemble::Utilities::lerp(rhead, &samples.at(0), capacity);
+    sample = Assemble::Utilities::lerp(rhead, &samples.at(0), capacity);
 
     whead = whead + 1;
     whead = whead - static_cast<int>(whead >= capacity) * capacity;
@@ -80,6 +82,4 @@ const float Vibrato::process(float sample)
     rhead = whead - depth + depth * modulator.nextSample();
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
-    
-    return modulated;
 }

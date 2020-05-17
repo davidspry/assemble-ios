@@ -49,27 +49,6 @@ extension Transport {
         keyboard.layoutIfNeeded()
     }
     
-    func initialiseModeButton() {
-        mode.backgroundColor = .clear
-        mode.translatesAutoresizingMaskIntoConstraints = false
-        mode.addTarget(self, action: #selector(didPressModeButton), for: .touchUpInside)
-        mode.setImage(modeState ? Icons.song : Icons.pattern, for: .normal)
-        mode.layer.cornerCurve = .continuous
-        mode.layer.cornerRadius = 15
-        mode.tintColor = .label
-        addSubview(mode)
-        
-        NSLayoutConstraint.activate([
-            mode.widthAnchor.constraint(equalToConstant: buttonWidth),
-            mode.heightAnchor.constraint(equalTo: heightAnchor),
-            mode.topAnchor.constraint(equalTo: topAnchor),
-            mode.bottomAnchor.constraint(equalTo: bottomAnchor),
-            mode.trailingAnchor.constraint(equalTo: keyboard.leadingAnchor)
-        ])
-        
-        mode.layoutIfNeeded()
-    }
-    
     func initialiseSegmentedControl() {
         oscillators = OscillatorSelector(itemWidth: buttonWidth)
         oscillators.addTarget(self, action: #selector(didSelectOscillator), for: .valueChanged)

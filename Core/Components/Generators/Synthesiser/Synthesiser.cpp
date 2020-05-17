@@ -31,13 +31,13 @@ Synthesiser::Synthesiser()
     for (auto &vtrns : frequency)
     {
         vtrns.setSampleRate(sampleRate);
-        vtrns.set(0.75F, 0.5F);
+        vtrns.set(0.75F, 1.0F);
     }
 
     for (auto &vtrns : resonance)
     {
         vtrns.setSampleRate(sampleRate);
-        vtrns.set(0.01F, 0.5F);
+        vtrns.set(0.01F, 1.0F);
     }
 }
 
@@ -87,10 +87,16 @@ const float Synthesiser::get(uint64_t parameter)
             
         case 0xAE: // Fallthrough
         case 0xFE: // Fallthrough
-        case 0xF0:
         {
             const int oscillator = POLYPHONY * bank;
             return voices[oscillator].get(parameter);
+        }
+            
+        case 0xF0:
+        {
+            const int subtype = (int) parameter % 16;
+            if (subtype == 0) { return frequency[bank].getTarget(); }
+            if (subtype == 1) { return resonance[bank].getTarget(); }
         }
    
         default: return 0.0F;
@@ -129,8 +135,8 @@ void Synthesiser::set(uint64_t parameter, float value)
         case 0xF0:
         {
             const int subtype = (int) parameter % 16;
-            if (subtype == 0) { frequency[bank].set(0.01F + value); return; }
-            if (subtype == 1) { resonance[bank].set(0.01F + value); return; }
+            if (subtype == 0) { frequency[bank].set(value); return; }
+            if (subtype == 1) { resonance[bank].set(value); return; }
         }
 
         default: return;

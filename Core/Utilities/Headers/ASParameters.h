@@ -85,13 +85,12 @@ static const int kDelayFeedback           = 0xEF01;
 static const int kDelayTimeInMs           = 0xEF02;
 static const int kDelayMusicalTime        = 0xEF03;
 static const int kDelayMix                = 0xEF04;
-static const int kDelayModulationSpeed    = 0xEF05;
-static const int kDelayModulationDepth    = 0xEF06;
 
 // Stereo Delay
 static const int kStereoDelayToggle       = 0xEF10;
 static const int kStereoDelayLTime        = 0xEF11;
 static const int kStereoDelayRTime        = 0xEF12;
+static const int kStereoDelayOffset       = 0xEF13;
 
 // Vibrato
 static const int kVibratoToggle           = 0xEF20;

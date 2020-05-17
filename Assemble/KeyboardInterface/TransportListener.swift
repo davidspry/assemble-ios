@@ -4,17 +4,15 @@
 
 import Foundation
 
+/// A class who conforms to `TransportListener` can receive
+/// information or data about the state of the sequencer.
+
 protocol TransportListener: AnyObject {
     
     /// Toggle the transport
 
     func pressPlayOrPause()
-    
-    /// Toggle the mode
-
-    func didToggleMode()
 }
-
 
 /**
  This extension provides default implementations for the TransportListener protocol,
@@ -23,5 +21,4 @@ protocol TransportListener: AnyObject {
 
 extension TransportListener {
     func pressPlayOrPause() {}
-    func didToggleMode() {}
 }

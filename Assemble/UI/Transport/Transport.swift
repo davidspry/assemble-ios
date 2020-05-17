@@ -9,22 +9,18 @@ public struct Icons {
     static let pause = UIImage(systemName: "pause", withConfiguration: size)
     static let show  = UIImage(systemName: "circle.fill", withConfiguration: size)
     static let hide  = UIImage(systemName: "circle", withConfiguration: size)
-    static let song  = UIImage(systemName: "s.circle.fill", withConfiguration: size)
-    static let pattern = UIImage(systemName: "p.circle.fill", withConfiguration: size)
-    private static let size = UIImage.SymbolConfiguration.init(pointSize: 20, weight: .semibold)
+    private static let size = UIImage.SymbolConfiguration.init(pointSize: 25, weight: .semibold)
 }
 
 class Transport : UIView, TransportListener, KeyboardSettingsListener {
 
     let play = UIButton()
-    let mode = UIButton()
     let keyboard = UIButton()
     var oscillators: OscillatorSelector!
     
     let buttonWidth: CGFloat = 55
     let buttonMargin: CGFloat = 25
 
-    var modeState: Bool = false
     var keyboardState: Bool = false
 
     let listeners = MulticastDelegate<KeyboardSettingsListener>()
@@ -32,11 +28,9 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         translatesAutoresizingMaskIntoConstraints = false
-        modeState = Int(Assemble.core.getParameter(kSequencerMode)) == 1
         initialisePlayButton()
         initialiseSegmentedControl()
         initialiseKeyboardButton()
-        initialiseModeButton()
     }
 
     @objc func didPressPlay(sender: UIButton)
@@ -74,23 +68,6 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
         }
     }
     
-    @objc func didPressModeButton(sender: UIButton) {
-        Assemble.core.didToggleMode()
-        modeState = Int(Assemble.core.getParameter(kSequencerMode)) == 1
-        let image = modeState ? Icons.song : Icons.pattern
-
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseInOut, animations: {
-                self.mode.imageView?.layer.setAffineTransform(.init(scaleX: 0.85, y: 0.85))
-            }) { success in
-                self.mode.setImage(image, for: .normal)
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.mode.imageView?.layer.setAffineTransform(.init(scaleX: 1, y: 1))
-                })
-            }
-        }
-    }
-    
     @objc func didSelectOscillator(sender: UISegmentedControl)
     {
         let index = oscillators.selectedSegmentIndex
@@ -102,10 +79,6 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
 
     func pressPlayOrPause() {
         didPressPlay(sender: play)
-    }
-    
-    func didToggleMode() {
-        didPressModeButton(sender: mode)
     }
     
     // MARK: - Keyboard Settings Listener

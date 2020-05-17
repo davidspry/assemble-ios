@@ -15,6 +15,8 @@
 #include "Sequencer.hpp"
 #include "Clock.hpp"
 
+#include "SimpleComp.h"
+
 class ASCommanderCore
 {
 public:
@@ -29,7 +31,6 @@ public:
 public:
     const bool playOrPause();
     const bool clockIsTicking() { return clock.isTicking();  }
-//    const bool toggleMode()     { return sequencer.toggle(); }
     
 public:
     void prepareToLoadPatternState();
@@ -52,6 +53,8 @@ private:
     Synthesiser synthesiser;
     Vibrato     vibrato;
     StereoDelay delay = {&clock};
+    
+    chunkware_simple::SimpleComp  comp;
 
 private:
     float sampleRate;

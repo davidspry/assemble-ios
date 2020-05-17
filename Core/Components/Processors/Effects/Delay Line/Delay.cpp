@@ -11,7 +11,7 @@ Delay::Delay(Clock *clock)
     capacity = clock->sampleRate * 4;
     samples.reserve(capacity);
     samples.assign(capacity, 0.F);
-    set(0.5F);
+    set(kDelayMusicalTime, 4.F);
 }
 
 /// \brief Get the value of the Delay Line's parameters
@@ -40,16 +40,6 @@ const float Delay::get(uint64_t parameter)
         {
             return Assemble::Utilities::milliseconds(target, clock->sampleRate);
         }
-         
-        case kDelayModulationSpeed:
-        {
-            return modulationSpeed;
-        }
-            
-        case kDelayModulationDepth:
-        {
-            return modulationDepth;
-        }
 
         default: return 0.0F;
     }
@@ -76,31 +66,20 @@ void Delay::set(uint64_t parameter, float value)
         case kDelayTimeInMs:
         {
             const int time = (int) std::floor(Assemble::Utilities::bound(value, 0.F, 4000.F));
-            set(time);
+            setInMilliseconds(time);
             break;
         }
         case kDelayMusicalTime:
         {
-            targetAsIndex = (int) value;
+            targetAsIndex = static_cast<int>(value);
             const float time = parseMusicalTimeParameterIndex(targetAsIndex);
-            set(time);
+            setInMusicalTime(time);
             break;
         }
         case kDelayMix:
         {
             const float mix = Assemble::Utilities::bound(value, 0.F, 1.F);
             this->mix = mix;
-        }
-        case kDelayModulationSpeed:
-        {
-            const float speed = Assemble::Utilities::bound(value, 0.1F, 25.F);
-            this->modulationSpeed = speed;
-            modulator.load(speed);
-        }
-        case kDelayModulationDepth:
-        {
-            const float depth = Assemble::Utilities::bound(value, 0.F, 2.F);
-            this->modulationDepth = depth;
         }
         default: return;
     }
@@ -135,7 +114,7 @@ const float Delay::parseMusicalTimeParameterIndex(const int index)
 void Delay::inject(int milliseconds)
 {
     offsetInSamples = Assemble::Utilities::samples(milliseconds, clock->sampleRate);
-    set(time);
+    setInMusicalTime(time);
 }
 
 void Delay::cycleDelayTime(const bool shorter)
@@ -146,7 +125,7 @@ void Delay::cycleDelayTime(const bool shorter)
 /// \brief Process the incoming sample
 /// \param sample A sample to process
 
-const float Delay::process(const float sample)
+void Delay::process(float& sample)
 {
     if (bpm != clock->bpm) update();
     
@@ -161,10 +140,8 @@ const float Delay::process(const float sample)
     if (whead >= capacity) whead = 0;
 
     rhead = whead - delay;
-//    This is causing aliasing. Modulated delay needs over-sampling.
-//    rhead = rhead + modulationDepth * (150 * modulator.nextSample());
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 
-    return (1.F - mix) * sample + mix * lerp;
+    sample = (1.F - mix) * sample + mix * lerp;
 }

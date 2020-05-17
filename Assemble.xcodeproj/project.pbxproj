@@ -78,6 +78,7 @@
 		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
 		14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
 		14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9D243313210095B587 /* NoteShapeNode.swift */; };
+		14D4C74D246EAB3B00B7180C /* ParameterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4C74C246EAB3B00B7180C /* ParameterCell.swift */; };
 		14DAC3892417772C005654EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC3882417772C005654EA /* AppDelegate.swift */; };
 		14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC38A2417772C005654EA /* SceneDelegate.swift */; };
 		14DAC38D2417772C005654EA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC38C2417772C005654EA /* MainViewController.swift */; };
@@ -87,6 +88,11 @@
 		14DAC39D241777DF005654EA /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC39C241777DF005654EA /* Engine.swift */; };
 		14DB9E71246538E0000AAD79 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DB9E70246538E0000AAD79 /* AudioToolbox.framework */; };
 		14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */; };
+		14E6550E247135DF00D619F0 /* SimpleCompProcess.inl in Resources */ = {isa = PBXBuildFile; fileRef = 14E6550C247135DF00D619F0 /* SimpleCompProcess.inl */; };
+		14E6550F247135DF00D619F0 /* SimpleComp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14E6550D247135DF00D619F0 /* SimpleComp.cpp */; };
+		14E65514247135FC00D619F0 /* SimpleEnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14E65511247135FC00D619F0 /* SimpleEnvelope.cpp */; };
+		14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */; };
+		14E6551F24718A7100D619F0 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6551E24718A7100D619F0 /* FactoryPresetA.swift */; };
 		14EFEDA9242E350100242298 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
 		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
 		14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */; };
@@ -225,6 +231,7 @@
 		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
 		14D3AE9B2433088E0095B587 /* DotGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGridRow.swift; sourceTree = "<group>"; };
 		14D3AE9D243313210095B587 /* NoteShapeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteShapeNode.swift; sourceTree = "<group>"; };
+		14D4C74C246EAB3B00B7180C /* ParameterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterCell.swift; sourceTree = "<group>"; };
 		14DAC3852417772C005654EA /* Assemble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assemble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14DAC3882417772C005654EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14DAC38A2417772C005654EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -238,6 +245,15 @@
 		14DB9E70246538E0000AAD79 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ValueTransition.cpp; sourceTree = "<group>"; };
 		14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ValueTransition.hpp; sourceTree = "<group>"; };
+		14E6550B247135DF00D619F0 /* SimpleComp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleComp.h; sourceTree = "<group>"; };
+		14E6550C247135DF00D619F0 /* SimpleCompProcess.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SimpleCompProcess.inl; sourceTree = "<group>"; };
+		14E6550D247135DF00D619F0 /* SimpleComp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleComp.cpp; sourceTree = "<group>"; };
+		14E65510247135FC00D619F0 /* SimpleEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleEnvelope.h; sourceTree = "<group>"; };
+		14E65511247135FC00D619F0 /* SimpleEnvelope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleEnvelope.cpp; sourceTree = "<group>"; };
+		14E65513247135FC00D619F0 /* SimpleGain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleGain.h; sourceTree = "<group>"; };
+		14E655162471360B00D619F0 /* SimpleHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleHeader.h; sourceTree = "<group>"; };
+		14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Medium.ttf"; sourceTree = "<group>"; };
+		14E6551E24718A7100D619F0 /* FactoryPresetA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetA.swift; sourceTree = "<group>"; };
 		14EFEDA8242E350100242298 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDrawing.swift; sourceTree = "<group>"; };
 		14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderCell.swift; sourceTree = "<group>"; };
@@ -328,7 +344,7 @@
 		1428034E246C3D9A006775AE /* Parameter Menus */ = {
 			isa = PBXGroup;
 			children = (
-				144D8636246D72D200F6EDD4 /* Header Cells */,
+				144D8636246D72D200F6EDD4 /* Table Cells */,
 				14280351246C3DC2006775AE /* ParameterMenu.swift */,
 				1428034F246C3DB9006775AE /* OscillatorParameters.swift */,
 				144D862C246D3A9300F6EDD4 /* StereoDelayParameters.swift */,
@@ -364,9 +380,9 @@
 			isa = PBXGroup;
 			children = (
 				146EC663244CC39C009025E4 /* Data Structures */,
-				143FAFFF243F2DF00058AE40 /* AU Hierarchy */,
+				144A116824571957000F2B4C /* AU Interface */,
+				143FAFFF243F2DF00058AE40 /* AU Base Classes */,
 				141DDA59243F8BA30020386C /* Components */,
-				144A116824571957000F2B4C /* Interface */,
 				143FB009243F3D990058AE40 /* Utilities */,
 			);
 			path = Core;
@@ -381,7 +397,7 @@
 			path = Commander;
 			sourceTree = "<group>";
 		};
-		143FAFFF243F2DF00058AE40 /* AU Hierarchy */ = {
+		143FAFFF243F2DF00058AE40 /* AU Base Classes */ = {
 			isa = PBXGroup;
 			children = (
 				143FB004243F301C0058AE40 /* Attribution.md */,
@@ -392,7 +408,7 @@
 				143FB003243F2F800058AE40 /* ASDSPBase.hpp */,
 				143FB007243F360D0058AE40 /* ASDSPBase.mm */,
 			);
-			path = "AU Hierarchy";
+			path = "AU Base Classes";
 			sourceTree = "<group>";
 		};
 		143FB009243F3D990058AE40 /* Utilities */ = {
@@ -405,9 +421,10 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		144A116824571957000F2B4C /* Interface */ = {
+		144A116824571957000F2B4C /* AU Interface */ = {
 			isa = PBXGroup;
 			children = (
+				14E6551D2471897600D619F0 /* FactoryPresets */,
 				143FB022243F67500058AE40 /* ASComponent.swift */,
 				143FB020243F63620058AE40 /* ASCommander.swift */,
 				143FB016243F400B0058AE40 /* ASCommanderAU.swift */,
@@ -415,26 +432,27 @@
 				143FB01B243F50520058AE40 /* ASCommanderDSP.mm */,
 				14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */,
 			);
-			path = Interface;
+			path = "AU Interface";
 			sourceTree = "<group>";
 		};
-		144D8636246D72D200F6EDD4 /* Header Cells */ = {
+		144D8636246D72D200F6EDD4 /* Table Cells */ = {
 			isa = PBXGroup;
 			children = (
+				14D4C74C246EAB3B00B7180C /* ParameterCell.swift */,
 				144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */,
 				14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */,
 			);
-			path = "Header Cells";
+			path = "Table Cells";
 			sourceTree = "<group>";
 		};
 		1458D12B24531DA30093B541 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				144D8634246D703400F6EDD4 /* Assemble_1.png */,
-				1458D12C24531FFD0093B541 /* License.txt */,
 				14DAC3962417772E005654EA /* Info.plist */,
+				14DB9E6F2465239E000AAD79 /* Assemble.entitlements */,
 				14DAC3912417772E005654EA /* Assets.xcassets */,
-				1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */,
+				14E6551B2471455B00D619F0 /* Images */,
+				14E6551C2471456000D619F0 /* Fonts */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -510,6 +528,7 @@
 		14909D9F24585490003C6F03 /* Processors */ = {
 			isa = PBXGroup;
 			children = (
+				14E6550A247135CD00D619F0 /* Compressor */,
 				14909D9C2458532A003C6F03 /* Effects */,
 				141DDA6C243F962B0020386C /* Lowpass Filter */,
 			);
@@ -668,15 +687,14 @@
 		14DAC3872417772C005654EA /* Assemble */ = {
 			isa = PBXGroup;
 			children = (
-				14DB9E6F2465239E000AAD79 /* Assemble.entitlements */,
 				1458D12B24531DA30093B541 /* Assets */,
-				14AFB89A2452361E00F5AD3A /* UIResponder */,
-				149ACC2524543602009DA18F /* Utilities */,
-				149ACC20245424B0009DA18F /* KeyboardInterface */,
 				146B55EB242CDA90001163B3 /* Audio */,
+				149ACC2524543602009DA18F /* Utilities */,
 				14EFEDA5242DBA5200242298 /* UI */,
+				149ACC20245424B0009DA18F /* KeyboardInterface */,
 				14AFB89B2452362400F5AD3A /* View Controllers */,
 				14AFB89C2452363000F5AD3A /* Storyboards */,
+				14AFB89A2452361E00F5AD3A /* UIResponder */,
 			);
 			path = Assemble;
 			sourceTree = "<group>";
@@ -708,15 +726,55 @@
 			path = Elements;
 			sourceTree = "<group>";
 		};
+		14E6550A247135CD00D619F0 /* Compressor */ = {
+			isa = PBXGroup;
+			children = (
+				14E655162471360B00D619F0 /* SimpleHeader.h */,
+				14E65511247135FC00D619F0 /* SimpleEnvelope.cpp */,
+				14E65510247135FC00D619F0 /* SimpleEnvelope.h */,
+				14E65513247135FC00D619F0 /* SimpleGain.h */,
+				14E6550D247135DF00D619F0 /* SimpleComp.cpp */,
+				14E6550B247135DF00D619F0 /* SimpleComp.h */,
+				14E6550C247135DF00D619F0 /* SimpleCompProcess.inl */,
+			);
+			path = Compressor;
+			sourceTree = "<group>";
+		};
+		14E6551B2471455B00D619F0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				144D8634246D703400F6EDD4 /* Assemble_1.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		14E6551C2471456000D619F0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1458D12C24531FFD0093B541 /* License.txt */,
+				1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */,
+				14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		14E6551D2471897600D619F0 /* FactoryPresets */ = {
+			isa = PBXGroup;
+			children = (
+				14E6551E24718A7100D619F0 /* FactoryPresetA.swift */,
+			);
+			path = FactoryPresets;
+			sourceTree = "<group>";
+		};
 		14EFEDA5242DBA5200242298 /* UI */ = {
 			isa = PBXGroup;
 			children = (
 				14E459462461417000F26667 /* Elements */,
-				1436CE51245404A000670E3E /* SK Sequencer */,
-				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
 				1436CE5224541BB800670E3E /* Keyboard */,
 				14CE044A2457366900B0220C /* Waveform */,
 				14C38EE9245B29A100180810 /* Transport */,
+				1436CE51245404A000670E3E /* SK Sequencer */,
+				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
 				1428034E246C3D9A006775AE /* Parameter Menus */,
 			);
 			path = UI;
@@ -789,6 +847,8 @@
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
 				144D8635246D703400F6EDD4 /* Assemble_1.png in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
+				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
+				14E6550E247135DF00D619F0 /* SimpleCompProcess.inl in Resources */,
 				1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -809,9 +869,12 @@
 				14DAC38D2417772C005654EA /* MainViewController.swift in Sources */,
 				14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */,
 				14C38EEB245B29B800180810 /* Transport.swift in Sources */,
+				14E6551F24718A7100D619F0 /* FactoryPresetA.swift in Sources */,
+				14E65514247135FC00D619F0 /* SimpleEnvelope.cpp in Sources */,
 				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
+				14E6550F247135DF00D619F0 /* SimpleComp.cpp in Sources */,
 				14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */,
 				143FB01E243F52820058AE40 /* ASCommanderCore.cpp in Sources */,
 				14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */,
@@ -831,6 +894,7 @@
 				14AE01A4245E014D003EB586 /* UISegmentedControlExtensions.swift in Sources */,
 				141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */,
 				14DAC39D241777DF005654EA /* Engine.swift in Sources */,
+				14D4C74D246EAB3B00B7180C /* ParameterCell.swift in Sources */,
 				144D8638246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift in Sources */,
 				143FB017243F400B0058AE40 /* ASCommanderAU.swift in Sources */,
 				144D862B246D1F4100F6EDD4 /* TransportListener.swift in Sources */,

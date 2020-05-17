@@ -16,20 +16,20 @@ public:
     Vibrato();
 
 public:
-    const float process(float sample);
+    void process(float& sample);
     
 public:
-    void  setSampleRate(float sampleRate);
-    void  set(uint64_t parameter, float value);
+    void setSampleRate(float sampleRate);
+    void set(uint64_t parameter, float value);
     const float get(uint64_t parameter);
 
 private:
     std::atomic<bool> bypassed = {false};
-    std::atomic<float> speed = {1.0F};
-    std::atomic<float> depth = {1.0F};
-    std::atomic<float> targetDepth = {1.0F};
-    std::atomic<float> depthNormal = {1.0F};
-    SineWTOscillator modulator = {1.0F};
+    std::atomic<float> speed;
+    std::atomic<float> depth;
+    std::atomic<float> targetDepth;
+    std::atomic<float> depthNormal;
+    SineWTOscillator modulator;
 
 private:
     inline void fadeOut(const float t) { depth = std::max(t, depth - 0.01F); }
@@ -47,7 +47,7 @@ private:
     
 private:
     int capacity;
-    float scalar = 425.0F;
+    float scalar = 250.0F;
     float sampleRate = 48000.F;
     std::vector<float> samples;
 };

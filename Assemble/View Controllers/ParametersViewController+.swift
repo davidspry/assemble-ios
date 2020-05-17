@@ -29,7 +29,7 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 { return headerForMenu(table: tableView, at: indexPath) }
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "parameterCell", for: indexPath)
+        let cell = tableDelay.dequeueReusableCell(withIdentifier: "parameterCell", for: indexPath) as! ParameterCell
         var menu: ParameterMenu
 
         switch (tableView)
@@ -40,12 +40,14 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
         default: fatalError("[ParametersViewController] Unknown UITableView instance")
         }
 
-        cell.textLabel?.text = menu.labelFor(indexPath)
-        if let label = cell.detailTextLabel as? ParameterLabel {
+        cell.title.text = menu.labelFor(indexPath)
+        if let label = cell.parameter {
             let parameter = menu.parameterFor(indexPath)
-            label.initialise(with: parameter.address, and: parameter.type)
+            label.initialise(with: parameter.address,
+                             increment: parameter.increment,
+                             and: parameter.type)
         }
-        
+
         return cell
     }
     
@@ -77,7 +79,7 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.initialise(with: kVibratoToggle)
                 cell.toggle.addTarget(self, action: #selector(didToggle(_:)), for: .touchUpInside)
                 return cell
-            }   else { fatalError("[ParametersViewController+] 1. Cast to MenuHeaderCell failed") }
+            }   else { fatalError("[ParametersViewController+] 2. Cast to MenuHeaderCell failed") }
     
         default: fatalError("[ParametersViewController] Unknown UITableView instance")
         }

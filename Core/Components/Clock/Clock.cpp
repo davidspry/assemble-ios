@@ -32,8 +32,8 @@ void Clock::set(uint64_t parameter, float value)
 {
     switch (parameter)
     {
-        case kClockBPM: setBPM(value); return;
-        case kClockSubdivision: setSubdivision(value); return;
+        case kClockBPM: setBPM(static_cast<int>(value)); return;
+        case kClockSubdivision: setSubdivision(static_cast<int>(value)); return;
         default: return;
     }
 }

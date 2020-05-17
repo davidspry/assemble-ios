@@ -1,30 +1,38 @@
 //  Assemble
 //  ============================
-//  Original author: Aurelius Prochazka.
-//  Copyright 2018 AudioKit. All rights reserved.
-//  License: <https://github.com/AudioKit/AudioKit/blob/master/LICENSE>
+//  Copyright © 2020 David Spry. All rights reserved.
 
-import AVFoundation
 import CoreAudio
+import AVFoundation
 
 public class ASCommanderAU : ASAudioUnit
 {
+    /// The number of rows in the current pattern
+    
     public var length: Int {
         return Int(parameter(withAddress: AUParameterAddress(kSequencerLength)))
     }
+
+    /// The current row number
     
     public var currentRow: Int {
         return Int(parameter(withAddress: AUParameterAddress(kSequencerCurrentRow)))
     }
     
+    /// The current pattern number
+
     public var currentPattern: Int {
         return Int(parameter(withAddress: AUParameterAddress(kSequencerCurrentPattern)))
     }
     
+    /// The state of the underlying clock
+
     public var ticking: Bool {
         return isPlaying;
     }
     
+    /// The current mode of the sequencer. This property will return`0` during Pattern Mode, and `1` during Song Mode.
+
     public var mode: Float {
         return parameter(withAddress: AUParameterAddress(kSequencerMode))
     }
@@ -38,6 +46,7 @@ public class ASCommanderAU : ASAudioUnit
         return makeASCommanderDSP(Int32(count), sampleRate)
     }
 
+    /// Instantiate an AudioUnit
     override init(componentDescription: AudioComponentDescription,
                   options: AudioComponentInstantiationOptions = []) throws {
         try super.init(componentDescription: componentDescription, options: options);
@@ -80,30 +89,53 @@ public class ASCommanderAU : ASAudioUnit
             return String(format: "%.2f", value ?? parameter.value)
         }
 
-        userPresets.forEach { print("Preset: \($0.name), \($0.number)") }
+        userPresets.forEach { print("User Preset: Name: \($0.name), Number: \($0.number)") }
     }
     
+    /// Play or pause the sequencer by toggling the state of the underlying clock.
+    /// - Returns: `true` if the clock begins to tick; `false` otherwise
+
     public func playOrPause() -> Bool {
         return __interop__PlayOrPause(dsp)
     }
+
+    /// Play a note using the given oscillator shape immediately
+    /// - Parameter note:  The pitch of the note to play as a MIDI note number
+    /// - Parameter shape: The index of the oscillator to use.
 
     public func playNote(note: Int, shape: Int) {
         __interop__LoadNote(dsp, Int32(note), Int32(shape))
     }
     
+    /// Add a note to the sequencer
+    /// - Parameter x: The x-coordinate of the position where the note should be placed
+    /// - Parameter y: The y-coordinate of the position where the note should be placed
+    /// - Parameter note:  The pitch of the note to add as a MIDI note number
+    /// - Parameter shape: The index of the oscillator to use
+    
     public func addNote(x: Int, y: Int, note: Int, shape: Int) {
         __interop__WriteNote(dsp, Int32(x), Int32(y), Int32(note), Int32(shape))
     }
     
+    /// Erase a note from the sequencer
+    /// - Parameter x: The x-coordinate of the position that should be erased
+    /// - Parameter y: The y-coordinate of the position that should be erased
+    /// - Note: If the position (x, y) is empty, nothing will happen.
+
     public func eraseNote(x: Int, y: Int) {
         __interop__EraseNote(dsp, Int32(x), Int32(y))
     }
+    
+    public override var factoryPresets: [AUAudioUnitPreset]? {
+        return [
+            AUAudioUnitPreset(),
+            AUAudioUnitPreset()
+        ]
+    }
+
+    public override func shouldAllocateInputBus() -> Bool  { return false }
 
     public override func shouldClearOutputBuffer() -> Bool { return false }
-
-    public override var canProcessInPlace: Bool            { return true  }
-    
-    public override func shouldAllocateInputBus() -> Bool  { return false }
     
     public override var supportsUserPresets: Bool          { return true  }
 

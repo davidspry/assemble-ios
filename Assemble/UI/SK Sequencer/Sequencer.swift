@@ -39,7 +39,7 @@ class Sequencer : SKView, KeyboardListener
     }
     
     func setOctave(_ octave: Int) {
-        fatalError("[Sequencer] Unimplemented")
+        print("[Sequencer] Unimplemented")
     }
     
     func setOscillator(_ next: Bool) {

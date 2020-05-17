@@ -8,7 +8,7 @@
 void AHREnvelope::set(float attack, float hold, float release)
 {
     attack  = std::fmax(1.F, std::fmin(attack, 5000.F));
-    hold    = std::fmax(1.F, std::fmin(hold,   5000.F));
+    hold    = std::fmax(0.F, std::fmin(hold,   5000.F));
     release = std::fmax(1.F, std::fmin(release,5000.F));
 
     attackInMs  = attack;

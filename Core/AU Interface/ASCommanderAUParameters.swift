@@ -5,16 +5,37 @@
 import AudioUnit
 import Foundation
 
-struct ASCommanderAUParameters {
+/// A collection of `AUParameter`s in `AUParameterGroup`s, which together define the `AUParameter` interface to the core.
+/// Each parameter defines an address, a minimum and maximum value, and a unit type (such as Hertz, milliseconds, BPM, etc.)
+///
+/// - Note:
+/// It's possible to change the state of Assemble using the parameter addresses alone, as in:
+/// ~~~
+/// Assemble.core.setParameter(kSawFilterFrequency, 0.5)
+/// ~~~
+/// However, Apple's API provides persistence of `AUParameter` state with user presets automatically, and the use of `AUParameter`
+/// includes the functionality of listening to a queue of parameter changes for the purpose of updating the UI, etc.
+///
+/// A callback for getting and setting parameter values via an `AUParameter` is defined in `ASCommanderAU.swift`
+
+struct ASCommanderAUParameters
+{
     static private let defaultBPM: Float = 120
     static private let defaultSubdivison: Float = 4
+    
+    static private let defaultBPMRange: ClosedRange<Float> = 30.0...300.0
     
     static private let defaultEnvelopeA: Float = 5.0
     static private let defaultEnvelopeH: Float = 0.0
     static private let defaultEnvelopeR: Float = 500.0
     
+    static private let defaultEnvelopeRangeA: ClosedRange<Float> = 1.0...500.0
+    static private let defaultEnvelopeRangeH: ClosedRange<Float> = 0.0...500.0
+    static private let defaultEnvelopeRangeR: ClosedRange<Float> = 1.0...3000.0
+    
     static private let defaultFilterFrequency: Float = 1
     static private let defaultFilterResonance: Float = 0
+    
     
     // MARK: - Parameter Groups
     static public let parametersClock =
@@ -96,8 +117,7 @@ struct ASCommanderAUParameters {
                                     ASCommanderAUParameters.stereoDelayTimeLeft,
                                     ASCommanderAUParameters.stereoDelayTimeRight,
                                     ASCommanderAUParameters.stereoDelayMix,
-                                    ASCommanderAUParameters.stereoDelayModulationSpeed,
-                                    ASCommanderAUParameters.stereoDelayModulationDepth
+                                    ASCommanderAUParameters.stereoDelayOffset
         ])
     
     static public let parametersVibrato =
@@ -116,7 +136,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kClockBPM",
                                             name: "Clock BPM",
                                             address: AUParameterAddress(kClockBPM),
-                                            min: 30, max: 300,
+                                            min: ASCommanderAUParameters.defaultBPMRange.lowerBound,
+                                            max: ASCommanderAUParameters.defaultBPMRange.upperBound,
                                             unit: .BPM,
                                             unitName: "BPM",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -148,7 +169,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinFilterFrequency",
                                             name: "[SIN] Filter frequency",
                                             address: AUParameterAddress(kSinFilterFrequency),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -165,7 +187,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinFilterResonance",
                                             name: "[SIN] Filter resonance",
                                             address: AUParameterAddress(kSinFilterResonance),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -182,7 +205,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinAmpAttack",
                                             name: "[SIN] AE Attack",
                                             address: AUParameterAddress(kSinAmpAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -197,7 +221,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinAmpHold",
                                             name: "[SIN] AE Hold",
                                             address: AUParameterAddress(kSinAmpHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -212,7 +237,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinAmpRelease",
                                             name: "[SIN] AE Release",
                                             address: AUParameterAddress(kSinAmpRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -229,7 +255,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinFilterAttack",
                                             name: "[SIN] FE Attack",
                                             address: AUParameterAddress(kSinFilterAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -244,7 +271,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinFilterHold",
                                             name: "[SIN] FE Hold",
                                             address: AUParameterAddress(kSinFilterHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -259,7 +287,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSinFilterRelease",
                                             name: "[SIN] FE Release",
                                             address: AUParameterAddress(kSinFilterRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -276,7 +305,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriFilterFrequency",
                                             name: "[TRI] Filter frequency",
                                             address: AUParameterAddress(kTriFilterFrequency),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -293,7 +323,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriFilterResonance",
                                             name: "[TRI] Filter resonance",
                                             address: AUParameterAddress(kTriFilterResonance),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -310,7 +341,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriAmpAttack",
                                             name: "[TRI] AE Attack",
                                             address: AUParameterAddress(kTriAmpAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -325,7 +357,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriAmpHold",
                                             name: "[TRI] AE Hold",
                                             address: AUParameterAddress(kTriAmpHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -340,7 +373,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriAmpRelease",
                                             name: "[TRI] AE Release",
                                             address: AUParameterAddress(kTriAmpRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -357,7 +391,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriFilterAttack",
                                             name: "[TRI] FE Attack",
                                             address: AUParameterAddress(kTriFilterAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -372,7 +407,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriFilterHold",
                                             name: "[TRI] FE Hold",
                                             address: AUParameterAddress(kTriFilterHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -387,7 +423,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kTriFilterRelease",
                                             name: "[TRI] FE Release",
                                             address: AUParameterAddress(kTriFilterRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -404,7 +441,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrFilterFrequency",
                                             name: "[SQR] Filter frequency",
                                             address: AUParameterAddress(kSqrFilterFrequency),
-                                            min: 20, max: 20_000,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -421,7 +459,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrFilterResonance",
                                             name: "[SQR] Filter resonance",
                                             address: AUParameterAddress(kSqrFilterResonance),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -438,7 +477,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrAmpAttack",
                                             name: "[SQR] AE Attack",
                                             address: AUParameterAddress(kSqrAmpAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -453,7 +493,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrAmpHold",
                                             name: "[SQR] AE Hold",
                                             address: AUParameterAddress(kSqrAmpHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -468,7 +509,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrAmpRelease",
                                             name: "[SQR] AE Release",
                                             address: AUParameterAddress(kSqrAmpRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -485,7 +527,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrFilterAttack",
                                             name: "[SQR] FE Attack",
                                             address: AUParameterAddress(kSqrFilterAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -500,7 +543,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrFilterHold",
                                             name: "[SQR] FE Hold",
                                             address: AUParameterAddress(kSqrFilterHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -515,7 +559,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSqrFilterRelease",
                                             name: "[SQR] FE Release",
                                             address: AUParameterAddress(kSqrFilterRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -532,7 +577,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawFilterFrequency",
                                             name: "[SAW] Filter frequency",
                                             address: AUParameterAddress(kSawFilterFrequency),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable,
@@ -549,7 +595,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawFilterResonance",
                                             name: "[SAW] Filter resonance",
                                             address: AUParameterAddress(kSawFilterResonance),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -566,7 +613,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawAmpAttack",
                                             name: "[SAW] AE Attack",
                                             address: AUParameterAddress(kSawAmpAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -581,7 +629,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawAmpHold",
                                             name: "[SAW] AE Hold",
                                             address: AUParameterAddress(kSawAmpHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -596,7 +645,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawAmpRelease",
                                             name: "[SAW] AE Release",
                                             address: AUParameterAddress(kSawAmpRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -613,7 +663,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawFilterAttack",
                                             name: "[SAW] FE Attack",
                                             address: AUParameterAddress(kSawFilterAttack),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeA.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeA.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -628,7 +679,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawFilterHold",
                                             name: "[SAW] FE Hold",
                                             address: AUParameterAddress(kSawFilterHold),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeH.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeH.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -643,7 +695,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kSawFilterRelease",
                                             name: "[SAW] FE Release",
                                             address: AUParameterAddress(kSawFilterRelease),
-                                            min: 0, max: 4000,
+                                            min: ASCommanderAUParameters.defaultEnvelopeRangeR.lowerBound,
+                                            max: ASCommanderAUParameters.defaultEnvelopeRangeR.upperBound,
                                             unit: .milliseconds,
                                             unitName: "ms",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -660,7 +713,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kDelayToggle",
                                             name: "Stereo Delay Toggle",
                                             address: AUParameterAddress(kStereoDelayToggle),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .boolean,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -684,7 +738,6 @@ struct ASCommanderAUParameters {
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: ASCommanderAUParameters.delayTimes,
                                             dependentParameters: nil)
-        parameter.value = 6
         return parameter
     }()
     
@@ -699,7 +752,6 @@ struct ASCommanderAUParameters {
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: ASCommanderAUParameters.delayTimes,
                                             dependentParameters: nil)
-        parameter.value = 6
         return parameter
     }()
     
@@ -708,7 +760,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kDelayFeedback",
                                             name: "Stereo Delay Feedback",
                                             address: AUParameterAddress(kDelayFeedback),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -718,48 +771,34 @@ struct ASCommanderAUParameters {
         return parameter
     }()
     
+    static var stereoDelayOffset: AUParameter = {
+        let parameter =
+            AUParameterTree.createParameter(withIdentifier: "kStereoDelayOffset",
+                                            name: "Stereo Delay Offset",
+                                            address: AUParameterAddress(kStereoDelayOffset),
+                                            min: 0, max: 25,
+                                            unit: .milliseconds,
+                                            unitName: "ms",
+                                            flags: [.flag_IsReadable, .flag_IsWritable],
+                                            valueStrings: nil,
+                                            dependentParameters: nil)
+        parameter.value = 4.0
+        return parameter
+    }()
+    
     static var stereoDelayMix: AUParameter = {
         let parameter =
             AUParameterTree.createParameter(withIdentifier: "kDelayMix",
                                             name: "Stereo Delay Mix",
                                             address: AUParameterAddress(kDelayMix),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
         parameter.value = 0.35
-        return parameter
-    }()
-    
-    static var stereoDelayModulationSpeed: AUParameter = {
-        let parameter =
-            AUParameterTree.createParameter(withIdentifier: "kDelayModulationSpeed",
-                                            name: "Stereo Delay Modulation Speed",
-                                            address: AUParameterAddress(kDelayModulationSpeed),
-                                            min: 0.1, max: 10,
-                                            unit: .hertz,
-                                            unitName: "Hz",
-                                            flags: [.flag_IsReadable, .flag_IsWritable],
-                                            valueStrings: nil,
-                                            dependentParameters: nil)
-        parameter.value = 1.0
-        return parameter
-    }()
-    
-    static var stereoDelayModulationDepth: AUParameter = {
-        let parameter =
-            AUParameterTree.createParameter(withIdentifier: "kDelayModulationDepth",
-                                            name: "Stereo Delay Modulation Depth",
-                                            address: AUParameterAddress(kDelayModulationDepth),
-                                            min: 0, max: 1,
-                                            unit: .generic,
-                                            unitName: nil,
-                                            flags: [.flag_IsReadable, .flag_IsWritable],
-                                            valueStrings: nil,
-                                            dependentParameters: nil)
-        parameter.value = 0.25
         return parameter
     }()
     
@@ -770,7 +809,8 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kVibratoToggle",
                                             name: "Vibrato Toggle",
                                             address: AUParameterAddress(kVibratoToggle),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .boolean,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
@@ -785,13 +825,13 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kVibratoSpeed",
                                             name: "Vibrato Speed",
                                             address: AUParameterAddress(kVibratoSpeed),
-                                            min: 0.1, max: 15,
+                                            min: 0.1, max: 5,
                                             unit: .hertz,
                                             unitName: "Hz",
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
-        parameter.value = 0.65
+        parameter.value = 0.5
         return parameter
     }()
     
@@ -800,13 +840,14 @@ struct ASCommanderAUParameters {
             AUParameterTree.createParameter(withIdentifier: "kVibratoDepth",
                                             name: "Vibrato Depth",
                                             address: AUParameterAddress(kVibratoDepth),
-                                            min: 0, max: 1,
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
                                             unit: .generic,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
-        parameter.value = 0.2
+        parameter.value = 0.25
         return parameter
     }()
     

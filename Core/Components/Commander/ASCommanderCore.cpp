@@ -21,6 +21,10 @@ void ASCommanderCore::init(double sampleRate)
 
     printf("[ASCommanderCore] Updating sample rate to %.0f\n", audioRate);
     __state__.reserve(6000);
+    
+    comp.initRuntime();
+    comp.setRatio(4);
+    comp.setThresh(65);
 }
 
 /// \brief Toggle the state of the Clock, which drives the Sequencer.
@@ -143,10 +147,10 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
         }
 
         sample = {0.f, 0.f};
-        sample[0] = sample[1] = synthesiser.nextSample();
-        sample[0] = sample[1] = vibrato.process(sample[0]);
-        sample[0] = delay.process(sample[0], static_cast<bool>(1));
-        sample[1] = delay.process(sample[1], static_cast<bool>(0));
+        sample[0] = synthesiser.nextSample();
+        vibrato.process(sample[0]);
+        sample[1] = sample[0];
+        delay.process(sample[0], sample[1]);
 
         for (size_t c = 0; c < channels; c++)
             output[c][t] = sample[c & 1];

@@ -36,6 +36,7 @@ class OscillatorSelector: UISegmentedControl {
         let clear = UIImage(color: .clear, size: .init(width: 1, height: bounds.height))
         setBackgroundImage(clear, for: .normal, barMetrics: .default)
         setDividerImage(clear)
+        setFontAttributes()
         
         highlight.translatesAutoresizingMaskIntoConstraints = false
         highlight.backgroundColor = .sineNoteColour
@@ -46,6 +47,15 @@ class OscillatorSelector: UISegmentedControl {
         constrainHighlightView()
         
         DispatchQueue.main.async { self.sendActions(for: .valueChanged) }
+    }
+    
+    private func setFontAttributes() {
+        let font = UIFont.init(name: "JetBrainsMono-Regular", size: 14)
+        setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .normal)
+        setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
+        setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .highlighted)
+        setTitleTextAttributes([.font : font as Any], for: .normal)
+        layoutIfNeeded()
     }
     
     private func constrainHighlightView() {

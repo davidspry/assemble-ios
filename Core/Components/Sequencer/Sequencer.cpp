@@ -58,7 +58,9 @@ void Sequencer::set(uint64_t parameter, float value)
             printf("Active patterns: %d\n", activePatterns);
             return;
         }
-
+            
+        case kSequencerTicks: return patterns.at(pattern).setTimeSignature(value, static_cast<bool>(0));
+        case kSequencerBeats: return patterns.at(pattern).setTimeSignature(value, static_cast<bool>(1));
         default: return;
     }
 }
@@ -70,16 +72,17 @@ const float Sequencer::get(uint64_t parameter)
 {
     switch (parameter)
     {
-        case kSequencerMode: return (float) mode;
-        case kSequencerLength: return (float) patternLength;
-        case kSequencerCurrentRow: return (float) row;
+        case kSequencerMode:           return (float) mode;
+        case kSequencerLength:         return (float) patternLength;
+        case kSequencerCurrentRow:     return (float) row;
         case kSequencerCurrentPattern: return (float) pattern;
-        case kSequencerNextPattern: return (float) nextPattern;
-        case kSequencerPatternState: return (float) patterns.at(pattern).isActive();
+        case kSequencerNextPattern:    return (float) nextPattern;
+        case kSequencerPatternState:   return (float) patterns.at(pattern).isActive();
+        case kSequencerBeats:          return (float) patterns.at(pattern).getTimeSignature().first;
+        case kSequencerTicks:          return (float) patterns.at(pattern).getTimeSignature().second;
         default: return 0.F;
     }
 }
-
 
 /// \brief Move to the next row, which may be on another Pattern,
 /// and return the next row of notes.

@@ -125,18 +125,35 @@ public class ASCommanderAU : ASAudioUnit
     public func eraseNote(x: Int, y: Int) {
         __interop__EraseNote(dsp, Int32(x), Int32(y))
     }
-    
-    public override var factoryPresets: [AUAudioUnitPreset]? {
-        return [
-            AUAudioUnitPreset(),
-            AUAudioUnitPreset()
-        ]
-    }
 
     public override func shouldAllocateInputBus() -> Bool  { return false }
 
     public override func shouldClearOutputBuffer() -> Bool { return false }
     
+    /// Factory presets are associated with an associative state array, `[String:Any]`, in
+    /// `factoryPresetsState`.
+
+    public override var factoryPresets: [AUAudioUnitPreset]? {
+        return [FactoryPresetA.preset]
+    }
+    
+    /// The state of each factory preset
+
+    public var factoryPresetsState: [[String:Any]?] {
+        return [FactoryPresetA.state]
+    }
+    
+    /// The current preset of the AudioUnit.
+    /// Assigning to this property loads the state of a preset.
+    
+    public override var currentPreset: AUAudioUnitPreset? {
+        didSet {
+            guard let preset = currentPreset else { return }
+            do    { fullStateForDocument = try presetState(for: preset) }
+            catch { print("[ASCommanderAU] currentPreset failed to load.") }
+        }
+    }
+
     public override var supportsUserPresets: Bool          { return true  }
 
     /// This property represents the total state of the AudioUnit. The state of the parameters, as well as
@@ -174,6 +191,16 @@ public class ASCommanderAU : ASAudioUnit
         }
     }
     
+    @discardableResult
+    public func loadFactoryPreset(number: Int) -> Bool {
+        guard let presets = factoryPresets else { return false }
+        guard !(number < 0) && number < presets.count else { return false }
+
+        fullStateForDocument = factoryPresetsState[number]
+
+        return true
+    }
+    
     /// Load the state of a user's AUAudioUnitPreset into the Assemble core.
     /// In order to synchronise the SKSequencer and the core, the SKSequencer must poll the core
     /// for its state after a preset has been loaded. Therefore, this method should be called from a layer
@@ -185,11 +212,9 @@ public class ASCommanderAU : ASAudioUnit
     public func loadFromPreset(number: Int) -> Bool {
         guard !(number < 0) && number < userPresets.count else { return false }
 
-        let preset = userPresets[number]
-        do    { fullStateForDocument = try presetState(for: preset) }
-        catch { return false }
+        currentPreset = userPresets[number]
 
-        return true
+        return currentPreset == userPresets[number]
     }
 
     /// Save the current state as a user preset.

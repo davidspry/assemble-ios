@@ -16,6 +16,8 @@ static const int kSequencerCurrentPattern = 0xAA03;
 static const int kSequencerNextPattern    = 0xAA04;
 static const int kSequencerPatternState   = 0xAA05;
 static const int kSequencerMode           = 0xAA06;
+static const int kSequencerBeats          = 0xAA07;
+static const int kSequencerTicks          = 0xAA08;
 
 // [CLOCK] 0xCA0[Parameter]
 // ===========================================

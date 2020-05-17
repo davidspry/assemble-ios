@@ -54,7 +54,7 @@ extension Transport {
         oscillators.addTarget(self, action: #selector(didSelectOscillator), for: .valueChanged)
         addSubview(oscillators)
 
-        let complement: CGFloat = -(buttonWidth * 3 + buttonMargin * 2)
+        let complement: CGFloat = -(buttonWidth * 2 + buttonMargin * 2)
 
         NSLayoutConstraint.activate([
             oscillators.widthAnchor.constraint(equalTo: widthAnchor, constant: complement),
@@ -65,13 +65,6 @@ extension Transport {
         ])
         
         oscillators.selectedSegmentIndex = 0
-        let font = UIFont.init(name: "JetBrainsMono-Regular", size: 14)
-        oscillators.setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .normal)
-        oscillators.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .selected)
-        oscillators.setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .highlighted)
-        oscillators.setTitleTextAttributes([.font : font as Any], for: .normal)
-        oscillators.layoutIfNeeded()
-
         oscillators.sendActions(for: .valueChanged)
     }
     

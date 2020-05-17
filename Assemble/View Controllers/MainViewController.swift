@@ -55,7 +55,6 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         super.viewDidLoad()
         addInBackground(computerKeyboard)
 
-        // Test: Update Sequencer position
         updater = CADisplayLink(target: self, selector: #selector(refreshInterface))
         updater.add(to: .main, forMode: .default)
         updater.preferredFramesPerSecond = 20
@@ -81,6 +80,7 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated);
+        loadFactoryPresetOnFirstUse()
         waveform.start()
     }
     
@@ -93,8 +93,21 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         {
             transport.pressPlayOrPause()
         }
-
+        
         Assemble.core.commander?.loadFromPreset(number: 0)
+        sequencer.initialiseFromUnderlyingState()
+        patterns.loadStates()
+        tempoLabel.reinitialise()
+    }
+    
+    func loadFactoryPresetOnFirstUse() {
+        let defaults = UserDefaults()
+        if let value = defaults.value(forKey: "FirstUse") as? Bool,
+               value == false {
+            return
+        }   else { defaults.setValue(false, forKey: "FirstUse") }
+        
+        Assemble.core.commander?.loadFactoryPreset(number: 0)
         sequencer.initialiseFromUnderlyingState()
         patterns.loadStates()
         tempoLabel.reinitialise()

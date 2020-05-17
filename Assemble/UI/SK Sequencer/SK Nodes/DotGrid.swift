@@ -34,7 +34,7 @@ class DotGrid : SKSpriteNode
         if  shape != currentShape {
             self.texture = DotGrid.drawDotGrid(shape: shape, spacing: spacing);
             currentShape = shape
-            print("[DotGrid] Redraw!")
+            print("[DotGrid] Redrawing")
         }
     }
     
@@ -74,7 +74,8 @@ class DotGrid : SKSpriteNode
     
     internal class func drawRow(on path: inout UIBezierPath, at y: CGFloat, columns: Int, spacing: CGSize)
     {
-        let r: CGFloat = (y - 1).remainder(dividingBy: 4) == 0 ? 4 : 2;
+        let t: CGFloat = CGFloat(Assemble.core.getParameter(kSequencerTicks))
+        let r: CGFloat = (y - 1).remainder(dividingBy: t) == 0 ? 3 : 2;
         for x in 1...columns
         {
             let centre = CGPoint(x: CGFloat(x) * spacing.width, y: y * spacing.height);

@@ -44,8 +44,8 @@ class ParameterLabel: PaddedLabel {
             guard let node = tree.parameter(withAddress: AUParameterAddress(parameter)) else { return }
 
             rawValue = Assemble.core.getParameter(parameter)
-            valueStrings = node.valueStrings
             parameterRange = node.minValue...node.maxValue
+            valueStrings = node.valueStrings
             value = rawValue
 
             switch (node.unit)
@@ -61,14 +61,15 @@ class ParameterLabel: PaddedLabel {
 
     public func initialise(with parameter: Int32, increment: Float, and type: ParameterLabelScale) {
         self.parameterScale = type.rawValue
-        self.parameterStep = increment
+        self.parameterStep  = increment
         self.parameter = parameter
         update()
     }
     
     public func reinitialise() {
         guard let parameter = parameter else { return }
-        value = Assemble.core.getParameter(parameter)
+        rawValue = Assemble.core.getParameter(parameter)
+        value    = rawValue
         update()
     }
     

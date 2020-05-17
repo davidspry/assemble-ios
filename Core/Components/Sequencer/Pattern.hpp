@@ -25,10 +25,10 @@ public:
     inline int length() noexcept { return h; }
     
     /// \brief Set the time signature of the pattern
-    /// \param beats The number of desired beats
-    /// \param subdivision The number of ticks per beat
+    /// \param value The value to be set
+    /// \param beats Whether the value represents the number of beats or the number of ticks per beat
 
-    void setTimeSignature(const int beats, const int subdivision);
+    void setTimeSignature(const int value, const bool beats);
 
     /// \brief Return the time signature, (beats, ticks), as a std::pair
 

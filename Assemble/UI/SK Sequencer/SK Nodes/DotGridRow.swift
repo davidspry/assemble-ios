@@ -47,7 +47,7 @@ class DotGridRow : SKSpriteNode
     internal class func drawRow(columns: Int, spacing: CGSize) -> CGPath
     {
         let path = UIBezierPath();
-        let r: CGFloat = 5;
+        let r: CGFloat = 4;
         
         for x in 1...columns
         {

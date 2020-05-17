@@ -280,7 +280,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="673" y="682" width="20" height="36"/>
+                                <rect key="frame" x="673" y="690" width="20" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
                                 </constraints>
@@ -355,9 +355,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-P7-LJq">
-                                <rect key="frame" x="1313" y="32" width="21" height="22"/>
+                                <rect key="frame" x="1310" y="32" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="YU9-Og-NOE"/>
+                                    <constraint firstAttribute="height" constant="24" id="kF3-NI-bOp"/>
+                                </constraints>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" image="circle.grid.hex.fill" catalog="system"/>
+                                <state key="normal" image="hexagon" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                </state>
                                 <connections>
                                     <segue destination="MYq-JU-ftL" kind="presentation" identifier="displayParameters" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0Db-aO-7p0"/>
                                 </connections>
@@ -377,7 +383,7 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ea2-P7-LJq" secondAttribute="trailing" constant="32" id="6Wr-oy-5ua"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="24" id="BUz-DE-yER"/>
-                            <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="8" id="BaF-Bz-xIA"/>
+                            <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="width" secondItem="f3D-RJ-dah" secondAttribute="width" id="Etg-Pz-DsQ"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="La5-QL-stQ" secondAttribute="bottom" constant="32" id="G8A-Hk-fdz"/>
@@ -420,6 +426,6 @@
     </scenes>
     <resources>
         <image name="circle" catalog="system" width="128" height="121"/>
-        <image name="circle.grid.hex.fill" catalog="system" width="128" height="112"/>
+        <image name="hexagon" catalog="system" width="128" height="124"/>
     </resources>
 </document>

@@ -3,7 +3,6 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 #include "ASCommanderCore.hpp"
-#include <iostream>
 
 /// \brief Initialise the Commander. This is called by `init` from the DSP layer.
 /// \param sampleRate The sample rate to propagate to the audio components
@@ -21,10 +20,6 @@ void ASCommanderCore::init(double sampleRate)
 
     printf("[ASCommanderCore] Updating sample rate to %.0f\n", audioRate);
     __state__.reserve(6000);
-    
-    comp.initRuntime();
-    comp.setRatio(4);
-    comp.setThresh(65);
 }
 
 /// \brief Toggle the state of the Clock, which drives the Sequencer.

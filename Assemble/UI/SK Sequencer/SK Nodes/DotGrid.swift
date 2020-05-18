@@ -83,5 +83,4 @@ class DotGrid : SKSpriteNode
             path.addArc(withCenter: centre, radius: r, startAngle: 0, endAngle: 360, clockwise: true);
         }
     }
-
 }

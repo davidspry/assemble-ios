@@ -15,8 +15,6 @@
 #include "Sequencer.hpp"
 #include "Clock.hpp"
 
-#include "SimpleComp.h"
-
 class ASCommanderCore
 {
 public:
@@ -48,13 +46,11 @@ public:
     const float get(uint64_t parameter);
 
 private:
-    Clock       clock = { 90 };
+    Clock       clock = { 100 };
     Sequencer   sequencer;
     Synthesiser synthesiser;
     Vibrato     vibrato;
     StereoDelay delay = {&clock};
-    
-    chunkware_simple::SimpleComp  comp;
 
 private:
     float sampleRate;

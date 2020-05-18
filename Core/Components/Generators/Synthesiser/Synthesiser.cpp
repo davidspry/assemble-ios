@@ -71,7 +71,7 @@ const float Synthesiser::nextSample()
         bank = bank + delta;
     }
 
-    return sample * 0.5;//0.0625F;
+    return sample * 0.0833F;
 }
 
 /// \brief Get the parameter values of the Synthesiser.

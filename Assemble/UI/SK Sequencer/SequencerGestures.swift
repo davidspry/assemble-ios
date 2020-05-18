@@ -8,26 +8,41 @@ import SpriteKit
 
 extension SequencerScene
 {
-    /**
-     Destroy the Note at the selected point.
-     
-     After the user selects a Note by double-tapping and presses the delete button that appears,
-     the Note needs to be removed from the SequencerScene, where it is drawn, and the
-     Matrix data structure in Assemble's core C++ context. This method performs initiates
-     both of these tasks.
-     */
+    
+    /// Destroy the note at the selected point.
+    ///
+    /// After the user selects a note by double-tapping and presses the delete button that appears,
+    /// the Note needs to be removed from the SequencerScene, where it is drawn, and the
+    /// Matrix data structure in Assemble's core C++ context. This method performs initiates
+    /// both of these tasks.
+    ///
+    /// - Parameter sender: The `UIButton` that was pressed
     
     @objc func binPressed(sender: UIButton) {
-        eraseNote()
+        guard let xy = noteToErase else { return }
+        eraseNote(xy)
         hideEraseNoteView()
-        Assemble.core.eraseNote(xy: selected)
+        Assemble.core.eraseNote(xy: xy)
     }
     
-    @objc func doubleTapped(_ gesture: UITapGestureRecognizer) {
+    /// Handle a long press on the Sequencer.
+    ///
+    /// The `UILongPressGestureRecogniser` is used to select notes for deletion. When a note is
+    /// selected by long pressing, a button appears above the note to allow the user to delete the note.
+    ///
+    /// - Parameter gesture: The gesture recogniser used to detect the press
+
+    @objc func longPressed(_ gesture: UILongPressGestureRecognizer)
+    {
+        if gesture.state != .began { return }
         selected = pointFromGesture(gesture)
-        guard noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx] != nil else { return }
+        guard noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx] != nil else {
+            return
+        }
         eraseButtonView.center = viewPointFromIndices(selected)
         eraseButtonView.center = eraseButtonView.center.applying(.init(translationX: 0, y: -45))
+        noteToErase = selected
+        
         showEraseNoteView()
     }
 
@@ -48,13 +63,17 @@ extension SequencerScene
         cursor.run(move);
     }
 
+    /// Compute the grid coordinate that matches the location of a `UITouch`
+
     internal func pointFromTouch(_ touch: UITouch) -> CGPoint {
         let location = convertPoint(toView: touch.location(in: self));
 
         return indicesFromPoint(x: location.x, y: location.y)
     }
     
-    internal func pointFromGesture(_ gesture: UITapGestureRecognizer) -> CGPoint {
+    /// Compute the grid coordinate the matches the location of a `UILongPressGestureRecognizer` touch
+
+    internal func pointFromGesture(_ gesture: UILongPressGestureRecognizer) -> CGPoint {
         let location = gesture.location(in: view);
         
         return indicesFromPoint(x: location.x, y: location.y)

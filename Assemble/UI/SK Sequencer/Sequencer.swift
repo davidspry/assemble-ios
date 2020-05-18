@@ -34,7 +34,7 @@ class Sequencer : SKView, KeyboardListener
     }
     
     func eraseNote() {
-        UI.eraseNote()
+        UI.eraseNote(UI.selected)
         Assemble.core.eraseNote(xy: UI.selected)
     }
     

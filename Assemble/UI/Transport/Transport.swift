@@ -37,6 +37,7 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     {
         let playing = Assemble.core.playOrPause()
         let image = playing ? Icons.pause : Icons.play
+        NotificationCenter.default.post(name: .playOrPause, object: nil)
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.15, delay: 0.0, options: .curveEaseInOut, animations: {

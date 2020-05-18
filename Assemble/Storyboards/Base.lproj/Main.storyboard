@@ -355,10 +355,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-P7-LJq">
-                                <rect key="frame" x="1310" y="32" width="24" height="24"/>
+                                <rect key="frame" x="1294" y="8" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="YU9-Og-NOE"/>
-                                    <constraint firstAttribute="height" constant="24" id="kF3-NI-bOp"/>
+                                    <constraint firstAttribute="width" constant="64" id="YU9-Og-NOE"/>
+                                    <constraint firstAttribute="height" constant="64" id="kF3-NI-bOp"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" image="hexagon" catalog="system">
@@ -381,14 +381,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ea2-P7-LJq" secondAttribute="trailing" constant="32" id="6Wr-oy-5ua"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ea2-P7-LJq" secondAttribute="trailing" constant="8" id="6Wr-oy-5ua"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="24" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="width" secondItem="f3D-RJ-dah" secondAttribute="width" id="Etg-Pz-DsQ"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="La5-QL-stQ" secondAttribute="bottom" constant="32" id="G8A-Hk-fdz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
-                            <constraint firstItem="ea2-P7-LJq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="OZI-Xd-Q80"/>
+                            <constraint firstItem="ea2-P7-LJq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="OZI-Xd-Q80"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
                             <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="OJS-ew-lo6" secondAttribute="leading" id="U0C-u8-9rw"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="14" id="Wn2-LC-p8R"/>

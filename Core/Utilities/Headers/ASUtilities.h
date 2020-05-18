@@ -47,6 +47,28 @@ namespace Assemble::Utilities
         return a + t * (b - a);
     }
 
+    /// \brief Compute Catmull-Rom cubic interpolation at the given index in the given table
+    /// \param index The position in the table to interpolate a value for
+    /// \param table A pointed to an array of floats
+    /// \param capacity The capacity of the table
+
+    static inline const float cerp(const float index, const float *table, const int capacity)
+    {
+        const int a = (int) index;
+        const int b = a + 1 - static_cast<int>((a + 1) >= capacity) * capacity;
+        const int c = b + 1 - static_cast<int>((b + 1) >= capacity) * capacity;
+        const int d = a - 1 + capacity - static_cast<int>((a - 1 + capacity) >= capacity) * capacity;
+        const float t = index - a;
+        const float T = t * t;
+        
+        const float A = -0.5F * table[d] + 1.5F * table[a] - 1.5F * table[b] + 0.5F * table[c];
+        const float B = table[d] - 2.5F * table[a] + 2.0F * table[b] - 0.5F * table[c];
+        const float C = -0.5F * table[d] + 0.5F * table[b];
+        const float D = table[a];
+        
+        return A * t * T + B * T + C * t + D;
+    }
+
     /// \brief Return the input value bounded by the range [min, max].
     /// \param input The value to be bounded by the given range
     /// \param min The minimum value of the output range, inclusive.

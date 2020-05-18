@@ -26,11 +26,18 @@ void AHREnvelope::setSampleRate(float sampleRate)
     set(attackInMs, holdInMs, releaseInMs);
 }
 
+/// \brief Prepare the envelope to begin a new cycle
+/// If the envelope is not closed, compute the inverse function
+/// of the attack curve in order to begin the envelope's phase
+/// with a time value that corresponds to its current amplitude.
+
 void AHREnvelope::prepare()
 {
+    amplitude = std::fmax(0.0F, amplitude);
+    
+    time = (amplitude > 0.F) ? computeTimeOnRetrigger() : 0;
+    
     setMode(Attack);
-    amplitude = 0.0F;
-    time = 0;
 }
 
 /// \brief Get the parameter values of the AHREnvelope.

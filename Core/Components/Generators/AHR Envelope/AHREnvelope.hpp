@@ -23,6 +23,16 @@ public:
     const float nextSample();
 
 public:
+    /// \brief  Compute the inverse function of the attack curve
+    /// \return The time value that corresponds with the envelope's
+    /// current amplitude value.
+
+    inline const int computeTimeOnRetrigger()
+    {
+        return attackInSamples * std::cbrt(amplitude);
+    }
+
+public:
     const float get(uint64_t parameter);
     void set(uint64_t parameter, float value);
     void set(float attack, float hold, float release);

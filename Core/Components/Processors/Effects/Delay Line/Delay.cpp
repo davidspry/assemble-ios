@@ -133,6 +133,7 @@ void Delay::process(float& sample)
     else           fadeIn();
 
     delay = delay + 5E-5F * (target - delay);
+    sample = (1.0F / std::atan(2.0F) * std::atan(2.0F * sample));
     samples[whead] = gain * sample + feedback * samples[rhead];
     const float lerp = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
 
@@ -142,6 +143,6 @@ void Delay::process(float& sample)
     rhead = whead - delay;
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
-
+    
     sample = (1.F - mix) * sample + mix * lerp;
 }

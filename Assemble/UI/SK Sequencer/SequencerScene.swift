@@ -9,8 +9,8 @@ import SpriteKit
 class SequencerScene : SKScene, UIGestureRecognizerDelegate
 {
     var noteToErase   : CGPoint?
-    let tapRecogniser = UITapGestureRecognizer()
     var eraseButtonView = UIView()
+    let longPressRecogniser = UILongPressGestureRecognizer()
 
     let grid   = DotGrid()
     let row    = DotGridRow()
@@ -18,8 +18,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     var noteShapes = [[NoteShapeNode]]()
     var pattern: Int = 0
     
-    var noteStrings = [[[String?]]]()
     var noteString: String?
+    var noteStrings = [[[String?]]]()
     
     var spacing: CGSize = .zero
     var selected: CGPoint = .zero
@@ -28,9 +28,10 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     {
         super.init(size: size);
         
-        tapRecogniser.delegate = self
-        tapRecogniser.numberOfTapsRequired = 2
-        tapRecogniser.cancelsTouchesInView = false
+        longPressRecogniser.delegate = self
+        longPressRecogniser.minimumPressDuration = 1
+        longPressRecogniser.numberOfTouchesRequired = 1
+        longPressRecogniser.cancelsTouchesInView = false
 
         spacing.width  = size.width  / Assemble.patternWidth
         spacing.height = size.height / Assemble.patternHeight
@@ -68,8 +69,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     }
 
     override func didMove(to view: SKView) {
-        view.addGestureRecognizer(self.tapRecogniser)
-        tapRecogniser.addTarget(self, action: #selector(SequencerScene.doubleTapped(_:)))
+        view.addGestureRecognizer(self.longPressRecogniser)
+        longPressRecogniser.addTarget(self, action: #selector(SequencerScene.longPressed(_:)))
         
         let width: CGFloat = 35
         let button = UIButton(frame: frame)
@@ -178,8 +179,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
     }
 
-    func eraseNote() {
-        let xy = selected
+    func eraseNote(_ xy: CGPoint) {
         let p = Assemble.core.currentPattern
         DispatchQueue.main.async {
             self.noteShapes[p].forEach { node in

@@ -6,7 +6,7 @@ import UIKit
 
 struct StereoDelayParameters : ParameterMenu {
     
-    var name: String = "Stereo Delay"
+    var name: String = "STEREO DELAY"
     
     var toggle: Int32? = kStereoDelayToggle
     

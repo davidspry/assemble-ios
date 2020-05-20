@@ -40,7 +40,7 @@ extension SequencerScene
             return
         }
         eraseButtonView.center = viewPointFromIndices(selected)
-        eraseButtonView.center = eraseButtonView.center.applying(.init(translationX: 0, y: -45))
+        eraseButtonView.center = eraseButtonView.center.applying(.init(translationX: 0, y: -25))
         noteToErase = selected
         
         showEraseNoteView()

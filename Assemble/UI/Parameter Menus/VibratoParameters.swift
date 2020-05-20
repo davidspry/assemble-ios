@@ -6,7 +6,7 @@ import UIKit
 
 struct VibratoParameters : ParameterMenu {
     
-    var name: String = "Vibrato"
+    var name: String = "VIBRATO"
     
     var toggle: Int32? = kVibratoToggle
     

@@ -32,13 +32,13 @@
 		143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01B243F50520058AE40 /* ASCommanderDSP.mm */; };
 		143FB021243F63620058AE40 /* ASCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB020243F63620058AE40 /* ASCommander.swift */; };
 		143FB023243F67500058AE40 /* ASComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB022243F67500058AE40 /* ASComponent.swift */; };
+		14431B952475855900D59DED /* Assemble_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 14431B942475855900D59DED /* Assemble_1.png */; };
 		144A11672457166C000F2B4C /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 144A11662457166C000F2B4C /* Clock.cpp */; };
 		144D862B246D1F4100F6EDD4 /* TransportListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D862A246D1F4100F6EDD4 /* TransportListener.swift */; };
 		144D862D246D3A9300F6EDD4 /* StereoDelayParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D862C246D3A9300F6EDD4 /* StereoDelayParameters.swift */; };
 		144D862F246D3B2A00F6EDD4 /* VibratoParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D862E246D3B2A00F6EDD4 /* VibratoParameters.swift */; };
 		144D8631246D3C4900F6EDD4 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */; };
 		144D8633246D4BA300F6EDD4 /* OscillatorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */; };
-		144D8635246D703400F6EDD4 /* Assemble_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 144D8634246D703400F6EDD4 /* Assemble_1.png */; };
 		144D8638246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */; };
 		14556A7C2472954900FB2392 /* NSNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14556A7B2472954900FB2392 /* NSNotifications.swift */; };
 		1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D1272452C5110093B541 /* KeyboardHandler.swift */; };
@@ -91,6 +91,8 @@
 		14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */; };
 		14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */; };
 		14E6551F24718A7100D619F0 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6551E24718A7100D619F0 /* FactoryPresetA.swift */; };
+		14EEB8CB247572FF007F0D37 /* PersistenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EEB8CA247572FF007F0D37 /* PersistenceViewController.swift */; };
+		14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EEB8CC24757455007F0D37 /* PersistenceViewController+.swift */; };
 		14EFEDA9242E350100242298 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
 		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
 		14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */; };
@@ -161,6 +163,7 @@
 		143FB01D243F52820058AE40 /* ASCommanderCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASCommanderCore.hpp; sourceTree = "<group>"; };
 		143FB020243F63620058AE40 /* ASCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommander.swift; sourceTree = "<group>"; };
 		143FB022243F67500058AE40 /* ASComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASComponent.swift; sourceTree = "<group>"; };
+		14431B942475855900D59DED /* Assemble_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble_1.png; sourceTree = "<group>"; };
 		144354152466E57200F3142D /* ASSawtoothTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSawtoothTable.h; sourceTree = "<group>"; };
 		144A11652456CF4A000F2B4C /* ASParameters.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; path = ASParameters.h; sourceTree = "<group>"; };
 		144A11662457166C000F2B4C /* Clock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
@@ -169,7 +172,6 @@
 		144D862E246D3B2A00F6EDD4 /* VibratoParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibratoParameters.swift; sourceTree = "<group>"; };
 		144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorSelector.swift; sourceTree = "<group>"; };
-		144D8634246D703400F6EDD4 /* Assemble_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble_1.png; sourceTree = "<group>"; };
 		144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorsHeaderCell.swift; sourceTree = "<group>"; };
 		14556A7B2472954900FB2392 /* NSNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotifications.swift; sourceTree = "<group>"; };
 		1458D1272452C5110093B541 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
@@ -246,6 +248,8 @@
 		14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ValueTransition.hpp; sourceTree = "<group>"; };
 		14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Medium.ttf"; sourceTree = "<group>"; };
 		14E6551E24718A7100D619F0 /* FactoryPresetA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetA.swift; sourceTree = "<group>"; };
+		14EEB8CA247572FF007F0D37 /* PersistenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceViewController.swift; sourceTree = "<group>"; };
+		14EEB8CC24757455007F0D37 /* PersistenceViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceViewController+.swift"; sourceTree = "<group>"; };
 		14EFEDA8242E350100242298 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDrawing.swift; sourceTree = "<group>"; };
 		14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderCell.swift; sourceTree = "<group>"; };
@@ -617,6 +621,8 @@
 				14DAC38C2417772C005654EA /* MainViewController.swift */,
 				14280341246C1B27006775AE /* ParametersViewController.swift */,
 				14280348246C2980006775AE /* ParametersViewController+.swift */,
+				14EEB8CA247572FF007F0D37 /* PersistenceViewController.swift */,
+				14EEB8CC24757455007F0D37 /* PersistenceViewController+.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -729,7 +735,7 @@
 		14E6551B2471455B00D619F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				144D8634246D703400F6EDD4 /* Assemble_1.png */,
+				14431B942475855900D59DED /* Assemble_1.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -831,9 +837,9 @@
 				14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */,
 				14DAC3922417772E005654EA /* Assets.xcassets in Resources */,
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
-				144D8635246D703400F6EDD4 /* Assemble_1.png in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
 				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
+				14431B952475855900D59DED /* Assemble_1.png in Resources */,
 				1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -913,8 +919,10 @@
 				14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */,
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
+				14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */,
 				149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */,
 				14280350246C3DB9006775AE /* OscillatorParameters.swift in Sources */,
+				14EEB8CB247572FF007F0D37 /* PersistenceViewController.swift in Sources */,
 				14280342246C1B27006775AE /* ParametersViewController.swift in Sources */,
 				149A1D2E2459E0C900F083D0 /* PatternOverview.swift in Sources */,
 				14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */,

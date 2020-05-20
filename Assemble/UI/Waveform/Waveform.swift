@@ -18,28 +18,26 @@ class Waveform: UIView {
 
     /// The display mode of the Waveform view
 
-    public var mode: Visualisation = .waveform
+    private var mode: Visualisation = .waveform
 
     private var updater: CADisplayLink!
     private var waveform = CAShapeLayer()
     
-    /**
-     `r`, `w` represent indices that define where data should be written to and read from.
-     `n` is a flag representing the presence of new data to be read.
-
-     In order to avoid a data race, the real-time thread should not write to the memory that the UI thread is reading from.
-
-     There are two "channels" of data for each of the stereo output channels in `ldata` and `rdata`.
-
-     When the UI thread needs new data, it performs an atomic XOR operation:
-     `r = r ^ n`
-     `w = w ^ n`
-
-     If `n` has been set, the read/write indices will swap. Otherwise, they'll remain the same until
-     the write stage has completed and new data is present to be written.
-     
-     - SeeAlso: "Double Buffering" https://www.youtube.com/watch?v=ndeN983j_GQ
-     */
+    /// `r`, `w` represent indices that define where data should be written to and read from.
+    /// `n` is a flag representing the presence of new data to be read.
+    ///
+    /// In order to avoid a data race, the real-time thread should not write to the memory that the UI thread is reading from.
+    ///
+    /// There are two "channels" of data for each of the stereo output channels in `ldata` and `rdata`.
+    ///
+    /// When the UI thread needs new data, it performs an atomic XOR operation:
+    /// `r = r ^ n`
+    /// `w = w ^ n`
+    ///
+    /// If `n` has been set, the read/write indices will swap. Otherwise, they'll remain the same until
+    /// the write stage has completed and new data is present to be written.
+    ///
+    /// - SeeAlso: "Double Buffering" https://www.youtube.com/watch?v=ndeN983j_GQ
 
     private var r: UInt32 = 1
     private var w: UInt32 = 0
@@ -76,20 +74,21 @@ class Waveform: UIView {
 
     private var gain: CGFloat = 0.85
 
-    /**
-     Install a tap on the output bus of the Assemble core in order to access the sample data.
-
-     Samples from the Assemble core are copied to a block of memory reserved for `points` samples.
-     The samples are accumulated from the tap in buffer sizes of `bufferSize`, but only `points` values are produced. Each of these values is the arithmetic mean of some sub-sequence of `step` samples.
-
-     For example, `points[k]` is the average of the samples in `floatBuffer[0][k ..< k + step]`.
-
-     `vDSP_meanv` is from the `Accelerate` framework, which leverages the hardware's capacity for vectorisation in order to perform tasks like this efficiently.
-
-     After copying the data into the appropriate channel in `data`, set `n`to `1`, which signals that new data is available for the UI thread to read from.
-
-     - Note: This tap should be removed in `deinit`.
-    */
+    /// Install a tap on the output bus of the Assemble core in order to access the sample data.
+    ///
+    /// Samples from the Assemble core are copied to a block of memory reserved for `points` samples.
+    /// The samples are accumulated from the tap in buffer sizes of `bufferSize`, but only `points` values
+    /// are produced. Each of these values is the arithmetic /// mean of some sub-sequence of `step` samples.
+    ///
+    /// For example, `points[k]` is the average of the samples in `floatBuffer[0][k ..< k + step]`.
+    ///
+    /// `vDSP_meanv` is from the `Accelerate` framework, which leverages the hardware's capacity for
+    /// vectorisation in order to perform tasks like this efficiently.
+    ///
+    /// After copying the data into the appropriate channel in `data`, set `n`to `1`, which signals that
+    /// new data is available for the UI thread to read from.
+    ///
+    /// - Note: This tap should be removed in `deinit`.
 
     private func installTap() {
         Assemble.core.unit?.installTap(onBus: 0, bufferSize: _bufferSize, format: Assemble.format, block: { buffer, time in

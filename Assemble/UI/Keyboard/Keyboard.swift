@@ -5,12 +5,10 @@
 
 import UIKit
 
-/**
- A single-touch musical keyboard that can broadcast MIDI note numbers from its keys.
- 
- - Note: This class owes its design in part to `AKKeyboardView.swift` from the **AudioKit** framework,
-         which was written by Aurelius Prochazka.
- */
+/// A single-touch musical keyboard that can broadcast MIDI note numbers from its keys.
+///
+/// - Note: This class owes its design in part to `AKKeyboardView.swift` from the **AudioKit** framework,
+/// which was written by Aurelius Prochazka.
 
 class Keyboard : UIView, KeyboardSettingsListener
 {
@@ -20,13 +18,17 @@ class Keyboard : UIView, KeyboardSettingsListener
     var isVisible: Bool = true
     
     var shapeLayers = [CAShapeLayer]()
-    var octaveLabel = UILabel()
 
     var listeners = MulticastDelegate<KeyboardListener>()
     var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
     var octave : Int = 3
     let octaves: Int = 1
+    var octaveLabel = UILabel()
+    var octaveString : String {
+        return "OCT \(octave)"
+    }
+
     var oscillator: OscillatorShape = .sine
 
     internal var margins: UIEdgeInsets {
@@ -69,7 +71,7 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     func didChangeOctave(to octave: Int) {
         self.octave = octave
-        octaveLabel.text = octave.description
+        octaveLabel.text = octaveString
     }
     
     func didChangeOscillator(to oscillator: OscillatorShape) {
@@ -100,7 +102,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         default: break
         }
         
-        octaveLabel.text = octave.description
+        octaveLabel.text = octaveString
         settingsListeners.invoke({$0.didChangeOctave(to: octave)})
     }
 
@@ -113,16 +115,16 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     internal func initialiseControls(in frame: CGRect) {
         let button: Int = 35
-        let controlMargin: CGFloat = 5.0
+        let controlMargin: CGFloat = 0.0
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
         var origin = CGPoint(x: 0, y: frame.midY - CGFloat(button) * 0.5)
-        let weight = UIImage.SymbolConfiguration(weight: .semibold)
         var arrow: UIImage!
         
         let octaveU = UIButton()
         let octaveD = UIButton()
         
         origin.x = controlMargin
-        arrow = UIImage(systemName: "arrowtriangle.down.fill", withConfiguration: weight)
+        arrow = UIImage(systemName: "arrowtriangle.down.fill", withConfiguration: configuration)
         octaveD.frame = CGRect(origin: origin, size: .square(button))
         octaveD.setImage(arrow, for: .normal)
         octaveD.tintColor = .white
@@ -131,7 +133,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         addSubview(octaveD)
         
         origin.x = bounds.width - controlMargin - CGFloat(button)
-        arrow = UIImage(systemName: "arrowtriangle.up.fill", withConfiguration: weight)
+        arrow = UIImage(systemName: "arrowtriangle.up.fill", withConfiguration: configuration)
         octaveU.frame = CGRect(origin: origin, size: .square(button))
         octaveU.setImage(arrow, for: .normal)
         octaveU.tintColor = .white
@@ -139,11 +141,11 @@ class Keyboard : UIView, KeyboardSettingsListener
         octaveU.addTarget(self, action: #selector(setOctave), for: .touchDown)
         addSubview(octaveU)
         
-        origin.x = frame.midX
-        origin.y = controlMargin
-        octaveLabel.frame = CGRect(origin: origin, size: .square(15))
-        octaveLabel.text = octave.description
-        octaveLabel.font = UIFont(name: "JetBrainsMono-Regular", size: 13)
+        origin.x = frame.minX
+        origin.y = frame.minY
+        octaveLabel.frame = CGRect(origin: origin, size: CGSize(width: 55, height: 15))
+        octaveLabel.font = UIFont(name: "JetBrainsMono-Regular", size: 12)
+        octaveLabel.text = octaveString
         octaveLabel.textAlignment = .center
         octaveLabel.textColor = .white
         addSubview(octaveLabel)

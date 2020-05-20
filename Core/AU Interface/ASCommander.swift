@@ -47,8 +47,19 @@ import AudioUnit
     }
     
     public var ticking: Bool {
-        guard let commander = commander else { return false }
-        return commander.ticking
+        get {
+            guard let commander = commander else { return false }
+            return    commander.ticking
+        }
+        
+        set (shouldTick) {
+            guard let commander = commander else { return }
+            let ticking = commander.ticking
+            if        shouldTick != ticking {
+                      commander.playOrPause()
+            }
+        }
+        
     }
     
     func setParameter(_ parameter: Int32, to value: Float) {

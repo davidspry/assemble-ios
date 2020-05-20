@@ -29,7 +29,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         super.init(size: size);
         
         longPressRecogniser.delegate = self
-        longPressRecogniser.minimumPressDuration = 1
+        longPressRecogniser.minimumPressDuration = 0.8
         longPressRecogniser.numberOfTouchesRequired = 1
         longPressRecogniser.cancelsTouchesInView = false
 

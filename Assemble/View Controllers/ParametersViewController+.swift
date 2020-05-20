@@ -15,7 +15,7 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
         default:               fatalError()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (tableView)
         {

@@ -95,6 +95,7 @@ public class ASCommanderAU : ASAudioUnit
     /// Play or pause the sequencer by toggling the state of the underlying clock.
     /// - Returns: `true` if the clock begins to tick; `false` otherwise
 
+    @discardableResult
     public func playOrPause() -> Bool {
         return __interop__PlayOrPause(dsp)
     }

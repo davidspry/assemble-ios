@@ -8,10 +8,13 @@
 #include "ASHeaders.h"
 
 class ValueTransition {
-    
+
 public:
     ValueTransition()
     { set(0.1F, 1.0F, 1.0F); }
+    
+    ValueTransition(float target, float timeInSeconds)
+    { set(target, timeInSeconds); }
     
     ValueTransition(float value, float target, float timeInSeconds)
     { set(value, target, timeInSeconds); }

@@ -16,7 +16,7 @@ template <WaveTableType W>
 class BandlimitedOscillator : public Oscillator
 {
 public:
-    BandlimitedOscillator() {}
+    BandlimitedOscillator() { }
     BandlimitedOscillator(const float frequency)
     {
         load(frequency);

@@ -7,12 +7,5 @@
 #define ASOSCILLATORS_H
 
 #include "BandlimitedOscillator.hpp"
-//#include "SawtoothWTOscillator.hpp"
-//#include "SawtoothOscillator.hpp"
-//#include "TriangleOscillator.hpp"
-//#include "SquareWTOscillator.hpp"
-//#include "SquareOscillator.hpp"
-#include "SineWTOscillator.hpp"
-#include "SineOscillator.hpp"
 
 #endif

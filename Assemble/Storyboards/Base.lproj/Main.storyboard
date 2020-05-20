@@ -311,11 +311,11 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4G-8C-h7M" customClass="PatternOverview" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="1224" y="933" width="110" height="55"/>
+                                <rect key="frame" x="1214" y="928" width="120" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="110" id="mdQ-th-prj"/>
-                                    <constraint firstAttribute="height" constant="55" id="nvl-cp-w0M"/>
+                                    <constraint firstAttribute="width" constant="120" id="mdQ-th-prj"/>
+                                    <constraint firstAttribute="height" constant="60" id="nvl-cp-w0M"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1n-M5-aq6" customClass="Transport" customModule="Assemble" customModuleProvider="target">
@@ -326,16 +326,14 @@
                                     <constraint firstAttribute="height" constant="50" id="Oxd-NU-iBq"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j">
-                                <rect key="frame" x="491" y="208" width="100" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j">
+                                <rect key="frame" x="875" y="23" width="100" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BaZ-3G-8Wh"/>
                                     <constraint firstAttribute="width" constant="100" id="I94-B9-QK7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <state key="normal" title="TRY SAVE">
-                                    <color key="titleColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
+                                <state key="normal" title="SAVE"/>
                                 <connections>
                                     <action selector="didTrySave:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W4g-W2-uHz"/>
                                 </connections>
@@ -347,8 +345,8 @@
                                     <constraint firstAttribute="width" constant="100" id="diu-U8-zun"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <state key="normal" title="TRY LOAD">
-                                    <color key="titleColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="LOAD">
+                                    <color key="titleColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="didTryLoad:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c19-1r-Zos"/>
@@ -361,8 +359,8 @@
                                     <constraint firstAttribute="height" constant="64" id="kF3-NI-bOp"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <state key="normal" image="hexagon" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
+                                <state key="normal" image="slider.horizontal.3" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23" weight="semibold"/>
                                 </state>
                                 <connections>
                                     <segue destination="MYq-JU-ftL" kind="presentation" identifier="displayParameters" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0Db-aO-7p0"/>
@@ -378,9 +376,27 @@
                                     <action selector="didChangeMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pzl-Xt-w6a"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Init" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zG-sF-KW1">
+                                <rect key="frame" x="491" y="32" width="384" height="32"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="5dc-Hv-7Aw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="2ob-Lz-NiG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ea2-P7-LJq" secondAttribute="trailing" constant="8" id="6Wr-oy-5ua"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="24" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
@@ -390,20 +406,22 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="ea2-P7-LJq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="OZI-Xd-Q80"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
-                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="OJS-ew-lo6" secondAttribute="leading" id="U0C-u8-9rw"/>
+                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="1zG-sF-KW1" secondAttribute="trailing" id="U0C-u8-9rw"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="14" id="Wn2-LC-p8R"/>
+                            <constraint firstItem="1zG-sF-KW1" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" id="YHI-ep-bHL"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Z58-s1-Oy3"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="f3D-RJ-dah" firstAttribute="width" secondItem="K3i-2N-gT6" secondAttribute="width" id="c62-Hj-2fg"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
-                            <constraint firstItem="OJS-ew-lo6" firstAttribute="top" secondItem="qbC-Vu-c5j" secondAttribute="bottom" constant="32" id="ez8-Vj-qBh"/>
                             <constraint firstItem="f3D-RJ-dah" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="mk7-aQ-dcl"/>
+                            <constraint firstItem="1zG-sF-KW1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ngu-7C-CZV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="O4G-8C-h7M" secondAttribute="bottom" constant="16" id="oZL-NT-XfH"/>
                             <constraint firstItem="f3D-RJ-dah" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="24" id="p44-gs-vMN"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-30" id="pDd-HK-iyj"/>
                             <constraint firstItem="La5-QL-stQ" firstAttribute="trailing" secondItem="OJS-ew-lo6" secondAttribute="trailing" id="s2U-OO-gnZ"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="scF-YI-kja"/>
+                            <constraint firstItem="1zG-sF-KW1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="v4l-9w-nuE"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yAo-Uo-CYW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -426,6 +444,6 @@
     </scenes>
     <resources>
         <image name="circle" catalog="system" width="128" height="121"/>
-        <image name="hexagon" catalog="system" width="128" height="124"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
     </resources>
 </document>

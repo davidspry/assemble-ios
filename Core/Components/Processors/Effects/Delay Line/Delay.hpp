@@ -11,12 +11,15 @@
 #include "ASParameters.h"
 #include "Clock.hpp"
 
+/// \brief A simple delay line with feedback that uses interpolation in order to smoothly vary between delay lengths.
+
 class Delay
 {
 public:
+    /// \brief Initialise the Delay with a Clock who should define the tempo of the Delay
+
     Delay(Clock *clock);
 
-public:
     /// \brief Consume a new sample and return the next sample
     /// \param sample The sample to consume
 
@@ -56,13 +59,7 @@ public:
     /// \param milliseconds The number of milliseconds to inject
 
     void inject(int milliseconds);
-    
-    /// \brief Select the next musical delay time factor from a list of delay times.
-    /// \param shorter True if the delay time should become shorter, or false otherwise.
 
-    void cycleDelayTime(const bool shorter);
-
-private:
     /// \brief Given an index, return the corresponding musical time factor.
     /// \note Indices are expected to reach this function as a parameter value via the parameter system.
     /// \param index The index whose corresponding musical time factor is being requested.
@@ -70,27 +67,42 @@ private:
 
     const float parseMusicalTimeParameterIndex(const int index);
 
-public:
+    /// \brief Set the state of the Delay to `status`, where status represents
+    /// whether or not the Delay should consume new samples from its input.
+    /// \param status The desired state of the Delay
+
     inline bool toggle(const bool status)
     {
         return !(bypassed = !status);
     }
 
+    /// \brief Reduce the input gain of the Delay to 0 gradually
+    
     inline void fadeOut() { gain = std::max(0.F, gain - 0.0001F); }
+    
+    /// \brief Increase the input gain of the Delay to 1 gradually
+
     inline void  fadeIn() { gain = std::min(1.F, gain + 0.0001F); }
 
 private:
+    /// \brief Synchronise the Delay with its Clock's tempo
+
     inline void update()  { setInMusicalTime(time); }
 
 private:
+    /// \brief The writehead as an array index
+    
     int   whead;
+    
+    /// \brief The readhead as an array index
+
     float rhead;
 
 private:
-    int offsetInSamples = 0;
-    int targetAsIndex;
     float delay;
     float target;
+    int targetAsIndex;
+    int offsetInSamples = 0;
 
 private:
     float mix      = 0.35F;
@@ -103,8 +115,8 @@ private:
     std::vector<float> samples;
 
 private:
-    uint16_t bpm;
     float time;
+    uint16_t bpm;
     Clock *clock;
 };
 

@@ -117,11 +117,6 @@ void Delay::inject(int milliseconds)
     setInMusicalTime(time);
 }
 
-void Delay::cycleDelayTime(const bool shorter)
-{
-    printf("[Unimplemented] Delay::cycleDelayTime(const bool shorter)");
-}
-
 /// \brief Process the incoming sample
 /// \param sample A sample to process
 
@@ -133,9 +128,8 @@ void Delay::process(float& sample)
     else           fadeIn();
 
     delay = delay + 5E-5F * (target - delay);
-    sample = (1.0F / std::atan(2.0F) * std::atan(2.0F * sample));
-    samples[whead] = gain * sample + feedback * samples[rhead];
-    const float lerp = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
+    samples[whead] = gain * sample - feedback * samples[rhead];
+    const float interpolated = Assemble::Utilities::cerp(rhead, &samples[0], capacity);
 
     whead = whead + 1;
     if (whead >= capacity) whead = 0;
@@ -143,6 +137,6 @@ void Delay::process(float& sample)
     rhead = whead - delay;
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
-    
-    sample = (1.F - mix) * sample + mix * lerp;
+
+    sample = (1.F - mix) * sample + mix * interpolated;
 }

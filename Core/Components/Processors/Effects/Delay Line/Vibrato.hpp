@@ -29,7 +29,10 @@ private:
     std::atomic<float> depth;
     std::atomic<float> targetDepth;
     std::atomic<float> depthNormal;
-    SineWTOscillator modulator;
+    
+private:
+    BandlimitedOscillator<SIN> modulator;
+    ValueTransition portamento = { 0.5F, 1.0F };
 
 private:
     inline void fadeOut(const float t) { depth = std::max(t, depth - 0.01F); }
@@ -37,11 +40,6 @@ private:
     void update();
 
 private:
-    /// There must be a buffer between the whead, which increases linearly,
-    /// and the rhead, which is modulated by a sine wave. If the buffer is not
-    /// large enough, the rhead may move beyond the whead, which causes
-    /// a glitching effect.
-
     int   whead = 0;
     float rhead;
     

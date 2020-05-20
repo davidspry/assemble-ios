@@ -191,10 +191,10 @@
 		146EC66A244CC6DC009025E4 /* ASFrequencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASFrequencies.h; sourceTree = "<group>"; };
 		1470F72D2432047E00E751B7 /* NoteUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtilities.swift; sourceTree = "<group>"; };
 		1474EC462442114F00D2BA79 /* OscillatorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorShape.swift; sourceTree = "<group>"; };
+		1488C85D247432BE00EE9350 /* VoiceBank.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VoiceBank.hpp; sourceTree = "<group>"; };
 		148E7E26244D5B72003C1DCF /* Synthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Synthesiser.cpp; sourceTree = "<group>"; };
 		148E7E27244D5B72003C1DCF /* Synthesiser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Synthesiser.hpp; sourceTree = "<group>"; };
 		148E7E2B244D5C88003C1DCF /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
-		14909DA224585635003C6F03 /* SineWTOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SineWTOscillator.hpp; sourceTree = "<group>"; };
 		14909DA42458585D003C6F03 /* ASSineTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSineTable.h; sourceTree = "<group>"; };
 		14915BBF2434B75B008E8147 /* Assemble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assemble.swift; sourceTree = "<group>"; };
 		14915BC12434BB3A008E8147 /* CellSelectShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellSelectShape.swift; sourceTree = "<group>"; };
@@ -494,6 +494,7 @@
 				148E7E27244D5B72003C1DCF /* Synthesiser.hpp */,
 				141DDA69243F95D00020386C /* Voice.cpp */,
 				141DDA6A243F95D00020386C /* Voice.hpp */,
+				1488C85D247432BE00EE9350 /* VoiceBank.hpp */,
 			);
 			path = Synthesiser;
 			sourceTree = "<group>";
@@ -582,7 +583,6 @@
 		14A3317E2467172C009A1B47 /* Bandlimited */ = {
 			isa = PBXGroup;
 			children = (
-				14909DA224585635003C6F03 /* SineWTOscillator.hpp */,
 				145CDEE02467BD0B001A56B1 /* BandlimitedOscillator.hpp */,
 				145CDEE12467BDEF001A56B1 /* WaveTable.hpp */,
 			);

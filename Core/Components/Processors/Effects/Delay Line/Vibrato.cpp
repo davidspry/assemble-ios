@@ -38,7 +38,7 @@ void Vibrato::set(uint64_t parameter, float value)
         case kVibratoSpeed:
         {
             speed.store(Assemble::Utilities::bound(value, 0.1F, 15.F));
-            modulator.load(speed);
+            portamento.set(speed.load());
             break;
         }
         case kVibratoDepth:
@@ -82,4 +82,6 @@ void Vibrato::process(float& sample)
     rhead = whead - depth + depth * modulator.nextSample();
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
+    
+    if (!portamento.complete()) modulator.update(portamento.get());
 }

@@ -72,14 +72,15 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         view.addGestureRecognizer(self.longPressRecogniser)
         longPressRecogniser.addTarget(self, action: #selector(SequencerScene.longPressed(_:)))
         
-        let width: CGFloat = 35
+        let w: CGFloat = 30
+        let h: CGFloat = 25
         let button = UIButton(frame: frame)
-        let size = UIImage.SymbolConfiguration(pointSize: width)
-        let frame = CGRect(x: 0, y: 0, width: width, height: width)
+        let size = UIImage.SymbolConfiguration(pointSize: w)
+        let frame = CGRect(x: 0, y: 0, width: w, height: h)
         button.frame = frame
         button.tintColor = .white
         button.addTarget(self, action: #selector(binPressed), for: .touchDown)
-        button.setImage(UIImage(systemName: "xmark.circle.fill",
+        button.setImage(UIImage(systemName: "xmark.rectangle.fill",
                                 withConfiguration: size), for: .normal)
 
         eraseButtonView.frame = frame

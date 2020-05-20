@@ -6,11 +6,11 @@
 
 Voice::Voice()
 {
-    vca.set(5, 0, 500);
+    vca.set( 5, 0, 500);
     vcf.set(25, 0, 250);
 }
 
-void Voice::load(float frequency)
+void Voice::load(const float frequency)
 {
     vca.prepare();
     vcf.prepare();
@@ -22,9 +22,9 @@ const float Voice::get(uint64_t parameter)
     const int type = (int) parameter / (2 << 7);
     switch (type)
     {
-        case 0xF0: return lpf.get(parameter);
         case 0xAE: return vca.get(parameter);
         case 0xFE: return vcf.get(parameter);
+        case 0xF0: return lpf.get(parameter);
         default: return 0.F;
     }
 }

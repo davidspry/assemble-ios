@@ -10,6 +10,8 @@
 #include "ASHeaders.h"
 #include "ASParameters.h"
 
+/// \brief A stereo delay effect using two Delays
+
 class StereoDelay
 {
 public:
@@ -21,6 +23,10 @@ public:
     }
 
 public:
+    /// \brief Process the next sample from the left and right channels
+    /// \param lsample The next sample from the left stereo channel
+    /// \param rsample The next sample from the right stereo channel
+
     inline void process(float & lsample, float & rsample)
     {
         ldelay.process(lsample);
@@ -32,10 +38,7 @@ public:
     void set(uint64_t parameter, const float value);
     void set(float time, const bool left) { left ? ldelay.setInMusicalTime(time) : rdelay.setInMusicalTime(time); }
 
-public:
-    void cycleDelayTime(const bool shorter, const bool left)
-    { left ? ldelay.cycleDelayTime(shorter) : rdelay.cycleDelayTime(shorter); }
-    
+public:    
     void inject(int milliseconds, const bool left)
     { left ? ldelay.inject(milliseconds) : rdelay.inject(milliseconds); }
 

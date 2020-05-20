@@ -39,6 +39,17 @@ public:
         translation = frequency / sampleRate;
     }
     
+    /// \brief Update the frequency of the oscillator without randomising the phase
+    /// This should be used if a series of successive, incremental updates are required,
+    /// as in a gradual change between two frequencies (portamento).
+    ///
+    /// \param frequency The frequency, in Hz, to load in the oscillator
+
+    virtual void update(const float frequency)
+    {
+        translation = frequency / sampleRate;
+    }
+    
 protected:
     std::mt19937 twister;
     std::random_device rd;

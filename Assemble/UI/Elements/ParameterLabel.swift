@@ -94,7 +94,8 @@ class ParameterLabel: PaddedLabel {
         self.touch = touch.location(in: self)
 
         let delta = parameterScale * Float(self.lastTouch.y - self.touch.y)
-        rawValue = max(parameterRange.lowerBound, min(rawValue + Float(delta), parameterRange.upperBound))
+        rawValue = rawValue + delta
+        rawValue.bound(by: parameterRange)
         value = rawValue.mapNormal(to: parameterRange, of: parameterStep)
         Assemble.core.setParameter(parameter, to: value)
 

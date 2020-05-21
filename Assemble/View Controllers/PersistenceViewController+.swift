@@ -19,29 +19,22 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath)
         
         guard let count   = Assemble.core.commander?.userPresets.count,
-              let presets = Assemble.core.commander?.userPresets else { return cell }
+              let presets = Assemble.core.commander?.userPresets,
+                  indexPath.row < count else { return cell }
 
         let preset = presets[indexPath.row]
         cell.textLabel?.text = "\(preset.name)"
-        
-        
-//        if let label = cell.parameter {
-//            let parameter = menu.parameterFor(indexPath)
-//            label.initialise(with: parameter.address,
-//                             increment: parameter.increment,
-//                             and: parameter.type)
-//        }
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let delegate = delegate else { return }
+        guard let delegate = delegate else { print("[PersistenceViewController] Delegate is nil"); return }
         guard let count   = Assemble.core.commander?.userPresets.count,
-              let presets = Assemble.core.commander?.userPresets else { return }
+                  indexPath.row < count else { return }
 
         delegate.loadState(indexPath.row)
+        dismiss(animated: true, completion: nil)
     }
-    
-    
+
 }

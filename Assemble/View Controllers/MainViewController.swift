@@ -89,7 +89,7 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     }
     
     @IBAction func didTrySave(_ sender: UIButton) {
-        Assemble.core.commander?.saveState(named: "Preset Three", at: 3)
+        Assemble.core.commander?.saveCurrentPreset()
     }
 
     // MARK: - Save/Load Facilitation
@@ -98,13 +98,14 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     /// and subsequently update the UI to reflect it.
 
     public func loadState(_ position: Int) {
-        Assemble.core.ticking = false
+        if Assemble.core.ticking { transport.pressPlayOrPause() }
         Assemble.core.commander?.loadFromPreset(number: position)
+        presetLabel.text = Assemble.core.commander?.currentPreset?.name
         sequencer.initialiseFromUnderlyingState()
         tempoLabel.reinitialise()
         patterns.loadStates()
     }
-    
+
     /// If the application is being loaded for the first time, load the factory preset and update
     /// the UI to reflect it.
     ///

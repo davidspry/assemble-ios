@@ -14,6 +14,7 @@
 		141DDA68243F918E0020386C /* SawtoothOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA64243F918E0020386C /* SawtoothOscillator.cpp */; };
 		141DDA6B243F95D00020386C /* Voice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA69243F95D00020386C /* Voice.cpp */; };
 		141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA6D243F96470020386C /* HuovilainenFilter.cpp */; };
+		1427E2EF247686340011D102 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1427E2EE247686340011D102 /* Colours.xcassets */; };
 		14280342246C1B27006775AE /* ParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280341246C1B27006775AE /* ParametersViewController.swift */; };
 		14280349246C2980006775AE /* ParametersViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280348246C2980006775AE /* ParametersViewController+.swift */; };
 		14280350246C3DB9006775AE /* OscillatorParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428034F246C3DB9006775AE /* OscillatorParameters.swift */; };
@@ -138,6 +139,7 @@
 		141DDA6A243F95D00020386C /* Voice.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Voice.hpp; sourceTree = "<group>"; };
 		141DDA6D243F96470020386C /* HuovilainenFilter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HuovilainenFilter.cpp; sourceTree = "<group>"; };
 		141DDA6E243F96470020386C /* HuovilainenFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HuovilainenFilter.hpp; sourceTree = "<group>"; };
+		1427E2EE247686340011D102 /* Colours.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colours.xcassets; sourceTree = "<group>"; };
 		14280341246C1B27006775AE /* ParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersViewController.swift; sourceTree = "<group>"; };
 		14280348246C2980006775AE /* ParametersViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParametersViewController+.swift"; sourceTree = "<group>"; };
 		1428034F246C3DB9006775AE /* OscillatorParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorParameters.swift; sourceTree = "<group>"; };
@@ -306,7 +308,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		141DDA59243F8BA30020386C /* Components */ = {
+		141DDA59243F8BA30020386C /* DSP Components */ = {
 			isa = PBXGroup;
 			children = (
 				14909D9F24585490003C6F03 /* Processors */,
@@ -315,7 +317,7 @@
 				146EC65C244CBF2D009025E4 /* Sequencer */,
 				143FAFF8243F06B90058AE40 /* Commander */,
 			);
-			path = Components;
+			path = "DSP Components";
 			sourceTree = "<group>";
 		};
 		141DDA5B243F914A0020386C /* Oscillators */ = {
@@ -378,7 +380,7 @@
 				146EC663244CC39C009025E4 /* Data Structures */,
 				144A116824571957000F2B4C /* AU Interface */,
 				143FAFFF243F2DF00058AE40 /* AU Base Classes */,
-				141DDA59243F8BA30020386C /* Components */,
+				141DDA59243F8BA30020386C /* DSP Components */,
 				143FB009243F3D990058AE40 /* Utilities */,
 			);
 			path = Core;
@@ -455,6 +457,7 @@
 				14DAC3962417772E005654EA /* Info.plist */,
 				14DB9E6F2465239E000AAD79 /* Assemble.entitlements */,
 				14DAC3912417772E005654EA /* Assets.xcassets */,
+				1427E2EE247686340011D102 /* Colours.xcassets */,
 				14E6551B2471455B00D619F0 /* Images */,
 				14E6551C2471456000D619F0 /* Fonts */,
 			);
@@ -725,8 +728,8 @@
 		14E459462461417000F26667 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				14D2D5C5246C747C003675C2 /* ParameterLabel.swift */,
 				1458D130245328550093B541 /* PaddedLabel.swift */,
+				14D2D5C5246C747C003675C2 /* ParameterLabel.swift */,
 				144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */,
 			);
 			path = Elements;
@@ -840,6 +843,7 @@
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
 				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
 				14431B952475855900D59DED /* Assemble_1.png in Resources */,
+				1427E2EF247686340011D102 /* Colours.xcassets in Resources */,
 				1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

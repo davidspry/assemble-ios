@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="dark"/>
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +26,7 @@
                         <subviews>
                             <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mId-yA-zZe">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpm-a2-jAD">
                                 <rect key="frame" x="283" y="212" width="800" height="600"/>
@@ -90,16 +91,16 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
+                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
-                                                                            <nil key="textColor"/>
+                                                                            <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCT-xo-ZzN">
                                                                             <rect key="frame" x="0.0" y="0.0" width="347.5" height="43.5"/>
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                                            <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="tintColor" name="Foreground"/>
                                                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                                                             <state key="normal" image="circle" catalog="system">
                                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
@@ -134,13 +135,15 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
+                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
+                                                                            <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" contentMode="right" semanticContentAttribute="forceRightToLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEE-2Q-M6g" customClass="ParameterLabel" customModule="Assemble" customModuleProvider="target">
                                                                             <rect key="frame" x="251.5" y="0.0" width="80" height="43.5"/>
+                                                                            <color key="tintColor" name="Foreground"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="fDu-W1-QjW"/>
                                                                             </constraints>
@@ -193,7 +196,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundLight"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="750" constant="800" id="0QF-Bi-FtG"/>
@@ -245,7 +248,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="499" y="829" width="368" height="85"/>
-                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="13:3" id="6UH-cy-BR1"/>
                                     <constraint firstAttribute="height" constant="85" id="F3N-Ii-KQp"/>
@@ -253,16 +256,16 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-ew-lo6" customClass="Sequencer" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="491" y="290" width="384" height="384"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="384" placeholder="YES" id="ik0-0w-fm8"/>
                                     <constraint firstAttribute="height" constant="384" placeholder="YES" id="tyI-F5-5g5"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz" customClass="ParameterLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="32" y="147" width="100" height="15"/>
+                                <rect key="frame" x="32" y="142" width="100" height="35"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="Foreground"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="topInset">
@@ -279,13 +282,13 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="683" y="690" width="0.0" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
+                                <rect key="frame" x="630" y="690" width="106" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="Foreground"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="topInset">
@@ -304,7 +307,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3i-2N-gT6" customClass="Waveform" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="32" y="32" width="100" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ixE-HM-g5j"/>
                                     <constraint firstAttribute="width" constant="100" id="nQ7-s1-BNy"/>
@@ -312,7 +315,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4G-8C-h7M" customClass="PatternOverview" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="1214" y="928" width="120" height="60"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="mdQ-th-prj"/>
                                     <constraint firstAttribute="height" constant="60" id="nvl-cp-w0M"/>
@@ -320,7 +323,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1n-M5-aq6" customClass="Transport" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="475.5" y="930" width="415" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="415" id="6re-7h-bxu"/>
                                     <constraint firstAttribute="height" constant="50" id="Oxd-NU-iBq"/>
@@ -334,7 +337,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                 <state key="normal" title="SAVE">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" name="Foreground"/>
                                 </state>
                                 <connections>
                                     <action selector="didTrySave:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W4g-W2-uHz"/>
@@ -346,7 +349,7 @@
                                     <constraint firstAttribute="width" constant="64" id="YU9-Og-NOE"/>
                                     <constraint firstAttribute="height" constant="64" id="kF3-NI-bOp"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="tintColor" name="Foreground"/>
                                 <state key="normal" image="slider.horizontal.3" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23" weight="semibold"/>
                                 </state>
@@ -355,10 +358,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3D-RJ-dah">
-                                <rect key="frame" x="32" y="106" width="100" height="27"/>
+                                <rect key="frame" x="32" y="106" width="100" height="28"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <state key="normal" title="PATTERN MODE">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" name="Foreground"/>
                                 </state>
                                 <connections>
                                     <action selector="didChangeMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pzl-Xt-w6a"/>
@@ -366,33 +369,41 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Init" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zG-sF-KW1">
                                 <rect key="frame" x="539" y="32" width="288" height="32"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundLight"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="5dc-Hv-7Aw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="Foreground"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="-3"/>
+                                        <real key="value" value="15"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-LA-bfh">
                                 <rect key="frame" x="539" y="32" width="288" height="32"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="Bsw-oE-hDs" kind="presentation" identifier="persistenceSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="37L-ZL-Axj"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="qbC-Vu-c5j" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="2ob-Lz-NiG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ea2-P7-LJq" secondAttribute="trailing" constant="16" id="6Wr-oy-5ua"/>
@@ -404,7 +415,7 @@
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="height" secondItem="1zG-sF-KW1" secondAttribute="height" id="JqA-dH-aNF"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
                             <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="1zG-sF-KW1" secondAttribute="trailing" id="U0C-u8-9rw"/>
-                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="14" id="Wn2-LC-p8R"/>
+                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="8" id="Wn2-LC-p8R"/>
                             <constraint firstItem="1zG-sF-KW1" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" multiplier="0.75" id="YHI-ep-bHL"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Z58-s1-Oy3"/>
@@ -452,34 +463,34 @@
                         <subviews>
                             <view alpha="0.64999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GWj-GW-LIo">
                                 <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5aA-6B-HOM">
-                                <rect key="frame" x="283" y="212" width="800" height="600"/>
+                                <rect key="frame" x="383" y="205" width="600" height="614"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tMD-BW-XQP">
-                                        <rect key="frame" x="20" y="15" width="760" height="570"/>
+                                        <rect key="frame" x="15" y="15" width="570" height="584"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vSP-Qd-mI5">
-                                                <rect key="frame" x="0.0" y="0.0" width="760" height="570"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="250" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="vSP-Qd-mI5">
+                                                <rect key="frame" x="0.0" y="0.0" width="570" height="584"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songCell" textLabel="cBR-b1-wfU" style="IBUITableViewCellStyleDefault" id="KG9-p8-Gva">
-                                                        <rect key="frame" x="15" y="55.5" width="730" height="44"/>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songCell" textLabel="cBR-b1-wfU" style="IBUITableViewCellStyleDefault" id="KG9-p8-Gva">
+                                                        <rect key="frame" x="15" y="55.5" width="540" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KG9-p8-Gva" id="Fm4-TS-4Ip">
-                                                            <rect key="frame" x="0.0" y="0.0" width="730" height="44"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cBR-b1-wfU">
-                                                                    <rect key="frame" x="15" y="0.0" width="700" height="44"/>
+                                                                    <rect key="frame" x="15" y="0.0" width="510" height="44"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" name="BackgroundLight"/>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </tableViewCell>
@@ -492,14 +503,13 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <color key="backgroundColor" name="BackgroundLight"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="600" id="947-AW-7ir"/>
                                     <constraint firstItem="tMD-BW-XQP" firstAttribute="centerX" secondItem="5aA-6B-HOM" secondAttribute="centerX" id="IPi-Po-nbU"/>
                                     <constraint firstItem="tMD-BW-XQP" firstAttribute="width" secondItem="5aA-6B-HOM" secondAttribute="width" multiplier="0.95" id="Z2Q-dV-TTd"/>
                                     <constraint firstItem="tMD-BW-XQP" firstAttribute="height" secondItem="5aA-6B-HOM" secondAttribute="height" multiplier="0.95" id="sdw-CE-Fih"/>
-                                    <constraint firstAttribute="width" priority="750" constant="800" id="vaV-op-4R0"/>
+                                    <constraint firstAttribute="width" priority="750" constant="600" id="vaV-op-4R0"/>
                                     <constraint firstItem="tMD-BW-XQP" firstAttribute="centerY" secondItem="5aA-6B-HOM" secondAttribute="centerY" id="xX4-0E-knY"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -515,6 +525,7 @@
                         <constraints>
                             <constraint firstItem="5aA-6B-HOM" firstAttribute="centerY" secondItem="YfH-Vf-U6s" secondAttribute="centerY" id="4mC-kY-K2w"/>
                             <constraint firstItem="GWj-GW-LIo" firstAttribute="leading" secondItem="YfH-Vf-U6s" secondAttribute="leading" id="5rr-eU-rkk"/>
+                            <constraint firstItem="5aA-6B-HOM" firstAttribute="height" secondItem="GWj-GW-LIo" secondAttribute="height" multiplier="0.6" id="Jax-Ma-uxY"/>
                             <constraint firstItem="5aA-6B-HOM" firstAttribute="width" relation="lessThanOrEqual" secondItem="YfH-Vf-U6s" secondAttribute="width" multiplier="0.75" id="LLh-nU-9VT"/>
                             <constraint firstItem="GWj-GW-LIo" firstAttribute="top" secondItem="YfH-Vf-U6s" secondAttribute="top" id="MN8-5v-NbX"/>
                             <constraint firstItem="5aA-6B-HOM" firstAttribute="centerX" secondItem="YfH-Vf-U6s" secondAttribute="centerX" id="RId-G9-H0Y"/>
@@ -533,5 +544,14 @@
     <resources>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
+        <namedColor name="Background">
+            <color red="0.76470588235294112" green="0.76470588235294112" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BackgroundLight">
+            <color red="0.68627450980392157" green="0.68627450980392157" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Foreground">
+            <color red="0.13725490196078433" green="0.13725490196078433" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

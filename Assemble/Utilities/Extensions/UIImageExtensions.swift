@@ -11,12 +11,27 @@ extension UIImage {
 
     public convenience init(color: UIColor, size: CGSize) {
         UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        
+        guard let ctx = UIGraphicsGetCurrentContext() else {
+            self.init()
+            return
+        }
+        
         color.set()
-        let ctx = UIGraphicsGetCurrentContext()!
         ctx.fill(CGRect(origin: .zero, size: size))
-        let image = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
+            self.init()
+            return
+        }
+        
         UIGraphicsEndImageContext()
 
-        self.init(data: image.pngData()!)!
+        guard let data = image.pngData() else {
+            self.init()
+            return
+        }
+
+        self.init(data: data)!
     }
 }

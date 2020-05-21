@@ -23,6 +23,12 @@ class DotGridRow : SKSpriteNode
         self.color = SKColor.clear;
         self.size = grid.size();
     }
+    
+    func redraw()
+    {
+        self.texture = DotGridRow.drawDotGridRow(spacing: spacing)
+        print("[DotGridRow] Redrawing")
+    }
 
     class func drawDotGridRow(spacing: CGSize) -> SKTexture?
     {
@@ -56,7 +62,7 @@ class DotGridRow : SKSpriteNode
             path.addArc(withCenter: dot, radius: r, startAngle: 0, endAngle: 360, clockwise: true);
         }
 
-        SKColor.white.setFill();
+        UIColor.init(named: "Foreground")?.setFill()
         path.lineWidth = 2.0
         path.fill();
 

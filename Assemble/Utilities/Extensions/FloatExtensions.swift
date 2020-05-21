@@ -26,4 +26,11 @@ extension Float
         if  map == 0 { return 0 }
         return (self / steps).rounded(.towardZero) * steps
     }
+    
+    /// Ensure that a Float, `x`, is `A <= x <= B` for any Floats `A`, `B`, where `A <= B`.
+
+    mutating func bound(by range: ClosedRange<Float>)
+    {
+        self = max(range.lowerBound, min(range.upperBound, self))
+    }
 }

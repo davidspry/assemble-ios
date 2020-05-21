@@ -39,7 +39,7 @@ public:
     void setSampleRate(float sampleRate);
     
 private:
-    enum Mode { Attack, Hold, Release, Closed };
+    enum Mode { Attack, Hold, Release, Closed, Recovery };
     Mode mode = Closed;
     
 public:

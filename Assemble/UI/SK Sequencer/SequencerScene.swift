@@ -36,7 +36,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         spacing.width  = size.width  / Assemble.patternWidth
         spacing.height = size.height / Assemble.patternHeight
         
-        backgroundColor = .clear;
+        backgroundColor = UIColor.init(named: "Background")!
         anchorPoint = CGPoint(x: 0.5, y: 0.5);
         scaleMode = .aspectFit;
 
@@ -87,6 +87,11 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         eraseButtonView.addSubview(button)
         eraseButtonView.isHidden = true
         view.addSubview(eraseButtonView)
+    }
+    
+    public func redraw()
+    {
+        backgroundColor = UIColor.init(named: "Background")!
     }
 
     private func reset()

@@ -6,8 +6,8 @@ import UIKit
 
 struct OscillatorParameters : ParameterMenu {
 
-    var name: String = "Oscillators"
-    
+    var name: String = "OSCILLATORS"
+
     var toggle: Int32? = nil
     
     var oscillator: OscillatorShape = .sine

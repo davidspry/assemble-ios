@@ -18,7 +18,7 @@ import AudioUnit
 
         AUAudioUnit.registerSubclass(ASCommanderAU.self,
                                      as: ASCommander.acd,
-                                     name: "Synthesiser",
+                                     name: "Assemble",
                                      version: 1);
 
         super.init()

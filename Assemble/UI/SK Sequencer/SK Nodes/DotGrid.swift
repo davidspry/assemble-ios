@@ -32,10 +32,15 @@ class DotGrid : SKSpriteNode
     {
         let shape = Assemble.shape
         if  shape != currentShape {
-            self.texture = DotGrid.drawDotGrid(shape: shape, spacing: spacing);
-            currentShape = shape
-            print("[DotGrid] Redrawing")
+            redraw()
         }
+    }
+    
+    func redraw()
+    {
+        print("[DotGrid] Redrawing")
+        let shape    = Assemble.shape
+        self.texture = DotGrid.drawDotGrid(shape: shape, spacing: spacing);
     }
     
     class func drawDotGrid(shape: CGSize, spacing: CGSize) -> SKTexture?
@@ -60,7 +65,7 @@ class DotGrid : SKSpriteNode
     internal class func drawGrid(rows: Int, columns: Int, spacing: CGSize) -> CGPath
     {
         var path = UIBezierPath();
-        SKColor.white.setFill();
+        UIColor.init(named: "Foreground")?.setFill()
 
         for y in 1...rows {
             drawRow(on: &path, at: CGFloat(y), columns: columns, spacing: spacing);

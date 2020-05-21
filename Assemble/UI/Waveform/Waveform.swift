@@ -72,7 +72,7 @@ class Waveform: UIView {
 
     /// A scalar to adjust the scale of the visualisation
 
-    private var gain: CGFloat = 0.85
+    private var gain: CGFloat = 16.0
 
     /// Install a tap on the output bus of the Assemble core in order to access the sample data.
     ///
@@ -160,7 +160,7 @@ class Waveform: UIView {
     }
 
     /// Render the visualisation to the screen.
-    /// If new data has been written from the buffer when the draw method begins, which should be true invariably given the disparity between the read and write speeds, then the read and write channels should be switched in order to read the newest sample data from the tap.
+    /// If new data has been written from the buffer when the draw method begins, then the read and write channels should be switched in order to read the newest sample data from the tap.
     /// Set `n` to `0` to indicate that the newest data has been accessed. `n` will be set to `1` again during next write operation.
     /// - Note: `draw(_ rect:)` must be overridden in order to perform any custom drawing.
 
@@ -190,6 +190,12 @@ class Waveform: UIView {
     public func start() {
         installTap()
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        waveform.strokeColor = UIColor.init(named: "Foreground")?.cgColor ??
+                               UIColor.white.cgColor
+    }
 
     required init?(coder: NSCoder) {
         bufferSize = Int32(_bufferSize)
@@ -214,7 +220,8 @@ class Waveform: UIView {
         waveform.lineCap = .round
         waveform.lineJoin = .round
         waveform.fillColor = UIColor.clear.cgColor
-        waveform.strokeColor = UIColor.white.cgColor
+        waveform.strokeColor = UIColor.init(named: "Foreground")?.cgColor ??
+                               UIColor.white.cgColor
 
         layer.addSublayer(waveform)
     }

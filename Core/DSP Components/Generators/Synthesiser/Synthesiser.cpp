@@ -27,7 +27,7 @@ const float Synthesiser::nextSample()
     sample += sqr.nextSample();
     sample += saw.nextSample();
 
-    return sample * 0.5F;//0.0833F;
+    return sample * 0.0625F;
 }
 
 const float Synthesiser::get(uint64_t parameter)

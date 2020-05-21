@@ -109,4 +109,12 @@ class Sequencer : SKView, KeyboardListener
 
         return super.hitTest(point, with: event)
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        UI.cursor.redraw()
+        UI.grid.redraw()
+        UI.row.redraw()
+        UI.redraw()
+    }
 }

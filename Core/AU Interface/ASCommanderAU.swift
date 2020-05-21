@@ -217,6 +217,17 @@ public class ASCommanderAU : ASAudioUnit
 
         return currentPreset == userPresets[number]
     }
+    
+    @discardableResult
+    public func saveCurrentPreset() -> Bool {
+        guard let preset = currentPreset else { return false }
+        
+        do    { try saveUserPreset(preset) }
+        catch { return false }
+        
+        print("[ASCommanderAU] User preset \(preset.number) saved successfully!")
+        return true
+    }
 
     /// Save the current state as a user preset.
     /// If the preset name, `name`, already exists, then the preset wil be overwritten with the current state.

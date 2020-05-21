@@ -13,5 +13,11 @@ class CellSelectShape : SKShapeNode
         lineWidth = 2.0
         lineJoin  = .round
         lineCap   = .round
+        strokeColor = UIColor.init(named: "Foreground")!
+    }
+    
+    func redraw()
+    {
+        strokeColor = UIColor.init(named: "Foreground")!
     }
 }

@@ -15,4 +15,5 @@ protocol ParameterMenu {
     func parameterFor(_ path: IndexPath) -> (address: Int32, increment: Float, type: ParameterLabelScale)
     
     func headerFor(table: UITableView, path: IndexPath) -> UITableViewCell
+
 }

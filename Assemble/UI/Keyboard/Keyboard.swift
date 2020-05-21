@@ -13,7 +13,7 @@ import UIKit
 class Keyboard : UIView, KeyboardSettingsListener
 {
     var keyOnColour  : UIColor = UIColor.sineNoteColour
-    var keyOffColour : UIColor = UIColor.white
+    var keyOffColour : UIColor = UIColor.init(named: "Secondary") ?? .white
 
     var isVisible: Bool = true
     
@@ -29,6 +29,8 @@ class Keyboard : UIView, KeyboardSettingsListener
         return "OCT \(octave)"
     }
 
+    let octaveButtons = (u: UIButton(), d: UIButton())
+    
     var oscillator: OscillatorShape = .sine
 
     internal var margins: UIEdgeInsets {
@@ -65,6 +67,16 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     internal func releaseNote(_ note: Int) {
         pressedKey = nil
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        let colour = UIColor.init(named: "Secondary") ?? .white
+        keyOffColour = colour
+        shapeLayers.forEach {
+            $0.fillColor = keyOffColour.cgColor
+            $0.strokeColor = keyOffColour.cgColor
+        }
     }
 
     // MARK: - Keyboard Settings Listener
@@ -118,28 +130,26 @@ class Keyboard : UIView, KeyboardSettingsListener
         let controlMargin: CGFloat = 0.0
         let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
         var origin = CGPoint(x: 0, y: frame.midY - CGFloat(button) * 0.5)
+        let colour = UIColor.init(named: "Secondary") ?? .white
         var arrow: UIImage!
-        
-        let octaveU = UIButton()
-        let octaveD = UIButton()
         
         origin.x = controlMargin
         arrow = UIImage(systemName: "arrowtriangle.down.fill", withConfiguration: configuration)
-        octaveD.frame = CGRect(origin: origin, size: .square(button))
-        octaveD.setImage(arrow, for: .normal)
-        octaveD.tintColor = .white
-        octaveD.tag = 0x0
-        octaveD.addTarget(self, action: #selector(setOctave), for: .touchDown)
-        addSubview(octaveD)
+        octaveButtons.d.frame = CGRect(origin: origin, size: .square(button))
+        octaveButtons.d.setImage(arrow, for: .normal)
+        octaveButtons.d.tintColor = colour
+        octaveButtons.d.tag = 0x0
+        octaveButtons.d.addTarget(self, action: #selector(setOctave), for: .touchDown)
+        addSubview(octaveButtons.d)
         
         origin.x = bounds.width - controlMargin - CGFloat(button)
         arrow = UIImage(systemName: "arrowtriangle.up.fill", withConfiguration: configuration)
-        octaveU.frame = CGRect(origin: origin, size: .square(button))
-        octaveU.setImage(arrow, for: .normal)
-        octaveU.tintColor = .white
-        octaveU.tag = 0x1
-        octaveU.addTarget(self, action: #selector(setOctave), for: .touchDown)
-        addSubview(octaveU)
+        octaveButtons.u.frame = CGRect(origin: origin, size: .square(button))
+        octaveButtons.u.setImage(arrow, for: .normal)
+        octaveButtons.u.tintColor = colour
+        octaveButtons.u.tag = 0x1
+        octaveButtons.u.addTarget(self, action: #selector(setOctave), for: .touchDown)
+        addSubview(octaveButtons.u)
         
         origin.x = frame.minX
         origin.y = frame.minY
@@ -147,7 +157,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         octaveLabel.font = UIFont(name: "JetBrainsMono-Regular", size: 12)
         octaveLabel.text = octaveString
         octaveLabel.textAlignment = .center
-        octaveLabel.textColor = .white
+        octaveLabel.textColor = colour
         addSubview(octaveLabel)
     }
     

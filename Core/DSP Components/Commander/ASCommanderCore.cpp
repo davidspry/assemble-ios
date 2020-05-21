@@ -17,7 +17,7 @@ void ASCommanderCore::init(double sampleRate)
     }
 
     __state__.reserve(2048);
-    printf("[ASCommanderCore] Set sample rate to %.0fHz\n", audioRate);
+    printf("[ASCommanderCore] Initialising with sample rate %.0fHz\n", audioRate);
 }
 
 const bool ASCommanderCore::playOrPause()

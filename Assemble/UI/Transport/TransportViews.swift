@@ -13,7 +13,7 @@ extension Transport {
         play.setImage(Icons.play, for: .normal)
         play.layer.cornerCurve = .continuous
         play.layer.cornerRadius = 15
-        play.tintColor = .label
+        play.tintColor = UIColor.init(named: "Foreground") ?? .label
         addSubview(play)
         
         NSLayoutConstraint.activate([
@@ -34,7 +34,7 @@ extension Transport {
         keyboard.setImage(Icons.hide, for: .normal)
         keyboard.layer.cornerCurve = .continuous
         keyboard.layer.cornerRadius = 15
-        keyboard.tintColor = .label
+        keyboard.tintColor = UIColor.init(named: "Foreground") ?? .label
         addSubview(keyboard)
         
         NSLayoutConstraint.activate([

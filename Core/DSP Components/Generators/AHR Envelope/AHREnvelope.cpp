@@ -18,6 +18,8 @@ void AHREnvelope::set(float attack, float hold, float release)
     attackInSamples  = Assemble::Utilities::samples(attack, sampleRate);
     holdInSamples    = Assemble::Utilities::samples(hold,   sampleRate);
     releaseInSamples = Assemble::Utilities::samples(release,sampleRate);
+
+    if (time > releaseInSamples) setMode(Recovery);
 }
 
 void AHREnvelope::setSampleRate(float sampleRate)
@@ -35,7 +37,7 @@ void AHREnvelope::prepare()
 {
     amplitude = std::fmax(0.0F, amplitude);
     
-    time = (amplitude > 0.F) ? computeTimeOnRetrigger() : 0;
+    time = (amplitude > 0.0F) ? computeTimeOnRetrigger() : 0;
     
     setMode(Attack);
 }
@@ -49,10 +51,10 @@ const float AHREnvelope::get(uint64_t parameter)
     const int subtype = (int) parameter % 16;
     switch (subtype)
     {
-        case 0: return attackInMs;
-        case 1: return holdInMs;
-        case 2: return releaseInMs;
-        default: return 0.F;
+        case 0x0: return attackInMs;
+        case 0x1: return holdInMs;
+        case 0x2: return releaseInMs;
+        default:  return 0.F;
     }
 }
 
@@ -65,10 +67,10 @@ void AHREnvelope::set(uint64_t parameter, float value)
     const int subtype = (int) parameter % 16;
     switch (subtype)
     {
-        case 0: set(value, holdInMs, releaseInMs);   return;
-        case 1: set(attackInMs, value, releaseInMs); return;
-        case 2: set(attackInMs, holdInMs, value);    return;
-        default: return;
+        case 0x0: set(value, holdInMs, releaseInMs);   return;
+        case 0x1: set(attackInMs, value, releaseInMs); return;
+        case 0x2: set(attackInMs, holdInMs, value);    return;
+        default:  return;
     }
 }
 
@@ -77,25 +79,47 @@ const float AHREnvelope::nextSample()
     switch (mode)
     {
         case Attack:
+        {
             amplitude = std::pow(computeAttack(time), 3.0F);
             mode = static_cast<Mode>(Mode::Attack + static_cast<int>(amplitude >= 1.0F));
             break;
+        }
             
         case Hold:
+        {
             if ((holdInSamples == 0) || (time - attackInSamples >= holdInSamples))
             {
                 time = 0;
                 mode = static_cast<Mode>(Mode::Release);
             }   else break;
+        }
 
         case Release:
+        {
             amplitude = std::pow(computeRelease(time), 3.0F);
             mode = static_cast<Mode>(Release + static_cast<int>(amplitude <= 0.0F));
             break;
+        }
 
         case Closed:
+        {
             amplitude = 0.0F;
             break;
+        }
+
+        /// The recovery phase is reserved for cases where the duration of the release phase has been decreased
+        /// such that releaseInSamples < time. This relationship produces a negative value for amplitude, which in
+        /// turn causes loud popping and clicking sounds for several seconds.
+        /// To avoid this, the recovery phase is entered manually when the envelope's properties are set, but only
+        /// in cases where the time > releaseInSamples. The recovery phase lasts for as long as it takes for the
+        /// amplitude to fade out linearly to zero.
+
+        case Recovery:
+        {
+            amplitude = std::fmax(0.0F, amplitude - 1E-4F);
+            mode = static_cast<Mode>(Recovery - static_cast<int>(amplitude == 0.0F));
+        }
+
     }
     
     time++;
@@ -109,5 +133,5 @@ double AHREnvelope::computeAttack(int &time)
 
 double AHREnvelope::computeRelease(int &time)
 {
-    return (double) 1.0 + time * -(1.0 / (releaseInSamples + 1));
+    return 1.0 - ((double) time / (releaseInSamples + 1));
 }

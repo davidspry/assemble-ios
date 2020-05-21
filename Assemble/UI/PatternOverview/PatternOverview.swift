@@ -7,8 +7,8 @@ import UIKit
 class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
 
     let activeColour    : UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    let patternOnColour : UIColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    let patternOffColour: UIColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    var patternOnColour : UIColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    var patternOffColour: UIColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
 
     private var lastTappedNode: Int?
     private var lastTappedTime: TimeInterval?
@@ -100,6 +100,8 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         }
     }
     
+    /// Set the current pattern index to 0 in the core and update the UI accordingly.
+
     public func reset() {
         Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(0))
         self.pattern = 0

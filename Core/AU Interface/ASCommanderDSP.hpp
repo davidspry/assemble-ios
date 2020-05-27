@@ -43,6 +43,8 @@ const char* __interop__GetPatternState(ASDSPRef, const int pattern);
 
 const bool  __interop__PlayOrPause(ASDSPRef);
 
+const void  __interop__ClearCurrentPattern(ASDSPRef);
+
 #else
 
 // ============================================================ //

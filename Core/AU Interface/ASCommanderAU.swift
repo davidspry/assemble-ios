@@ -89,6 +89,13 @@ public class ASCommanderAU : ASAudioUnit
             return String(format: "%.2f", value ?? parameter.value)
         }
 
+        /// Create a new, empty preset
+
+        let preset = AUAudioUnitPreset()
+            preset.number = -userPresets.count
+            preset.name = "Init"
+
+        currentPreset = preset
         userPresets.forEach { print("User Preset: Name: \($0.name), Number: \($0.number)") }
     }
     
@@ -125,6 +132,12 @@ public class ASCommanderAU : ASAudioUnit
 
     public func eraseNote(x: Int, y: Int) {
         __interop__EraseNote(dsp, Int32(x), Int32(y))
+    }
+    
+    /// Clear the sequencer's current pattern.
+
+    public func clearCurrentPattern() {
+        __interop__ClearCurrentPattern(dsp)
     }
 
     public override func shouldAllocateInputBus() -> Bool  { return false }
@@ -230,26 +243,26 @@ public class ASCommanderAU : ASAudioUnit
     }
 
     /// Save the current state as a user preset.
-    /// If the preset name, `name`, already exists, then the preset wil be overwritten with the current state.
+    /// If the given preset name already exists then the preset wil be overwritten with the current state.
     /// Otherwise, the preset will be created.
-    /// - Note: The preset number of a user preset must be negative. This function takes positive integer
-    /// arguments and negates them prior to saving.
+    /// - Note: The preset number of a user preset must be negative.
     ///
     /// - Parameter name: The name of the preset.
-    /// - Parameter number: The number of the preset, which must be a positive integer.
+    /// - Parameter number: The number of the preset, which must be a negative integer.
 
     @discardableResult
     public func saveState(named name: String, at number: Int) -> Bool {
-        guard number > 0 else { return false }
+        guard number < 0 else { return false }
 
         let preset = AUAudioUnitPreset()
         preset.name = name
-        preset.number = -(number)
+        preset.number = number
 
         do    { try saveUserPreset(preset) }
         catch { return false }
 
         print("[ASCommanderAU] User preset \(number) saved successfully!")
+        print(userPresets)
         return true
     }
     

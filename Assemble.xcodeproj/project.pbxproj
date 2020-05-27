@@ -64,6 +64,8 @@
 		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
 		14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */; };
 		14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */; };
+		14A51E38247D1C5700ADDCB4 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51E37247D1C5700ADDCB4 /* NewSongViewController.swift */; };
+		14A51E3A247D1C8B00ADDCB4 /* SaveCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */; };
 		14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBEB2436233B00822139 /* SequencerScene.swift */; };
 		14ADCBEE2436265300822139 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBED2436265300822139 /* Sequencer.swift */; };
 		14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE019B245DA04C003EB586 /* BoolExtensions.swift */; };
@@ -214,6 +216,8 @@
 		14A3318024671A6B009A1B47 /* ASTriangleTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTriangleTable.h; sourceTree = "<group>"; };
 		14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommanderAUParameters.swift; sourceTree = "<group>"; };
 		14A3BDB52454844700FB63B1 /* SequencerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerDelegate.swift; sourceTree = "<group>"; };
+		14A51E37247D1C5700ADDCB4 /* NewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSongViewController.swift; sourceTree = "<group>"; };
+		14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCopyViewController.swift; sourceTree = "<group>"; };
 		14ADCBEB2436233B00822139 /* SequencerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerScene.swift; sourceTree = "<group>"; };
 		14ADCBED2436265300822139 /* Sequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencer.swift; sourceTree = "<group>"; };
 		14AE019B245DA04C003EB586 /* BoolExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolExtensions.swift; sourceTree = "<group>"; };
@@ -626,6 +630,8 @@
 				14280348246C2980006775AE /* ParametersViewController+.swift */,
 				14EEB8CA247572FF007F0D37 /* PersistenceViewController.swift */,
 				14EEB8CC24757455007F0D37 /* PersistenceViewController+.swift */,
+				14A51E37247D1C5700ADDCB4 /* NewSongViewController.swift */,
+				14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -919,6 +925,7 @@
 				144D8633246D4BA300F6EDD4 /* OscillatorSelector.swift in Sources */,
 				143FB00F243F3DE40058AE40 /* CGSizeExtensions.swift in Sources */,
 				148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */,
+				14A51E3A247D1C8B00ADDCB4 /* SaveCopyViewController.swift in Sources */,
 				14915BC02434B75B008E8147 /* Assemble.swift in Sources */,
 				14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */,
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
@@ -934,6 +941,7 @@
 				14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */,
 				144A11672457166C000F2B4C /* Clock.cpp in Sources */,
 				1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */,
+				14A51E38247D1C5700ADDCB4 /* NewSongViewController.swift in Sources */,
 				14AE01A2245DFF02003EB586 /* UIImageExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

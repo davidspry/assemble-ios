@@ -74,6 +74,10 @@ public:
     /// Otherwise, the Sequencer should reset to its initial state for the current Pattern.
 
     const bool playOrPause();
+    
+    /// \brief Clear the state of the current Pattern.
+    
+    inline void clearCurrentPattern() { sequencer.hardReset(sequencer.pattern); }
 
     /// \brief Indicate whether or not the Clock is ticking.
     /// \return `true` if the Clock is ticking; `false` otherwise.

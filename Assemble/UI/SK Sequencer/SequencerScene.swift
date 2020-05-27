@@ -61,6 +61,10 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         addChild(grid);
         addChild(row);
         addChild(cursor);
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(clearCurrentPattern(_:)),
+                                               name: .clearCurrentPattern, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -185,14 +189,46 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
     }
 
+    /// Remove and destroy every `NoteShapeNode` who is situated at the location, `xy`.
+    /// - Parameter xy: The location of the note to be erased in grid coordinates.
+
     func eraseNote(_ xy: CGPoint) {
         let p = Assemble.core.currentPattern
         DispatchQueue.main.async {
-            self.noteShapes[p].forEach { node in
-                if node.name == xy.debugDescription {
+            self.noteShapes[p].removeAll(where: { node in
+                let matches = node.name == xy.debugDescription
+                if  matches {
                     node.removeFromParent()
                     self.noteStrings[p][xy.ny][xy.nx] = nil
                     self.noteString = nil
+                }
+                return matches
+            })
+        }
+    }
+    
+    /// Clear the sequencer scene's current pattern.
+    ///
+    /// Each `NoteShapeNode` is removed from the scene and destroyed,
+    /// and each cell in the current pattern's `noteStrings` array is set to nil.
+    /// This should be called at the same time as the current pattern of the core
+    /// sequencer is reset.
+    ///
+    /// - Parameter notification: The `NSNotification` requesting that
+    /// the current pattern should be cleared.
+
+    @objc func clearCurrentPattern(_ notification: NSNotification) {
+        let p = Assemble.core.currentPattern
+        DispatchQueue.main.async {
+            self.noteShapes[p].forEach { $0.removeFromParent() }
+            self.noteShapes[p].removeAll()
+        }
+
+        DispatchQueue.main.async {
+            self.noteString = nil
+            for y in 0 ..< Int(Assemble.patternHeight) {
+                for x in 0 ..< Int(Assemble.patternWidth) {
+                    self.noteStrings[p][y][x] = nil
                 }
             }
         }

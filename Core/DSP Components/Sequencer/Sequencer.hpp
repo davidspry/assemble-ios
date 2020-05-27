@@ -46,6 +46,7 @@ public:
     void hardReset();
     void hardReset(const int pattern)
     {
+        printf("[Sequencer] Clearing pattern %d\n", pattern);
         const auto active = patterns.at(pattern).isActive();
         patterns.at(pattern).clear();
         activePatterns = activePatterns - (active ? 1 : 0);

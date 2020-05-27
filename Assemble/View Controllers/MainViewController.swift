@@ -24,21 +24,6 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     
     @IBOutlet weak var presetLabel: UILabel!
     
-    @objc func refreshInterface() {
-        descriptionLabel.text = sequencer.UI.noteString
-        descriptionLabel.isHidden = descriptionLabel.text == nil
-
-        let mode = Int(Assemble.core.getParameter(kSequencerMode))
-        let modes = ["PATTERN MODE", "SONG MODE"]
-        modeButton.setTitle(modes[mode & 1], for: .normal)
-
-        sequencer.UI.patternDidChange(to: Assemble.core.currentPattern)
-        patterns.setNeedsDisplay()
-
-        let row = Assemble.core.currentRow
-        sequencer.UI.row.moveTo(row: row)
-    }
-    
     /// Connect classes and UI components together as listeners in order that
     /// user interaction and other signals can be propagated throughout the application interface
 
@@ -87,23 +72,75 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     @IBAction func didChangeMode(_ sender: UIButton) {
         Assemble.core.didToggleMode()
     }
-    
-    @IBAction func didTrySave(_ sender: UIButton) {
-        Assemble.core.commander?.saveCurrentPreset()
-    }
 
     // MARK: - Save/Load Facilitation
 
+    public func beginNewSong() {
+        if Assemble.core.ticking { transport.pressPlayOrPause() }
+        let preset = AUAudioUnitPreset()
+            preset.name = "Init"
+        Assemble.core.commander?.currentPreset = preset
+        updateUIFromState()
+    }
+    
     /// Load the user preset with the index `position` in the underlying `userPresets` array
     /// and subsequently update the UI to reflect it.
 
     public func loadState(_ position: Int) {
         if Assemble.core.ticking { transport.pressPlayOrPause() }
         Assemble.core.commander?.loadFromPreset(number: position)
-        presetLabel.text = Assemble.core.commander?.currentPreset?.name
-        sequencer.initialiseFromUnderlyingState()
-        tempoLabel.reinitialise()
-        patterns.loadStates()
+        updateUIFromState()
+    }
+    
+    /// Save the current preset with the given name
+    /// - Parameter name: The desired name for the preset
+
+    public func saveState(named name: String) {
+        guard let preset = Assemble.core.commander?.currentPreset
+        else { return print("[MainViewController] CurrentPreset is nil") }
+
+        let renamed = name != preset.name
+        
+        if !renamed { Assemble.core.commander?.saveState(named: name, at: preset.number) }
+        else        { renamePreset(preset, named: name) }
+        presetLabel.text = name
+    }
+    
+    /// Create a new preset with the given name and save the new preset.
+    /// - Parameter name: The desired name for the preset.
+    /// - Returns: `true` if the preset saved correctly; `false` otherwise.
+
+    @discardableResult
+    public func copyState(named name: String) -> Bool {
+        guard let number = Assemble.core.commander?.userPresets.count
+        else { return false }
+
+        let preset = AUAudioUnitPreset()
+            preset.number = -number
+            preset.name = name
+
+        if let saved = Assemble.core.commander?.saveState(named: name, at: preset.number) {
+            if saved { presetLabel.text = name }
+            return saved
+        }
+
+        return false
+    }
+    
+    /// Rename the given preset with the given name.
+    ///
+    /// In order to rename a preset, it must be saved as a new preset with the new name,
+    /// then the original preset file must be deleted. Apple's implementation of `saveUserPreset`
+    /// will duplicate an `AUAudioUnitPreset` if its `name` property has been changed.
+    ///
+    /// - Parameter preset: The preset to rename
+    /// - Parameter name:   The desired name for the preset.
+
+    private func renamePreset(_ preset: AUAudioUnitPreset, named name: String) {
+        guard copyState(named: name) else { return }
+
+        do    { try Assemble.core.commander?.deleteUserPreset(preset) }
+        catch { print("[MainViewController] User Preset could not be deleted.") }
     }
 
     /// If the application is being loaded for the first time, load the factory preset and update
@@ -124,6 +161,28 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         tempoLabel.reinitialise()
     }
     
+    private func updateUIFromState() {
+        presetLabel.text = Assemble.core.commander?.currentPreset?.name
+        sequencer.initialiseFromUnderlyingState()
+        tempoLabel.reinitialise()
+        patterns.loadStates()
+    }
+    
+    @objc func refreshInterface() {
+        descriptionLabel.text = sequencer.UI.noteString
+        descriptionLabel.isHidden = descriptionLabel.text == nil
+
+        let mode = Int(Assemble.core.getParameter(kSequencerMode))
+        let modes = ["PATTERN MODE", "SONG MODE"]
+        modeButton.setTitle(modes[mode & 1], for: .normal)
+
+        sequencer.UI.patternDidChange(to: Assemble.core.currentPattern)
+        patterns.setNeedsDisplay()
+
+        let row = Assemble.core.currentRow
+        sequencer.UI.row.moveTo(row: row)
+    }
+    
     // MARK: - Storyboard Navigation
     
     /// Prepare to perform a segue to some other `UIViewController`
@@ -132,6 +191,13 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         super.prepare(for: segue, sender: sender)
         if segue.identifier == "persistenceSegue" {
             guard let destination = segue.destination as? PersistenceViewController
+            else { return }
+
+            destination.delegate = self
+        }
+        
+        if segue.identifier == "saveCopySegue" {
+            guard let destination = segue.destination as? SaveCopyViewController
             else { return }
 
             destination.delegate = self

@@ -15,6 +15,9 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     private var tapSpeedThreshold: TimeInterval = 0.4
     private var nodeDestination: Int?
 
+    private var clearPatternView = UIView()
+    private let longPressRecogniser = UILongPressGestureRecognizer()
+
     private var states = [Bool]()
     private var shapes = [CAShapeLayer]()
     private let patterns: Int = Int(PATTERNS)
@@ -58,8 +61,17 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         isMultipleTouchEnabled = false
         shapes.reserveCapacity(patterns)
         states.reserveCapacity(patterns)
-        NotificationCenter.default.addObserver(self, selector: #selector(handlePlayPauseNotification(_:)),
-                                               name: .playOrPause, object: nil)
+
+        establishClearPatternView()
+        longPressRecogniser.delegate = self
+        longPressRecogniser.minimumPressDuration  = 0.4
+        longPressRecogniser.numberOfTouchesRequired = 1
+        longPressRecogniser.cancelsTouchesInView = true
+        longPressRecogniser.addTarget(self, action: #selector(handleLongPress(_:)))
+        addGestureRecognizer(longPressRecogniser)
+
+        let callbackPlayPause = #selector(handlePlayPauseNotification(_:))
+        NotificationCenter.default.addObserver(self, selector: callbackPlayPause, name: .playOrPause, object: nil)
 
         for r in stride(from: 0, to: rows, by: 1) {
             for c in stride(from: 0, to: cols, by: 1) {
@@ -77,7 +89,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
                 layer.allowsEdgeAntialiasing = true
                 layer.rasterizationScale = 2.0 * UIScreen.main.scale
                 layer.fillColor = patternOffColour.cgColor
-                self.layer.addSublayer(layer)
+                self.layer.insertSublayer(layer, below: clearPatternView.layer)
                 shapes.append(layer)
                 states.append(false)
             }
@@ -163,6 +175,18 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         layer.strokeColor = nil
     }
     
+    internal func locationFromNodeIndex(_ node: Int) -> CGPoint? {
+        if node < 0 || node > patterns { return nil }
+
+        let r = CGFloat(node / Int(cols))
+        let c = CGFloat(node % Int(cols))
+        
+        let x = c * diameter + radius
+        let y = r * diameter + radius
+
+        return CGPoint(x: x, y: y)
+    }
+    
     internal func nodeFromTouchLocation(_ touch: CGPoint) -> Int? {
         if touch.x > diameter * (cols + 1) { return nil }
         if touch.y > diameter * (rows + 1) { return nil }
@@ -206,6 +230,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         guard let touch = touches.first else { return }
         guard let node = nodeFromTouchLocation(touch.location(in: self)) else { return }
         guard node > -1 && node < patterns else { return }
+        hideClearPatternView()
         handleTap(on: node)
     }
 
@@ -229,5 +254,93 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
             dequeue(&shapes[nextPattern])
             nextPattern = pattern
         }
+    }
+
+    /// Handle a long press on the given node
+    ///
+    /// If a long press occurs on a node, the user is presented with an option to clear the corresponding pattern.
+    /// In the event that the pattern should be cleared, a notification is broadcast to the sequencer and the core.
+    ///
+    /// - Parameter gesture: The gesture recogniser that detected the long press
+    
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+        if gesture.state != .began { return }
+        let location   = gesture.location(in: self)
+        guard let node = nodeFromTouchLocation(location) else { return }
+        guard let xy   = locationFromNodeIndex(node)     else { return }
+
+        clearPatternView.center = xy
+        clearPatternView.center = clearPatternView.center.applying(.init(translationX: 0, y: -25))
+        showClearPatternView()
+    }
+    
+    @objc func shouldClearPattern(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .clearCurrentPattern, object: nil)
+        Assemble.core.commander?.clearCurrentPattern()
+        set(pattern: pattern, to: false)
+        hideClearPatternView()
+    }
+    
+    // MARK: - Clear Pattern View
+    
+    private func establishClearPatternView() {
+        let w: CGFloat = 30
+        let h: CGFloat = 25
+        let button = UIButton(frame: frame)
+        let size = UIImage.SymbolConfiguration(pointSize: w)
+        let frame = CGRect(x: 0, y: 0, width: w, height: h)
+
+        button.frame = frame
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(shouldClearPattern), for: .touchDown)
+        button.setImage(UIImage(systemName: "xmark.rectangle.fill",
+                                withConfiguration: size), for: .normal)
+
+        clearPatternView.frame = frame
+        clearPatternView.addSubview(button)
+        clearPatternView.isHidden = true
+        addSubview(clearPatternView)
+        bringSubviewToFront(clearPatternView)
+    }
+
+    func showClearPatternView() {
+        DispatchQueue.main.async {
+            self.clearPatternView.isHidden = false
+            self.clearPatternView.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+            UIView.animate(withDuration: 0.1) {
+                self.clearPatternView.layer.setAffineTransform(.init(scaleX: 1.0, y: 1.0))
+            }
+        }
+    }
+    
+    func hideClearPatternView() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1) {
+                self.clearPatternView.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+                self.clearPatternView.isHidden = true
+            }
+        }
+    }
+    
+    // MARK: Clear Pattern View End -
+    
+    /// Include subviews who fall outside the bounds of the view in the hit test. In Assemble,
+    /// this allows the clear pattern icon to be pressed if it happens to appear outside the bounds of the
+    /// pattern overview's `UIView`.
+    ///
+    /// - Author: Noam
+    /// - Note: Source: <https://stackoverflow.com/a/14875673/9611538>
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView?
+    {
+        guard !clipsToBounds && !isHidden && alpha > 0 else { return nil }
+
+        for member in subviews.reversed() {
+            let subPoint = member.convert(point, from: self)
+            guard let result = member.hitTest(subPoint, with: event) else { continue }
+            return result
+        }
+
+        return super.hitTest(point, with: event)
     }
 }

@@ -12,7 +12,7 @@ class PersistenceViewController: UIViewController {
     /// including updating the UI to reflect changes in the underlying state
 
     weak var delegate: MainViewController?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

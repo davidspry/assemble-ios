@@ -6,6 +6,8 @@ import Foundation
 
 extension NSNotification.Name {
     
-    static let playOrPause = NSNotification.Name(rawValue: "ASMPlayOrPause")
+    static let playOrPause = NSNotification.Name(rawValue: "ASPlayOrPause")
+    
+    static let clearCurrentPattern = NSNotification.Name(rawValue: "ASClearCurrentPattern")
 
 }

@@ -30,6 +30,8 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
         
         NotificationCenter.default.addObserver(self, selector: callbackShow, name: notifyShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: callbackHide, name: notifyHide, object: nil)
+        
+        verifyTextField()
     }
     
     deinit {
@@ -73,6 +75,20 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    private func verifyTextField() {
+        guard let text = songName.text else { return }
+        let empty = (text.filter { !$0.isWhitespace }).isEmpty
+
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5) {
+                self.saveButton.alpha = empty ? 0.25 : 1.0
+                self.copyButton.alpha = empty ? 0.25 : 1.0
+                self.saveButton.isEnabled = !empty
+                self.copyButton.isEnabled = !empty
+            }
+        }
+    }
 
     /// Save the current preset with the given name
 
@@ -95,16 +111,6 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
     // MARK: - UITextField Delegate
     
     @objc func textFieldDidChange(_ field: UITextField) {
-        guard let text = field.text else { return }
-        let empty = (text.filter { !$0.isWhitespace }).isEmpty
-
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5) {
-                self.saveButton.alpha = empty ? 0.25 : 1.0
-                self.copyButton.alpha = empty ? 0.25 : 1.0
-                self.saveButton.isEnabled = !empty
-                self.copyButton.isEnabled = !empty
-            }
-        }
+        verifyTextField()
     }
 }

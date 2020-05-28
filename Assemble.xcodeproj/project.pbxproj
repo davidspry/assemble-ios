@@ -19,6 +19,8 @@
 		14280349246C2980006775AE /* ParametersViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280348246C2980006775AE /* ParametersViewController+.swift */; };
 		14280350246C3DB9006775AE /* OscillatorParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428034F246C3DB9006775AE /* OscillatorParameters.swift */; };
 		14280352246C3DC2006775AE /* ParameterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280351246C3DC2006775AE /* ParameterMenu.swift */; };
+		1428A2D5247F8B5400C8B353 /* EmptyPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */; };
+		1428A2D7247F9C4E00C8B353 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D6247F9C4E00C8B353 /* SongCell.swift */; };
 		143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */; };
 		143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */; };
 		143FB005243F301C0058AE40 /* Attribution.md in Resources */ = {isa = PBXBuildFile; fileRef = 143FB004243F301C0058AE40 /* Attribution.md */; };
@@ -146,6 +148,8 @@
 		14280348246C2980006775AE /* ParametersViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParametersViewController+.swift"; sourceTree = "<group>"; };
 		1428034F246C3DB9006775AE /* OscillatorParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorParameters.swift; sourceTree = "<group>"; };
 		14280351246C3DC2006775AE /* ParameterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMenu.swift; sourceTree = "<group>"; };
+		1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPreset.swift; sourceTree = "<group>"; };
+		1428A2D6247F9C4E00C8B353 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioUnitBase.m; sourceTree = "<group>"; };
 		143FAFFD243F17DF0058AE40 /* ASAudioUnitBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioUnitBase.h; sourceTree = "<group>"; };
 		143FB000243F2E940058AE40 /* ASAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAudioUnit.h; sourceTree = "<group>"; };
@@ -346,7 +350,6 @@
 		1428034E246C3D9A006775AE /* Parameter Menus */ = {
 			isa = PBXGroup;
 			children = (
-				144D8636246D72D200F6EDD4 /* Table Cells */,
 				14280351246C3DC2006775AE /* ParameterMenu.swift */,
 				1428034F246C3DB9006775AE /* OscillatorParameters.swift */,
 				144D862C246D3A9300F6EDD4 /* StereoDelayParameters.swift */,
@@ -440,6 +443,7 @@
 		144D8636246D72D200F6EDD4 /* Table Cells */ = {
 			isa = PBXGroup;
 			children = (
+				1428A2D6247F9C4E00C8B353 /* SongCell.swift */,
 				14D4C74C246EAB3B00B7180C /* ParameterCell.swift */,
 				144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */,
 				14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */,
@@ -734,6 +738,7 @@
 		14E459462461417000F26667 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				144D8636246D72D200F6EDD4 /* Table Cells */,
 				1458D130245328550093B541 /* PaddedLabel.swift */,
 				14D2D5C5246C747C003675C2 /* ParameterLabel.swift */,
 				144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */,
@@ -763,6 +768,7 @@
 			isa = PBXGroup;
 			children = (
 				14E6551E24718A7100D619F0 /* FactoryPresetA.swift */,
+				1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */,
 			);
 			path = FactoryPresets;
 			sourceTree = "<group>";
@@ -913,6 +919,7 @@
 				143FB00B243F3DD10058AE40 /* UIColorExtensions.swift in Sources */,
 				14A3BDB62454844700FB63B1 /* SequencerDelegate.swift in Sources */,
 				149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */,
+				1428A2D7247F9C4E00C8B353 /* SongCell.swift in Sources */,
 				149ACC1F24542483009DA18F /* ComputerKeyboard.swift in Sources */,
 				146EC662244CC143009025E4 /* Pattern.cpp in Sources */,
 				143FB013243F3E7D0058AE40 /* FourCharCodeExtensions.swift in Sources */,
@@ -921,6 +928,7 @@
 				14556A7C2472954900FB2392 /* NSNotifications.swift in Sources */,
 				143FB008243F360D0058AE40 /* ASDSPBase.mm in Sources */,
 				149ACC1B24542209009DA18F /* UIBezierPathExtensions.swift in Sources */,
+				1428A2D5247F8B5400C8B353 /* EmptyPreset.swift in Sources */,
 				141DDA68243F918E0020386C /* SawtoothOscillator.cpp in Sources */,
 				144D8633246D4BA300F6EDD4 /* OscillatorSelector.swift in Sources */,
 				143FB00F243F3DE40058AE40 /* CGSizeExtensions.swift in Sources */,

@@ -77,9 +77,8 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
 
     public func beginNewSong() {
         if Assemble.core.ticking { transport.pressPlayOrPause() }
-        let preset = AUAudioUnitPreset()
-            preset.name = "Init"
-        Assemble.core.commander?.currentPreset = preset
+        Assemble.core.commander?.loadInitialState()
+        presetLabel.text = Assemble.core.commander?.currentPreset?.name
         updateUIFromState()
     }
     
@@ -100,47 +99,24 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         else { return print("[MainViewController] CurrentPreset is nil") }
 
         let renamed = name != preset.name
-        
-        if !renamed { Assemble.core.commander?.saveState(named: name, at: preset.number) }
-        else        { renamePreset(preset, named: name) }
+        if !renamed { Assemble.core.commander?.saveCurrentPreset() }
+        else        { Assemble.core.commander?.renamePreset(preset, to: name) }
         presetLabel.text = name
     }
-    
+
     /// Create a new preset with the given name and save the new preset.
     /// - Parameter name: The desired name for the preset.
     /// - Returns: `true` if the preset saved correctly; `false` otherwise.
+    /// - Precondition: A preset with the number `-(K + 1)`, where `K` is the number of user presets, does not exist.
 
     @discardableResult
     public func copyState(named name: String) -> Bool {
-        guard let number = Assemble.core.commander?.userPresets.count
-        else { return false }
-
-        let preset = AUAudioUnitPreset()
-            preset.number = -number
-            preset.name = name
-
-        if let saved = Assemble.core.commander?.saveState(named: name, at: preset.number) {
+        if let saved = Assemble.core.commander?.saveState(named: name) {
             if saved { presetLabel.text = name }
             return saved
         }
 
         return false
-    }
-    
-    /// Rename the given preset with the given name.
-    ///
-    /// In order to rename a preset, it must be saved as a new preset with the new name,
-    /// then the original preset file must be deleted. Apple's implementation of `saveUserPreset`
-    /// will duplicate an `AUAudioUnitPreset` if its `name` property has been changed.
-    ///
-    /// - Parameter preset: The preset to rename
-    /// - Parameter name:   The desired name for the preset.
-
-    private func renamePreset(_ preset: AUAudioUnitPreset, named name: String) {
-        guard copyState(named: name) else { return }
-
-        do    { try Assemble.core.commander?.deleteUserPreset(preset) }
-        catch { print("[MainViewController] User Preset could not be deleted.") }
     }
 
     /// If the application is being loaded for the first time, load the factory preset and update
@@ -155,11 +131,13 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
             return
         }   else { defaults.setValue(false, forKey: "FirstUse") }
 
-        Assemble.core.commander?.loadFactoryPreset(number: 0)
+        Assemble.core.commander?.loadFactoryPreset(number: 1)
         sequencer.initialiseFromUnderlyingState()
         patterns.loadStates()
         tempoLabel.reinitialise()
     }
+    
+    /// Update all UI elements in order that they reflect the underlying state.
     
     private func updateUIFromState() {
         presetLabel.text = Assemble.core.commander?.currentPreset?.name
@@ -168,6 +146,9 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         patterns.loadStates()
     }
     
+    /// Refresh the UI in order to synchronise it with the underlying state.
+    /// This is intended to be called continually at regular intervals.
+
     @objc func refreshInterface() {
         descriptionLabel.text = sequencer.UI.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
@@ -198,6 +179,13 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         
         if segue.identifier == "saveCopySegue" {
             guard let destination = segue.destination as? SaveCopyViewController
+            else { return }
+
+            destination.delegate = self
+        }
+        
+        if segue.identifier == "newSongSegue" {
+            guard let destination = segue.destination as? NewSongViewController
             else { return }
 
             destination.delegate = self

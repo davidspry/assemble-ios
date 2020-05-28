@@ -16,14 +16,18 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongCell
+        else { return .init() }
         
         guard let count   = Assemble.core.commander?.userPresets.count,
               let presets = Assemble.core.commander?.userPresets,
                   indexPath.row < count else { return cell }
 
         let preset = presets[indexPath.row]
-        cell.textLabel?.text = "\(preset.name)"
+        let isCurrentPreset = indexPath.row == Assemble.core.commander?.selectedPreset
+        cell.songName.text = "\(preset.name)"
+        cell.songName.textColor = isCurrentPreset ? .darkText : UIColor.init(named: "Foreground")
+        cell.songName.backgroundColor = isCurrentPreset ? .offWhite : UIColor.mutedOrange
 
         return cell
     }
@@ -35,6 +39,30 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
 
         delegate.loadState(indexPath.row)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        guard let count   = Assemble.core.commander?.userPresets.count,
+              let presets = Assemble.core.commander?.userPresets,
+              editingStyle == .delete, indexPath.row < count else { return }
+        
+        let preset = presets[indexPath.row]
+
+        Assemble.core.commander?.deletePreset(preset)
+    
+        DispatchQueue.main.async {
+            var tries = 0
+            while Assemble.core.commander?.userPresets.count == count, tries < 10 {
+                Thread.sleep(forTimeInterval: 0.05)
+                tries = tries + 1
+            }
+            
+            tableView.reloadData()
+            if preset == Assemble.core.commander?.currentPreset {
+                self.delegate?.beginNewSong()
+            }
+        }
     }
 
 }

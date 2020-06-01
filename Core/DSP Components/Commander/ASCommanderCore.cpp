@@ -14,6 +14,7 @@ void ASCommanderCore::init(double sampleRate)
     {
         synthesiser.setSampleRate(audioRate);
         clock.setSampleRate(audioRate);
+        noise.setSampleRate(audioRate);
     }
 
     __state__.reserve(2048);
@@ -117,8 +118,13 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
         sample = {0.f, 0.f};
         sample[0] = synthesiser.nextSample();
         vibrato.process(sample[0]);
-        delay.process(sample[0], (sample[1] = sample[0]));
+        sample[1] = sample[0];
+        delay.process(sample[0], sample[1]);
 
+//        const float whiteNoise = noise.nextSample();
+//        sample[0] += whiteNoise;
+//        sample[1] += whiteNoise;
+        
         for (size_t c = 0; c < channels; c++)
             output[c][t] = sample[c & 1];
     }

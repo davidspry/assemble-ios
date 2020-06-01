@@ -4,18 +4,21 @@
 
 import UIKit
 
-public struct Icons {
-    static let play  = UIImage(systemName: "play.fill", withConfiguration: size)
-    static let pause = UIImage(systemName: "pause", withConfiguration: size)
-    static let show  = UIImage(systemName: "circle.fill", withConfiguration: size)
-    static let hide  = UIImage(systemName: "circle", withConfiguration: size)
+struct Icons {
+    static let play   = UIImage(systemName: "play.fill", withConfiguration: size)
+    static let pause  = UIImage(systemName: "pause", withConfiguration: size)
+    static let show   = UIImage(systemName: "circle.fill", withConfiguration: size)
+    static let hide   = UIImage(systemName: "circle", withConfiguration: size)
+    static let record = UIImage(systemName: "circle.fill", withConfiguration: size)
     private static let size = UIImage.SymbolConfiguration.init(pointSize: 25, weight: .semibold)
 }
 
 class Transport : UIView, TransportListener, KeyboardSettingsListener {
 
     let play = UIButton()
+    let record = UIButton()
     let keyboard = UIButton()
+    var recording: Bool = false
     var oscillators: OscillatorSelector!
     
     let buttonWidth: CGFloat = 55
@@ -28,6 +31,7 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         translatesAutoresizingMaskIntoConstraints = false
+        initialiseRecordButton()
         initialisePlayButton()
         initialiseSegmentedControl()
         initialiseKeyboardButton()
@@ -47,6 +51,31 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
                 UIView.animate(withDuration: 0.1, animations: {
                     self.play.imageView?.layer.setAffineTransform(.init(scaleX: 1, y: 1))
                 })
+            }
+        }
+    }
+    
+    @objc func didPressRecord(sender: UIButton)
+    {
+        recording = !recording
+        
+        if recording {
+            NotificationCenter.default.post(name: .beginRecording, object: nil)
+            DispatchQueue.main.async {
+                self.record.pulsate()
+                UIView.animate(withDuration: 0.15) {
+                    self.record.tintColor = .sineNoteColour
+                }
+            }
+        }
+
+        else {
+            NotificationCenter.default.post(name: .stopRecording, object: nil)
+            DispatchQueue.main.async {
+                self.record.layer.removeAllAnimations()
+                UIView.animate(withDuration: 0.15) {
+                    self.record.tintColor = UIColor.init(named: "Foreground")
+                }
             }
         }
     }

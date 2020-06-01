@@ -34,18 +34,26 @@ import AudioUnit
         }
     }
     
+    /// The number of rows in the currently selected pattern
+
     public var length: Int {
         return commander?.length ?? 0
     }
     
+    /// The sequencer's current row number, beginning from 0.
+
     public var currentRow: Int {
         return commander?.currentRow ?? 0
     }
     
+    /// The index of the currently selected pattern
+
     public var currentPattern: Int {
         return commander?.currentPattern ?? 0
     }
     
+    /// Whether the core clock is ticking or not
+
     public var ticking: Bool {
         get {
             guard let commander = commander else { return false }
@@ -59,7 +67,6 @@ import AudioUnit
                       commander.playOrPause()
             }
         }
-        
     }
     
     func setParameter(_ parameter: Int32, to value: Float) {
@@ -77,6 +84,11 @@ import AudioUnit
     public func playOrPause() -> Bool {
         guard let commander = commander else { return false }
         return commander.playOrPause()
+    }
+    
+    func note(at xy: CGPoint) -> (note: Int, shape: OscillatorShape)? {
+        guard let commander = commander else { return nil }
+        return commander.note(at: xy)
     }
 
     func addOrModifyNote(xy: CGPoint, note: Int, shape: OscillatorShape) {

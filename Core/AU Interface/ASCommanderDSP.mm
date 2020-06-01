@@ -35,6 +35,11 @@ extern "C" void __interop__WriteNote(void *DSP, const int x, const int y, const 
     ((ASCommanderDSP*) DSP)->writeNote(x, y, note, shape);
 }
 
+extern "C" void __interop__Note(void *DSP, const int x, const int y, int *note, int *shape)
+{
+    ((ASCommanderDSP*) DSP)->getNote(x, y, note, shape);
+}
+
 extern "C" void __interop__EraseNote(void *DSP, const int x, const int y)
 {
     ((ASCommanderDSP*) DSP)->eraseNote(x, y);

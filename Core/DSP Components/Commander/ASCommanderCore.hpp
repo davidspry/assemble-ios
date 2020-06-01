@@ -11,6 +11,7 @@
 #include "ASConstants.h"
 #include "ASEffects.h"
 
+#include "WhiteNoisePeriodic.hpp"
 #include "Synthesiser.hpp"
 #include "Sequencer.hpp"
 #include "Clock.hpp"
@@ -47,6 +48,25 @@ public:
     void loadNote(const int note, const int shape)
     {
         synthesiser.loadNote(note, shape);
+    }
+    
+    /// \brief Get the note at position (x, y) in the Sequencer's current Pattern,
+    /// then mutate the given pointers with the corresponding values, provided that a non-null
+    /// note exists at position (x, y).
+    /// \param x The x-coordinate of the desired note
+    /// \param y The y-coordinate of the desired note
+    /// \param note The location in memory where the MIDI note number should be stored
+    /// \param shape The location in memory where the note's shape should be stored
+
+    void getNote(const int x, const int y, int* note, int* shape)
+    {
+        const Note& datum = sequencer.patterns.at(sequencer.pattern).pattern.at(x, y);
+        
+        if (datum.null)
+            return;
+
+        *note  = datum.note;
+        *shape = datum.shape;
     }
     
     /// \brief Write a note to the sequencer at position (x, y)
@@ -126,6 +146,7 @@ private:
     Synthesiser synthesiser;
     Vibrato     vibrato;
     StereoDelay delay = {&clock};
+    WhiteNoisePeriodic noise;
 
 private:
     float sampleRate;

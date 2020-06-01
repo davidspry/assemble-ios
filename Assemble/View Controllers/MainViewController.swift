@@ -4,13 +4,15 @@
 
 import UIKit
 import AVFoundation
-import ReplayKit
 
-class MainViewController : UIViewController, RPPreviewViewControllerDelegate
+class MainViewController : UIViewController
 {
     let engine = Engine()
     var updater: CADisplayLink!
+    var recorder: Recorder!
     let computerKeyboard = ComputerKeyboard()
+    
+    let modeStrings = ["PATTERN MODE", "SONG MODE"]
     
     @IBOutlet weak var keyboard:  Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
@@ -18,12 +20,11 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     @IBOutlet weak var patterns:  PatternOverview!
     @IBOutlet weak var transport: Transport!
 
+    @IBOutlet weak var presetLabel: UILabel!
     @IBOutlet weak var modeButton: UIButton!
     @IBOutlet weak var tempoLabel: ParameterLabel!
     @IBOutlet weak var descriptionLabel: PaddedLabel!
-    
-    @IBOutlet weak var presetLabel: UILabel!
-    
+
     /// Connect classes and UI components together as listeners in order that
     /// user interaction and other signals can be propagated throughout the application interface
 
@@ -50,17 +51,76 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// Add the computer keyboard controller in the background
+        /// such that it handles keyboard presses but doesn't handle taps.
+        
         addInBackground(computerKeyboard)
-
-        updater = CADisplayLink(target: self, selector: #selector(refreshInterface))
-        updater.add(to: .main, forMode: .default)
-        updater.preferredFramesPerSecond = 20
+        
+        /// Initialise the Recorded with a reference to the `AVAudioEngine`
+        
+        recorder = Recorder(engine.engine)
+        
+        /// Initialise the tempo `ParameterLabel` with its parameter address and settings.
         
         tempoLabel.initialise(with: kClockBPM, increment: 1.0, and: .discreteFast)
+        
+        /// Establish the `CADisplayLink` that synchronises the UI with the given frequency
+
+        establishDisplayLink(fps: 20)
+        
+        /// Establish delegate/listener relationships between classes who require it
+
         connectListeners()
+        
+        /// Register to receive notifications from the transport when audio recording should begin or end
+        
+        let selector = #selector(useRecorder(_:))
+        NotificationCenter.default.addObserver(self, selector: selector, name: .beginRecording, object: nil)
+        NotificationCenter.default.addObserver(self, selector: selector, name: .stopRecording,  object: nil)
+
+        /// Start the `AVAudioEngine`
+        
         engine.start()
     }
+    
+    /// Establish a `CADisplayLink` for the purpose of updating the UI.
+    /// - Parameter fps: The number of times the specified callback will be executed per second
+    
+    private func establishDisplayLink(fps: Int) {
+        let callback = #selector(refreshInterface)
+        updater = CADisplayLink(target: self, selector: callback)
+        updater.add(to: .main, forMode: .default)
+        updater.preferredFramesPerSecond = fps
+    }
 
+    
+    @objc private func useRecorder(_ notification: NSNotification) {
+        if recorder.recording { recorder.stop(didCompleteRecording(_:)) }
+
+        if notification.name == NSNotification.Name.beginRecording {
+            recorder.record()
+        }
+    }
+    
+    private func didCompleteRecording(_ file: URL?) {
+        guard let url = file else { return }
+        let rect = CGRect(x: view.bounds.maxX, y: view.bounds.midY, width: 0, height: 0)
+        let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activity.popoverPresentationController?.sourceView = view
+        activity.popoverPresentationController?.sourceRect = rect
+        activity.popoverPresentationController?.permittedArrowDirections = .right
+        activity.excludedActivityTypes =
+        [
+            .addToReadingList,
+            .assignToContact,
+            .markupAsPDF,
+            .openInIBooks
+        ]
+        
+        present(activity, animated: true, completion: nil)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
         loadFactoryPresetOnFirstUse()
@@ -154,8 +214,7 @@ class MainViewController : UIViewController, RPPreviewViewControllerDelegate
         descriptionLabel.isHidden = descriptionLabel.text == nil
 
         let mode = Int(Assemble.core.getParameter(kSequencerMode))
-        let modes = ["PATTERN MODE", "SONG MODE"]
-        modeButton.setTitle(modes[mode & 1], for: .normal)
+        modeButton.setTitle(modeStrings[mode & 1], for: .normal)
 
         sequencer.UI.patternDidChange(to: Assemble.core.currentPattern)
         patterns.setNeedsDisplay()

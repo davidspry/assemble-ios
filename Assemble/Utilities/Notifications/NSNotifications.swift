@@ -10,4 +10,8 @@ extension NSNotification.Name {
     
     static let clearCurrentPattern = NSNotification.Name(rawValue: "ASClearCurrentPattern")
 
+    static let beginRecording = NSNotification.Name(rawValue: "ASBeginRecording")
+    
+    static let stopRecording = NSNotification.Name(rawValue: "ASStopRecording")
+
 }

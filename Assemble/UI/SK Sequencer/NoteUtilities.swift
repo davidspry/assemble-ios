@@ -51,6 +51,10 @@ struct NoteUtilities
     public static func octave(of note: Int) -> Int {
         return note / 12 - 1
     }
+    
+    public static func modify(note: Int, withOctave octave: Int) -> Int {
+        return (note % 12) + 12 * (octave + 1)
+    }
 
     public static func notename(of note: Int) -> String {
         return notenames[note % 12]

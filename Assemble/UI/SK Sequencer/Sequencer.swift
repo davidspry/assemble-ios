@@ -39,11 +39,19 @@ class Sequencer : SKView, KeyboardListener
     }
     
     func setOctave(_ octave: Int) {
-        print("[Sequencer] Unimplemented")
+        guard let note = Assemble.core.note(at: UI.selected) else { return }
+        let pitch = NoteUtilities.modify(note: note.note, withOctave: octave)
+        UI.addOrModifyNote(xy: UI.selected, note: pitch, oscillator: note.shape)
+        Assemble.core.addOrModifyNote(xy: UI.selected, note: pitch, shape: note.shape)
+        Assemble.core.pressNote(pitch, shape: note.shape)
     }
     
     func setOscillator(_ next: Bool) {
-        fatalError("[Sequencer] Unimplemented")
+        guard let note = Assemble.core.note(at: UI.selected) else { return }
+        let oscillator = next ? note.shape.next() : note.shape.previous()
+        UI.addOrModifyNote(xy: UI.selected, note: note.note, oscillator: oscillator)
+        Assemble.core.addOrModifyNote(xy: UI.selected, note: note.note, shape: oscillator)
+        Assemble.core.pressNote(note.note, shape: oscillator)
     }
     
     func didNavigate(by direction: Int) {

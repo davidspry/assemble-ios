@@ -24,6 +24,7 @@ struct EmptyPreset
         "preset-number": 1,
         "manufacturer": 1146310738,
         "P0" : "1",
+        "P1" : "0",
         "P2" : "0",
         "P3" : "0",
         "P4" : "0",

@@ -108,6 +108,10 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func didPressClose(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - UITextField Delegate
     
     @objc func textFieldDidChange(_ field: UITextField) {

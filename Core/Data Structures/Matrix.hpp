@@ -24,7 +24,7 @@ public:
     }
 
 public:
-    /// \brief Return a const reference to the Note at position (x, y).
+    /// \brief Return a reference to the Note at position (x, y).
     /// The returned reference should be treated as read-only.
     /// All modifications should be performed using the provided methods.
     /// \param x The column to lookup.
@@ -32,7 +32,7 @@ public:
 
     const Note& at(int x, int y) const
     {
-        return vector[index(x,y)];
+        return vector[find(x, y)];
     }
     
     /// \brief Compute the underlying 1-D array index for the abstract 2-D matrix position, (x, y).
@@ -62,7 +62,7 @@ public:
         return lengths[y];
     }
 
-    int find(const int x, const int y)
+    int find(const int x, const int y) const
     {
         const int length = lengths[y];
         if (length == 0) return -1;

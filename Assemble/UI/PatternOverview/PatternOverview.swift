@@ -266,6 +266,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         if gesture.state != .began { return }
         let location   = gesture.location(in: self)
+        guard self.bounds.contains(location) else { return }
         guard let node = nodeFromTouchLocation(location) else { return }
         guard let xy   = locationFromNodeIndex(node)     else { return }
 

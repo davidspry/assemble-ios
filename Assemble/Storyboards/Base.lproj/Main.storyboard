@@ -91,7 +91,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                                                             <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
                                                                             <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
@@ -247,7 +247,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="499" y="829" width="368" height="85"/>
+                                <rect key="frame" x="499" y="824" width="368" height="85"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="13:3" id="6UH-cy-BR1"/>
@@ -322,36 +322,38 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1n-M5-aq6" customClass="Transport" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="475.5" y="930" width="415" height="50"/>
+                                <rect key="frame" x="448" y="925" width="470" height="55"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="415" id="6re-7h-bxu"/>
-                                    <constraint firstAttribute="height" constant="50" id="Oxd-NU-iBq"/>
+                                    <constraint firstAttribute="width" constant="470" id="6re-7h-bxu"/>
+                                    <constraint firstAttribute="height" constant="55" id="Oxd-NU-iBq"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-15-iez">
-                                <rect key="frame" x="827" y="23" width="75" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-15-iez" userLabel="New Button">
+                                <rect key="frame" x="464" y="23" width="75" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="9AL-N0-aos"/>
                                     <constraint firstAttribute="height" constant="50" id="bam-iJ-lGl"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <state key="normal" title="NEW">
+                                <color key="tintColor" name="Foreground"/>
+                                <state key="normal" image="plus" catalog="system">
                                     <color key="titleColor" name="Foreground"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                 </state>
                                 <connections>
                                     <segue destination="RxF-37-PEB" kind="presentation" identifier="newSongSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="YvT-CO-U67"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j">
-                                <rect key="frame" x="902" y="23" width="85" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j" userLabel="Save Button">
+                                <rect key="frame" x="827" y="23" width="85" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BaZ-3G-8Wh"/>
                                     <constraint firstAttribute="width" constant="85" id="I94-B9-QK7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <state key="normal" title="SAVE">
+                                <color key="tintColor" name="Foreground"/>
+                                <state key="normal" image="arrow.down.doc.fill" catalog="system">
                                     <color key="titleColor" name="Foreground"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                 </state>
                                 <connections>
                                     <segue destination="j2K-Js-ZUO" kind="presentation" identifier="saveCopySegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="xnq-cW-egW"/>
@@ -410,7 +412,7 @@
                                 </constraints>
                                 <color key="tintColor" name="Foreground"/>
                                 <state key="normal" image="slider.horizontal.3" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="23" weight="semibold"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                 </state>
                                 <connections>
                                     <segue destination="MYq-JU-ftL" kind="presentation" identifier="displayParameters" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0Db-aO-7p0"/>
@@ -428,9 +430,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="height" secondItem="1zG-sF-KW1" secondAttribute="height" id="JqA-dH-aNF"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
-                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="j9m-15-iez" secondAttribute="trailing" id="U0C-u8-9rw"/>
+                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="1zG-sF-KW1" secondAttribute="trailing" id="U0C-u8-9rw"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="8" id="Wn2-LC-p8R"/>
-                            <constraint firstItem="j9m-15-iez" firstAttribute="leading" secondItem="1zG-sF-KW1" secondAttribute="trailing" id="X8s-2z-Wpr"/>
+                            <constraint firstItem="j9m-15-iez" firstAttribute="trailing" secondItem="1zG-sF-KW1" secondAttribute="leading" id="X8s-2z-Wpr"/>
                             <constraint firstItem="1zG-sF-KW1" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" multiplier="0.75" id="YHI-ep-bHL"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Z58-s1-Oy3"/>
@@ -683,11 +685,21 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvd-Zf-Oyb">
+                                        <rect key="frame" x="533.5" y="30.5" width="18.5" height="22"/>
+                                        <state key="normal" image="multiply" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="medium"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didPressClose:" destination="j2K-Js-ZUO" eventType="touchUpInside" id="6WT-nh-Zej"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="BackgroundLight"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="335" id="11i-wz-cDC"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mvd-Zf-Oyb" secondAttribute="trailing" constant="48" id="7Ny-1r-i4R"/>
                                     <constraint firstAttribute="trailing" secondItem="RP8-E7-D6n" secondAttribute="trailing" constant="48" id="9Jp-yf-I1X"/>
                                     <constraint firstItem="6d4-5Y-r3e" firstAttribute="top" secondItem="x80-zu-NE4" secondAttribute="top" constant="32" id="Egr-Jx-nOM"/>
                                     <constraint firstItem="Eja-6C-lcl" firstAttribute="top" secondItem="6d4-5Y-r3e" secondAttribute="bottom" constant="32" id="MLx-ZR-WzZ"/>
@@ -695,6 +707,7 @@
                                     <constraint firstItem="RP8-E7-D6n" firstAttribute="top" secondItem="Eja-6C-lcl" secondAttribute="bottom" constant="40" id="bpt-yJ-bQI"/>
                                     <constraint firstAttribute="width" priority="750" constant="600" id="iFa-62-if8"/>
                                     <constraint firstItem="RP8-E7-D6n" firstAttribute="leading" secondItem="x80-zu-NE4" secondAttribute="leading" constant="48" id="ic6-fj-WVo"/>
+                                    <constraint firstItem="Mvd-Zf-Oyb" firstAttribute="centerY" secondItem="6d4-5Y-r3e" secondAttribute="centerY" id="pXm-Yg-7rY"/>
                                     <constraint firstAttribute="bottom" secondItem="E8b-wq-ZJ6" secondAttribute="bottom" constant="32" id="qw9-zq-Xsj"/>
                                     <constraint firstAttribute="trailing" secondItem="E8b-wq-ZJ6" secondAttribute="trailing" constant="48" id="vZ2-jB-Uha"/>
                                     <constraint firstItem="6d4-5Y-r3e" firstAttribute="leading" secondItem="x80-zu-NE4" secondAttribute="leading" constant="48" id="xb4-eM-hWf"/>
@@ -746,7 +759,7 @@
                                 <color key="tintColor" name="Secondary"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XsQ-nO-4bu">
-                                <rect key="frame" x="383" y="389.5" width="600" height="245"/>
+                                <rect key="frame" x="383" y="384.5" width="600" height="255"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW SONG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hco-Sf-L8f">
                                         <rect key="frame" x="48" y="32" width="87" height="19"/>
@@ -772,7 +785,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="0WN-QL-2CP">
-                                        <rect key="frame" x="336" y="163" width="216" height="50"/>
+                                        <rect key="frame" x="336" y="173" width="216" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2TZ-H2-74j">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
@@ -820,14 +833,25 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pY-tJ-oUo">
+                                        <rect key="frame" x="533.5" y="30.5" width="18.5" height="22"/>
+                                        <state key="normal" image="multiply" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" weight="medium"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didPressClose:" destination="RxF-37-PEB" eventType="touchUpInside" id="ple-gH-q7E"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" name="BackgroundLight"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="245" id="0DK-uY-Ae1"/>
+                                    <constraint firstAttribute="height" constant="255" id="0DK-uY-Ae1"/>
                                     <constraint firstItem="2gO-Zi-zx8" firstAttribute="top" secondItem="hco-Sf-L8f" secondAttribute="bottom" constant="32" id="CX5-dz-hdT"/>
                                     <constraint firstAttribute="trailing" secondItem="2gO-Zi-zx8" secondAttribute="trailing" constant="48" id="DMI-Nl-mOI"/>
                                     <constraint firstItem="2gO-Zi-zx8" firstAttribute="leading" secondItem="XsQ-nO-4bu" secondAttribute="leading" constant="48" id="KVm-7p-xG1"/>
+                                    <constraint firstAttribute="trailing" secondItem="8pY-tJ-oUo" secondAttribute="trailing" constant="48" id="SJq-Ih-OGE"/>
+                                    <constraint firstItem="8pY-tJ-oUo" firstAttribute="centerY" secondItem="hco-Sf-L8f" secondAttribute="centerY" id="Uob-da-8vD"/>
                                     <constraint firstAttribute="width" priority="750" constant="600" id="WJ8-6e-oeN"/>
                                     <constraint firstItem="hco-Sf-L8f" firstAttribute="top" secondItem="XsQ-nO-4bu" secondAttribute="top" constant="32" id="axf-wo-ps2"/>
                                     <constraint firstAttribute="trailing" secondItem="0WN-QL-2CP" secondAttribute="trailing" constant="48" id="jcL-kP-nPZ"/>
@@ -866,7 +890,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.down.doc.fill" catalog="system" width="115" height="128"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="multiply" catalog="system" width="128" height="111"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <namedColor name="Background">
             <color red="0.76499998569488525" green="0.76499998569488525" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

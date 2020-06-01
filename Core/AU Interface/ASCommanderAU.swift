@@ -125,6 +125,19 @@ public class ASCommanderAU : ASAudioUnit
         __interop__WriteNote(dsp, Int32(x), Int32(y), Int32(note), Int32(shape))
     }
     
+    /// Return the MIDI note number and the `OscillatorShape` of the note at the given position
+    /// in the sequencer's current pattern.
+    /// - Parameter xy: The position of the note whose values should be retrieved
+
+    func note(at xy: CGPoint) -> (note: Int, shape: OscillatorShape)? {
+        var note:  Int32 = 0
+        var shape: Int32 = 0
+        __interop__Note(dsp, Int32(xy.nx), Int32(xy.ny), &note, &shape)
+        
+        guard note > 0 else { return nil }
+        return (Int(note), OscillatorShape(rawValue: Int(shape)) ?? .sine)
+    }
+    
     /// Erase a note from the sequencer
     /// - Parameter x: The x-coordinate of the position that should be erased
     /// - Parameter y: The y-coordinate of the position that should be erased

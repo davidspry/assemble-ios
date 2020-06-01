@@ -29,4 +29,8 @@ class NewSongViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func didPressClose(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+
 }

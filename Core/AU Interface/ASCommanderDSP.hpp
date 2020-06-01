@@ -31,6 +31,10 @@ void __interop__WriteNote(ASDSPRef, const int x, const int y, const int note, co
 
 void __interop__EraseNote(ASDSPRef, const int x, const int y);
 
+/// \brief Mutate the pointers `note` and `shape` with the corresponding values of the note at position (x, y) in the current pattern.
+
+void __interop__Note(ASDSPRef, const int x, const int y, int *note, int *shape);
+
 /// \brief Pass an encoded state string for the pattern that matches the given pattern number to the core for loading.
 
 void __interop__LoadPatternState(ASDSPRef, const char* state, const int pattern);

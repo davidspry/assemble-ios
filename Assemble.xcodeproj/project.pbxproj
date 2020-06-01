@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140B63CA2484D70600D571D1 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63C92484D70600D571D1 /* Recorder.swift */; };
+		140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63D32485371100D571D1 /* UIButtonExtensions.swift */; };
 		141DDA51243F81140020386C /* AHREnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA4F243F81140020386C /* AHREnvelope.cpp */; };
 		141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA5C243F91610020386C /* SineOscillator.cpp */; };
 		141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA60243F918D0020386C /* SquareOscillator.cpp */; };
@@ -127,6 +129,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		140B63C92484D70600D571D1 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		140B63D32485371100D571D1 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
+		140B63D6248560FC00D571D1 /* WhiteNoise.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WhiteNoise.hpp; sourceTree = "<group>"; };
+		140B63D7248561BF00D571D1 /* WhiteNoisePeriodic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WhiteNoisePeriodic.hpp; sourceTree = "<group>"; };
 		141DDA4F243F81140020386C /* AHREnvelope.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AHREnvelope.cpp; sourceTree = "<group>"; };
 		141DDA50243F81140020386C /* AHREnvelope.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AHREnvelope.hpp; sourceTree = "<group>"; };
 		141DDA5A243F90900020386C /* ASConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASConstants.h; sourceTree = "<group>"; };
@@ -277,6 +283,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140B63C82484D6F000D571D1 /* Recorder */ = {
+			isa = PBXGroup;
+			children = (
+				140B63C92484D70600D571D1 /* Recorder.swift */,
+			);
+			path = Recorder;
+			sourceTree = "<group>";
+		};
+		140B63D5248560CF00D571D1 /* Noise */ = {
+			isa = PBXGroup;
+			children = (
+				140B63D6248560FC00D571D1 /* WhiteNoise.hpp */,
+				140B63D7248561BF00D571D1 /* WhiteNoisePeriodic.hpp */,
+			);
+			path = Noise;
+			sourceTree = "<group>";
+		};
 		141D5CA42467FE5900FA6CF3 /* Wavetables */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +335,7 @@
 				149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */,
 				14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */,
 				144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */,
+				140B63D32485371100D571D1 /* UIButtonExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -537,6 +561,7 @@
 				141DDA4E243F81070020386C /* AHR Envelope */,
 				148E7E25244D5B65003C1DCF /* Synthesiser */,
 				141DDA5B243F914A0020386C /* Oscillators */,
+				140B63D5248560CF00D571D1 /* Noise */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -710,6 +735,7 @@
 				146B55EB242CDA90001163B3 /* Audio */,
 				149ACC2524543602009DA18F /* Utilities */,
 				14EFEDA5242DBA5200242298 /* UI */,
+				140B63C82484D6F000D571D1 /* Recorder */,
 				149ACC20245424B0009DA18F /* KeyboardInterface */,
 				14AFB89B2452362400F5AD3A /* View Controllers */,
 				14AFB89C2452363000F5AD3A /* Storyboards */,
@@ -912,6 +938,7 @@
 				141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */,
 				14280349246C2980006775AE /* ParametersViewController+.swift in Sources */,
 				14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */,
+				140B63CA2484D70600D571D1 /* Recorder.swift in Sources */,
 				144D862F246D3B2A00F6EDD4 /* VibratoParameters.swift in Sources */,
 				14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */,
 				14DAC3892417772C005654EA /* AppDelegate.swift in Sources */,
@@ -939,6 +966,7 @@
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
 				14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */,
+				140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */,
 				149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */,
 				14280350246C3DB9006775AE /* OscillatorParameters.swift in Sources */,
 				14EEB8CB247572FF007F0D37 /* PersistenceViewController.swift in Sources */,

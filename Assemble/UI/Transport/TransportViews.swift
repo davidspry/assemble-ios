@@ -21,10 +21,31 @@ extension Transport {
             play.heightAnchor.constraint(equalTo: heightAnchor),
             play.topAnchor.constraint(equalTo: topAnchor),
             play.bottomAnchor.constraint(equalTo: bottomAnchor),
-            play.trailingAnchor.constraint(equalTo: trailingAnchor)
+            play.trailingAnchor.constraint(equalTo: record.leadingAnchor)
         ])
         
         play.layoutIfNeeded()
+    }
+    
+    func initialiseRecordButton() {
+        record.backgroundColor = .clear
+        record.translatesAutoresizingMaskIntoConstraints = false
+        record.addTarget(self, action: #selector(didPressRecord), for: .touchUpInside)
+        record.setImage(Icons.record, for: .normal)
+        record.layer.cornerCurve = .continuous
+        record.layer.cornerRadius = 15
+        record.tintColor = UIColor.init(named: "Foreground") ?? .label
+        addSubview(record)
+        
+        NSLayoutConstraint.activate([
+            record.widthAnchor.constraint(equalToConstant: buttonWidth),
+            record.heightAnchor.constraint(equalTo: heightAnchor),
+            record.topAnchor.constraint(equalTo: topAnchor),
+            record.bottomAnchor.constraint(equalTo: bottomAnchor),
+            record.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        
+        record.layoutIfNeeded()
     }
     
     func initialiseKeyboardButton() {
@@ -54,7 +75,7 @@ extension Transport {
         oscillators.addTarget(self, action: #selector(didSelectOscillator), for: .valueChanged)
         addSubview(oscillators)
 
-        let complement: CGFloat = -(buttonWidth * 2 + buttonMargin * 2)
+        let complement: CGFloat = -(buttonWidth * 3 + buttonMargin * 2)
 
         NSLayoutConstraint.activate([
             oscillators.widthAnchor.constraint(equalTo: widthAnchor, constant: complement),

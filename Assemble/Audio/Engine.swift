@@ -6,7 +6,7 @@ import AVFoundation
 
 class Engine
 {
-    private let engine = AVAudioEngine()
+    let engine = AVAudioEngine()
 
     /// Initialise the underlying AVAudioEngine and capture the format for global access.
 

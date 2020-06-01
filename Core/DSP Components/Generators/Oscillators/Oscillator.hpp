@@ -5,7 +5,6 @@
 #ifndef OSCILLATOR_HPP
 #define OSCILLATOR_HPP
 
-#include <stdio.h>
 #include <random>
 
 class Oscillator

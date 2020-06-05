@@ -15,7 +15,7 @@ class WhiteNoise
 public:
     WhiteNoise()
     {
-        std::uniform_real_distribution<float>::param_type range(-1.F, 1.F);
+        std::uniform_real_distribution<float>::param_type range(-0.8F, 0.8F);
         distribution.param(range);
         twister.seed(rd());
     }

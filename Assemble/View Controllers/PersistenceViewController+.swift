@@ -53,7 +53,7 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     
         DispatchQueue.main.async {
             var tries = 0
-            while Assemble.core.commander?.userPresets.count == count, tries < 10 {
+            while Assemble.core.commander?.userPresets.count == count, tries < 20 {
                 Thread.sleep(forTimeInterval: 0.05)
                 tries = tries + 1
             }

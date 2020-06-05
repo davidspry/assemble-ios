@@ -31,7 +31,7 @@ extension Transport {
         record.backgroundColor = .clear
         record.translatesAutoresizingMaskIntoConstraints = false
         record.addTarget(self, action: #selector(didPressRecord), for: .touchUpInside)
-        record.setImage(Icons.record, for: .normal)
+        record.setImage(Icons.bypass, for: .normal)
         record.layer.cornerCurve = .continuous
         record.layer.cornerRadius = 15
         record.tintColor = UIColor.init(named: "Foreground") ?? .label

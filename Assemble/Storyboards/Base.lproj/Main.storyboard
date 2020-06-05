@@ -91,7 +91,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
+                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                                                             <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
+                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
                                                                             <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
@@ -330,9 +330,9 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-15-iez" userLabel="New Button">
-                                <rect key="frame" x="464" y="23" width="75" height="50"/>
+                                <rect key="frame" x="474" y="23" width="65" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="9AL-N0-aos"/>
+                                    <constraint firstAttribute="width" constant="65" id="9AL-N0-aos"/>
                                     <constraint firstAttribute="height" constant="50" id="bam-iJ-lGl"/>
                                 </constraints>
                                 <color key="tintColor" name="Foreground"/>
@@ -345,13 +345,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j" userLabel="Save Button">
-                                <rect key="frame" x="827" y="23" width="85" height="50"/>
+                                <rect key="frame" x="827" y="23" width="65" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="BaZ-3G-8Wh"/>
-                                    <constraint firstAttribute="width" constant="85" id="I94-B9-QK7"/>
+                                    <constraint firstAttribute="width" constant="65" id="I94-B9-QK7"/>
                                 </constraints>
                                 <color key="tintColor" name="Foreground"/>
-                                <state key="normal" image="arrow.down.doc.fill" catalog="system">
+                                <state key="normal" image="arrow.down.to.line" catalog="system">
                                     <color key="titleColor" name="Foreground"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
                                 </state>
@@ -405,10 +405,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-P7-LJq" userLabel="Parameters Button">
-                                <rect key="frame" x="1286" y="16" width="64" height="64"/>
+                                <rect key="frame" x="1285" y="23" width="65" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="YU9-Og-NOE"/>
-                                    <constraint firstAttribute="height" constant="64" id="kF3-NI-bOp"/>
+                                    <constraint firstAttribute="width" constant="65" id="YU9-Og-NOE"/>
+                                    <constraint firstAttribute="height" constant="50" id="kF3-NI-bOp"/>
                                 </constraints>
                                 <color key="tintColor" name="Foreground"/>
                                 <state key="normal" image="slider.horizontal.3" catalog="system">
@@ -439,7 +439,7 @@
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="f3D-RJ-dah" firstAttribute="width" secondItem="K3i-2N-gT6" secondAttribute="width" id="c62-Hj-2fg"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
-                            <constraint firstItem="ea2-P7-LJq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="fWQ-fw-1xH"/>
+                            <constraint firstItem="ea2-P7-LJq" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="fWQ-fw-1xH"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="width" secondItem="1zG-sF-KW1" secondAttribute="width" id="fdt-Gl-NNF"/>
                             <constraint firstItem="j9m-15-iez" firstAttribute="centerY" secondItem="Mow-LA-bfh" secondAttribute="centerY" id="jDH-2n-ciy"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="48" id="jZh-0c-JV4"/>
@@ -890,7 +890,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.down.doc.fill" catalog="system" width="115" height="128"/>
+        <image name="arrow.down.to.line" catalog="system" width="128" height="128"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="plus" catalog="system" width="128" height="113"/>

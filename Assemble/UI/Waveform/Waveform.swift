@@ -71,8 +71,10 @@ class Waveform: UIView {
     }()
 
     /// A scalar to adjust the scale of the visualisation
+    /// - Note: The amplitude of the synthesiser is multiplied by 1/16 in order to prevent the total amplitude from exceeding [-1, 1].
+    ///         Therefore, the gain should be thought of as a number between [0, 16] scaled as 16`k`, where `k` is some number in [0, 1].
 
-    private var gain: CGFloat = 16.0
+    private var gain: CGFloat = 0.8 * 16.0
 
     /// Install a tap on the output bus of the Assemble core in order to access the sample data.
     ///
@@ -201,9 +203,13 @@ class Waveform: UIView {
         bufferSize = Int32(_bufferSize)
 
         super.init(coder: coder)
-        
+
         updater = CADisplayLink(target: self, selector: #selector(redraw))
         updater.add(to: .main, forMode: .default)
+
+        /// Each of the stereo channels passes through a buffer.
+        /// Each buffer has two channels for the purpose of achieving "double buffering".
+        /// buffer = [pointer_to_contiguous_floats, pointer_to_contiguous_floats]
 
         ldata.reserveCapacity(2)
         rdata.reserveCapacity(2)

@@ -16,7 +16,15 @@
 class AHREnvelope
 {
 public:
-    AHREnvelope() { set(5, 0, 500); }
+    AHREnvelope()
+    {
+        set(5, 0, 500);
+    }
+
+    AHREnvelope(const int attack, const int hold, const int release)
+    {
+        set(attack, hold, release);
+    }
 
 public:
     void prepare();

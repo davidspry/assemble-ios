@@ -24,7 +24,7 @@ public:
         advance();
 
         if (amplitude > 0.0F)
-            return amplitude * noise.nextSample();
+            return noDenormals + scalar * amplitude * noise.nextSample();
 
         return 0.F;
     }
@@ -46,15 +46,17 @@ private:
             silent = !silent;
         }
 
-        if (!silent) amplitude = std::fmin(0.55F, amplitude + 1E-7F);
-        else         amplitude = std::fmax(0.00F, amplitude - 1E-7F);
+        if (!silent) amplitude = std::fmin(1.0F, amplitude + 1E-5F);
+        else         amplitude = std::fmax(0.0F, amplitude - 1E-5F);
     }
 
 private:
     int time;
     int seconds;
-    const int audible = 20;
-    const int silence = 120;
+    float scalar = 2E-2F;
+    const int audible = 10;
+    const int silence = 60;
+    constexpr static float noDenormals = 1E-25F;
 
 private:
     bool silent = false;

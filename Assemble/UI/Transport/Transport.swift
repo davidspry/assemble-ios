@@ -10,6 +10,7 @@ struct Icons {
     static let show   = UIImage(systemName: "circle.fill", withConfiguration: size)
     static let hide   = UIImage(systemName: "circle", withConfiguration: size)
     static let record = UIImage(systemName: "circle.fill", withConfiguration: size)
+    static let bypass = UIImage(systemName: "largecircle.fill.circle", withConfiguration: size)
     private static let size = UIImage.SymbolConfiguration.init(pointSize: 25, weight: .semibold)
 }
 
@@ -58,11 +59,13 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     @objc func didPressRecord(sender: UIButton)
     {
         recording = !recording
-        
+        let image = recording ? Icons.record : Icons.bypass
+
         if recording {
             NotificationCenter.default.post(name: .beginRecording, object: nil)
             DispatchQueue.main.async {
                 self.record.pulsate()
+                self.record.setImage(image, for: .normal)
                 UIView.animate(withDuration: 0.15) {
                     self.record.tintColor = .sineNoteColour
                 }
@@ -73,10 +76,23 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
             NotificationCenter.default.post(name: .stopRecording, object: nil)
             DispatchQueue.main.async {
                 self.record.layer.removeAllAnimations()
+                self.record.setImage(image, for: .normal)
                 UIView.animate(withDuration: 0.15) {
                     self.record.tintColor = UIColor.init(named: "Foreground")
                 }
             }
+        }
+    }
+    
+    /// Set the usable state of the record button.
+    ///
+    /// The record button should be disabled during the video encoding stage.
+    /// - Parameter state: The desired state of the record button. `true` if the button should be active; `false` otherwise.
+
+    public func setRecordButtonUsable(_ state: Bool) {
+        record.isEnabled = state
+        UIView.animate(withDuration: 1.0) {
+            self.record.alpha = state ? 1.0 : 0.75
         }
     }
     

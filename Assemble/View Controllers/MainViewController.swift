@@ -9,7 +9,7 @@ class MainViewController : UIViewController
 {
     let engine = Engine()
     var updater: CADisplayLink!
-    var recorder: Recorder!
+    var recorder: MediaRecorder!
     let computerKeyboard = ComputerKeyboard()
     
     let modeStrings = ["PATTERN MODE", "SONG MODE"]
@@ -59,7 +59,7 @@ class MainViewController : UIViewController
         
         /// Initialise the Recorded with a reference to the `AVAudioEngine`
         
-        recorder = Recorder(engine.engine)
+        recorder = MediaRecorder(engine.engine)
         
         /// Initialise the tempo `ParameterLabel` with its parameter address and settings.
         
@@ -96,7 +96,10 @@ class MainViewController : UIViewController
 
     
     @objc private func useRecorder(_ notification: NSNotification) {
-        if recorder.recording { recorder.stop(didCompleteRecording(_:)) }
+        if recorder.recording {
+            recorder.stop(didCompleteRecording(_:))
+            transport.setRecordButtonUsable(false)
+        }
 
         if notification.name == NSNotification.Name.beginRecording {
             recorder.record()
@@ -105,11 +108,11 @@ class MainViewController : UIViewController
     
     private func didCompleteRecording(_ file: URL?) {
         guard let url = file else { return }
-        let rect = CGRect(x: view.bounds.maxX, y: view.bounds.midY, width: 0, height: 0)
+        let rect = CGRect(x: view.bounds.midX, y: transport.frame.minY, width: 0, height: 0)
         let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = view
         activity.popoverPresentationController?.sourceRect = rect
-        activity.popoverPresentationController?.permittedArrowDirections = .right
+        activity.popoverPresentationController?.permittedArrowDirections = .down
         activity.excludedActivityTypes =
         [
             .addToReadingList,
@@ -117,8 +120,9 @@ class MainViewController : UIViewController
             .markupAsPDF,
             .openInIBooks
         ]
-        
+
         present(activity, animated: true, completion: nil)
+        transport.setRecordButtonUsable(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

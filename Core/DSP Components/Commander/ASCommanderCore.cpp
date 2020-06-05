@@ -124,7 +124,7 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
 //        const float whiteNoise = noise.nextSample();
 //        sample[0] += whiteNoise;
 //        sample[1] += whiteNoise;
-        
+
         for (size_t c = 0; c < channels; c++)
             output[c][t] = sample[c & 1];
     }

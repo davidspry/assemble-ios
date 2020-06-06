@@ -131,7 +131,7 @@ class MediaRecorder
         var frame = 0
         let queue = DispatchQueue(label: "assemble.video.queue", qos: .background)
         video.requestMediaDataWhenReady(on: queue, using: {
-            while video.isReadyForMoreMediaData && frame < Int(videoLengthInFrames)
+            if video.isReadyForMoreMediaData && frame < Int(videoLengthInFrames)
             {
                 let lastFrameTime = CMTimeMake(value: Int64(frame), timescale: Int32(framesPerSecond))
                 let presentationTime = frame == 0 ? lastFrameTime : CMTimeAdd(lastFrameTime, videoFrameDuration)
@@ -168,7 +168,8 @@ class MediaRecorder
     private func generateImage(size: CGSize, audio file: AVAudioFile, frame position: Int) -> UIImage {
         UIGraphicsBeginImageContext(size)
         let context = UIGraphicsGetCurrentContext()
-        let image = UIImage(color: .black, size: size)
+        let color = UIColor.init(named: "Background") ?? .black
+        let image = UIImage(color: color, size: size)
         let frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             image.draw(in: frame)
         
@@ -211,11 +212,12 @@ class MediaRecorder
         guard let context = context else { return }
         let width: CGFloat = size.width * 0.40
         let delta: CGFloat = width / CGFloat(data.count)
+        let color: UIColor = UIColor.init(named: "Foreground") ?? .white
 
         context.setLineWidth(2.0)
         context.setLineCap (.round)
         context.setLineJoin(.round)
-        context.setStrokeColor(UIColor.white.cgColor)
+        context.setStrokeColor(color.cgColor)
 
         let m: CGPoint = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
         var x: CGFloat = m.x - width / 2.0
@@ -243,6 +245,12 @@ class MediaRecorder
         {
             if  let bufferPool = adapter.pixelBufferPool {
                 let bufferPointer = UnsafeMutablePointer<CVPixelBuffer?>.allocate(capacity: 1)
+
+                defer {
+                    bufferPointer.deinitialize(count: 1)
+                    bufferPointer.deallocate()
+                }
+
                 let status: CVReturn = CVPixelBufferPoolCreatePixelBuffer(
                     kCFAllocatorDefault,
                     bufferPool,
@@ -252,10 +260,7 @@ class MediaRecorder
                 if let buffer = bufferPointer.pointee, status == 0 {
                     drawToBuffer(buffer, from: image)
                     appended = adapter.append(buffer, withPresentationTime: time)
-                    bufferPointer.deinitialize(count: 1)
                 }
-
-                bufferPointer.deallocate()
             }
         }
 

@@ -34,7 +34,7 @@ extension Transport {
         record.setImage(Icons.bypass, for: .normal)
         record.layer.cornerCurve = .continuous
         record.layer.cornerRadius = 15
-        record.tintColor = UIColor.init(named: "Foreground") ?? .label
+        record.tintColor = .sineNoteColour
         addSubview(record)
         
         NSLayoutConstraint.activate([

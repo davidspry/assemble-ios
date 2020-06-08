@@ -10,7 +10,11 @@ import AVFoundation
 
 class MediaRecorder
 {
-    var recording = false
+    private(set) var recording = false
+    
+    private(set) var shouldGenerateVideo = false
+    
+    private(set) var visualisation: Visualisation = .waveform
 
     private var file: AVAudioFile?
 
@@ -20,18 +24,18 @@ class MediaRecorder
     
     private lazy var settings: (audio: [String:Any], video: [String:Any]) =
     (
-    audio:
-    [
-        AVFormatIDKey    : kAudioFormatMPEG4AAC,
-        AVSampleRateKey  : Assemble.format.sampleRate,
-        AVNumberOfChannelsKey : Assemble.format.channelCount,
-    ],
-    video:
-    [
-        AVVideoCodecKey  : AVVideoCodecType.h264,
-        AVVideoWidthKey  : 1080,
-        AVVideoHeightKey : 1080
-    ]
+        audio:
+        [
+            AVFormatIDKey    : kAudioFormatMPEG4AAC,
+            AVSampleRateKey  : Assemble.format.sampleRate,
+            AVNumberOfChannelsKey : Assemble.format.channelCount,
+        ],
+        video:
+        [
+            AVVideoCodecKey  : AVVideoCodecType.h264,
+            AVVideoWidthKey  : 1080,
+            AVVideoHeightKey : 1080
+        ]
     )
 
     init(_ engine: AVAudioEngine) {
@@ -44,27 +48,43 @@ class MediaRecorder
         catch { print("[Recorder] AVAudioFile could not be written to.") }
     }
     
-    public func record()
+    /// Begin recording media
+    /// - Parameter video: A flag to indicate whether a video should be generated for the recording or not.
+    /// - Parameter visualisation: The type of audio visualisation to use in the generated video
+
+    public func record(video: Bool, visualisation type: Visualisation = .waveform)
     {
+        visualisation = type
+
+        shouldGenerateVideo = video
+        
         let path = MediaRecorder.createNewFile(extension: "aac")
 
         do    { self.file = try AVAudioFile(forWriting: path, settings: settings.audio) }
         catch { print("[Recorder] AVAudioFile could not be created.") }
 
+        print("[Recorder] Recording started.")
         engine.mainMixerNode.installTap(onBus: 0, bufferSize: _bufferSize,
                                         format: Assemble.format, block: writeAudio(_:_:))
 
-        print("[Recorder] Recording started.")
         recording = true
     }
     
+    /// Stop recording media
+    /// - Parameter complete: A method that should be called with the encoded media
+
     public func stop(_ complete: @escaping (URL?) -> ())
     {
         recording = false
-        engine.mainMixerNode.removeTap(onBus: 0)
         print("[Recorder] Recording stopped.")
-        guard let file = file else { return }
-        generateVideo(for: file.url, then: complete)
+        engine.mainMixerNode.removeTap(onBus: 0)
+        guard let file = file else {
+            print("[Recorder] File is nil on recording stop")
+            return
+        }
+        
+        if shouldGenerateVideo { generateVideo(for: file.url, then: complete) }
+        else                   { complete(file.url) }
     }
 
     /// Create a new file with the given path extension in the user's documents directory
@@ -90,6 +110,23 @@ class MediaRecorder
         return filepath
     }
     
+    /// Attempt to delete the file at the given URL
+    /// - Parameter filepath: The URL of the file to be deleted
+    
+    private class func deleteExistingFile(_ filepath: URL) {
+        DispatchQueue.main.async {
+            var result = false
+
+            if FileManager.default.isDeletableFile(atPath: filepath.path)
+            {
+                do    { try FileManager.default.removeItem(at: filepath); result = true }
+                catch { print("[Recorder] File exists but could not be removed\n\(error)") }
+            }   else  { print("[Recorder] File is not deleteable.") }
+            
+            if result { print("[Recorder] File was removed successfully") }
+        }
+    }
+
     /// Generate a video from the given audio file
     /// - Parameter audioFile: The URL of the audio file whose contents should be used to generate a video
     /// - Parameter complete:  A completion handler, which will be passed the video after a successful encode, or nil otherwise.
@@ -175,7 +212,7 @@ class MediaRecorder
         
         let step = 16
         let frames = AVAudioFrameCount(2048)
-        var data   = [Float](repeating: 0.0, count: Int(frames / UInt32(step)))
+        var data   = [[Float]](repeating: [Float](repeating: 0.0, count: Int(frames / UInt32(step))), count: 2)
         if let format = AVAudioFormat(commonFormat: .pcmFormatFloat32,
                                    sampleRate:   file.fileFormat.sampleRate,
                                    channels:     file.fileFormat.channelCount,
@@ -188,8 +225,10 @@ class MediaRecorder
                 catch { return image }
 
                 if let floatBuffer = buffer.floatChannelData {
+                    let L = 0, R = format.channelCount > 1 ? 1 : 0
                     for (i, block) in stride(from: 0, to: Int(frames), by: step).enumerated() {
-                        vDSP_meanv(&floatBuffer[0][block], 1, &data[i], vDSP_Length(step))
+                        vDSP_meanv(&floatBuffer[L][block], 1, &data[0][i], vDSP_Length(step))
+                        vDSP_meanv(&floatBuffer[R][block], 1, &data[1][i], vDSP_Length(step))
                     }
                 }
             }
@@ -208,27 +247,102 @@ class MediaRecorder
     /// - Parameter context: The context in which the visualisation should be drawn
     /// - Parameter size: The total available size for the visualisation
 
-    private func drawAudio(from data: [Float], in context: CGContext?, with size: CGSize) {
+    private func drawAudio(from data: [[Float]], in context: CGContext?, with size: CGSize) {
         guard let context = context else { return }
-        let width: CGFloat = size.width * 0.40
-        let delta: CGFloat = width / CGFloat(data.count)
-        let color: UIColor = UIColor.init(named: "Foreground") ?? .white
+        let primary: UIColor = UIColor.init(named: "Foreground") ?? .white
+        let secondary: UIColor = primary.withAlphaComponent(0.25)
 
-        context.setLineWidth(2.0)
         context.setLineCap (.round)
         context.setLineJoin(.round)
-        context.setStrokeColor(color.cgColor)
+        context.setStrokeColor(secondary.cgColor)
+        context.setLineWidth(4.0)
+        drawGrid(in: context, size: size)
+        context.strokePath()
+        
+        context.beginPath()
+        context.setLineWidth(2.0)
+        context.setStrokeColor(primary.cgColor)
+        if visualisation == .waveform {  drawWaveform(from: data, size: size, in: context) }
+        else                          { drawLissajous(from: data, size: size, in: context) }
+        context.strokePath()
+
+        drawAssembleBadge(in: context, size: size)
+    }
+    
+    /// Draw a dot grid in the given `CGContext`
+    /// - Parameter context: The context in which the dot grid should be drawn
+    /// - Parameter size: The total available size for the drawing
+    
+    private func drawGrid(in context: CGContext, size: CGSize) {
+        let path = CGMutablePath()
+        let width = min(size.height, size.width) * 0.6
+        let delta = CGFloat((width / 18).rounded(.up))
+        let m: CGPoint = CGPoint(x: (size.width - width) / 2.0, y: (size.height - width) / 2.0)
+
+        for y in stride(from: 0, through: width, by: delta) {
+            for x in stride(from: 0, through: width, by: delta) {
+                let xy = CGPoint(x: m.x + x, y: m.y + y)
+                path.move(to: xy)
+                path.addArc(center: xy, radius: 1, startAngle: 0, endAngle: 0, clockwise: true)
+            }
+        }
+
+        context.addPath(path)
+    }
+    
+    /// Draw an Assemble badge in the given `CGContext`
+    /// - Parameter context: The context in which the dot grid should be drawn
+    /// - Parameter size: The total available size for the drawing
+
+    private func drawAssembleBadge(in context: CGContext, size: CGSize) {
+        let square: CGFloat = 70
+        let margin: CGFloat = square / 2.0
+        let xy = CGPoint(x: margin, y: size.height - square - margin)
+        if let logo = UIImage(named: "Assemble_2"), let image = logo.cgImage {
+            let imageFrame = CGRect(x: xy.x, y: xy.y, width: square, height: square)
+            context.draw(image, in: imageFrame)
+        }
+    }
+
+    /// Draw a waveform visualisation in the given `CGContext`
+    /// - Parameter data: A buffer of audio samples
+    /// - Parameter size: The total available size for the visualisation
+    /// - Parameter context: The context in which the visualisation should be drawn
+
+    private func drawWaveform(from data: [[Float]], size: CGSize, in context: CGContext) {
+        let gain:  CGFloat = 1.0
+        let width: CGFloat = size.width * 0.5
+        let delta: CGFloat = width / CGFloat(data[0].count)
 
         let m: CGPoint = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
         var x: CGFloat = m.x - width / 2.0
-        context.move(to: CGPoint(x: x, y: m.y + CGFloat(data[0]) * m.y))
-        for i in 0 ..< data.count {
-            let y = m.y + CGFloat(data[i]) * m.y
+        
+        context.move(to: CGPoint(x: x, y: m.y + CGFloat(data[0][0] + data[1][0]) * m.y * gain))
+        for i in 0 ..< data[0].count {
+            let y = m.y + CGFloat(data[0][i] + data[1][i]) * m.y * gain
             context.addLine(to: CGPoint(x: x, y: y))
             x = x + delta
         }
+    }
+    
+    /// Draw a Lissajous figure in the given `CGContext`
+    /// - Parameter data: A buffer of audio samples
+    /// - Parameter size: The total available size for the visualisation
+    /// - Parameter context: The context in which the visualisation should be drawn
 
-        context.strokePath()
+    private func drawLissajous(from data: [[Float]], size: CGSize, in context: CGContext) {
+        let gain: CGFloat = 3.0
+        let m = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
+        let x = m.x + CGFloat(data[0][0]) * m.y
+        let y = m.y + CGFloat(data[1][0]) * m.y
+
+        context.move(to: .init(x: x, y: y))
+        for i in 0 ..< data[0].count {
+            let x = m.x + CGFloat(data[0][i]) * m.y * gain
+            let y = m.y + CGFloat(data[1][i]) * m.y * gain
+            let point = CGPoint(x: x, y: y)
+            context.addLine(to: point)
+        }
     }
     
     /// Append the contents of the given image as a pixel buffer to the given pixel buffer adapter at the given presentation time.
@@ -288,6 +402,7 @@ class MediaRecorder
     }
 
     /// Merge the contents of an audio file and a video file together, then encode the result in a new MP4 file.
+    /// - Note: If the merge is successful, the original video file will be deleted.
     /// - Parameter audio: The URL of the audio file to use
     /// - Parameter video: The URL of the video file to use
     /// - Parameter complete: A completion handler, which will be passed the result of this method.
@@ -320,6 +435,7 @@ class MediaRecorder
             if export?.status == .completed {
                 guard let url = export?.outputURL else { return }
                 print("[Recorder] A/V merge completed:\n\(url)")
+                MediaRecorder.deleteExistingFile(video.url)
                 DispatchQueue.main.async {
                     complete(url)
                 }
@@ -329,7 +445,7 @@ class MediaRecorder
                 guard let error = export?.error else { return }
                 print("[Recorder] A/V merge failed:\n\(error)")
                 DispatchQueue.main.async {
-                    complete(nil)
+                    complete(audio.url)
                 }
             }
         }

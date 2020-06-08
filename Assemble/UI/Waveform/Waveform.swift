@@ -74,7 +74,7 @@ class Waveform: UIView {
     /// - Note: The amplitude of the synthesiser is multiplied by 1/16 in order to prevent the total amplitude from exceeding [-1, 1].
     ///         Therefore, the gain should be thought of as a number between [0, 16] scaled as 16`k`, where `k` is some number in [0, 1].
 
-    private var gain: CGFloat = 0.8 * 16.0
+    private var gain: CGFloat = 0.35 * 16.0
 
     /// Install a tap on the output bus of the Assemble core in order to access the sample data.
     ///
@@ -127,18 +127,18 @@ class Waveform: UIView {
         super.touchesBegan(touches, with: event)
         mode = mode == .waveform ? .lissajous : .waveform
     }
-    
-    
+
     /// Plot the sample data across the width of the bounds.
     /// The scale in the y-direction is set by the `gain` property.
     /// - Parameter path: The path that should contain the visualisation.
 
     private func drawWaveform(on path: inout CGMutablePath) {
-        var x: CGFloat = 0
         let r: Int = Int(self.r)
-        path.move(to: CGPoint(x: 0, y: bounds.midY + CGFloat(ldata[r][0]) * bounds.midY * self.gain))
+        var x: CGFloat = 0
+        let initialAmplitude = CGFloat(ldata[r][0] + rdata[r][0])
+        path.move(to: CGPoint(x: 0, y: bounds.midY + initialAmplitude * bounds.midY * self.gain))
         for i in 0 ..< points {
-            let y = bounds.midY + CGFloat(ldata[r][i]) * bounds.midY * self.gain
+            let y = bounds.midY + CGFloat(ldata[r][i] + rdata[r][i]) * bounds.midY * self.gain
             path.addLine(to: CGPoint(x: x, y: y))
             x = x + delta
         }

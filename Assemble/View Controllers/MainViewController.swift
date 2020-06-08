@@ -13,7 +13,7 @@ class MainViewController : UIViewController
     let computerKeyboard = ComputerKeyboard()
     
     let modeStrings = ["PATTERN MODE", "SONG MODE"]
-    
+
     @IBOutlet weak var keyboard:  Keyboard!
     @IBOutlet weak var sequencer: Sequencer!
     @IBOutlet weak var waveform:  Waveform!
@@ -67,7 +67,7 @@ class MainViewController : UIViewController
         
         /// Establish the `CADisplayLink` that synchronises the UI with the given frequency
 
-        establishDisplayLink(fps: 20)
+        establishDisplayLink(fps: nil)
         
         /// Establish delegate/listener relationships between classes who require it
 
@@ -85,16 +85,24 @@ class MainViewController : UIViewController
     }
     
     /// Establish a `CADisplayLink` for the purpose of updating the UI.
-    /// - Parameter fps: The number of times the specified callback will be executed per second
+    /// - Note: If `nil` is passed as the value of `fps`, the default frequency (the refresh rate of the screen) will be used.
+    /// - Parameter fps: The number of times the specified callback should be executed per second
     
-    private func establishDisplayLink(fps: Int) {
+    private func establishDisplayLink(fps: Int?) {
         let callback = #selector(refreshInterface)
         updater = CADisplayLink(target: self, selector: callback)
         updater.add(to: .main, forMode: .default)
+        guard let fps = fps else { return }
         updater.preferredFramesPerSecond = fps
     }
 
-    
+    /// Use the `MediaRecorder` to either begin a new recording or end an ongoing recording.
+    /// - Note: This function is a callback to be triggered by an `NSNotification`
+    /// - Parameter notification: The notification that triggered the function call.
+    /// Specifically, the notifications that should call this function are:
+    ///     `NSNotification.Name.beginRecording`, and;
+    ///     `NSNotification.Name.stopRecording`
+
     @objc private func useRecorder(_ notification: NSNotification) {
         if recorder.recording {
             recorder.stop(didCompleteRecording(_:))
@@ -102,9 +110,12 @@ class MainViewController : UIViewController
         }
 
         if notification.name == NSNotification.Name.beginRecording {
-            recorder.record()
+            recorder.record(video: true, visualisation: .lissajous)
         }
     }
+    
+    /// Handle the result of a media recording from the `MediaRecorder`
+    /// - Parameter file: The URL of the recorded audio or generated video, or `nil` if an error occurred.
     
     private func didCompleteRecording(_ file: URL?) {
         guard let url = file else { return }
@@ -154,7 +165,7 @@ class MainViewController : UIViewController
         Assemble.core.commander?.loadFromPreset(number: position)
         updateUIFromState()
     }
-    
+
     /// Save the current preset with the given name
     /// - Parameter name: The desired name for the preset
 

@@ -10,7 +10,8 @@ struct Icons {
     static let show   = UIImage(systemName: "circle.fill", withConfiguration: size)
     static let hide   = UIImage(systemName: "circle", withConfiguration: size)
     static let record = UIImage(systemName: "circle.fill", withConfiguration: size)
-    static let bypass = UIImage(systemName: "largecircle.fill.circle", withConfiguration: size)
+    static let bypass = UIImage(systemName: "circle", withConfiguration: size)
+    static let saving = UIImage(systemName: "slowmo", withConfiguration: size)
     private static let size = UIImage.SymbolConfiguration.init(pointSize: 25, weight: .semibold)
 }
 
@@ -66,20 +67,14 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
             DispatchQueue.main.async {
                 self.record.pulsate()
                 self.record.setImage(image, for: .normal)
-                UIView.animate(withDuration: 0.15) {
-                    self.record.tintColor = .sineNoteColour
-                }
             }
         }
 
         else {
-            NotificationCenter.default.post(name: .stopRecording, object: nil)
             DispatchQueue.main.async {
-                self.record.layer.removeAllAnimations()
+                self.record.pulsateEnd()
                 self.record.setImage(image, for: .normal)
-                UIView.animate(withDuration: 0.15) {
-                    self.record.tintColor = UIColor.init(named: "Foreground")
-                }
+                NotificationCenter.default.post(name: .stopRecording, object: nil)
             }
         }
     }
@@ -89,10 +84,18 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     /// The record button should be disabled during the video encoding stage.
     /// - Parameter state: The desired state of the record button. `true` if the button should be active; `false` otherwise.
 
-    public func setRecordButtonUsable(_ state: Bool) {
-        record.isEnabled = state
-        UIView.animate(withDuration: 1.0) {
-            self.record.alpha = state ? 1.0 : 0.75
+    public func setRecordButtonUsable(_ usable: Bool) {
+        record.isUserInteractionEnabled = usable
+        let image = usable ? Icons.bypass : Icons.saving
+
+        DispatchQueue.main.async {
+            if  usable { self.record.rotateClockwiseEnd() }
+            if !usable { self.record.rotateClockwise() }
+            
+            UIView.animate(withDuration: 0.25) {
+                self.record.alpha = usable ? 1.0 : 0.50
+                self.record.setImage(image, for: .normal)
+            }
         }
     }
     

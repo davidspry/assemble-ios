@@ -82,6 +82,7 @@
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
 		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
 		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
+		14D04D9A248DE5B8005A941A /* Assemble_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D04D99248DE5B8005A941A /* Assemble_2.png */; };
 		14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2D5C5246C747C003675C2 /* ParameterLabel.swift */; };
 		14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
 		14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
@@ -244,6 +245,7 @@
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
 		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
+		14D04D99248DE5B8005A941A /* Assemble_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble_2.png; sourceTree = "<group>"; };
 		14D2D5C5246C747C003675C2 /* ParameterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterLabel.swift; sourceTree = "<group>"; };
 		14D3AE972432F3AC0095B587 /* DotGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGrid.swift; sourceTree = "<group>"; };
 		14D3AE9B2433088E0095B587 /* DotGridRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotGridRow.swift; sourceTree = "<group>"; };
@@ -775,6 +777,7 @@
 		14E6551B2471455B00D619F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				14D04D99248DE5B8005A941A /* Assemble_2.png */,
 				14431B942475855900D59DED /* Assemble_1.png */,
 			);
 			path = Images;
@@ -880,6 +883,7 @@
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
 				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
+				14D04D9A248DE5B8005A941A /* Assemble_2.png in Resources */,
 				14431B952475855900D59DED /* Assemble_1.png in Resources */,
 				1427E2EF247686340011D102 /* Colours.xcassets in Resources */,
 				1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */,

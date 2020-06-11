@@ -115,8 +115,9 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     /// Set the current pattern index to 0 in the core and update the UI accordingly.
 
     public func reset() {
-        Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(0))
-        self.pattern = 0
+        let pattern = Assemble.core.getParameter(kSequencerFirstActive)
+        Assemble.core.setParameter(kSequencerCurrentPattern, to: pattern)
+        self.pattern = Int(pattern)
     }
 
     /// Toggle the state of a `Pattern` and update its icon.
@@ -250,6 +251,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     /// - Parameter notification: The `NSNotification` that has been received.
 
     @objc func handlePlayPauseNotification(_ notification: NSNotification) {
+        pattern = Int(Assemble.core.getParameter(kSequencerCurrentPattern))
         if nextPattern != pattern {
             dequeue(&shapes[nextPattern])
             nextPattern = pattern
@@ -342,6 +344,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
             return result
         }
 
+        hideClearPatternView()
         return super.hitTest(point, with: event)
     }
 }

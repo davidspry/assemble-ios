@@ -47,12 +47,19 @@ public class ASCommanderAU : ASAudioUnit
     }
 
     /// Instantiate an AudioUnit
+    /// - Parameter componentDescription: The `AudioComponentDescription` containing
+    /// information (manufacturer code, component type, etc.) about the `AudioUnit`. This information is
+    /// defined in the `acd` property in `ASCommander.swift`.
+    /// - Parameter options: Options for loading the `AudioUnit` in process or out of process.
+
     override init(componentDescription: AudioComponentDescription,
                   options: AudioComponentInstantiationOptions = []) throws {
         try super.init(componentDescription: componentDescription, options: options);
 
-        /// Create an `AUParameterTree` comprised of `AUParameterGroup` nodes,
-        /// which are defined in `ASCommanderAUParameters.swift`
+        /// Create an `AUParameterTree` comprised of `AUParameterGroup` subtrees,
+        /// which are defined in `ASCommanderAUParameters.swift`. Each group
+        /// defines a subtree of `AUParameter` vertices, which each define a parameter
+        /// with an address, a value type, a value range, etc. recognised by Assemble.
 
         let tree = AUParameterTree.createTree(withChildren:
         [
@@ -69,6 +76,7 @@ public class ASCommanderAU : ASAudioUnit
         setParameterTree(tree)
         
         /// Observe changes to parameter values
+        /// This callback defines the action taken when a parameter is used to set a value in Assemble (from the Swift layer).
         /// - SeeAlso: https://developer.apple.com/documentation/audiotoolbox/creating_custom_audio_effects
 
         tree.implementorValueObserver = { parameter, value in
@@ -76,20 +84,25 @@ public class ASCommanderAU : ASAudioUnit
         }
         
         /// Return the state of a requested parameter
+        /// This callback defines the action taken when a parameter's value is requested from the Assemble core.
         /// - SeeAlso: https://developer.apple.com/documentation/audiotoolbox/creating_custom_audio_effects
 
         tree.implementorValueProvider = { parameter in
             return self.parameter(withAddress: parameter.address)
         }
-        
+
         /// Return a String representation of a requested parameter
+        /// This callback defines the action taken when a String representation of a parameter's value is requested.
+        /// If desired, a switch statement could be used in order to provide different representations for different parameters.
         /// - SeeAlso: https://developer.apple.com/documentation/audiotoolbox/creating_custom_audio_effects
         
         tree.implementorStringFromValueCallback = { parameter, value in
             return String(format: "%.2f", value ?? parameter.value)
         }
 
-        /// Create a new, empty preset
+        /// Create a new, empty preset.
+        /// Setting the `currentPreset` property loads the preset automatically. Loading an empty preset
+        /// ensures that a preset exists to be saved
 
         let preset = AUAudioUnitPreset()
             preset.number = -userPresets.count

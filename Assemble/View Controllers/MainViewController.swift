@@ -110,7 +110,7 @@ class MainViewController : UIViewController
         }
 
         if notification.name == NSNotification.Name.beginRecording {
-            recorder.record(video: true, visualisation: .lissajous)
+            recorder.record(video: true, visualisation: .waveform)
         }
     }
     
@@ -119,7 +119,7 @@ class MainViewController : UIViewController
     
     private func didCompleteRecording(_ file: URL?) {
         guard let url = file else { return }
-        let rect = CGRect(x: view.bounds.midX, y: transport.frame.minY, width: 0, height: 0)
+        let rect = CGRect(x: transport.frame.midX, y: transport.frame.minY, width: 0, height: 0)
         let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = view
         activity.popoverPresentationController?.sourceRect = rect
@@ -140,6 +140,21 @@ class MainViewController : UIViewController
         super.viewDidAppear(animated);
         loadFactoryPresetOnFirstUse()
         waveform.start()
+    }
+    
+    /// Share the video file at the given URL as an Instagram Story using Instagram.
+    /// - Parameter file: The URL of the video file to be shared.
+    ///
+    /// <TODO: Create a media preview ViewController with saving and sharing options>
+
+    func shareToInstagram(_ file: URL) {
+        guard let instagram = URL(string: "instagram-stories://share"),
+              UIApplication.shared.canOpenURL(instagram)
+              else { return }
+
+        let items: [String:Any] = ["com.instagram.sharedSticker.backgroundVideo" : file]
+        UIPasteboard.general.setItems([items])
+        UIApplication.shared.open(instagram)
     }
     
     // MARK: - UI-Core Interaction

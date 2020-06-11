@@ -28,7 +28,7 @@ class MediaRecorder
         [
             AVFormatIDKey    : kAudioFormatMPEG4AAC,
             AVSampleRateKey  : Assemble.format.sampleRate,
-            AVNumberOfChannelsKey : Assemble.format.channelCount,
+            AVNumberOfChannelsKey : max(Assemble.format.channelCount, 2)
         ],
         video:
         [
@@ -47,7 +47,7 @@ class MediaRecorder
         do    { try file?.write(from: buffer) }
         catch { print("[Recorder] AVAudioFile could not be written to.") }
     }
-    
+
     /// Begin recording media
     /// - Parameter video: A flag to indicate whether a video should be generated for the recording or not.
     /// - Parameter visualisation: The type of audio visualisation to use in the generated video
@@ -57,7 +57,7 @@ class MediaRecorder
         visualisation = type
 
         shouldGenerateVideo = video
-        
+
         let path = MediaRecorder.createNewFile(extension: "aac")
 
         do    { self.file = try AVAudioFile(forWriting: path, settings: settings.audio) }
@@ -69,7 +69,7 @@ class MediaRecorder
 
         recording = true
     }
-    
+
     /// Stop recording media
     /// - Parameter complete: A method that should be called with the encoded media
 

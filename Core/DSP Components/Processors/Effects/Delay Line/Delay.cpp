@@ -102,6 +102,8 @@ const float Delay::parseMusicalTimeParameterIndex(const int index)
         case 6:  return fDelayQuarterNote;
         case 7:  return fDelaySixteenthDotted;
         case 8:  return fDelaySixteenthNote;
+        case 9:  return fDelayThirtySecondNote;
+        case 10: return fDelaySixtyFourthNote;
         default: return 1.F;
     }
 }

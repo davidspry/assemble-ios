@@ -64,6 +64,7 @@ public:
     std::pair<int, iterator&> nextRow();
     
 private:
+    int  findAndSelectFirstActivePattern();
     void selectNextActivePattern();
     void selectPattern(const int);
     

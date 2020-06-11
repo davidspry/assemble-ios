@@ -7,9 +7,13 @@
 
 #include <array>
 
-const static int kSineTableLength = 512;
+/// \brief The number of samples in the sine wavetable.
 
-const static std::array<float, 512> wt_sine =
+constexpr static int kSineTableLength = 512;
+
+/// \brief One period of the sine function sampled 512 times.
+
+constexpr static std::array<float, 512> wt_sine =
 {
     0.0,
     0.012295551828511666,

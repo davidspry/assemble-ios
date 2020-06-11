@@ -10,7 +10,7 @@
 
 /// \brief A static look-up table for the frequencies of pitches associated with MIDI note numbers
 
-const static std::array<float, 128> frequencies =
+constexpr static std::array<float, 128> frequencies =
 {
     8.175798915643707,
     8.661957218027252,

@@ -18,6 +18,7 @@ static const int kSequencerPatternState   = 0xAA05;
 static const int kSequencerMode           = 0xAA06;
 static const int kSequencerBeats          = 0xAA07;
 static const int kSequencerTicks          = 0xAA08;
+static const int kSequencerFirstActive    = 0xAA09;
 
 // [CLOCK] 0xCA0[Parameter]
 // ===========================================
@@ -113,5 +114,7 @@ static const float fDelayEighthDotted     = 0.750F;
 static const float fDelayEighthNote       = 0.500F;
 static const float fDelaySixteenthDotted  = 0.375F;
 static const float fDelaySixteenthNote    = 0.250F;
+static const float fDelayThirtySecondNote = 0.125F;
+static const float fDelaySixtyFourthNote  = 0.0625F;
 
 #endif

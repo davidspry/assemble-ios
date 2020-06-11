@@ -13,6 +13,8 @@
 /// The square wave is oversampled by a factor of 2 and bandlimited in order to
 /// contain the maximum number of harmonics in each table without exceeding the Nyquist frequency.
 ///
+/// Correct use of these wavetables should ensure that aliasing from the synthesiser is minimised if not obviated completely.
+///
 /// For each table, the top frequency and the number of harmonics follows.
 /// 1. 40Hz             735
 /// 2. 80Hz             367
@@ -31,7 +33,7 @@
 constexpr static int kTriangleTableLength = 4096;
 
 // Top frequency: 44.1K * 0.000907029
-const static std::array<float, 4096> wt_triangle_0x1 =
+constexpr static std::array<float, 4096> wt_triangle_0x1 =
 {
     0,
     -0.000975447,
@@ -4132,7 +4134,7 @@ const static std::array<float, 4096> wt_triangle_0x1 =
 };
 
 // Top frequency: 44.1K * 0.00181406
-const static std::array<float, 4096> wt_triangle_0x2 =
+constexpr static std::array<float, 4096> wt_triangle_0x2 =
 {
     0,
     -0.000974523,
@@ -8233,7 +8235,7 @@ const static std::array<float, 4096> wt_triangle_0x2 =
 };
 
 // Top frequency: 44.1K * 0.00362812
-const static std::array<float, 4096> wt_triangle_0x3 =
+constexpr static std::array<float, 4096> wt_triangle_0x3 =
 {
     0,
     -0.000972791,
@@ -12334,7 +12336,7 @@ const static std::array<float, 4096> wt_triangle_0x3 =
 };
 
 // Top frequency: 44.1K * 0.00725624
-const static std::array<float, 4096> wt_triangle_0x4 =
+constexpr static std::array<float, 4096> wt_triangle_0x4 =
 {
     0,
     -0.000969392,
@@ -16435,7 +16437,7 @@ const static std::array<float, 4096> wt_triangle_0x4 =
 };
 
 // Top frequency: 44.1K * 0.0145125
-const static std::array<float, 4096> wt_triangle_0x5 =
+constexpr static std::array<float, 4096> wt_triangle_0x5 =
 {
     0,
     -0.000989615,
@@ -20536,7 +20538,7 @@ const static std::array<float, 4096> wt_triangle_0x5 =
 };
 
 // Top frequency: 44.1K * 0.0290249
-const static std::array<float, 4096> wt_triangle_0x6 =
+constexpr static std::array<float, 4096> wt_triangle_0x6 =
 {
     0,
     -0.00100431,
@@ -24638,7 +24640,7 @@ const static std::array<float, 4096> wt_triangle_0x6 =
 };
 
 // Top frequency: 44.1K * 0.0580499
-const static std::array<float, 4096> wt_triangle_0x7 =
+constexpr static std::array<float, 4096> wt_triangle_0x7 =
 {
     0,
     -0.000924689,
@@ -28739,7 +28741,7 @@ const static std::array<float, 4096> wt_triangle_0x7 =
 };
 
 // Top frequency: 44.1K * 0.1161
-const static std::array<float, 4096> wt_triangle_0x8 =
+constexpr static std::array<float, 4096> wt_triangle_0x8 =
 {
     0,
     -0.00107713,
@@ -32840,7 +32842,7 @@ const static std::array<float, 4096> wt_triangle_0x8 =
 };
 
 // Top frequency: 44.1K * 0.2322
-const static std::array<float, 4096> wt_triangle_0x9 =
+constexpr static std::array<float, 4096> wt_triangle_0x9 =
 {
     0,
     -0.00124284,
@@ -36941,7 +36943,7 @@ const static std::array<float, 4096> wt_triangle_0x9 =
 };
 
 // Top frequency: 44.1K * 0.464399
-const static std::array<float, 4096> wt_triangle_0xA =
+constexpr static std::array<float, 4096> wt_triangle_0xA =
 {
     0,
     -0.00124284,
@@ -41041,7 +41043,7 @@ const static std::array<float, 4096> wt_triangle_0xA =
     0.00124284
 };
 
-const static std::array<std::array<float, 4096>, 10> wt_triangle =
+constexpr static std::array<std::array<float, 4096>, 10> wt_triangle =
 {
     wt_triangle_0x1,
     wt_triangle_0x2,

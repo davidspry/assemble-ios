@@ -80,7 +80,7 @@ float ASCommanderDSP::getParameter(uint64_t parameter)
 
 void ASCommanderDSP::process(AUAudioFrameCount frameCount, AUAudioFrameCount bufferOffset)
 {
-    const auto channels = outBufferListPtr->mNumberBuffers;
+    const auto channels = std::min(2, (int) outBufferListPtr->mNumberBuffers);
     
     float *output[channels];
     for (auto c = 0; c < channels; ++c)

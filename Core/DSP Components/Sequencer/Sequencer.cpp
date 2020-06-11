@@ -76,6 +76,7 @@ const float Sequencer::get(uint64_t parameter)
         case kSequencerLength:         return (float) patternLength;
         case kSequencerCurrentRow:     return (float) row;
         case kSequencerCurrentPattern: return (float) pattern;
+        case kSequencerFirstActive:    return (float) findAndSelectFirstActivePattern();
         case kSequencerNextPattern:    return (float) nextPattern;
         case kSequencerPatternState:   return (float) patterns.at(pattern).isActive();
         case kSequencerBeats:          return (float) patterns.at(pattern).getTimeSignature().first;
@@ -126,12 +127,23 @@ void Sequencer::prepare()
 
 void Sequencer::selectPattern(const int pattern) noexcept(false)
 {
+    if (this->pattern == pattern) return;
+
     if (pattern < 0 || pattern >= PATTERNS)
         throw "Invalid Pattern index";
-    
+
     this->pattern = pattern;
     this->nextPattern = pattern;
     this->patternLength = patterns.at(pattern).length();
+}
+
+/// \brief Select the first active pattern then return the pattern index.
+
+int Sequencer::findAndSelectFirstActivePattern()
+{
+    selectNextActivePattern();
+    
+    return pattern;
 }
 
 /// \brief Select the next active pattern.

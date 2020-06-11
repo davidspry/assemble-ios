@@ -725,19 +725,20 @@ struct ASCommanderAUParameters
     }()
 
     static private let delayTimes =
-    [ "1/1", "1/2D", "1/2", "1/4D", "1/4", "1/8D", "1/8", "1/16D", "1/16" ]
+    [ "1/1", "1/2D", "1/2", "1/4D", "1/4", "1/8D", "1/8", "1/16D", "1/16", "1/32", "1/64" ]
 
     static var stereoDelayTimeLeft: AUParameter = {
         let parameter =
             AUParameterTree.createParameter(withIdentifier: "kStereoDelayLTime",
                                             name: "Stereo Delay Time (L)",
                                             address: AUParameterAddress(kStereoDelayLTime),
-                                            min: 0, max: 8,
+                                            min: 0, max: 10,
                                             unit: .indexed,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: ASCommanderAUParameters.delayTimes,
                                             dependentParameters: nil)
+        parameter.value = 6
         return parameter
     }()
     
@@ -746,12 +747,13 @@ struct ASCommanderAUParameters
             AUParameterTree.createParameter(withIdentifier: "kStereoDelayRTime",
                                             name: "Stereo Delay Time (R)",
                                             address: AUParameterAddress(kStereoDelayRTime),
-                                            min: 0, max: 8,
+                                            min: 0, max: 10,
                                             unit: .indexed,
                                             unitName: nil,
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: ASCommanderAUParameters.delayTimes,
                                             dependentParameters: nil)
+        parameter.value = 6
         return parameter
     }()
     
@@ -767,7 +769,7 @@ struct ASCommanderAUParameters
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
-        parameter.value = 0.55
+        parameter.value = 0.50
         return parameter
     }()
     
@@ -798,7 +800,7 @@ struct ASCommanderAUParameters
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
-        parameter.value = 0.35
+        parameter.value = 0.30
         return parameter
     }()
     

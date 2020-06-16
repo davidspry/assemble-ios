@@ -105,8 +105,8 @@ class MainViewController : UIViewController
 
     @objc private func useRecorder(_ notification: NSNotification) {
         if recorder.recording {
-            recorder.stop(didCompleteRecording(_:))
             transport.setRecordButtonUsable(false)
+            recorder.stop(didCompleteRecording(_:))
         }
 
         if notification.name == NSNotification.Name.beginRecording {
@@ -118,7 +118,12 @@ class MainViewController : UIViewController
     /// - Parameter file: The URL of the recorded audio or generated video, or `nil` if an error occurred.
     
     private func didCompleteRecording(_ file: URL?) {
-        guard let url = file else { return }
+        guard let url = file else {
+            transport.setRecordButtonUsable(true)
+            transport.didPressRecord(sender: transport.record)
+            return
+        }
+
         let rect = CGRect(x: transport.frame.midX, y: transport.frame.minY, width: 0, height: 0)
         let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = view

@@ -34,7 +34,6 @@ extension UIButton {
             animation.toValue      = Float.pi * 2.0
             animation.repeatCount  = .greatestFiniteMagnitude
             animation.isCumulative = true
-//            animation.timingFunction = .init(name: .easeInEaseOut)
 
         layer.add(animation, forKey: "transform.rotation.z")
     }

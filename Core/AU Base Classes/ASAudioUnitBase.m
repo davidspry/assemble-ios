@@ -32,14 +32,12 @@ static void    bufferListPointChannelDataToBuffer(AudioBufferList *, float *);
     
     if (self != nil)
     {
-        AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2];
+        AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:48000 channels:2];
         
         if ([self shouldAllocateInputBus])
-        {
             _inputBusArray  = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
                                                                      busType:AUAudioUnitBusTypeInput
                                                                       busses: @[[[AUAudioUnitBus alloc]initWithFormat:format error:NULL]]];
-        }
 
         _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
                                                                  busType:AUAudioUnitBusTypeOutput
@@ -66,10 +64,12 @@ static void    bufferListPointChannelDataToBuffer(AudioBufferList *, float *);
     if (![super allocateRenderResourcesAndReturnError:outError]) return NO;
 
     AVAudioFormat *format = _outputBusArray[0].format;
+
     if (_inputBusArray != NULL && [_inputBusArray[0].format isEqual: format] == false)
     {
         if (outError)
-            *outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:kAudioUnitErr_FormatNotSupported userInfo:nil];
+            *outError = [NSError errorWithDomain:NSOSStatusErrorDomain
+                                            code:kAudioUnitErr_FormatNotSupported userInfo:nil];
 
         NSLog(@"%@ input format must match output format", self.class);
         self.renderResourcesAllocated = NO;
@@ -94,7 +94,6 @@ static void    bufferListPointChannelDataToBuffer(AudioBufferList *, float *);
 -(void)deallocateRenderResources
 {
     if (_inputBuffer != NULL) free(_inputBuffer);
-
     if (_ouputBuffer != NULL) free(_ouputBuffer);
 
     _inputBuffer = NULL;

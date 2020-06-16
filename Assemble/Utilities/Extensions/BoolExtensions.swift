@@ -6,6 +6,8 @@ import Foundation
 
 extension Bool {
 
+    /// Infer a boolean value from an integer.
+
     init(_ from: Int) {
         let value = NSNumber(integerLiteral: from)
         self = Bool(truncating: value)

@@ -52,11 +52,4 @@ class MulticastDelegate <T>
         }
     }
 
-    static func += <T: AnyObject>(left: MulticastDelegate<T>, right: T) {
-        left.add(right)
-    }
-
-    static func -= <T: AnyObject>(left: MulticastDelegate<T>, right: T) {
-        left.remove(right)
-    }
 }

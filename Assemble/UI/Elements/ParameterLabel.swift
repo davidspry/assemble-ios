@@ -4,8 +4,7 @@
 
 import UIKit
 
-/// A set of constants that define appropriate scrolling speeds
-/// for a ParameterLabel.
+/// A set of constants that define appropriate scrolling speeds for a ParameterLabel.
 
 public enum ParameterLabelScale: Float {
     case continuousFast    = 5
@@ -59,6 +58,11 @@ class ParameterLabel: PaddedLabel {
         }
     }
 
+    /// Initialise the label with a parameter
+    /// - Parameter parameter: The address of the parameter that should be linked with the label
+    /// - Parameter increment: The increment by which the parameter's value should be increased and decreased
+    /// - Parameter type: The type of parameter, which defines how quickly its value changes.
+
     public func initialise(with parameter: Int32, increment: Float, and type: ParameterLabelScale) {
         self.parameterScale = type.rawValue
         self.parameterStep  = increment
@@ -66,6 +70,8 @@ class ParameterLabel: PaddedLabel {
         update()
     }
     
+    /// Re-initialise the label from its existing parameter address
+
     public func reinitialise() {
         guard let parameter = parameter else { return }
         rawValue = Assemble.core.getParameter(parameter)
@@ -73,6 +79,8 @@ class ParameterLabel: PaddedLabel {
         update()
     }
     
+    /// Update the textual contents of the label from the label's `value` property
+
     internal func update() {
         if valueStrings == nil || value < 0 || Int(value) > valueStrings!.count {
             text = String(format: format, value)

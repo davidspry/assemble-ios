@@ -85,10 +85,10 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     /// - Parameter state: The desired state of the record button. `true` if the button should be active; `false` otherwise.
 
     public func setRecordButtonUsable(_ usable: Bool) {
-        record.isUserInteractionEnabled = usable
         let image = usable ? Icons.bypass : Icons.saving
 
         DispatchQueue.main.async {
+            self.record.isUserInteractionEnabled = usable
             if  usable { self.record.rotateClockwiseEnd() }
             if !usable { self.record.rotateClockwise() }
             

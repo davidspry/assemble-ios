@@ -8,6 +8,8 @@ import UIKit
 
 extension CGSize
 {
+    /// Generate a square whose sides are equal to the given integer.
+
     static func square(_ size: Int) -> CGSize
     {
         return .init(width: size, height: size);

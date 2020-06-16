@@ -6,12 +6,24 @@ import UIKit
 
 extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource {
     
+    private func noSavedSongsCell(from cell: SongCell) -> SongCell {
+        cell.songName.text = "THERE ARE NO SAVED SEQUENCES"
+        cell.songName.textColor = UIColor.init(named: "Foreground")
+        cell.songName.backgroundColor = UIColor.init(named: "Background")
+        return cell
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let presets = Assemble.core.commander?.userPresets else { return 0 }
+        guard let presets = Assemble.core.commander?.userPresets,
+                !(presets.isEmpty) else { return 1 }
         return    presets.count
     }
     
@@ -21,8 +33,9 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
         
         guard let count   = Assemble.core.commander?.userPresets.count,
               let presets = Assemble.core.commander?.userPresets,
-                  indexPath.row < count else { return cell }
+              (count == 0 || indexPath.row < count) else { return cell }
 
+        if  presets.isEmpty { return noSavedSongsCell(from: cell) }
         let preset = presets[indexPath.row]
         let isCurrentPreset = indexPath.row == Assemble.core.commander?.selectedPreset
         cell.songName.text = "\(preset.name)"
@@ -34,18 +47,23 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate else { print("[PersistenceViewController] Delegate is nil"); return }
-        guard let count   = Assemble.core.commander?.userPresets.count,
-                  indexPath.row < count else { return }
+        guard let count = Assemble.core.commander?.userPresets.count,
+                  count > 0, indexPath.row < count else { return }
 
         delegate.loadState(indexPath.row)
         dismiss(animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        guard let presets = Assemble.core.commander?.userPresets else { return false }
+        return    presets.count > 0
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         guard let count   = Assemble.core.commander?.userPresets.count,
               let presets = Assemble.core.commander?.userPresets,
-              editingStyle == .delete, indexPath.row < count else { return }
+              editingStyle == .delete, !(presets.isEmpty), indexPath.row < count else { return }
         
         let preset = presets[indexPath.row]
 
@@ -56,6 +74,11 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
             while Assemble.core.commander?.userPresets.count == count, tries < 20 {
                 Thread.sleep(forTimeInterval: 0.05)
                 tries = tries + 1
+            }
+            
+            if let selectedPreset = Assemble.core.commander?.selectedPreset,
+                   selectedPreset > indexPath.row {
+                Assemble.core.commander?.selectedPreset = selectedPreset - 1
             }
             
             tableView.reloadData()

@@ -5,16 +5,17 @@
 import UIKit
 
 extension UIViewController {
-    /**
-     Add a `UIViewController` as a child, then add its `UIView` to the bottom of the subview hierarchy.
-     
-     - Author: John Sundell
-     - Note: Source: https://www.swiftbysundell.com/articles/using-child-view-controllers-as-plugins-in-swift/
-     */
+
+    /// Add a `UIViewController` as a child, then add its `UIView` to the bottom of the subview hierarchy.
+    ///
+    /// - Author: John Sundell
+    /// - Note: Source: https://www.swiftbysundell.com/articles/using-child-view-controllers-as-plugins-in-swift/
+
     func addInBackground(_ child: UIViewController) {
         addChild(child)
         view.addSubview(child.view)
         view.sendSubviewToBack(child.view)
         child.didMove(toParent: self)
     }
+
 }

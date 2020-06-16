@@ -11,7 +11,7 @@ class Engine
     /// Initialise the underlying AVAudioEngine and capture the format for global access.
 
     init() {
-        Assemble.format = engine.outputNode.outputFormat(forBus: 0);
+        Assemble.format = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 2)
         connect(Assemble.core)
 
         let route = AVAudioSession.routeChangeNotification
@@ -23,17 +23,27 @@ class Engine
         NotificationCenter.default.addObserver(self, selector: callback, name: configuration, object: nil)
     }
 
-    func start() {
+    /// Start the audio engine.
+
+    public func start() {
         engine.prepare()
+        print("[Engine] The engine is starting.")
         do    { try engine.start() }
-        catch { print("The engine could not be started: \(error)") }
+        catch { print("[Engine] The engine could not be started: \(error)") }
     }
 
-    func stop() {
-        engine.stop();
+    /// Stop the audio engine.
+
+    public func stop() {
+        engine.stop()
+        print("[Engine] The engine has been stopped.")
     }
 
-    func connect(_ unit: ASComponent) {
+    /// Connect the Assemble audio unit to the underlying `AVAudioEngine`.
+    /// The `AVAudioFormat` specified here is used to set the audio output format, which bears upon
+    /// all underlying audio operations, including rendering, visualisation, and audio recording.
+
+    private func connect(_ unit: ASComponent) {
         engine.attach(unit.node)
         engine.connect(unit.node, to: engine.mainMixerNode, format: Assemble.format)
         engine.connect(engine.mainMixerNode, to: engine.outputNode, format: Assemble.format)
@@ -43,10 +53,11 @@ class Engine
     /// The new audio format is subsequently propagated to the underlying AudioUnit.
 
     @objc private func tryEngineRestart() {
-        stop()
+        engine.stop()
         engine.reset()
         start()
-        Assemble.format = engine.outputNode.outputFormat(forBus: 0)
+        
+        Assemble.format = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 2)
     }
 
     /// This function is called when either the `AVAudioSession.routeChangeNotification`

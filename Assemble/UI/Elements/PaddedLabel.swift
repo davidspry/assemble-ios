@@ -4,12 +4,10 @@
 
 import UIKit
 
-/**
- A UILabel with padding that can be set from the interface builder.
- 
- - Author: Tai Le
- - Note: Source: <https://stackoverflow.com/a/32368958/9611538>
- */
+/// A UILabel with padding that can be set from the interface builder.
+///
+/// - Author: Tai Le
+/// - Note: Source: <https://stackoverflow.com/a/32368958/9611538>
 
 @IBDesignable
 class PaddedLabel: UILabel {

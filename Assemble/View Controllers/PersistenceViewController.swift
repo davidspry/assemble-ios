@@ -13,12 +13,23 @@ class PersistenceViewController: UIViewController {
 
     weak var delegate: MainViewController?
     
+    @IBOutlet weak var windowPanel: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: windowPanel)
+        let shouldDismiss = !(windowPanel.point(inside: location, with: nil))
+        if  shouldDismiss {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func didPressClose(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 

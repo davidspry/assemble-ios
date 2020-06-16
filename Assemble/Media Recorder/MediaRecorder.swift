@@ -28,7 +28,7 @@ class MediaRecorder
         [
             AVFormatIDKey    : kAudioFormatMPEG4AAC,
             AVSampleRateKey  : Assemble.format.sampleRate,
-            AVNumberOfChannelsKey : max(Assemble.format.channelCount, 2)
+            AVNumberOfChannelsKey : min(Assemble.format.channelCount, 2)
         ],
         video:
         [
@@ -42,16 +42,26 @@ class MediaRecorder
         self.engine = engine
     }
     
+    /// Write a buffer of audio data to the class's `AVAudioFile`.
+    /// - Note: `.write(from:)` throws an error when the `AVAudioFile` and the
+    /// `AVAudioPCMBuffer` have different formats, and `AVAudioFile` does not appear to be
+    /// compatible with formats consisting in numbers of channels greater than 2, so recording
+    /// does not work with audio interfaces whose `AVAudioFormat` uses more than 2 channels.
+
     private func writeAudio(_ buffer: AVAudioPCMBuffer, _ time: AVAudioTime)
     {
         do    { try file?.write(from: buffer) }
-        catch { print("[Recorder] AVAudioFile could not be written to.") }
+        catch {
+            print("[Recorder] AVAudioFile could not be written to.")
+            recordingDidFail()
+        }
     }
 
     /// Begin recording media
     /// - Parameter video: A flag to indicate whether a video should be generated for the recording or not.
     /// - Parameter visualisation: The type of audio visualisation to use in the generated video
-
+    /// - Parameter fail:  A method that should be called when the recording fails.
+    
     public func record(video: Bool, visualisation type: Visualisation = .waveform)
     {
         visualisation = type
@@ -60,14 +70,35 @@ class MediaRecorder
 
         let path = MediaRecorder.createNewFile(extension: "aac")
 
-        do    { self.file = try AVAudioFile(forWriting: path, settings: settings.audio) }
-        catch { print("[Recorder] AVAudioFile could not be created.") }
+        do
+        {
+            self.file = try AVAudioFile(forWriting: path, settings: settings.audio,
+                                        commonFormat: Assemble.format.commonFormat,
+                                        interleaved:  Assemble.format.isInterleaved)
+        }   catch { print("[Recorder] AVAudioFile could not be created.") }
 
-        print("[Recorder] Recording started.")
         engine.mainMixerNode.installTap(onBus: 0, bufferSize: _bufferSize,
-                                        format: Assemble.format, block: writeAudio(_:_:))
+                                        format: nil, block: writeAudio(_:_:))
 
+        print("Mixer node channel count: \(engine.mainMixerNode.outputFormat(forBus: 0).channelCount)")
+        print("AVAudioFile channel count (file, processing): \(file?.fileFormat.channelCount), \(file?.processingFormat.channelCount)")
+        
+        print("[Recorder] Recording started.")
         recording = true
+    }
+    
+    /// In the event that a recording fails, the `stopRecording` notification should be broadcast in order to trigger
+    /// the series of functions that handles the end of a recording session.
+    /// The class's `AVAudioFile` is set to nil before stopping the recording, which ensures that Assemble does
+    /// not prevent an empty audio file to ths user.
+
+    private func recordingDidFail()
+    {
+        if let file = file { MediaRecorder.deleteExistingFile(file.url) }
+        shouldGenerateVideo = false
+        file = nil
+
+        NotificationCenter.default.post(name: NSNotification.Name.stopRecording, object: nil)
     }
 
     /// Stop recording media
@@ -80,7 +111,7 @@ class MediaRecorder
         engine.mainMixerNode.removeTap(onBus: 0)
         guard let file = file else {
             print("[Recorder] File is nil on recording stop")
-            return
+            return complete(nil)
         }
         
         if shouldGenerateVideo { generateVideo(for: file.url, then: complete) }

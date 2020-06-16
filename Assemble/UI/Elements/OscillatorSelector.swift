@@ -4,6 +4,8 @@
 
 import UIKit
 
+/// A `UISegmentedControl` that facilitates the selection of Assemble's oscillator types.
+
 class OscillatorSelector: UISegmentedControl {
 
     private var itemWidth: CGFloat = 55
@@ -11,21 +13,27 @@ class OscillatorSelector: UISegmentedControl {
     private var highlightX: NSLayoutConstraint!
     private var oscillators = ["SIN", "TRI", "SQR", "SAW"]
     
+    /// Create an `OscillatorSelector` whose items are as wide as the given parameter
+    /// - Parameter itemWidth: The width of the `OscillatorSelector`'s items.
+
     init(itemWidth: CGFloat) {
         super.init(items: oscillators)
         self.itemWidth = itemWidth
         initialise()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(items: oscillators)
         initialise()
     }
     
+    /// Initialise and style the `OscillatorSelector`'s components, including the coloured selection indicator,
+    /// then select the first item asynchronously from the main UI thread.
+
     private func initialise() {
         backgroundColor = .clear
         selectedSegmentTintColor = .clear
@@ -48,7 +56,9 @@ class OscillatorSelector: UISegmentedControl {
         
         DispatchQueue.main.async { self.sendActions(for: .valueChanged) }
     }
-    
+
+    /// Setup the `OscillatorSelector`'s font.
+
     private func setFontAttributes() {
         let font = UIFont.init(name: "JetBrainsMono-Regular", size: 14)
         setTitleTextAttributes([.foregroundColor : UIColor.lightText], for: .normal)
@@ -58,6 +68,8 @@ class OscillatorSelector: UISegmentedControl {
         layoutIfNeeded()
     }
     
+    /// Establish constraints for the coloured selection indicator
+
     private func constrainHighlightView() {
         highlightX = highlight.centerXAnchor.constraint(equalTo: leadingAnchor)
 
@@ -73,6 +85,8 @@ class OscillatorSelector: UISegmentedControl {
         highlight.layoutIfNeeded()
     }
     
+    /// Move the coloured selection indicator view when the selected item has changed.
+
     override func sendActions(for controlEvents: UIControl.Event) {
         super.sendActions(for: controlEvents)
         

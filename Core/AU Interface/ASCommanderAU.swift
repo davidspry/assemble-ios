@@ -319,8 +319,6 @@ public class ASCommanderAU : ASAudioUnit
     ///
     /// - Parameter name: The name of the preset to select.
     /// - Parameter delay: The number of milliseconds to wait before beginning the process.
-
-    /// TODO ADD PRESET NUMBER OTHERWISE COULD SLECT DNIPLACIET NAMES
     
     private func selectPresetZero(named name: String, after delay: Int) {
         var tries = 0

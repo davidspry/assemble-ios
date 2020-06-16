@@ -79,9 +79,6 @@ class MediaRecorder
 
         engine.mainMixerNode.installTap(onBus: 0, bufferSize: _bufferSize,
                                         format: nil, block: writeAudio(_:_:))
-
-        print("Mixer node channel count: \(engine.mainMixerNode.outputFormat(forBus: 0).channelCount)")
-        print("AVAudioFile channel count (file, processing): \(file?.fileFormat.channelCount), \(file?.processingFormat.channelCount)")
         
         print("[Recorder] Recording started.")
         recording = true

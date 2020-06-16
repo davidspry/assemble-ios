@@ -5,7 +5,7 @@
 import UIKit
 import AVFoundation
 
-class MainViewController : UIViewController
+class MainViewController : UIViewController, KeyboardSettingsListener
 {
     let engine = Engine()
     var updater: CADisplayLink!
@@ -19,11 +19,61 @@ class MainViewController : UIViewController
     @IBOutlet weak var waveform:  Waveform!
     @IBOutlet weak var patterns:  PatternOverview!
     @IBOutlet weak var transport: Transport!
+    @IBOutlet weak var sequencerCentreY: NSLayoutConstraint!
 
     @IBOutlet weak var presetLabel: UILabel!
+    @IBOutlet weak var themeButton: UIButton!
     @IBOutlet weak var modeButton: UIButton!
     @IBOutlet weak var tempoLabel: ParameterLabel!
     @IBOutlet weak var descriptionLabel: PaddedLabel!
+
+    /// The system's visual theme (light/dark)
+
+    private lazy var systemTheme = traitCollection.userInterfaceStyle
+    
+    /// Indicate whether the theme is dark, `true`, or light, `false` from `UserDefaults`
+    /// or by matching the system theme.
+
+    var usingDarkTheme: Bool {
+        set (isDarkTheme) {
+            let key = "assemble.theme"
+            let defaults = UserDefaults()
+            defaults.set(isDarkTheme, forKey: key)
+        }
+
+        get {
+            let key = "assemble.theme"
+            let defaults = UserDefaults()
+            if     let isDarkTheme = defaults.value(forKey: key) as? Bool {
+                return isDarkTheme
+            }   else {
+                let usingDarkMode = systemTheme == .dark
+                defaults.set(usingDarkMode, forKey: key)
+                return usingDarkMode
+            }
+        }
+    }
+    
+    /// Load the visual theme accessible from the `usingDarkTheme` property,
+    /// and update the theme toggle button's icon to reflect the opposite theme.
+
+    private func loadVisualTheme() {
+        let icon: UIImage?
+        if usingDarkTheme { icon = UIImage.init(systemName: "sun.max.fill") }
+        else              { icon = UIImage.init(systemName: "moon.fill") }
+        
+        themeButton.setImage(icon, for: .normal)
+        UIApplication.shared.windows.forEach({
+            $0.overrideUserInterfaceStyle = usingDarkTheme ? .dark : .light
+        })
+    }
+    
+    /// Toggle the visual theme between light and dark, and store the chosen theme in the `UserDefaults` structure.
+
+    @IBAction func didSetTheme(_ sender: UIButton) {
+        usingDarkTheme = usingDarkTheme ? false : true
+        loadVisualTheme()
+    }
 
     /// Connect classes and UI components together as listeners in order that
     /// user interaction and other signals can be propagated throughout the application interface
@@ -45,6 +95,7 @@ class MainViewController : UIViewController
 
         /// Connect listeners to the Transport component
 
+        transport.listeners.add(self)
         transport.listeners.add(keyboard)
         transport.listeners.add(computerKeyboard)
     }
@@ -56,6 +107,11 @@ class MainViewController : UIViewController
         /// such that it handles keyboard presses but doesn't handle taps.
         
         addInBackground(computerKeyboard)
+        
+        /// Initialise the visual theme and the theme toggle button from `UserDefaults`.
+        /// By default, the theme matches the system.
+
+        loadVisualTheme()
         
         /// Initialise the Recorded with a reference to the `AVAudioEngine`
         
@@ -141,9 +197,41 @@ class MainViewController : UIViewController
         transport.setRecordButtonUsable(true)
     }
     
+    /// Respond to the on-screen keyboard being shown or hidden
+    ///
+    /// In order that everything can fit on the smallest iPad screen sizes, the sequencer may
+    /// need to move upwards to make space for the on-screen keyboard. There should be approximately
+    /// 48 points of space between the bottom of the sequencer and the top of the keyboard.
+    ///
+    /// This function computes the amount of space between the keyboard and the sequencer and modifies
+    /// the position of the sequencer such that there remains 48 points of space between the two elements.
+    ///
+    /// On large screens, such as the 12.9" iPad Pro, no translation of the sequencer's position is required.
+    ///
+    /// - Parameter show: An indicator as to whether or not the keyboard should be shown or hidden.
+
+    func didToggleKeyboardDisplay(_ show: Bool) {
+        let margin: CGFloat = 48
+        let translation = -(keyboard.visibilityTranslation)
+        let difference: CGFloat = keyboard.frame.minY - sequencer.frame.maxY
+        
+        var delta: CGFloat = 0
+        if (difference + translation) < margin {
+            delta = translation - (margin - difference)
+        }
+
+        DispatchQueue.main.async {
+            if show { self.sequencerCentreY.constant = delta }
+            else    { self.sequencerCentreY.constant = 0 }
+            UIView.animate(withDuration: 0.15) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated);
-        loadFactoryPresetOnFirstUse()
+        loadFactoryPresetsOnFirstUse()
         waveform.start()
     }
     
@@ -214,19 +302,20 @@ class MainViewController : UIViewController
         return false
     }
 
-    /// If the application is being loaded for the first time, load the factory preset and update
-    /// the UI to reflect it.
-    ///
-    /// <TODO: Consider a welcome panel with a few tips on first launch>
+    /// If the application is being loaded for the first time, load the factory presets, select the first one,
+    /// and update the UI to reflect it.
 
-    private func loadFactoryPresetOnFirstUse() {
+    private func loadFactoryPresetsOnFirstUse() {
         let defaults = UserDefaults()
-        if let value = defaults.value(forKey: "FirstUse") as? Bool,
-               value == false {
+        let key = "assemble.first.launch"
+        if let isFirstLaunch = defaults.value(forKey: key) as? Bool,
+             !(isFirstLaunch) {
             return
-        }   else { defaults.setValue(false, forKey: "FirstUse") }
+        }   else { defaults.setValue(false, forKey: key) }
 
-        Assemble.core.commander?.loadFactoryPreset(number: 1)
+        Assemble.core.commander?.copyFactoryPreset(number: 2)
+        Assemble.core.commander?.copyFactoryPreset(number: 1)
+        presetLabel.text = Assemble.core.commander?.currentPreset?.name
         sequencer.initialiseFromUnderlyingState()
         patterns.loadStates()
         tempoLabel.reinitialise()

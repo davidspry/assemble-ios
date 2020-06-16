@@ -7,18 +7,14 @@ import UIKit
 extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource {
     
     private func noSavedSongsCell(from cell: SongCell) -> SongCell {
-        cell.songName.text = "THERE ARE NO SAVED SEQUENCES"
-        cell.songName.textColor = UIColor.init(named: "Foreground")
-        cell.songName.backgroundColor = UIColor.init(named: "Background")
+        cell.songName.text = "There are no saved sequences."
+        cell.songName.textColor = UIColor.init(named: "Secondary")
+        cell.songName.backgroundColor = UIColor.init(named: "BackgroundLight")
         return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

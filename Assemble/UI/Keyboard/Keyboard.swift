@@ -14,8 +14,8 @@ class Keyboard : UIView, KeyboardSettingsListener
 {
     var keyOnColour  : UIColor = UIColor.sineNoteColour
     var keyOffColour : UIColor = UIColor.init(named: "Secondary") ?? .white
-
-    var isVisible: Bool = true
+    
+    let visibilityTranslation: CGFloat = 50
     
     var shapeLayers = [CAShapeLayer]()
 
@@ -29,7 +29,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         return "OCT \(octave)"
     }
 
-    let octaveButtons = (u: UIButton(), d: UIButton())
+    private let octaveButtons = (u: UIButton(), d: UIButton())
     
     var oscillator: OscillatorShape = .sine
 
@@ -42,7 +42,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         return CGSize(width: W / CGFloat(octaves) - margins.left - margins.right, height: 35.0);
     }
     
-    var keyStroke: CGFloat = 3.0
+    let keyStroke: CGFloat = 3.0
 
     var keyStep: CGFloat {
         return octaveSize.width / 7.0
@@ -78,34 +78,6 @@ class Keyboard : UIView, KeyboardSettingsListener
             $0.strokeColor = keyOffColour.cgColor
         }
     }
-
-    // MARK: - Keyboard Settings Listener
-
-    func didChangeOctave(to octave: Int) {
-        self.octave = octave
-        octaveLabel.text = octaveString
-    }
-    
-    func didChangeOscillator(to oscillator: OscillatorShape) {
-        self.oscillator = oscillator
-        keyOnColour = .from(oscillator)
-    }
-    
-    /// Hide or show the keyboard view in an animated fashion
-
-    func didToggleKeyboardDisplay(_ show: Bool) {
-        isVisible = show
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.15) {
-                self.alpha = self.isVisible ? 1.0 : 0.0
-                let dy: CGFloat = self.isVisible ? 0 : 50
-                let translation = CGAffineTransform(translationX: 0, y: dy)
-                self.layer.setAffineTransform(translation)
-            }
-        }
-    }
-    
-    // MARK: Keyboard Settings Listener End -
     
     @objc internal func setOctave(sender: UIButton) {
         switch sender.tag {
@@ -175,6 +147,31 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     override class var requiresConstraintBasedLayout: Bool {
         return true
+    }
+    
+    // MARK: - Keyboard Settings Listener
+
+    func didChangeOctave(to octave: Int) {
+        self.octave = octave
+        octaveLabel.text = octaveString
+    }
+    
+    func didChangeOscillator(to oscillator: OscillatorShape) {
+        self.oscillator = oscillator
+        keyOnColour = .from(oscillator)
+    }
+    
+    /// Hide or show the keyboard view in an animated fashion
+
+    func didToggleKeyboardDisplay(_ show: Bool) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.15) {
+                self.alpha = show ? 1.0 : 0.0
+                let dy: CGFloat = show ? 0 : self.visibilityTranslation
+                let translation = CGAffineTransform(translationX: 0, y: dy)
+                self.layer.setAffineTransform(translation)
+            }
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="dark"/>
+    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -91,7 +91,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                                                             <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
                                                                             <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
@@ -247,7 +247,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="499" y="824" width="368" height="85"/>
+                                <rect key="frame" x="499" y="828" width="368" height="85"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="X2r-1G-AL6" secondAttribute="height" multiplier="13:3" id="6UH-cy-BR1"/>
@@ -255,7 +255,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OJS-ew-lo6" customClass="Sequencer" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="491" y="295" width="384" height="384"/>
+                                <rect key="frame" x="491" y="294.5" width="384" height="384"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="384" placeholder="YES" id="ik0-0w-fm8"/>
@@ -263,7 +263,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz" customClass="ParameterLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="32" y="142" width="100" height="15"/>
+                                <rect key="frame" x="32" y="141" width="100" height="35"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <color key="textColor" name="Foreground"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -283,7 +283,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="640" y="695" width="86" height="36"/>
+                                <rect key="frame" x="630" y="694.5" width="106" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
                                 </constraints>
@@ -314,7 +314,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4G-8C-h7M" customClass="PatternOverview" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="1204" y="923" width="130" height="65"/>
+                                <rect key="frame" x="1204" y="927" width="130" height="65"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="mdQ-th-prj"/>
@@ -322,7 +322,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1n-M5-aq6" customClass="Transport" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="448" y="925" width="470" height="55"/>
+                                <rect key="frame" x="448" y="929" width="470" height="55"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="470" id="6re-7h-bxu"/>
@@ -395,7 +395,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f3D-RJ-dah">
-                                <rect key="frame" x="32" y="106" width="100" height="28"/>
+                                <rect key="frame" x="32" y="106" width="100" height="27"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <state key="normal" title="PATTERN MODE">
                                     <color key="titleColor" name="Foreground"/>
@@ -418,38 +418,69 @@
                                     <segue destination="MYq-JU-ftL" kind="presentation" identifier="displayParameters" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0Db-aO-7p0"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XT2-lY-yN7" userLabel="Theme Button">
+                                <rect key="frame" x="1212" y="23" width="65" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dZ8-db-pgH"/>
+                                    <constraint firstAttribute="width" constant="65" id="yGq-Bc-0g9"/>
+                                </constraints>
+                                <color key="tintColor" name="Foreground"/>
+                                <state key="normal" image="moon.stars" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
+                                </state>
+                                <connections>
+                                    <action selector="didSetTheme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLr-n5-qkP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toK-Td-YeI" userLabel="Help Button">
+                                <rect key="frame" x="16" y="942" width="65" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="Ms4-i0-i5w"/>
+                                    <constraint firstAttribute="height" constant="50" id="fb3-iY-tLm"/>
+                                </constraints>
+                                <color key="tintColor" name="Foreground"/>
+                                <state key="normal" image="questionmark" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2rB-DO-ZGI" kind="presentation" identifier="displayHelpSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="enp-M9-aP7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="qbC-Vu-c5j" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="2ob-Lz-NiG"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ea2-P7-LJq" secondAttribute="trailing" constant="16" id="6Wr-oy-5ua"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="24" id="BUz-DE-yER"/>
+                            <constraint firstItem="XT2-lY-yN7" firstAttribute="centerY" secondItem="ea2-P7-LJq" secondAttribute="centerY" id="3KQ-xm-NiL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="right" secondItem="ea2-P7-LJq" secondAttribute="right" constant="16" id="6Wr-oy-5ua"/>
+                            <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="40" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="16" id="BaF-Bz-xIA"/>
                             <constraint firstItem="OJS-ew-lo6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CbP-Mk-14d"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="width" secondItem="f3D-RJ-dah" secondAttribute="width" id="Etg-Pz-DsQ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4G-8C-h7M" secondAttribute="trailing" constant="32" id="HYP-ga-pcb"/>
+                            <constraint firstAttribute="right" secondItem="O4G-8C-h7M" secondAttribute="right" constant="32" id="HYP-ga-pcb"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="height" secondItem="1zG-sF-KW1" secondAttribute="height" id="JqA-dH-aNF"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
-                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="leading" secondItem="1zG-sF-KW1" secondAttribute="trailing" id="U0C-u8-9rw"/>
+                            <constraint firstItem="qbC-Vu-c5j" firstAttribute="left" secondItem="1zG-sF-KW1" secondAttribute="right" id="U0C-u8-9rw"/>
+                            <constraint firstItem="ea2-P7-LJq" firstAttribute="left" secondItem="XT2-lY-yN7" secondAttribute="right" constant="8" id="UFf-M9-YDo"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="8" id="Wn2-LC-p8R"/>
-                            <constraint firstItem="j9m-15-iez" firstAttribute="trailing" secondItem="1zG-sF-KW1" secondAttribute="leading" id="X8s-2z-Wpr"/>
+                            <constraint firstItem="j9m-15-iez" firstAttribute="right" secondItem="1zG-sF-KW1" secondAttribute="left" id="X8s-2z-Wpr"/>
                             <constraint firstItem="1zG-sF-KW1" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" multiplier="0.75" id="YHI-ep-bHL"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Yut-oo-hEQ"/>
-                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Z58-s1-Oy3"/>
+                            <constraint firstItem="Ulx-iT-Ybz" firstAttribute="left" secondItem="6Tk-OE-BBY" secondAttribute="left" constant="32" id="Z58-s1-Oy3"/>
+                            <constraint firstAttribute="bottom" secondItem="toK-Td-YeI" secondAttribute="bottom" constant="32" id="axz-oB-HM2"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="f3D-RJ-dah" firstAttribute="width" secondItem="K3i-2N-gT6" secondAttribute="width" id="c62-Hj-2fg"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
                             <constraint firstItem="ea2-P7-LJq" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="fWQ-fw-1xH"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="width" secondItem="1zG-sF-KW1" secondAttribute="width" id="fdt-Gl-NNF"/>
                             <constraint firstItem="j9m-15-iez" firstAttribute="centerY" secondItem="Mow-LA-bfh" secondAttribute="centerY" id="jDH-2n-ciy"/>
-                            <constraint firstItem="X2r-1G-AL6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="48" id="jZh-0c-JV4"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="ld4-mg-w7N"/>
-                            <constraint firstItem="f3D-RJ-dah" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="mk7-aQ-dcl"/>
+                            <constraint firstItem="f3D-RJ-dah" firstAttribute="left" secondItem="6Tk-OE-BBY" secondAttribute="left" constant="32" id="mk7-aQ-dcl"/>
                             <constraint firstItem="1zG-sF-KW1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ngu-7C-CZV"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="O4G-8C-h7M" secondAttribute="bottom" constant="16" id="oZL-NT-XfH"/>
+                            <constraint firstAttribute="bottom" secondItem="O4G-8C-h7M" secondAttribute="bottom" constant="32" id="oZL-NT-XfH"/>
                             <constraint firstItem="f3D-RJ-dah" firstAttribute="top" secondItem="K3i-2N-gT6" secondAttribute="bottom" constant="24" id="p44-gs-vMN"/>
-                            <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" priority="750" constant="-25" id="pDd-HK-iyj"/>
-                            <constraint firstItem="K3i-2N-gT6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="scF-YI-kja"/>
+                            <constraint firstItem="OJS-ew-lo6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.95" priority="750" identifier="sequencerCenterY" id="pDd-HK-iyj"/>
+                            <constraint firstItem="toK-Td-YeI" firstAttribute="left" secondItem="6Tk-OE-BBY" secondAttribute="left" constant="16" id="ryj-Le-s5i"/>
+                            <constraint firstItem="K3i-2N-gT6" firstAttribute="left" secondItem="6Tk-OE-BBY" secondAttribute="left" constant="32" id="scF-YI-kja"/>
                             <constraint firstItem="1zG-sF-KW1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="v4l-9w-nuE"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="centerX" secondItem="1zG-sF-KW1" secondAttribute="centerX" id="xAO-hL-w8N"/>
                             <constraint firstItem="X2r-1G-AL6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yAo-Uo-CYW"/>
@@ -463,7 +494,9 @@
                         <outlet property="patterns" destination="O4G-8C-h7M" id="ggh-Ec-jnL"/>
                         <outlet property="presetLabel" destination="1zG-sF-KW1" id="EuI-mh-IxV"/>
                         <outlet property="sequencer" destination="OJS-ew-lo6" id="Lgx-hR-5VB"/>
+                        <outlet property="sequencerCentreY" destination="pDd-HK-iyj" id="C9I-3a-SWb"/>
                         <outlet property="tempoLabel" destination="Ulx-iT-Ybz" id="Ll8-rd-Z8C"/>
+                        <outlet property="themeButton" destination="XT2-lY-yN7" id="Q2Z-pJ-lsq"/>
                         <outlet property="transport" destination="Z1n-M5-aq6" id="jfo-Uo-XCd"/>
                         <outlet property="waveform" destination="K3i-2N-gT6" id="UJi-1U-sG7"/>
                     </connections>
@@ -488,7 +521,7 @@
                                 <rect key="frame" x="383" y="281.5" width="600" height="461"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVED SEQUENCES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeI-O2-ihd">
-                                        <rect key="frame" x="48" y="32" width="152.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="144" height="18.5"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
@@ -505,10 +538,10 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="tMD-BW-XQP">
-                                        <rect key="frame" x="15" y="83" width="570" height="346"/>
+                                        <rect key="frame" x="15" y="82.5" width="570" height="346.5"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="250" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="55" estimatedRowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vSP-Qd-mI5">
-                                                <rect key="frame" x="0.0" y="0.0" width="570" height="346"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="570" height="346.5"/>
                                                 <color key="backgroundColor" name="BackgroundLight"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songCell" id="hgh-eO-gkK" customClass="SongCell" customModule="Assemble" customModuleProvider="target">
@@ -624,24 +657,24 @@
                                 <rect key="frame" x="383" y="344.5" width="600" height="335"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE/COPY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-5Y-r3e">
-                                        <rect key="frame" x="48" y="32" width="89.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="86.5" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="RP8-E7-D6n">
-                                        <rect key="frame" x="48" y="168" width="504" height="47"/>
+                                        <rect key="frame" x="48" y="167.5" width="504" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE Save the current song and optionally update its name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzi-gJ-bdL">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COPY Copy the current song and save it with the given name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ler-mH-deg">
-                                                <rect key="frame" x="0.0" y="31.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -650,7 +683,7 @@
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="SONG NAME" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-6C-lcl">
-                                        <rect key="frame" x="50" y="83" width="500" height="45"/>
+                                        <rect key="frame" x="50" y="82.5" width="500" height="45"/>
                                         <color key="backgroundColor" red="0.56862745100000001" green="0.1960784314" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <constraints>
@@ -794,24 +827,24 @@
                                 <rect key="frame" x="383" y="384.5" width="600" height="255"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW SONG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hco-Sf-L8f">
-                                        <rect key="frame" x="48" y="32" width="87" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="77" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2gO-Zi-zx8">
-                                        <rect key="frame" x="48" y="83" width="504" height="47"/>
+                                        <rect key="frame" x="48" y="82.5" width="504" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beginning a new song will clear the sequencer." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Di-pr-oRi">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like to begin a new song?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-Pb-yyO">
-                                                <rect key="frame" x="0.0" y="31.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -924,12 +957,55 @@
             </objects>
             <point key="canvasLocation" x="-508" y="-571"/>
         </scene>
+        <!--Help View Controller-->
+        <scene sceneID="PmQ-v5-VD3">
+            <objects>
+                <viewController id="2rB-DO-ZGI" customClass="HelpViewController" customModule="Assemble" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="jz9-PY-Md4">
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ccb-Ya-FdR">
+                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkh-Is-haA">
+                                        <rect key="frame" x="307.5" y="281.5" width="0.0" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <color key="tintColor" name="Secondary"/>
+                                <constraints>
+                                    <constraint firstItem="zkh-Is-haA" firstAttribute="centerY" secondItem="Ccb-Ya-FdR" secondAttribute="centerY" multiplier="0.55" id="4jg-uU-cpR"/>
+                                    <constraint firstItem="zkh-Is-haA" firstAttribute="centerX" secondItem="Ccb-Ya-FdR" secondAttribute="centerX" multiplier="0.45" id="M9u-S9-tE7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" name="Secondary"/>
+                        <constraints>
+                            <constraint firstItem="Ccb-Ya-FdR" firstAttribute="top" secondItem="KaZ-PM-Xcg" secondAttribute="top" id="NGY-WZ-rBU"/>
+                            <constraint firstItem="Ccb-Ya-FdR" firstAttribute="leading" secondItem="KaZ-PM-Xcg" secondAttribute="leading" id="Wh6-Ol-sfF"/>
+                            <constraint firstItem="Ccb-Ya-FdR" firstAttribute="trailing" secondItem="KaZ-PM-Xcg" secondAttribute="trailing" id="bCY-fE-7dz"/>
+                            <constraint firstAttribute="bottom" secondItem="Ccb-Ya-FdR" secondAttribute="bottom" id="z0h-XY-D3T"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="KaZ-PM-Xcg"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nie-Ea-Ivw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-508.19912152269399" y="127.73437499999999"/>
+        </scene>
     </scenes>
     <resources>
         <image name="arrow.down.to.line" catalog="system" width="128" height="128"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="moon.stars" catalog="system" width="128" height="124"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="questionmark" catalog="system" width="96" height="128"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <namedColor name="Background">
             <color red="0.76499998569488525" green="0.76499998569488525" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

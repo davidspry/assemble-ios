@@ -174,13 +174,13 @@ public class ASCommanderAU : ASAudioUnit
     /// `factoryPresetsState`.
 
     public override var factoryPresets: [AUAudioUnitPreset]? {
-        return [EmptyPreset.preset, FactoryPresetA.preset]
+        return [EmptyPreset.preset, FactoryPresetA.preset, FactoryPresetB.preset]
     }
     
     /// The state of each factory preset
 
     public var factoryPresetsState: [[String:Any]?] {
-        return [EmptyPreset.state, FactoryPresetA.state]
+        return [EmptyPreset.state, FactoryPresetA.state, FactoryPresetB.state]
     }
     
     /// The current preset of the AudioUnit. Assigning to this property loads the state of a user preset.
@@ -202,7 +202,7 @@ public class ASCommanderAU : ASAudioUnit
 
     public var selectedPreset: Int?
 
-    public override var supportsUserPresets: Bool          { return true }
+    public override var supportsUserPresets: Bool { return true }
 
     /// This property represents the total state of the AudioUnit. The state of the parameters, as well as
     /// arbitrary data (such as the contents of the underlying sequencer) are associated with each
@@ -239,6 +239,24 @@ public class ASCommanderAU : ASAudioUnit
         }
     }
     
+    /// Copy the factory preset with the given index number to the user presets folder and select it.
+    /// - Parameter number: The index of the desired factory preset
+
+    @discardableResult
+    public func copyFactoryPreset(number: Int) -> Bool {
+        guard let presets = factoryPresets else { return false }
+        guard !(number < 0) && number < presets.count else { return false }
+        
+        currentPreset = presets[number]
+        fullStateForDocument = factoryPresetsState[number]
+        saveState(named: currentPreset?.name ?? "Factory Preset")
+        
+        return true
+    }
+    
+    /// Load a factory preset
+    /// - Parameter number: The index of the desired factory preset
+
     @discardableResult
     public func loadFactoryPreset(number: Int) -> Bool {
         guard let presets = factoryPresets else { return false }

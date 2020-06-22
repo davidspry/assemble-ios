@@ -14,6 +14,8 @@ class MediaRecorder
     
     private(set) var shouldGenerateVideo = false
     
+    private(set) var visualTheme: UIUserInterfaceStyle = .dark
+    
     private(set) var visualisation: Visualisation = .waveform
 
     private var file: AVAudioFile?
@@ -59,14 +61,16 @@ class MediaRecorder
 
     /// Begin recording media
     /// - Parameter video: A flag to indicate whether a video should be generated for the recording or not.
+    /// - Parameter mode:  A flag to indicate whether the video should use the dark or light visual theme.
     /// - Parameter visualisation: The type of audio visualisation to use in the generated video
-    /// - Parameter fail:  A method that should be called when the recording fails.
     
-    public func record(video: Bool, visualisation type: Visualisation = .waveform)
+    public func record(video: Bool, mode isDarkMode: Bool, visualisation type: Visualisation = .waveform)
     {
         visualisation = type
-
+        
         shouldGenerateVideo = video
+
+        visualTheme = isDarkMode ? .dark : .light
 
         let path = MediaRecorder.createNewFile(extension: "aac")
 
@@ -194,7 +198,8 @@ class MediaRecorder
         writer.startSession(atSourceTime: CMTime(seconds: 1, preferredTimescale: Int32(framesPerSecond)))
 
         var frame = 0
-        let queue = DispatchQueue(label: "assemble.video.queue", qos: .background)
+        let queue = DispatchQueue(label: "assemble.video.queue", qos: .default)
+        var total = 0
         video.requestMediaDataWhenReady(on: queue, using: {
             if video.isReadyForMoreMediaData && frame < Int(videoLengthInFrames)
             {
@@ -203,13 +208,20 @@ class MediaRecorder
                 let audioBufferPosition = frame * frameLengthInSamples
 
                 let size  = CGSize(width: W, height: H)
-                let image = self.generateImage(size: size, audio: file, frame: audioBufferPosition)
-
-                if !self.appendPixelBuffer(image: image, adapter: adapter, time: presentationTime) {
-                    return
+                UITraitCollection.init(userInterfaceStyle: self.visualTheme).performAsCurrent {
+                    let image = self.generateImage(size: size, audio: file, frame: audioBufferPosition)
+                    if !self.appendPixelBuffer(image: image, adapter: adapter, time: presentationTime) {
+                        print("[MediaRecorder] Failed to append pixel buffer to adapter for frame \(frame).")
+                        return
+                    }
                 }
 
                 frame = frame + 1
+                let progress = Int(Float(frame) / Float(videoLengthInFrames) * 100)
+                if  progress > total {
+                    total = progress
+                    print("[MediaRecorder] Progress: \(total)%")
+                }
             }
 
             if (frame >= videoLengthInFrames) {
@@ -231,12 +243,12 @@ class MediaRecorder
     /// - Parameter position: The current frame of the given audio file
 
     private func generateImage(size: CGSize, audio file: AVAudioFile, frame position: Int) -> UIImage {
-        UIGraphicsBeginImageContext(size)
+        UIGraphicsBeginImageContextWithOptions(size, true, 1)
         let context = UIGraphicsGetCurrentContext()
-        let color = UIColor.init(named: "Background") ?? .black
-        let image = UIImage(color: color, size: size)
+        let color: UIColor = UIColor.init(named: "Background") ?? .black
+            color.setFill()
         let frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-            image.draw(in: frame)
+        context?.fill(frame)
         
         let step = 16
         let frames = AVAudioFrameCount(2048)
@@ -250,7 +262,7 @@ class MediaRecorder
             {
                 file.framePosition = AVAudioFramePosition(position)
                 do    { try file.read(into: buffer, frameCount: frames) }
-                catch { return image }
+                catch { return UIImage(color: color, size: size) }
 
                 if let floatBuffer = buffer.floatChannelData {
                     let L = 0, R = format.channelCount > 1 ? 1 : 0
@@ -264,10 +276,10 @@ class MediaRecorder
 
         drawAudio(from: data, in: context, with: size)
 
-        let result = UIGraphicsGetImageFromCurrentImageContext()
+        guard let result = UIGraphicsGetImageFromCurrentImageContext()
+        else { return UIImage(color: color, size: size) }
         UIGraphicsEndImageContext()
-        
-        return result ?? image
+        return result
     }
     
     /// Visualise the given audio data in the given context

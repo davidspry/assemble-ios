@@ -83,6 +83,7 @@
 		14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E40624990BA500980AA9 /* HelpViewController.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
 		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
+		14C732C824A0568A00FD668F /* MediaUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C732C724A0568A00FD668F /* MediaUtilities.swift */; };
 		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
 		14D04D9A248DE5B8005A941A /* Assemble_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 14D04D99248DE5B8005A941A /* Assemble_2.png */; };
 		14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2D5C5246C747C003675C2 /* ParameterLabel.swift */; };
@@ -248,6 +249,7 @@
 		14C1E40624990BA500980AA9 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
+		14C732C724A0568A00FD668F /* MediaUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUtilities.swift; sourceTree = "<group>"; };
 		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		14D04D99248DE5B8005A941A /* Assemble_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble_2.png; sourceTree = "<group>"; };
 		14D2D5C5246C747C003675C2 /* ParameterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterLabel.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				140B63C92484D70600D571D1 /* MediaRecorder.swift */,
+				14C732C724A0568A00FD668F /* MediaUtilities.swift */,
 			);
 			path = "Media Recorder";
 			sourceTree = "<group>";
@@ -604,6 +607,7 @@
 		149ACC2524543602009DA18F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				140B63C82484D6F000D571D1 /* Media Recorder */,
 				14556A7A2472953A00FB2392 /* Notifications */,
 				141DDA55243F85AC0020386C /* Extensions */,
 				149ACC2624543615009DA18F /* MulticastDelegate.swift */,
@@ -742,7 +746,6 @@
 				146B55EB242CDA90001163B3 /* Audio */,
 				149ACC2524543602009DA18F /* Utilities */,
 				14EFEDA5242DBA5200242298 /* UI */,
-				140B63C82484D6F000D571D1 /* Media Recorder */,
 				149ACC20245424B0009DA18F /* KeyboardInterface */,
 				14AFB89B2452362400F5AD3A /* View Controllers */,
 				14AFB89C2452363000F5AD3A /* Storyboards */,
@@ -948,6 +951,7 @@
 				141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */,
 				14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */,
 				141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */,
+				14C732C824A0568A00FD668F /* MediaUtilities.swift in Sources */,
 				14280349246C2980006775AE /* ParametersViewController+.swift in Sources */,
 				14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */,
 				140B63CA2484D70600D571D1 /* MediaRecorder.swift in Sources */,

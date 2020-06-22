@@ -16,6 +16,10 @@ extension NSNotification.Name {
     
     static let clearCurrentPattern = NSNotification.Name(rawValue: "ASClearCurrentPattern")
 
+    /// Define a recording session for the `MediaRecorder`
+    
+    static let defineRecording = NSNotification.Name(rawValue: "ASDefineRecording")
+    
     /// Begin a recording session using the `MediaRecorder`
     
     static let beginRecording = NSNotification.Name(rawValue: "ASBeginRecording")

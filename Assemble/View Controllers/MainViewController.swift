@@ -134,6 +134,7 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         let selector = #selector(useRecorder(_:))
         NotificationCenter.default.addObserver(self, selector: selector, name: .beginRecording, object: nil)
         NotificationCenter.default.addObserver(self, selector: selector, name: .stopRecording,  object: nil)
+        NotificationCenter.default.addObserver(self, selector: selector, name: .defineRecording, object: nil)
 
         /// Start the `AVAudioEngine`
         
@@ -165,8 +166,12 @@ class MainViewController : UIViewController, KeyboardSettingsListener
             recorder.stop(didCompleteRecording(_:))
         }
 
-        if notification.name == NSNotification.Name.beginRecording {
-            recorder.record(video: true, visualisation: .waveform)
+        if notification.name == NSNotification.Name.defineRecording {
+            performSegue(withIdentifier: "defineRecordingSegue", sender: nil)
+        }
+
+        else if notification.name == NSNotification.Name.beginRecording {
+            recorder.record(video: true, mode: usingDarkTheme, visualisation: .lissajous)
         }
     }
     
@@ -193,7 +198,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
             .openInIBooks
         ]
 
-        present(activity, animated: true, completion: nil)
+//        present(activity, animated: true, completion: nil)
+        MediaUtilities.shareToInstagram(url)
         transport.setRecordButtonUsable(true)
     }
     
@@ -235,28 +241,13 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         waveform.start()
     }
     
-    /// Share the video file at the given URL as an Instagram Story using Instagram.
-    /// - Parameter file: The URL of the video file to be shared.
-    ///
-    /// <TODO: Create a media preview ViewController with saving and sharing options>
-
-    func shareToInstagram(_ file: URL) {
-        guard let instagram = URL(string: "instagram-stories://share"),
-              UIApplication.shared.canOpenURL(instagram)
-              else { return }
-
-        let items: [String:Any] = ["com.instagram.sharedSticker.backgroundVideo" : file]
-        UIPasteboard.general.setItems([items])
-        UIApplication.shared.open(instagram)
-    }
-    
     // MARK: - UI-Core Interaction
     
     @IBAction func didChangeMode(_ sender: UIButton) {
         Assemble.core.didToggleMode()
     }
 
-    // MARK: - Save/Load Facilitation
+    // MARK: - State Save/Load Interface
 
     public func beginNewSong() {
         if Assemble.core.ticking { transport.pressPlayOrPause() }
@@ -330,6 +321,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         patterns.loadStates()
     }
     
+    // MARK: - Core-UI Synchronisation
+    
     /// Refresh the UI in order to synchronise it with the underlying state.
     /// This is intended to be called continually at regular intervals.
 
@@ -360,14 +353,14 @@ class MainViewController : UIViewController, KeyboardSettingsListener
             destination.delegate = self
         }
         
-        if segue.identifier == "saveCopySegue" {
+        else if segue.identifier == "saveCopySegue" {
             guard let destination = segue.destination as? SaveCopyViewController
             else { return }
 
             destination.delegate = self
         }
         
-        if segue.identifier == "newSongSegue" {
+        else if segue.identifier == "newSongSegue" {
             guard let destination = segue.destination as? NewSongViewController
             else { return }
 

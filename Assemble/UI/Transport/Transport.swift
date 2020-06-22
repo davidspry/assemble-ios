@@ -25,7 +25,6 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     
     let buttonWidth: CGFloat = 55
     let buttonMargin: CGFloat = 25
-
     var keyboardState: Bool = false
 
     let listeners = MulticastDelegate<KeyboardSettingsListener>()
@@ -37,6 +36,12 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
         initialisePlayButton()
         initialiseSegmentedControl()
         initialiseKeyboardButton()
+        
+        /// Register to be notified when a media recording session begins
+
+        let selector = #selector(didBeginRecording(_:))
+        let notification = NSNotification.Name.beginRecording
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
 
     @objc func didPressPlay(sender: UIButton)
@@ -57,28 +62,39 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
         }
     }
     
+    /// Begin a new media recording session or end an existing media recording session
+    ///
+    /// - Parameter sender: A reference to the record button
+
     @objc func didPressRecord(sender: UIButton)
     {
-        recording = !recording
-        let image = recording ? Icons.record : Icons.bypass
-
-        if recording {
-            NotificationCenter.default.post(name: .beginRecording, object: nil)
-            DispatchQueue.main.async {
-                self.record.pulsate()
-                self.record.setImage(image, for: .normal)
-            }
+        if !recording {
+            NotificationCenter.default.post(name: .defineRecording, object: nil)
         }
 
         else {
+            recording = false
             DispatchQueue.main.async {
                 self.record.pulsateEnd()
-                self.record.setImage(image, for: .normal)
+                self.record.setImage(Icons.bypass, for: .normal)
                 NotificationCenter.default.post(name: .stopRecording, object: nil)
             }
         }
     }
     
+    /// Respond to a newly initiated media recording session by setting the visual state of the record button
+    ///
+    /// - Parameter notification: The `NSNotification` who triggered the callback
+
+    @objc private func didBeginRecording(_ notification: NSNotification) {
+        recording = true
+        NotificationCenter.default.post(name: .beginRecording, object: nil)
+        DispatchQueue.main.async {
+            self.record.pulsate()
+            self.record.setImage(Icons.record, for: .normal)
+        }
+    }
+
     /// Set the usable state of the record button.
     ///
     /// The record button should be disabled during the video encoding stage.

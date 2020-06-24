@@ -91,7 +91,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                                                             <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
                                                                             <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
@@ -263,7 +263,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz" customClass="ParameterLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="32" y="142" width="100" height="35"/>
+                                <rect key="frame" x="32" y="141" width="100" height="35"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <color key="textColor" name="Foreground"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -395,7 +395,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f3D-RJ-dah">
-                                <rect key="frame" x="32" y="106" width="100" height="28"/>
+                                <rect key="frame" x="32" y="106" width="100" height="27"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <state key="normal" title="PATTERN MODE">
                                     <color key="titleColor" name="Foreground"/>
@@ -523,7 +523,7 @@
                                 <rect key="frame" x="383" y="281.5" width="600" height="461"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVED SEQUENCES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WeI-O2-ihd">
-                                        <rect key="frame" x="48" y="32" width="152.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="144" height="18.5"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
@@ -540,10 +540,10 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="tMD-BW-XQP">
-                                        <rect key="frame" x="15" y="83" width="570" height="346"/>
+                                        <rect key="frame" x="15" y="82.5" width="570" height="346.5"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="250" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="55" estimatedRowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vSP-Qd-mI5">
-                                                <rect key="frame" x="0.0" y="0.0" width="570" height="346"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="570" height="346.5"/>
                                                 <color key="backgroundColor" name="BackgroundLight"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="songCell" id="hgh-eO-gkK" customClass="SongCell" customModule="Assemble" customModuleProvider="target">
@@ -659,24 +659,24 @@
                                 <rect key="frame" x="383" y="344.5" width="600" height="335"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE/COPY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-5Y-r3e">
-                                        <rect key="frame" x="48" y="32" width="89.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="86.5" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="RP8-E7-D6n">
-                                        <rect key="frame" x="48" y="171" width="504" height="47"/>
+                                        <rect key="frame" x="48" y="170.5" width="504" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE Save the current song and optionally update its name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzi-gJ-bdL">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COPY Copy the current song and save it with the given name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ler-mH-deg">
-                                                <rect key="frame" x="0.0" y="31.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -685,7 +685,7 @@
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="SONG NAME" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-6C-lcl">
-                                        <rect key="frame" x="50" y="83" width="500" height="48"/>
+                                        <rect key="frame" x="50" y="82.5" width="500" height="48"/>
                                         <color key="backgroundColor" red="0.56862745100000001" green="0.1960784314" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <constraints>
@@ -829,24 +829,24 @@
                                 <rect key="frame" x="383" y="384.5" width="600" height="255"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW SONG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hco-Sf-L8f">
-                                        <rect key="frame" x="48" y="32" width="87" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="77" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2gO-Zi-zx8">
-                                        <rect key="frame" x="48" y="83" width="504" height="47"/>
+                                        <rect key="frame" x="48" y="82.5" width="504" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beginning a new song will clear the sequencer." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Di-pr-oRi">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like to begin a new song?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-Pb-yyO">
-                                                <rect key="frame" x="0.0" y="31.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -990,10 +990,10 @@
                                         <rect key="frame" x="239" y="242.5" width="888" height="614.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoX-4z-Aiy" userLabel="TextContent">
-                                                <rect key="frame" x="0.0" y="0.0" width="888" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="888" height="15"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assemble" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dn7-a1-ypi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="888" height="15.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="888" height="15"/>
                                                         <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                         <color key="textColor" name="Foreground"/>
                                                         <nil key="highlightedColor"/>
@@ -1077,24 +1077,24 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEGIN RECORDING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTE-MW-S95">
-                                        <rect key="frame" x="48" y="32" width="148" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="144" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="i2o-1K-yhL">
-                                        <rect key="frame" x="48" y="83" width="504" height="47"/>
+                                        <rect key="frame" x="48" y="82.5" width="504" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the type of media to encode." textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lne-TC-ZQm">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTE Generating video is a computationally intensive task." textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khi-mP-wvZ">
-                                                <rect key="frame" x="0.0" y="31.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -1103,7 +1103,7 @@
                                         </subviews>
                                     </stackView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RuN-QD-RnZ">
-                                        <rect key="frame" x="45" y="162" width="510" height="49"/>
+                                        <rect key="frame" x="45" y="160.5" width="510" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="GvX-X3-ihS"/>
                                         </constraints>
@@ -1116,10 +1116,10 @@
                                         <color key="selectedSegmentTintColor" name="BackgroundLight"/>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="t2v-XO-wOE">
-                                        <rect key="frame" x="48" y="242" width="504" height="15.5"/>
+                                        <rect key="frame" x="48" y="240.5" width="504" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the type of audio visualisation." textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-FV-hFk">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -1177,7 +1177,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFq-YM-dSu" userLabel="Waveform">
-                                        <rect key="frame" x="48" y="289.5" width="75" height="75"/>
+                                        <rect key="frame" x="48" y="287.5" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="B4y-1b-LpT"/>
                                             <constraint firstAttribute="width" secondItem="qFq-YM-dSu" secondAttribute="height" multiplier="1:1" id="gzT-VB-R1R"/>
@@ -1195,11 +1195,11 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="selectWaveform:" destination="klb-No-y5H" eventType="touchUpInside" id="npC-f8-x3E"/>
+                                            <action selector="selectWaveform:" destination="klb-No-y5H" eventType="touchDown" id="XEI-qD-ePA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZg-dx-Ype" userLabel="Lissajous">
-                                        <rect key="frame" x="155" y="289.5" width="75" height="75"/>
+                                        <rect key="frame" x="155" y="287.5" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="AZg-dx-Ype" secondAttribute="height" multiplier="1:1" id="CM2-cW-8tb"/>
                                             <constraint firstAttribute="width" constant="75" id="gE6-Vk-7ga"/>
@@ -1217,17 +1217,18 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="selectLissajous:" destination="klb-No-y5H" eventType="touchUpInside" id="Te0-cd-RkN"/>
+                                            <action selector="selectLissajous:" destination="klb-No-y5H" eventType="touchDown" id="tUj-a5-80L"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAVEFORM" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BBQ-hM-4Xb">
-                                        <rect key="frame" x="49" y="372.5" width="73.5" height="15.5"/>
+                                        <rect key="frame" x="54.5" y="370.5" width="62.5" height="15"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                         <color key="textColor" name="Secondary"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LISSAJOUS" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aeS-gC-PCR">
-                                        <rect key="frame" x="157.5" y="372.5" width="70.5" height="15.5"/>
+                                        <rect key="frame" x="157.5" y="370.5" width="70.5" height="15"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                         <color key="textColor" name="Secondary"/>
@@ -1324,17 +1325,17 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEDIA ENCODED SUCCESSFULLY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6y-fQ-cNL">
-                                        <rect key="frame" x="48" y="32" width="258.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="250" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="E7q-19-Nju">
-                                        <rect key="frame" x="48" y="232.5" width="504" height="15.5"/>
+                                        <rect key="frame" x="48" y="231.5" width="504" height="15"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The file has been saved to your photo library successfully." textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee3-zn-Rk6">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -1392,14 +1393,14 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEDIA" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uM5-eY-ROV">
-                                        <rect key="frame" x="280" y="169" width="40.5" height="15.5"/>
+                                        <rect key="frame" x="280.5" y="168.5" width="39" height="15"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                         <color key="textColor" name="Secondary"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="iNC-uJ-8hT">
-                                        <rect key="frame" x="265" y="83" width="70" height="70"/>
+                                        <rect key="frame" x="265" y="82.5" width="70" height="70"/>
                                         <color key="tintColor" name="Secondary"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="iNC-uJ-8hT" secondAttribute="height" multiplier="1:1" id="57m-Lt-A5C"/>

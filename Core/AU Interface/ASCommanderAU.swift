@@ -330,7 +330,7 @@ public class ASCommanderAU : ASAudioUnit
     
     /// Select the newest preset from index 0, when its name matches the given name, after some number of milliseconds.
     ///
-    /// This is a idiosyncratic function designed to work around Apple's implementation of preset saving.
+    /// This is an idiosyncratic function designed to work around Apple's implementation of preset saving.
     /// Saving a preset to disk takes an nondeterministic amount of time, but the API provides no callback
     /// or notification system. In order to update the UI to match the saved files, it's necessary to repeatedly
     /// check the `userPresets` array for a particular object to appear.

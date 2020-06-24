@@ -8,6 +8,8 @@
 	</array>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Access to the Photo Library is required to save a video file</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access to the Photo Library is required to save a video file</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>CFBundleDevelopmentRegion</key>

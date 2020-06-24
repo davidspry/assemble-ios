@@ -18,7 +18,7 @@ public enum ParameterLabelScale: Float {
 /// Dragging on a ParameterLabel sets the value of the underlying
 /// parameter's value with some speed defined by a `ParameterLabelScale`.
 
-class ParameterLabel: PaddedLabel {
+class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
     
     internal var touch: CGPoint = .zero
     internal var lastTouch: CGPoint = .zero
@@ -33,7 +33,7 @@ class ParameterLabel: PaddedLabel {
     internal var parameterRange: ClosedRange<AUValue> = .normal()
     internal var parameterScale: Float = ParameterLabelScale.continuousFast.rawValue
     internal var parameterStep: Float = 0.1
-
+    
     /// The hexadecimal address of the Assemble core parameter.
 
     internal var parameter: Int32? {
@@ -68,6 +68,9 @@ class ParameterLabel: PaddedLabel {
         self.parameterStep  = increment
         self.parameter = parameter
         update()
+
+        let interaction = UIPointerInteraction(delegate: self)
+        self.addInteraction(interaction)
     }
     
     /// Re-initialise the label from its existing parameter address
@@ -86,6 +89,8 @@ class ParameterLabel: PaddedLabel {
             text = String(format: format, value)
         }   else { text = valueStrings?[Int(value)] ?? "Error" }
     }
+
+    // MARK: - Touch callbacks
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -114,6 +119,14 @@ class ParameterLabel: PaddedLabel {
         super.touchesEnded(touches, with: event)
         self.lastTouch = .zero
         self.touch = .zero
+    }
+
+    // MARK: - UIPointerInteractionDelegate
+    
+    func pointerInteraction(_ interaction: UIPointerInteraction, styleFor region: UIPointerRegion) -> UIPointerStyle? {
+        let view = UITargetedPreview(view: self)
+        let effect = UIPointerEffect.highlight(view)
+        return UIPointerStyle(effect: effect)
     }
 
 }

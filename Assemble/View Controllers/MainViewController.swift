@@ -154,11 +154,14 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     }
 
     /// Use the `MediaRecorder` to either begin a new recording or end an ongoing recording.
-    /// - Note: This function is a callback to be triggered by an `NSNotification`
-    /// - Parameter notification: The notification that triggered the function call.
+    ///
+    /// This function is a callback to be triggered by an `NSNotification`
     /// Specifically, the notifications that should call this function are:
-    ///     `NSNotification.Name.beginRecording`, and;
-    ///     `NSNotification.Name.stopRecording`
+    ///     `NSNotification.Name.defineRecording` to define the recording session,
+    ///     `NSNotification.Name.beginRecording` to begin recording, and
+    ///     `NSNotification.Name.stopRecording` to end a recording session.
+    ///
+    /// - Parameter notification: The notification that triggered the function call.
 
     @objc private func useRecorder(_ notification: NSNotification) {
         if recorder.recording {
@@ -171,22 +174,40 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         }
 
         else if notification.name == NSNotification.Name.beginRecording {
-            recorder.record(video: true, mode: usingDarkTheme, visualisation: .lissajous)
+            guard let settings = notification.object as? VideoSettings else { return }
+
+            recorder.setVideoMode(to: settings.mode)
+            recorder.record(video: settings.video, mode: usingDarkTheme, visualisation: settings.type)
         }
     }
-    
+
     /// Handle the result of a media recording from the `MediaRecorder`
     /// - Parameter file: The URL of the recorded audio or generated video, or `nil` if an error occurred.
     
     private func didCompleteRecording(_ file: URL?) {
+        transport.setRecordButtonUsable(true)
+        
         guard let url = file else {
-            transport.setRecordButtonUsable(true)
             transport.didPressRecord(sender: transport.record)
             return
         }
 
+        switch file?.pathExtension {
+        case MediaUtilities.MediaType.video.rawValue:
+             MediaUtilities.saveToCameraRoll(url)
+             return performSegue(withIdentifier: "shareCardSegue", sender: url)
+        case MediaUtilities.MediaType.audio.rawValue:
+             return presentFile(url)
+        default: print("[MediaUtilities] Unknown path extension.")
+        }
+    }
+    
+    /// Present an file to the user as an activity item in a `UIActivityViewController` rooted in the transport bar.
+    /// - Parameter file: The URL of the file to present to the user
+
+    private func presentFile(_ file: URL) {
         let rect = CGRect(x: transport.frame.midX, y: transport.frame.minY, width: 0, height: 0)
-        let activity = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        let activity = UIActivityViewController(activityItems: [file], applicationActivities: nil)
         activity.popoverPresentationController?.sourceView = view
         activity.popoverPresentationController?.sourceRect = rect
         activity.popoverPresentationController?.permittedArrowDirections = .down
@@ -197,10 +218,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
             .markupAsPDF,
             .openInIBooks
         ]
-
-//        present(activity, animated: true, completion: nil)
-        MediaUtilities.shareToInstagram(url)
-        transport.setRecordButtonUsable(true)
+        
+        present(activity, animated: true, completion: nil)
     }
     
     /// Respond to the on-screen keyboard being shown or hidden
@@ -304,12 +323,19 @@ class MainViewController : UIViewController, KeyboardSettingsListener
             return
         }   else { defaults.setValue(false, forKey: key) }
 
-        Assemble.core.commander?.copyFactoryPreset(number: 2)
-        Assemble.core.commander?.copyFactoryPreset(number: 1)
-        presetLabel.text = Assemble.core.commander?.currentPreset?.name
-        sequencer.initialiseFromUnderlyingState()
-        patterns.loadStates()
-        tempoLabel.reinitialise()
+        DispatchQueue.main.async {
+            let count = Assemble.core.commander?.userPresets.count
+            Assemble.core.commander?.copyFactoryPreset(number: 2)
+            while count == Assemble.core.commander?.userPresets.count {
+                Thread.sleep(forTimeInterval: 0.025)
+            }
+
+            Assemble.core.commander?.copyFactoryPreset(number: 1)
+            self.presetLabel.text = Assemble.core.commander?.currentPreset?.name
+            self.sequencer.initialiseFromUnderlyingState()
+            self.patterns.loadStates()
+            self.tempoLabel.reinitialise()
+        }
     }
     
     /// Update all UI elements in order that they reflect the underlying state.
@@ -365,6 +391,13 @@ class MainViewController : UIViewController, KeyboardSettingsListener
             else { return }
 
             destination.delegate = self
+        }
+        
+        else if segue.identifier == "shareCardSegue" {
+            guard let destination = segue.destination as? ShareCardViewController
+            else { return }
+            
+            destination.file = sender as? URL
         }
     }
 }

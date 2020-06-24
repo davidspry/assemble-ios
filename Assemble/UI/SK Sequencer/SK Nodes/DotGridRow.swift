@@ -37,11 +37,12 @@ class DotGridRow : SKSpriteNode
         var contextSize = CGSize();
         contextSize.width = (shape.width + 1.0) * spacing.width;
         contextSize.height = (shape.height + 1.0) * spacing.height;
-        UIGraphicsBeginImageContext(contextSize);
+        UIGraphicsBeginImageContextWithOptions(contextSize, false, 0.0)
 
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil }
-        ctx.setShouldAntialias(true);
+        ctx.interpolationQuality = .high
         ctx.setAllowsAntialiasing(true);
+        ctx.setShouldAntialias(true);
 
         let columns = Int(shape.width);
         let row = drawRow(columns: columns, spacing: spacing);

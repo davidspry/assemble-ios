@@ -88,7 +88,7 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
 
     @objc private func didBeginRecording(_ notification: NSNotification) {
         recording = true
-        NotificationCenter.default.post(name: .beginRecording, object: nil)
+//        NotificationCenter.default.post(name: .beginRecording, object: nil)
         DispatchQueue.main.async {
             self.record.pulsate()
             self.record.setImage(Icons.record, for: .normal)

@@ -9,9 +9,11 @@ extension Keyboard
 {
     open override func draw(_ layer: CALayer, in ctx: CGContext)
     {
-        for octave in 0 ..< octaves
-        {
-            drawOctave(octave);
+        self.traitCollection.performAsCurrent {
+            for octave in 0 ..< octaves
+            {
+                drawOctave(octave);
+            }
         }
     }
     
@@ -30,13 +32,16 @@ extension Keyboard
         let previousKeys = octave * 12
         let stroke: CGFloat = keyStroke
 
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(0.65)
+
         for whiteKey in 0...6
         {
             let pressed = whiteKeyPressed(whiteKey, octave: octave)
             let colour = pressed ? keyOnColour : keyOffColour
             shapeLayers[previousKeys + whiteKey].lineWidth = pressed ? 1.0 : stroke;
-            shapeLayers[previousKeys + whiteKey].strokeColor = colour.cgColor;
-            shapeLayers[previousKeys + whiteKey].fillColor = colour.cgColor;
+            shapeLayers[previousKeys + whiteKey].strokeColor = colour?.cgColor;
+            shapeLayers[previousKeys + whiteKey].fillColor = colour?.cgColor;
         }
 
         for (i, blackKey) in [1, 2, 4, 5, 6].enumerated()
@@ -44,9 +49,11 @@ extension Keyboard
             let pressed = blackKeyPressed(blackKey, octave: octave)
             let colour = pressed ? keyOnColour : keyOffColour
             shapeLayers[previousKeys + 7 + i].lineWidth = pressed ? 1.0 : stroke;
-            shapeLayers[previousKeys + 7 + i].strokeColor = colour.cgColor;
-            shapeLayers[previousKeys + 7 + i].fillColor = colour.cgColor;
+            shapeLayers[previousKeys + 7 + i].strokeColor = colour?.cgColor;
+            shapeLayers[previousKeys + 7 + i].fillColor = colour?.cgColor;
         }
+
+        CATransaction.commit()
     }
 
     internal func makeOctave(_ octave: CGFloat)
@@ -67,10 +74,10 @@ extension Keyboard
             shapeLayer.rasterizationScale = 2.0 * UIScreen.main.scale
             shapeLayer.speed = 2.0
             shapeLayers.append(shapeLayer)
-            
+
             shapeLayer.path = path.cgPath
-            shapeLayer.fillColor = keyOffColour.cgColor;
-            shapeLayer.strokeColor = keyOffColour.cgColor
+            shapeLayer.fillColor = keyOffColour?.cgColor
+            shapeLayer.strokeColor = keyOffColour?.cgColor
             shapeLayer.lineWidth = stroke;
             layer.addSublayer(shapeLayer)
         }
@@ -87,10 +94,10 @@ extension Keyboard
             shapeLayer.rasterizationScale = 2.0 * UIScreen.main.scale
             shapeLayer.speed = 2.0
             shapeLayers.append(shapeLayer)
-            
+    
             shapeLayer.path = path.cgPath
-            shapeLayer.fillColor = keyOffColour.cgColor;
-            shapeLayer.strokeColor = keyOffColour.cgColor
+            shapeLayer.fillColor = keyOffColour?.cgColor;
+            shapeLayer.strokeColor = keyOffColour?.cgColor
             shapeLayer.lineWidth = stroke;
             layer.addSublayer(shapeLayer)
         }

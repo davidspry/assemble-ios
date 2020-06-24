@@ -17,6 +17,13 @@ class MediaRecorder
     private(set) var visualTheme: UIUserInterfaceStyle = .dark
     
     private(set) var visualisation: Visualisation = .waveform
+    
+    private(set) var videoSize: (W: Int, H: Int) = (1080, 1080) {
+        didSet {
+            settings.video["AVVideoWidthKey"]  = videoSize.W
+            settings.video["AVVideoHeightKey"] = videoSize.H
+        }
+    }
 
     private var file: AVAudioFile?
 
@@ -35,8 +42,8 @@ class MediaRecorder
         video:
         [
             AVVideoCodecKey  : AVVideoCodecType.h264,
-            AVVideoWidthKey  : 1080,
-            AVVideoHeightKey : 1080
+            AVVideoWidthKey  : videoSize.W,
+            AVVideoHeightKey : videoSize.H
         ]
     )
 
@@ -58,6 +65,20 @@ class MediaRecorder
             recordingDidFail()
         }
     }
+    
+    /// Set the video mode, which defines the size of the video.
+    /// The available options are square video (1080 pixels) and portrait video (1080x1920 pixels).
+    /// By default, square videos are generated.
+    ///
+    /// - Note: 1080x1920 is the recommended size for an Instagram story.
+    /// - Parameter mode: A `VideoMode` constant that represents a video size and shape
+
+    public func setVideoMode(to mode: VideoMode) {
+        switch mode {
+        case .square:   return videoSize = (1080, 1080)
+        case .portrait: return videoSize = (1080, 1920)
+        }
+    }
 
     /// Begin recording media
     /// - Parameter video: A flag to indicate whether a video should be generated for the recording or not.
@@ -72,7 +93,7 @@ class MediaRecorder
 
         visualTheme = isDarkMode ? .dark : .light
 
-        let path = MediaRecorder.createNewFile(extension: "aac")
+        let path = MediaRecorder.createNewFile(extension: MediaUtilities.MediaType.audio.rawValue)
 
         do
         {
@@ -178,12 +199,12 @@ class MediaRecorder
         let frameLengthInSamples = Int((file.fileFormat.sampleRate / framesPerSecond).rounded(.up))
         let videoFrameDuration   = CMTime(seconds: 1, preferredTimescale: CMTimeScale(framesPerSecond))
 
-        let filepath = MediaRecorder.createNewFile(extension: "mp4")
+        let filepath = MediaRecorder.createNewFile(extension: MediaUtilities.MediaType.video.rawValue)
         do    { writer = try AVAssetWriter(outputURL: filepath, fileType: .mp4) }
         catch { return }
         
-        let W = 1080
-        let H = 1080
+        let W = videoSize.W
+        let H = videoSize.H
         let video = AVAssetWriterInput(mediaType: .video, outputSettings: settings.video)
         let attributes : [String : Any] = [
             String(kCVPixelBufferPixelFormatTypeKey) : Int(kCVPixelFormatType_32ARGB),
@@ -198,8 +219,8 @@ class MediaRecorder
         writer.startSession(atSourceTime: CMTime(seconds: 1, preferredTimescale: Int32(framesPerSecond)))
 
         var frame = 0
-        let queue = DispatchQueue(label: "assemble.video.queue", qos: .default)
         var total = 0
+        let queue = DispatchQueue(label: "assemble.video.queue", qos: .default)
         video.requestMediaDataWhenReady(on: queue, using: {
             if video.isReadyForMoreMediaData && frame < Int(videoLengthInFrames)
             {
@@ -468,7 +489,7 @@ class MediaRecorder
         let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
         export?.shouldOptimizeForNetworkUse = true
         export?.outputFileType = AVFileType.mp4
-        export?.outputURL = MediaRecorder.createNewFile(extension: "mp4")
+        export?.outputURL = MediaRecorder.createNewFile(extension: MediaUtilities.MediaType.video.rawValue)
         export?.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: video.duration)
 
         export?.exportAsynchronously {

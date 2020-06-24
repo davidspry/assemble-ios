@@ -25,6 +25,7 @@ class MenuHeaderCell: UITableViewCell {
     }
     
     func initialise(with parameter: Int32) {
+        toggle.isPointerInteractionEnabled = true
         let state = Assemble.core.getParameter(parameter)
         self.state = Int(state) == 0 ? false : true
         self.parameter = parameter

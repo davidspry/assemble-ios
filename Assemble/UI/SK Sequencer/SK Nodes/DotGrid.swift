@@ -48,9 +48,10 @@ class DotGrid : SKSpriteNode
         var contextSize = CGSize();
         contextSize.width = (shape.width + 1.0) * spacing.width;
         contextSize.height = (shape.height + 1.0) * spacing.height;
-        UIGraphicsBeginImageContext(contextSize);
+        UIGraphicsBeginImageContextWithOptions(contextSize, false, 0.0)
 
         guard let ctx = UIGraphicsGetCurrentContext() else { return nil; }
+        ctx.interpolationQuality = .high
         ctx.setAllowsAntialiasing(true);
         ctx.setShouldAntialias(true);
 

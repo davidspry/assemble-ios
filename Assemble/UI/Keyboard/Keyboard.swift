@@ -12,17 +12,19 @@ import UIKit
 
 class Keyboard : UIView, KeyboardSettingsListener
 {
-    var keyOnColour  : UIColor = UIColor.sineNoteColour
-    var keyOffColour : UIColor = UIColor.init(named: "Secondary") ?? .white
+    private(set) var keyOnColour = UIColor.sineNoteColour
+    
+    let keyOffColour: UIColor? = UIColor.init(named: "Secondary")
     
     let visibilityTranslation: CGFloat = 50
     
     var shapeLayers = [CAShapeLayer]()
 
-    var listeners = MulticastDelegate<KeyboardListener>()
-    var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
+    let listeners = MulticastDelegate<KeyboardListener>()
+    let settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
 
-    var octave : Int = 3
+    private(set) var octave : Int = 3
+    
     let octaves: Int = 1
     var octaveLabel = UILabel()
     var octaveString : String {
@@ -31,7 +33,7 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     private let octaveButtons = (u: UIButton(), d: UIButton())
     
-    var oscillator: OscillatorShape = .sine
+    private(set) var oscillator: OscillatorShape = .sine
 
     internal var margins: UIEdgeInsets {
         return UIEdgeInsets(top: 5.0, left: 35.0, bottom: 5.0, right: 35.0)
@@ -68,15 +70,16 @@ class Keyboard : UIView, KeyboardSettingsListener
     internal func releaseNote(_ note: Int) {
         pressedKey = nil
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        let colour = UIColor.init(named: "Secondary") ?? .white
-        keyOffColour = colour
-        shapeLayers.forEach {
-            $0.fillColor = keyOffColour.cgColor
-            $0.strokeColor = keyOffColour.cgColor
+        self.shapeLayers.forEach {
+            $0.fillColor   = self.keyOffColour?.cgColor
+            $0.strokeColor = self.keyOffColour?.cgColor
         }
+
+        print("[Keyboard] Redrawing")
+        self.setNeedsDisplay()
     }
     
     @objc internal func setOctave(sender: UIButton) {
@@ -102,7 +105,7 @@ class Keyboard : UIView, KeyboardSettingsListener
         let controlMargin: CGFloat = 0.0
         let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .semibold)
         var origin = CGPoint(x: 0, y: frame.midY - CGFloat(button) * 0.5)
-        let colour = UIColor.init(named: "Secondary") ?? .white
+        let colour = UIColor.init(named: "Secondary") ?? UIColor.systemGray5
         var arrow: UIImage!
         
         origin.x = controlMargin

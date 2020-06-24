@@ -14,7 +14,7 @@ enum Visualisation {
 
 /// A UIView subclass that visualises audio in real-time using different display modes.
 
-class Waveform: UIView {
+class Waveform: UIView, UIPointerInteractionDelegate {
 
     /// The display mode of the Waveform view
 
@@ -230,10 +230,25 @@ class Waveform: UIView {
                                UIColor.white.cgColor
 
         layer.addSublayer(waveform)
+        
+        /// Register an interaction for the iPad's pointer
+
+        let interaction = UIPointerInteraction(delegate: self)
+        addInteraction(interaction)
     }
     
     deinit
     {
         Assemble.core.unit?.removeTap(onBus: 0)
+    }
+    
+    // MARK: - UIPointerInteractionDelegate
+    
+    /// Define an interaction with the iPad's pointer
+
+    func pointerInteraction(_ interaction: UIPointerInteraction, styleFor region: UIPointerRegion) -> UIPointerStyle? {
+        let view = UITargetedPreview(view: self)
+        let effect = UIPointerEffect.highlight(view)
+        return UIPointerStyle(effect: effect)
     }
 }

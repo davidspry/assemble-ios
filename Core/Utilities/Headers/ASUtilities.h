@@ -35,7 +35,7 @@ namespace Assemble::Utilities
     /// \param table A pointer to an array of floats
     /// \param capacity The capacity of the table
 
-    static inline const float lerp(const float index, const float *table, const int capacity)
+    [[nodiscard]] static inline const float lerp(const float index, const float *table, const int capacity)
     {
         const int l = (int) index;
         const int r = l + 1 - static_cast<int>((l + 1) >= capacity) * capacity;
@@ -52,7 +52,7 @@ namespace Assemble::Utilities
     /// \param table A pointed to an array of floats
     /// \param capacity The capacity of the table
 
-    static inline const float cerp(const float index, const float *table, const int capacity)
+    [[nodiscard]] static inline const float cerp(const float index, const float *table, const int capacity)
     {
         const int a = (int) index;
         const int b = a + 1 - static_cast<int>((a + 1) >= capacity) * capacity;
@@ -74,7 +74,7 @@ namespace Assemble::Utilities
     /// \param min The minimum value of the output range, inclusive.
     /// \param max The maximum value of the output range, inclusive.
 
-    static inline const float bound(const float input, const float min, const float max)
+    [[nodiscard]] static inline const float bound(const float input, const float min, const float max)
     {
         return std::fmax(min, std::fmin(max, input));
     }

@@ -37,11 +37,6 @@
 		143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01B243F50520058AE40 /* ASCommanderDSP.mm */; };
 		143FB021243F63620058AE40 /* ASCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB020243F63620058AE40 /* ASCommander.swift */; };
 		143FB023243F67500058AE40 /* ASComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB022243F67500058AE40 /* ASComponent.swift */; };
-		14431B952475855900D59DED /* Assemble_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 14431B942475855900D59DED /* Assemble_1.png */; };
-		14488DB524A32E0F00B44A6C /* Lissajous_Light.png in Resources */ = {isa = PBXBuildFile; fileRef = 14488DB124A32E0F00B44A6C /* Lissajous_Light.png */; };
-		14488DB624A32E0F00B44A6C /* Sine_Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 14488DB224A32E0F00B44A6C /* Sine_Dark.png */; };
-		14488DB724A32E0F00B44A6C /* Lissajous_Dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 14488DB324A32E0F00B44A6C /* Lissajous_Dark.png */; };
-		14488DB824A32E0F00B44A6C /* Sine_Light.png in Resources */ = {isa = PBXBuildFile; fileRef = 14488DB424A32E0F00B44A6C /* Sine_Light.png */; };
 		14488DBA24A32F3200B44A6C /* DefineRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14488DB924A32F3200B44A6C /* DefineRecordingViewController.swift */; };
 		14488DBC24A3312000B44A6C /* DynamicImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14488DBB24A3312000B44A6C /* DynamicImages.xcassets */; };
 		14488DBE24A39C5C00B44A6C /* ShareCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14488DBD24A39C5C00B44A6C /* ShareCardViewController.swift */; };
@@ -188,12 +183,7 @@
 		143FB01D243F52820058AE40 /* ASCommanderCore.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ASCommanderCore.hpp; sourceTree = "<group>"; };
 		143FB020243F63620058AE40 /* ASCommander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommander.swift; sourceTree = "<group>"; };
 		143FB022243F67500058AE40 /* ASComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASComponent.swift; sourceTree = "<group>"; };
-		14431B942475855900D59DED /* Assemble_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble_1.png; sourceTree = "<group>"; };
 		144354152466E57200F3142D /* ASSawtoothTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSawtoothTable.h; sourceTree = "<group>"; };
-		14488DB124A32E0F00B44A6C /* Lissajous_Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lissajous_Light.png; sourceTree = "<group>"; };
-		14488DB224A32E0F00B44A6C /* Sine_Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sine_Dark.png; sourceTree = "<group>"; };
-		14488DB324A32E0F00B44A6C /* Lissajous_Dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Lissajous_Dark.png; sourceTree = "<group>"; };
-		14488DB424A32E0F00B44A6C /* Sine_Light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sine_Light.png; sourceTree = "<group>"; };
 		14488DB924A32F3200B44A6C /* DefineRecordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefineRecordingViewController.swift; sourceTree = "<group>"; };
 		14488DBB24A3312000B44A6C /* DynamicImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DynamicImages.xcassets; sourceTree = "<group>"; };
 		14488DBD24A39C5C00B44A6C /* ShareCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardViewController.swift; sourceTree = "<group>"; };
@@ -802,12 +792,7 @@
 		14E6551B2471455B00D619F0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				14488DB324A32E0F00B44A6C /* Lissajous_Dark.png */,
-				14488DB124A32E0F00B44A6C /* Lissajous_Light.png */,
-				14488DB224A32E0F00B44A6C /* Sine_Dark.png */,
-				14488DB424A32E0F00B44A6C /* Sine_Light.png */,
 				14D04D99248DE5B8005A941A /* Assemble_2.png */,
-				14431B942475855900D59DED /* Assemble_1.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -908,17 +893,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1458D12E24531FFD0093B541 /* License.txt in Resources */,
-				14488DB824A32E0F00B44A6C /* Sine_Light.png in Resources */,
-				14488DB524A32E0F00B44A6C /* Lissajous_Light.png in Resources */,
 				14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */,
-				14488DB724A32E0F00B44A6C /* Lissajous_Dark.png in Resources */,
 				14DAC3922417772E005654EA /* Assets.xcassets in Resources */,
-				14488DB624A32E0F00B44A6C /* Sine_Dark.png in Resources */,
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
 				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
 				14D04D9A248DE5B8005A941A /* Assemble_2.png in Resources */,
-				14431B952475855900D59DED /* Assemble_1.png in Resources */,
 				1427E2EF247686340011D102 /* Colours.xcassets in Resources */,
 				14488DBC24A3312000B44A6C /* DynamicImages.xcassets in Resources */,
 				1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */,

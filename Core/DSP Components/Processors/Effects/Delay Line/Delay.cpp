@@ -140,5 +140,5 @@ void Delay::process(float& sample)
     rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     rhead = rhead + static_cast<int>(rhead <  0) * capacity;
 
-    sample = (1.F - mix) * sample + mix * interpolated;
+    sample = (1.0F - gain * mix) * sample + mix * interpolated;
 }

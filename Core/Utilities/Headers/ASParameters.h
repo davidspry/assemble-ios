@@ -5,9 +5,10 @@
 #ifndef ASPARAMETERS_H
 #define ASPARAMETERS_H
 
-// PARAMETER ADDRESSES
-// ===================
+/// \brief The following constants define parameter addresses to be used throughout Assemble.
+/// The inclusion of this header file in Assemble.h ensures that the addresses are available in Swift.
 
+// Continuous parameters
 // [SEQUENCER] 0xAA0[Parameter]
 // ===========================================
 static const int kSequencerLength         = 0xAA01;
@@ -101,9 +102,7 @@ static const int kVibratoSpeed            = 0xEF21;
 static const int kVibratoDepth            = 0xEF22;
 // ===========================================
 
-// DISCRETE PARAMETERS
-// ===================
-
+// Discrete parameters
 // Delay Line: Musical Time Factors
 static const float fDelayWholeNote        = 4.000F;
 static const float fDelayHalfDotted       = 2.500F;

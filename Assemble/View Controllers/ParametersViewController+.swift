@@ -59,7 +59,9 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
             if let cell = cell as? OscillatorsHeaderCell {
                 cell.selector.addTarget(self, action: #selector(didSelectOscillator), for: .valueChanged)
                 return cell
-            }   else { fatalError("[ParametersViewController+] Cast to OscillatorsHeaderCell failed") }
+            }
+
+            else { preconditionFailure("[ParametersViewController+] Cast to OscillatorsHeaderCell failed") }
 
         case tableDelay:
             let cell = menuDelay.headerFor(table: table, path: path)
@@ -69,7 +71,9 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.initialise(with: kStereoDelayToggle)
                 cell.toggle.addTarget(self, action: #selector(didToggle(_:)), for: .touchUpInside)
                 return cell
-            }   else { fatalError("[ParametersViewController+] 1. Cast to MenuHeaderCell failed") }
+            }
+            
+            else { preconditionFailure("[ParametersViewController+] 1. Cast to MenuHeaderCell failed") }
             
         case tableVibrato:
             let cell = menuVibrato.headerFor(table: tableDelay, path: path)
@@ -79,9 +83,11 @@ extension ParametersViewController : UITableViewDelegate, UITableViewDataSource 
                 cell.initialise(with: kVibratoToggle)
                 cell.toggle.addTarget(self, action: #selector(didToggle(_:)), for: .touchUpInside)
                 return cell
-            }   else { fatalError("[ParametersViewController+] 2. Cast to MenuHeaderCell failed") }
+            }
+            
+            else { preconditionFailure("[ParametersViewController+] 2. Cast to MenuHeaderCell failed") }
     
-        default: fatalError("[ParametersViewController] Unknown UITableView instance")
+        default: preconditionFailure("[ParametersViewController] Unknown UITableView instance.")
         }
     }
 

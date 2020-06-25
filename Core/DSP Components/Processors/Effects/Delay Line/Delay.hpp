@@ -8,6 +8,7 @@
 
 #include "ASHeaders.h"
 #include "ASUtilities.h"
+#include "ASConstants.h"
 #include "ASParameters.h"
 #include "Clock.hpp"
 
@@ -69,7 +70,7 @@ public:
 
     /// \brief Set the state of the Delay to `status`, where status represents
     /// whether or not the Delay should consume new samples from its input.
-    /// \param status The desired state of the Delay
+    /// \param status A flag to indicate whether the Delay should be bypassed or not.
 
     inline bool toggle(const bool status)
     {
@@ -78,11 +79,19 @@ public:
 
     /// \brief Reduce the input gain of the Delay to 0 gradually
     
-    inline void fadeOut() { gain = std::max(0.F, gain - 0.0001F); }
+    inline void fadeOut() {
+        gainLinear = std::max(0.F, gainLinear - 1E-4F);
+        gain = static_cast<float>(gainLinear > 0.0F) *
+               (0.5F + 0.5F * std::sinf(PI * (gainLinear - 0.5F)));
+    }
     
     /// \brief Increase the input gain of the Delay to 1 gradually
 
-    inline void  fadeIn() { gain = std::min(1.F, gain + 0.0001F); }
+    inline void  fadeIn() {
+        gainLinear = std::min(1.F, gainLinear + 1E-4F);
+        gain = static_cast<float>(gainLinear > 0.0F) *
+               (0.5F + 0.5F * std::sinf(PI * (gainLinear - 0.5F)));
+    }
 
 private:
     /// \brief Synchronise the Delay with its Clock's tempo
@@ -108,6 +117,7 @@ private:
     float mix      = 0.35F;
     float gain     = 1.00F;
     float feedback = 0.50F;
+    float gainLinear = 1.00F;
     std::atomic<bool> bypassed = {false};
 
 private:

@@ -9,6 +9,8 @@
 #include "ASHeaders.h"
 
 /// \brief A static look-up table for the frequencies of pitches associated with MIDI note numbers
+/// \note  Dr. Rachel Hall shows that the frequency `F` corresponding to MIDI note number `p` can by found by setting F = [440 * 2 ^ ((p - 69) / 12)] Hz.
+/// <http://people.sju.edu/~rhall/SoundingNumber/pitch_and_frequency>
 
 constexpr static std::array<float, 128> frequencies =
 {

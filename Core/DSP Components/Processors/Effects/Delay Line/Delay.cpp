@@ -131,7 +131,7 @@ void Delay::process(float& sample)
 
     delay = delay + 5E-5F * (target - delay);
     samples[whead] = gain * sample + feedback * samples[rhead];
-    const float interpolated = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
+    float interpolated = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
 
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;

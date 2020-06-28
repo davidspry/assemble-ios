@@ -359,7 +359,7 @@ class MediaRecorder
         let square: CGFloat = 70
         let margin: CGFloat = square / 2.0
         let xy = CGPoint(x: margin, y: size.height - square - margin)
-        if let logo = UIImage(named: "Assemble_2"), let image = logo.cgImage {
+        if let logo = UIImage.init(named: "AssembleBadge"), let image = logo.cgImage {
             let imageFrame = CGRect(x: xy.x, y: xy.y, width: square, height: square)
             context.draw(image, in: imageFrame)
         }

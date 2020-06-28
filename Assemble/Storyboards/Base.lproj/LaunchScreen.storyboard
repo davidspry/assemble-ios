@@ -16,19 +16,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assemble_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="qsC-xh-3FH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assemble.png" translatesAutoresizingMaskIntoConstraints="NO" id="qsC-xh-3FH">
                                 <rect key="frame" x="558" y="387" width="250" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Bac-Bb-eUw"/>
-                                    <constraint firstAttribute="width" constant="250" id="R8Q-Re-BGZ"/>
+                                    <constraint firstAttribute="height" constant="250" id="Jeq-QZ-mj0"/>
+                                    <constraint firstAttribute="width" constant="250" id="gQa-dG-tAT"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="qsC-xh-3FH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="jeH-Uz-z38"/>
-                            <constraint firstItem="qsC-xh-3FH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vVK-5P-9Dz"/>
+                            <constraint firstItem="qsC-xh-3FH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Nfo-Ks-YiO"/>
+                            <constraint firstItem="qsC-xh-3FH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PSb-2k-zGZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Assemble_2.png" width="27.937854766845703" height="27.937854766845703"/>
+        <image name="Assemble.png" width="27.937854766845703" height="27.937854766845703"/>
         <namedColor name="Background">
             <color red="0.76499998569488525" green="0.76499998569488525" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

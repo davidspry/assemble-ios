@@ -300,12 +300,14 @@ public class ASCommanderAU : ASAudioUnit
     public func saveCurrentPreset() -> Bool {
         guard let preset = currentPreset else { return false }
         
-        do    { try saveUserPreset(preset) }
-        catch { return false }
+        let failure = "[ASCommanderAU] User preset \(preset.number): \(preset.name) failed to saved."
+        let success = "[ASCommanderAU] User preset \(preset.number): \(preset.name) saved successfully."
         
-        print("[ASCommanderAU] User preset \(preset.number) saved successfully!")
+        do    { try saveUserPreset(preset) }
+        catch { print(failure); return false }
+        
+        print(success)
         selectPresetZero(named: preset.name, after: 25)
-
         return true
     }
 
@@ -320,11 +322,14 @@ public class ASCommanderAU : ASAudioUnit
             preset.name = name
             preset.number = number
 
-        do    { try saveUserPreset(preset) }
-        catch { return false }
+        let failure = "[ASCommanderAU] User preset \(preset.number): \(preset.name) failed to saved."
+        let success = "[ASCommanderAU] User preset \(preset.number): \(preset.name) saved successfully."
 
-        print("[ASCommanderAU] User preset \(number) saved successfully!")
-        selectPresetZero(named: name, after: 25)
+        do    { try saveUserPreset(preset) }
+        catch { print(failure); return false }
+
+        print(success)
+        selectPresetZero(named: preset.name, after: 25)
         return true
     }
     
@@ -341,12 +346,13 @@ public class ASCommanderAU : ASAudioUnit
     private func selectPresetZero(named name: String, after delay: Int) {
         var tries = 0
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delay)) {
-            while self.userPresets[0].name != name, tries < 10 {
+            while self.userPresets[0].name != name, tries < 20 {
                 Thread.sleep(forTimeInterval: 0.05)
                 tries = tries + 1
             }
             
-            print("[ASCommanderAU] Selecting Preset #0 after \(tries) thread sleeps.")
+            if tries < 20 { print("[ASCommanderAU] Selecting Preset #0 after \(tries) thread sleeps.") }
+            else          { print("[ASCommanderAU] The specified number of tries were exceeded.") }
             self.loadFromPreset(number: 0)
             self.selectedPreset = 0
         }

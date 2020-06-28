@@ -4,8 +4,10 @@
 
 import UIKit
 
+/// A cell to represent a saved song in the `PersistenceViewController` table
+
 class SongCell: UITableViewCell {
 
     @IBOutlet weak var songName: UILabel!
-    
+
 }

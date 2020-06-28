@@ -4,14 +4,13 @@
 
 import UIKit
 
+/// A `ParameterMenu` to represent the parameters of each oscillator (filter and envelope controls) on the `ParametersViewController`.
+
 struct OscillatorParameters : ParameterMenu {
 
     var name: String = "OSCILLATORS"
-
-    var toggle: Int32? = nil
-    
     var oscillator: OscillatorShape = .sine
-    
+    var toggle: Int32? = nil
     var sections: Int = 4
     
     var labels: [String] =

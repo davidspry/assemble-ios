@@ -5,6 +5,8 @@
 
 import Foundation
 
+/// A collection of utilities for representing, decoding, and describing notes.
+
 struct NoteUtilities
 {
     typealias Note = (xy: CGPoint, note: Int, shape: OscillatorShape)
@@ -44,21 +46,38 @@ struct NoteUtilities
         return notes
     }
 
+    /// Represent the given note information as a string
+    /// - Parameter note: The note number of the note to describe
+    /// - Parameter oscillator: The oscillator used by the note to describe
+
     public static func describe(_ note: Int, oscillator: OscillatorShape) -> String {
         return "\(notename(of: note))\(octave(of: note)) \(oscillator.code)"
     }
+
+    /// Compute the octave number of the given note number
+    /// - Parameter note: The note number of the note whose octave number should be computed
 
     public static func octave(of note: Int) -> Int {
         return note / 12 - 1
     }
     
+    /// Modify the given note such that it belongs to the given octave, then return its note number.
+    /// - Parameter note: The note number of the note to be modified
+    /// - Parameter octave: The desired octave
+    /// - Returns: The note number of the note whose note name matches the given note and whose octave matches the given number
+
     public static func modify(note: Int, withOctave octave: Int) -> Int {
         return (note % 12) + 12 * (octave + 1)
     }
 
+    /// Find the note name of the given note
+    /// - Parameter note: The note number of the note whose note name is desired
+
     public static func notename(of note: Int) -> String {
         return notenames[note % 12]
     }
+
+    /// The name of each musical note
 
     private static let notenames: [String] = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 }

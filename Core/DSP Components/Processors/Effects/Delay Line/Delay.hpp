@@ -1,4 +1,3 @@
-//  Delay.hpp
 //  Assemble
 //  Created by David Spry on 24/4/20.
 //  Copyright © 2020 David Spry. All rights reserved.

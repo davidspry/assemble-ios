@@ -6,26 +6,59 @@
 import UIKit
 import SpriteKit
 
+/// The on-screen sequencer, which reflects Assemble's core sequencer
+
 class SequencerScene : SKScene, UIGestureRecognizerDelegate
 {
-    var noteToErase   : CGPoint?
-    var eraseButtonView = UIView()
-    let longPressRecogniser = UILongPressGestureRecognizer()
-
-    let grid   = DotGrid()
-    let row    = DotGridRow()
+    /// The sequencer's dot grid
+    
+    let grid = DotGrid()
+    
+    /// The sequencer's current position
+    
+    let row  = DotGridRow()
+    
+    /// The user's cursor
+    
     let cursor = CellSelectShape(size: 20)
-    var noteShapes = [[NoteShapeNode]]()
-    var pattern: Int = 0
     
-    var noteString: String?
-    var noteStrings = [[[String?]]]()
-    
-    var spacing: CGSize = .zero
-    var selected: CGPoint = .zero
+    /// Nodes representing notes on each pattern of the current sequence
 
-    override init(size: CGSize)
-    {
+    internal var noteShapes = [[NoteShapeNode]]()
+    
+    /// The index of the `SequencerScene`'s current pattern
+
+    internal var pattern: Int = 0
+    
+    /// A string describing the note underlying the user's cursor
+
+    var noteString: String?
+
+    /// Strings describing each note of the sequence
+
+    internal var noteStrings = [[[String?]]]()
+    
+    /// The cell-to-cell grid spacing of the sequencer
+
+    internal var spacing: CGSize = .zero
+
+    /// The location of the currently selected sequencer position
+
+    internal var selected: CGPoint = .zero
+    
+    /// The location of the note that the user has elected to erase
+
+    internal var noteToErase: CGPoint?
+    
+    /// A button used by the user to erase notes from the sequencer
+    
+    internal var eraseButtonView = UIView()
+    
+    /// The gesture used to move and display the `eraseButtonView`
+
+    internal let longPressRecogniser = UILongPressGestureRecognizer()
+
+    override init(size: CGSize) {
         super.init(size: size);
         
         longPressRecogniser.delegate = self
@@ -62,15 +95,18 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         addChild(row);
         addChild(cursor);
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(clearCurrentPattern(_:)),
-                                               name: .clearCurrentPattern, object: nil)
+        /// Register to receive notifications when the user elects to clear a pattern's contents
+
+        let selector = #selector(clearCurrentPattern(_:))
+        NotificationCenter.default.addObserver(self, selector: selector, name: .clearCurrentPattern, object: nil)
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        print("[SequencerScene] Required init is unimplemented.")
     }
+
+    /// Initialise the long press gesture recogniser and the note erase button when the `SequencerScene` attaches to the `Sequencer` `SKView`.
 
     override func didMove(to view: SKView) {
         view.addGestureRecognizer(self.longPressRecogniser)
@@ -78,25 +114,28 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         
         let w: CGFloat = 30
         let h: CGFloat = 25
-        let button = UIButton(frame: frame)
         let size = UIImage.SymbolConfiguration(pointSize: w)
         let frame = CGRect(x: 0, y: 0, width: w, height: h)
-        button.frame = frame
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(binPressed), for: .touchDown)
-        button.setImage(UIImage(systemName: "xmark.rectangle.fill",
-                                withConfiguration: size), for: .normal)
+        let button = UIButton(frame: frame)
+            button.frame = frame
+            button.tintColor = .white
+            button.addTarget(self, action: #selector(binPressed), for: .touchDown)
+            button.setImage(UIImage(systemName: "xmark.rectangle.fill", withConfiguration: size), for: .normal)
 
         eraseButtonView.frame = frame
         eraseButtonView.addSubview(button)
         eraseButtonView.isHidden = true
         view.addSubview(eraseButtonView)
     }
-    
-    public func redraw()
-    {
+
+    /// Redraw the sequencer scene's background colour.
+    /// This function should be called when changes are made to the user interface style.
+
+    public func redraw() {
         backgroundColor = UIColor.init(named: "Background")!
     }
+
+    /// Reset the sequencer scene by removing every note node and setting every note description to nil.
 
     private func reset()
     {
@@ -109,6 +148,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         self.noteStrings = self.noteStrings.map { pattern in pattern.map { row in row.map { _ in nil } } }
     }
     
+    /// Update the current note description to reflect the selected sequencer position
+
     private func updateNoteString()
     {
         guard pattern < noteStrings.count,
@@ -120,6 +161,9 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
 
     // MARK: - Computer Keyboard
     
+    /// Move the user's cursor in the specified direction on the sequencer
+    /// - Parameter direction: The direction, an integer in [0, 3], in which the cursor should move.
+
     func didNavigate(by direction: Int)
     {
         let w: CGFloat = Assemble.patternWidth
@@ -141,6 +185,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     
     // MARK: - Erase Note View
 
+    /// Display the erase button above the selected note
+    
     func showEraseNoteView() {
         DispatchQueue.main.async {
             self.eraseButtonView.isHidden = false
@@ -150,6 +196,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
             }
         }
     }
+    
+    /// Hide the erase button from view
     
     func hideEraseNoteView() {
         DispatchQueue.main.async {
@@ -162,6 +210,12 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     
     // MARK: - User Interaction
 
+    /// Add a new note to the sequencer or modify an existing note with new properties.
+    /// - Parameter xy: The location in grid coordinates of the new note
+    /// - Parameter note: The note number of the new note
+    /// - Parameter oscillator: The oscillator to be used for the new note
+    /// - Parameter pattern: The pattern that the note should belong to. By default, the current pattern will be used.
+    
     func addOrModifyNote(xy: CGPoint, note: Int, oscillator: OscillatorShape, pattern: Int? = nil) {
         let pattern = pattern ?? Assemble.core.currentPattern
         let existingNote: String? = noteStrings[pattern][xy.ny][xy.nx]
@@ -181,6 +235,10 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         addChild(node);
     }
 
+    /// Modify the oscillator of an existing note, located at the given position.
+    /// - Parameter xy: The location of the note to be modified
+    /// - Parameter oscillator: The desired oscillator
+
     internal func modifyNote(xy: CGPoint, oscillator: OscillatorShape) {
         DispatchQueue.main.async {
             self.noteShapes[Assemble.core.currentPattern].forEach { node in
@@ -189,7 +247,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
     }
 
-    /// Remove and destroy every `NoteShapeNode` who is situated at the location, `xy`.
+    /// Remove and destroy every `NoteShapeNode` who is situated at the location `xy`.
     /// - Parameter xy: The location of the note to be erased in grid coordinates.
 
     func eraseNote(_ xy: CGPoint) {

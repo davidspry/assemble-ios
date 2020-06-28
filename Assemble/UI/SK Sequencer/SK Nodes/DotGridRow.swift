@@ -1,7 +1,8 @@
 //  Assemble
+//  =================================================
 //  Created by David Spry on 31/3/20.
 //  Copyright © 2020 David Spry. All rights reserved.
-//
+//  =================================================
 //  Attribution:
 //  This class was derived from a post by "0x141E":
 //  <https://stackoverflow.com/a/33471755/9611538>
@@ -9,11 +10,17 @@
 import UIKit
 import SpriteKit
 
-class DotGridRow : SKSpriteNode
-{
-    var spacing   : CGSize!
+/// An `SKSpriteNode` that represents the current position of the sequencer.
+/// A `DotGridRow` should be bolder than any row on the `DotGrid`.
 
-    func initialise(spacing: CGSize) {
+class DotGridRow: SKSpriteNode
+{
+    private var spacing: CGSize!
+
+    /// Initialise the row.
+    /// - Parameter spacing: The size of each cell on the grid
+    
+    public func initialise(spacing: CGSize) {
         self.spacing = spacing
 
         guard let grid = DotGridRow.drawDotGridRow(spacing: spacing)
@@ -24,8 +31,10 @@ class DotGridRow : SKSpriteNode
         self.size = grid.size();
     }
     
-    func redraw()
-    {
+    /// Redraw the row.
+    /// This should be called when a change is made to the user interface style.
+
+    public func redraw() {
         self.texture = DotGridRow.drawDotGridRow(spacing: spacing)
         print("[DotGridRow] Redrawing")
     }

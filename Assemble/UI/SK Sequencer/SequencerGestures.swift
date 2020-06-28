@@ -8,7 +8,6 @@ import SpriteKit
 
 extension SequencerScene
 {
-    
     /// Destroy the note at the selected point.
     ///
     /// After the user selects a note by double-tapping and presses the delete button that appears,
@@ -45,6 +44,8 @@ extension SequencerScene
         
         showEraseNoteView()
     }
+    
+    // MARK: - Touch callbacks
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
@@ -62,6 +63,8 @@ extension SequencerScene
         let move = SKAction.move(to: position, duration: 0.05);
         cursor.run(move);
     }
+    
+    // MARK: Touch callbacks end -
 
     /// Compute the grid coordinate that matches the location of a `UITouch`
 

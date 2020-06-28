@@ -7,24 +7,70 @@ import AVFoundation
 
 class MainViewController : UIViewController, KeyboardSettingsListener
 {
+    /// Assemble's audio engine, which wraps the underlying `AVAudioEngine`
+
     let engine = Engine()
-    var updater: CADisplayLink!
-    var recorder: MediaRecorder!
+    
+    /// A `CADisplayLink` that periodically updates the UI
+
+    private(set) var updater: CADisplayLink!
+    
+    private(set) var recorder: MediaRecorder!
+    
+    /// A view controller that handles presses from an external computer keyboard
+
     let computerKeyboard = ComputerKeyboard()
     
+    /// Strings representing the two modes of the Assemble sequencer.
+    /// The mode button displays these strings to indicate the current mode.
+
     let modeStrings = ["PATTERN MODE", "SONG MODE"]
 
-    @IBOutlet weak var keyboard:  Keyboard!
+    /// The on-screen piano keyboard
+    
+    @IBOutlet weak var keyboard: Keyboard!
+    
+    /// The SpriteKit sequencer representation
+
     @IBOutlet weak var sequencer: Sequencer!
-    @IBOutlet weak var waveform:  Waveform!
-    @IBOutlet weak var patterns:  PatternOverview!
+    
+    /// The real-time audio visualisation view
+
+    @IBOutlet weak var waveform: Waveform!
+    
+    /// An overview of the current sequence
+
+    @IBOutlet weak var patterns: PatternOverview!
+    
+    /// The transport bar, including the oscillator selector, keyboard visibility toggle,
+    /// play-pause button, and record button.
+
     @IBOutlet weak var transport: Transport!
+    
+    /// The y-axis centre constraint of the SpriteKit sequencer.
+    /// This is used to alter the position of sequencer to accommodate the on-screen keyboard
+    /// on small device screens.
+
     @IBOutlet weak var sequencerCentreY: NSLayoutConstraint!
 
+    /// The label displaying the name of the current preset
+
     @IBOutlet weak var presetLabel: UILabel!
+    
+    /// A button allowing the user to switch between the light and dark visual themes
+
     @IBOutlet weak var themeButton: UIButton!
+    
+    /// A button that displays the current sequencer mode and allows the user to toggle between the modes.
+
     @IBOutlet weak var modeButton: UIButton!
+    
+    /// A `ParameterLabel` exposing the tempo of the underlying clock to user control
+
     @IBOutlet weak var tempoLabel: ParameterLabel!
+    
+    /// A description of the note underlying the user's cursor on the SpriteKit sequencer
+
     @IBOutlet weak var descriptionLabel: PaddedLabel!
 
     /// The system's visual theme (light/dark)

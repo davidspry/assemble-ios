@@ -49,39 +49,56 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
         delegate.loadState(indexPath.row)
         dismiss(animated: true, completion: nil)
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        guard let presets = Assemble.core.commander?.userPresets else { return false }
-        return    presets.count > 0
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let presets = Assemble.core.commander?.userPresets,
+                  presets.count > 0 else { return nil }
+
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, didComplete in
+            let result = self.deleteRow(from: tableView, at: indexPath)
+            didComplete(result)
+        }
+
+        let foreground = UIColor.darkGray
+        let configuration = UIImage.SymbolConfiguration(pointSize: 20, weight: .medium)
+        delete.image = UIImage(systemName: "trash", withConfiguration: configuration)?.coloured(in: foreground)
+        delete.backgroundColor = UIColor.init(named: "BackgroundLight") ?? .clear
+        
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
+    /// Delete the preset represented at the given `IndexPath` and update the table and the sequencer as appropriate to reflect the change.
+
+    private func deleteRow(from table: UITableView, at path: IndexPath) -> Bool {
         guard let count   = Assemble.core.commander?.userPresets.count,
               let presets = Assemble.core.commander?.userPresets,
-              editingStyle == .delete, !(presets.isEmpty), indexPath.row < count else { return }
-        
-        let preset = presets[indexPath.row]
+                !(presets.isEmpty), path.row < count else { return false }
+            
+        let preset = presets[path.row]
 
-        Assemble.core.commander?.deletePreset(preset)
-    
+        guard let result = Assemble.core.commander?.deletePreset(preset) else { return false }
+
         DispatchQueue.main.async {
             var tries = 0
-            while Assemble.core.commander?.userPresets.count == count, tries < 20 {
+            while Assemble.core.commander?.userPresets.count == count, tries < 25 {
                 Thread.sleep(forTimeInterval: 0.05)
                 tries = tries + 1
             }
-            
-            if let selectedPreset = Assemble.core.commander?.selectedPreset,
-                   selectedPreset > indexPath.row {
-                Assemble.core.commander?.selectedPreset = selectedPreset - 1
+
+            /// If the currently selected song was deleted, then begin a new song.
+            /// If the deleted preset is listed above the selected preset in the table, then decrement the selected preset index.
+
+            if let selectedPreset = Assemble.core.commander?.selectedPreset {
+                if selectedPreset == path.row { self.delegate?.beginNewSong() }
+                else if selectedPreset > path.row {
+                    Assemble.core.commander?.selectedPreset = selectedPreset - 1
+                }
             }
-            
-            tableView.reloadData()
-            if preset == Assemble.core.commander?.currentPreset {
-                self.delegate?.beginNewSong()
-            }
+
+            table.reloadData()
         }
+
+        return result
     }
 
 }

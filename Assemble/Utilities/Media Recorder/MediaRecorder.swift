@@ -6,12 +6,17 @@ import UIKit
 import Accelerate
 import AVFoundation
 
-/// Record audio from an `AVAudioEngine` into an `AVAudioFile` and optionally generate a video from the audio at a user-specified size.
+/// Record audio from an `AVAudioEngine`, encode an audio file, and optionally generate a video from the audio.
 
 class MediaRecorder
 {
-    private(set) var recording = false
-    
+    private(set) var recording = false {
+        didSet {
+            if recording { print("[Recorder] Recording started.") }
+            else         { print("[Recorder] Recording stopped.") }
+        }
+    }
+
     private(set) var shouldGenerateVideo = false
     
     private(set) var visualTheme: UIUserInterfaceStyle = .dark
@@ -25,9 +30,12 @@ class MediaRecorder
         }
     }
 
+    /// The audio file where data from the current recording session is written to
+
     private var file: AVAudioFile?
 
-    private let _bufferSize: UInt32 = 1024
+    ///
+    private let bufferSize: UInt32 = 1024
 
     private weak var engine: AVAudioEngine!
     
@@ -80,32 +88,29 @@ class MediaRecorder
         }
     }
 
-    /// Begin recording media
+    /// Begin a recording session
     /// - Parameter video: A flag to indicate whether a video should be generated for the recording or not.
     /// - Parameter mode:  A flag to indicate whether the video should use the dark or light visual theme.
     /// - Parameter visualisation: The type of audio visualisation to use in the generated video
     
     public func record(video: Bool, mode isDarkMode: Bool, visualisation type: Visualisation = .waveform)
     {
+        guard recording == false else {
+            print("[MediaRecorder] Recording initiated without ending existing session.")
+            return
+        }
+
         visualisation = type
-        
         shouldGenerateVideo = video
-
         visualTheme = isDarkMode ? .dark : .light
-
         let path = MediaRecorder.createNewFile(extension: MediaUtilities.MediaType.audio.rawValue)
 
-        do
-        {
-            self.file = try AVAudioFile(forWriting: path, settings: settings.audio,
+        do { self.file = try AVAudioFile(forWriting: path, settings: settings.audio,
                                         commonFormat: Assemble.format.commonFormat,
                                         interleaved:  Assemble.format.isInterleaved)
-        }   catch { print("[Recorder] AVAudioFile could not be created.") }
+        } catch { return print("[MediaRecorder] AVAudioFile could not be created.") }
 
-        engine.mainMixerNode.installTap(onBus: 0, bufferSize: _bufferSize,
-                                        format: nil, block: writeAudio(_:_:))
-        
-        print("[Recorder] Recording started.")
+        engine.mainMixerNode.installTap(onBus: 0, bufferSize: bufferSize, format: nil, block: writeAudio(_:_:))
         recording = true
     }
     
@@ -123,16 +128,17 @@ class MediaRecorder
         NotificationCenter.default.post(name: NSNotification.Name.stopRecording, object: nil)
     }
 
-    /// Stop recording media
+    /// Stop an existing recording session.
     /// - Parameter complete: A method that should be called with the encoded media
 
     public func stop(_ complete: @escaping (URL?) -> ())
     {
+        guard recording else { return }
+
         recording = false
-        print("[Recorder] Recording stopped.")
         engine.mainMixerNode.removeTap(onBus: 0)
         guard let file = file else {
-            print("[Recorder] File is nil on recording stop")
+            print("[Recorder] AVAudioFile was nil on recording stop.")
             return complete(nil)
         }
         
@@ -146,7 +152,7 @@ class MediaRecorder
     private class func createNewFile(extension pathExtension: String) -> URL
     {
         guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        else { fatalError("[Recorder] FileManager returned empty URLs array.")}
+        else { fatalError("[MediaRecorder] FileManager returned empty URLs array.")}
 
         let timestamp = Int(Date().timeIntervalSince1970)
         let filename  = String(format: "Assemble_%d", timestamp)
@@ -156,10 +162,10 @@ class MediaRecorder
         if FileManager.default.fileExists(atPath: filepath.absoluteString)
         {
             do    { try FileManager.default.removeItem(atPath: filepath.absoluteString) }
-            catch { print("[Recorder] File exists but could not be removed.\n\(error)") }
+            catch { print("[MediaRecorder] File exists but could not be removed.\n\(error)") }
         }
 
-        print("[Recorder] New file created: \(filepath)")
+        print("[MediaRecorder] New file created: \(filepath)")
         return filepath
     }
     
@@ -173,10 +179,10 @@ class MediaRecorder
             if FileManager.default.isDeletableFile(atPath: filepath.path)
             {
                 do    { try FileManager.default.removeItem(at: filepath); result = true }
-                catch { print("[Recorder] File exists but could not be removed\n\(error)") }
-            }   else  { print("[Recorder] File is not deleteable.") }
+                catch { print("[MediaRecorder] File exists but could not be removed\n\(error)") }
+            }   else  { print("[MediaRecorder] File is not deleteable.") }
             
-            if result { print("[Recorder] File was removed successfully") }
+            if result { print("[MediaRecorder] File was removed successfully") }
         }
     }
 

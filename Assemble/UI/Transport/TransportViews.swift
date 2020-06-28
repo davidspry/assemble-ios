@@ -6,6 +6,8 @@ import UIKit
 
 extension Transport {
 
+    /// Initialise, style, and constrain the play button.
+    
     func initialisePlayButton() {
         play.backgroundColor = .clear
         play.translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +29,8 @@ extension Transport {
         
         play.layoutIfNeeded()
     }
+    
+    /// Initialise, style, and constrain the record button.
     
     func initialiseRecordButton() {
         record.backgroundColor = .clear
@@ -50,6 +54,8 @@ extension Transport {
         record.layoutIfNeeded()
     }
     
+    /// Initialise, style, and constrain the keyboard button.
+    
     func initialiseKeyboardButton() {
         keyboard.backgroundColor = .clear
         keyboard.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +78,8 @@ extension Transport {
         
         keyboard.layoutIfNeeded()
     }
+    
+    /// Initialise, observe, and constrain the `OscillatorSelector` component.
     
     func initialiseSegmentedControl() {
         oscillators = OscillatorSelector(itemWidth: buttonWidth)

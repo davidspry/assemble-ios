@@ -4,13 +4,21 @@
 
 import UIKit
 
+/// The header cell for an effect's parameters in a `ParametersViewController` table
+
 class MenuHeaderCell: UITableViewCell {
     
-    var state: Bool = false
+    /// The state of the toggleable parameter
+
+    private var state: Bool = false
     
-    var parameter: Int32 = kStereoDelayToggle
+    /// The address of the toggleable parameter
+
+    private var parameter: Int32 = kStereoDelayToggle
     
-    var icon : UIImage {
+    /// The icon displayed on the `UIButton`
+
+    private var icon : UIImage {
         get {
             return state ? UIImage(systemName: "circle.fill")! :
                            UIImage(systemName: "circle")!
@@ -19,13 +27,18 @@ class MenuHeaderCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var toggle: UIButton!
-    
+
     private func updateButtonImage() {
         toggle.setImage(icon, for: .normal)
     }
     
+    /// Initialise the cell with the address of a toggleable, boolean parameter
+    /// - Parameter parameter: The address of a parameter that can has boolean values
+
     func initialise(with parameter: Int32) {
         toggle.isPointerInteractionEnabled = true
+        toggle.pointerStyleProvider = pointerInteractionStyle(_:_:_:)
+
         let state = Assemble.core.getParameter(parameter)
         self.state = Int(state) == 0 ? false : true
         self.parameter = parameter
@@ -37,6 +50,14 @@ class MenuHeaderCell: UITableViewCell {
         let state: Float = self.state == false ? 0 : 1
         Assemble.core.setParameter(parameter, to: state)
         updateButtonImage()
+    }
+
+    /// Define a pointer interaction style for the cell
+
+    private func pointerInteractionStyle(_ button: UIButton, _ effect: UIPointerEffect, _ shape: UIPointerShape) -> UIPointerStyle? {
+        let view = UITargetedPreview(view: button)
+        let effect = UIPointerEffect.hover(view)
+        return UIPointerStyle(effect: effect)
     }
 
 }

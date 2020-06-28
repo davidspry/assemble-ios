@@ -5,6 +5,8 @@
 import UIKit
 import SpriteKit
 
+/// An `SKShapeNode` to represent the user's cursor on the `SequencerScene`
+
 class CellSelectShape : SKShapeNode
 {
     convenience init(size: Int)
@@ -16,8 +18,10 @@ class CellSelectShape : SKShapeNode
         strokeColor = UIColor.init(named: "Foreground")!
     }
     
-    func redraw()
-    {
+    /// Update the node's stroke colour.
+    /// This should be called when a change is made to the user interface style.
+
+    public func redraw() {
         strokeColor = UIColor.init(named: "Foreground")!
     }
 }

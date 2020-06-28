@@ -6,9 +6,9 @@ import UIKit
 
 class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
 
-    let activeColour    : UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    var patternOnColour : UIColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    var patternOffColour: UIColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
+    private let activeColour    : UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    private let patternOnColour : UIColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    private let patternOffColour: UIColor = #colorLiteral(red: 0.2156862745, green: 0.2156862745, blue: 0.2156862745, alpha: 1)
 
     private var lastTappedNode: Int?
     private var lastTappedTime: TimeInterval?
@@ -130,7 +130,6 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         Assemble.core.setParameter(kSequencerPatternState, to: Float(pattern))
     }
 
-    
     /// Set the state of a `Pattern` icon.
     ///
     /// Setting the state of a `Pattern` in the Swift context obviates the need to regularly poll the C++ context

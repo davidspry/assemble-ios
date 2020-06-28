@@ -5,6 +5,8 @@
 
 import UIKit
 
+/// Constants representing commands within Assemble
+
 enum KeyCommand : Int
 {
     case none
@@ -20,13 +22,13 @@ enum KeyCommand : Int
     case noscillator
 }
 
+/// A mapping of computer keyboard keys to commands in Assemble
+
 @available(iOS 13.4, *)
 struct KeyboardHandler
 {
+    /// A Dictionary of keyboard keys and their corresponding commands in Assemble.
 
-    /**
-     A Dictionary of keyboard keys and their corresponding commands in Assemble.
-     */
     private static let keys : [UIKeyboardHIDUsage : (action: KeyCommand, value: Int)] =
     [
         .keyboardSpacebar   : (.transport,0),
@@ -54,11 +56,10 @@ struct KeyboardHandler
         .keyboardTab : (.mode, 0)
     ]
 
-    /**
-     Parse input from an external computer keyboard and return a key, value pair denoting the appropriate response.
-     - Parameter press: A keyboard press registered in `pressesBegan(presses:withEvent:)`
-     - Parameter process: A callback where the key, value pair will be handled.
-     */
+    /// Parse input from an external computer keyboard and return a key, value pair denoting the appropriate response.
+    /// - Parameter press: A keyboard press registered in `pressesBegan(presses:withEvent:)`
+    /// - Parameter process: A callback where the key, value pair will be handled.
+
     static func parse(_ press: UIPress, _ process: @escaping (KeyCommand, Int) -> ())
     {
         guard let key = press.key,

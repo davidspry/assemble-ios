@@ -50,7 +50,7 @@ struct MediaUtilities {
             PHPhotoLibrary.shared().performChanges({
                 PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: file)
             }, completionHandler: { didSave, error in
-                if didSave { displayFileSavedConfirmation() }
+                if didSave { print("[MediaUtilities] File saved successfully") }
                 else if let error = error {
                     print("[MediaUtilities] File could not be saved to the photo library.\n\(error)")
                 }
@@ -60,12 +60,6 @@ struct MediaUtilities {
         else if PHPhotoLibrary.authorizationStatus() == .denied {
             print("[MediaUtilities] File could not be saved to the photo library because access permission was denied.")
         }
-    }
-    
-    /// Display a confirmation when a file has been saved to the photo library
-
-    static private func displayFileSavedConfirmation() {
-        print("[MediaUtilities] File saved successfully")
     }
     
     /// Indicate whether the device has access to Instagram for the purpose of sharing an Instagram Story.

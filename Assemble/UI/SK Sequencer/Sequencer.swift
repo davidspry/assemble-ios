@@ -6,8 +6,12 @@
 import UIKit
 import SpriteKit
 
+/// A SpriteKit view/scene for visualising Assemble's underlying sequencer
+
 class Sequencer : SKView, KeyboardListener
 {
+    /// The sequencer scene
+
     private(set) var UI : SequencerScene!
 
     required init?(coder: NSCoder)
@@ -26,7 +30,7 @@ class Sequencer : SKView, KeyboardListener
         presentScene(UI);
     }
     
-    // MARK: - Keyboard Listener
+    // MARK: - Keyboard Listener callbacks
     
     func pressNote(_ note: Int, shape: OscillatorShape) {
         UI.addOrModifyNote(xy: UI.selected, note: note, oscillator: shape)
@@ -58,7 +62,7 @@ class Sequencer : SKView, KeyboardListener
         UI.didNavigate(by: direction)
     }
     
-    // MARK: Keyboard Listener End -
+    // MARK: Keyboard Listener end -
 
     /// After loading state from a preset, the Sequencer
     /// needs to poll the Assemble core. This method should be called
@@ -69,7 +73,7 @@ class Sequencer : SKView, KeyboardListener
         UI.initialiseFromUnderlyingState()
     }
     
-    /// Determine the size of the `SequencerScene` from the device's screen size.
+    /// Determine the appropriate size of the `SequencerScene` from the device's screen size.
 
     internal func determineSizeForDevice()
     {
@@ -88,7 +92,7 @@ class Sequencer : SKView, KeyboardListener
             if screenLength > 650  { scalar = 24; break }
             if screenLength > 550  { scalar = 22; break }
             else                   { scalar = 20; break }
-        default:        fatalError("Unsupported device!");
+        default: fatalError("Unsupported device!")
         }
 
         let width  = Assemble.patternWidth  * scalar
@@ -118,6 +122,8 @@ class Sequencer : SKView, KeyboardListener
         return super.hitTest(point, with: event)
     }
     
+    /// Redraw the scene's visual components to reflect a change in the user interface style
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         UI.cursor.redraw()

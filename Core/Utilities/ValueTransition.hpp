@@ -7,6 +7,8 @@
 
 #include "ASHeaders.h"
 
+/// \brief An object representing a value transitioning smoothly between a source and target over a specified number of samples.
+
 class ValueTransition {
 
 public:

@@ -4,8 +4,7 @@
 
 import Foundation
 
-/// A class who conforms to `TransportListener` can receive
-/// information or data about the state of the sequencer.
+/// A class who conforms to `TransportListener` is notified when the sequencer should play or pause.
 
 protocol TransportListener: AnyObject {
     
@@ -14,10 +13,8 @@ protocol TransportListener: AnyObject {
     func pressPlayOrPause()
 }
 
-/**
- This extension provides default implementations for the TransportListener protocol,
- thereby relaxing the requirement for subclassers to implement each one.
-*/
+/// This extension provides default implementations for the TransportListener protocol,
+/// thereby relaxing the requirement for subclassers to implement each one.
 
 extension TransportListener {
     func pressPlayOrPause() {}

@@ -6,12 +6,13 @@ import Foundation
 
 extension FourCharCode
 {
+    /// Initialise a `FourCharCode` from the given four-character `String`
     /// Author: Vadian
     /// Source: <https://stackoverflow.com/a/31321444/9611538>
     
     init(_ string: String)
     {
-        guard string.count == 4 else { fatalError() }
+        guard string.count == 4 else { preconditionFailure() }
         
         var code: FourCharCode = 0
         for char in string.utf16

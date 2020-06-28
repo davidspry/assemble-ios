@@ -4,6 +4,8 @@
 
 import UIKit
 
+/// A cell containing a `ParameterLabel` that represents a controllable parameter in a `ParametersViewController` table
+
 class ParameterCell: UITableViewCell {
 
     @IBOutlet weak var title: UILabel!

@@ -4,25 +4,42 @@
 
 import UIKit
 
+/// A view controller who parses presses from an external computer keyboard and
+/// notifies registered listeners of the user's commands.
+///
+/// This view controller should be added as a child to some other view controller on the bottom layer of its subview hierarchy.
+///
+/// - SeeAlso: KeyboardHandler.swift
+
 class ComputerKeyboard : UIViewController, KeyboardSettingsListener
 {
-    var listeners = MulticastDelegate<KeyboardListener>()
-    
-    var settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
+    let listeners = MulticastDelegate<KeyboardListener>()
+    let settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
+    let transportListeners = MulticastDelegate<TransportListener>()
 
-    var transportListeners = MulticastDelegate<TransportListener>()
+    /// The first note of the keyboard's current octave
 
-    lazy private var _octave: Int = 60
+    lazy private var octaveAsNoteNumber: Int = 60
     
-    var octave: Int = 4 {
+    /// The currently selected oscillator.
+    ///
+    /// This information is included with new note messages, but it's set
+    /// in the `didChangeOscillator` callback, which is a
+    /// `KeyboardSettingsListener` protocol method.
+
+    private(set) var oscillator: OscillatorShape = .sine
+    
+    /// The `ComputerKeyboard`'s current octave number
+
+    public var octave: Int = 4 {
         didSet {
-            _octave = (octave + 1) * 12
+            octaveAsNoteNumber = (octave + 1) * 12
             settingsListeners.invoke({$0.didChangeOctave(to: octave)})
         }
     }
 
-    var oscillator: OscillatorShape = .sine
-
+    // MARK: - KeyboardSettingsListener
+    
     func didChangeOctave(to octave: Int) {
         self.octave = octave
     }
@@ -31,9 +48,10 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
         self.oscillator = oscillator
     }
     
+    // MARK: - Presses callback
+
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for press in presses {
-            
             KeyboardHandler.parse(press) { action, value in
                 switch (action) {
                 case .navigate:
@@ -46,7 +64,7 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
                 
                 case .place:
                     self.listeners.invoke({
-                        $0.pressNote(self._octave + value, shape: self.oscillator)
+                        $0.pressNote(self.octaveAsNoteNumber + value, shape: self.oscillator)
                     });
                     break
 

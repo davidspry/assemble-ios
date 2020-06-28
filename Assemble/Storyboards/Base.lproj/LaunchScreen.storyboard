@@ -3,7 +3,6 @@
     <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +24,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" name="Background"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qsC-xh-3FH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Nfo-Ks-YiO"/>
                             <constraint firstItem="qsC-xh-3FH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PSb-2k-zGZ"/>
@@ -40,8 +39,5 @@
     </scenes>
     <resources>
         <image name="Assemble.png" width="27.937854766845703" height="27.937854766845703"/>
-        <namedColor name="Background">
-            <color red="0.76499998569488525" green="0.76499998569488525" blue="0.76499998569488525" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

@@ -120,10 +120,17 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
         vibrato.process(sample[0]);
         sample[1] = sample[0];
         delay.process(sample[0], sample[1]);
-
+        
+//        ===============================================
+//        NOTE: The following three lines add a periodic white noise
+//        generator into the audio output. The addition of periodic
+//        white noise will be a limitation in the free version of Assemble.
+//        It will be unlockable via an in-app purchase in the final release.
+//        ===============================================
 //        const float whiteNoise = noise.nextSample();
 //        sample[0] += whiteNoise;
 //        sample[1] += whiteNoise;
+//        ===============================================
 
         for (size_t c = 0; c < channels; c++)
             output[c][t] = sample[c & 1];

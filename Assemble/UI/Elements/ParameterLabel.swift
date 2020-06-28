@@ -15,7 +15,7 @@ public enum ParameterLabelScale: Float {
 }
 
 /// A UILabel that is linked with an Assemble core parameter.
-/// Dragging on a ParameterLabel sets the value of the underlying
+/// Dragging on a `ParameterLabel` sets the value of the underlying
 /// parameter's value with some speed defined by a `ParameterLabelScale`.
 
 class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
@@ -123,9 +123,11 @@ class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
 
     // MARK: - UIPointerInteractionDelegate
     
+    /// Define a pointer interaction style for the label
+
     func pointerInteraction(_ interaction: UIPointerInteraction, styleFor region: UIPointerRegion) -> UIPointerStyle? {
         let view = UITargetedPreview(view: self)
-        let effect = UIPointerEffect.highlight(view)
+        let effect = UIPointerEffect.hover(view, preferredTintMode: .overlay, prefersShadow: true, prefersScaledContent: false)
         return UIPointerStyle(effect: effect)
     }
 

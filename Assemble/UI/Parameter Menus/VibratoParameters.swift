@@ -4,12 +4,12 @@
 
 import UIKit
 
+/// A `ParameterMenu` to represent the parameters of the vibrato effect on the `ParametersViewController`.
+
 struct VibratoParameters : ParameterMenu {
     
     var name: String = "VIBRATO"
-    
     var toggle: Int32? = kVibratoToggle
-    
     var sections: Int = 2
     
     func itemsInSection(_ section: Int) -> Int {

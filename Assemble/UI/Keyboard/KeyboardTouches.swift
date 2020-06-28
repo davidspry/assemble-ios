@@ -7,40 +7,34 @@ import UIKit
 
 extension Keyboard
 {
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+    // MARK: - Touch callbacks
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         guard let note = noteFromTouchLocation(touch.location(in: self)) else { return }
 
-        pressNote(note);
-        self.layer.setNeedsDisplay();
+        pressNote(note)
     }
 
-    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         if let note = noteFromTouchLocation(touch.location(in: self)) {
             if      note == pressedKey { return }
             else if note != pressedKey { pressNote(note) }
-            else                       { releaseNote(note) }
+            else                       { releaseNote() }
             
         }
-
-        self.layer.setNeedsDisplay();
     }
 
-    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
-    {
-        for touch in touches {
-            if let note = noteFromTouchLocation(touch.location(in: self)) {
-                releaseNote(note);
-            }
-        }
-        
-        if pressedKey != nil { releaseNote(pressedKey!) }
-        self.layer.setNeedsDisplay();
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if pressedKey != nil { releaseNote() }
     }
     
+    // MARK: Touch callbacks end -
+
+    /// Find the note number of the key located at the given location, provided that a key can be found.
+    /// - Parameter location: The location of the touch, where a key may be found.
+
     internal func noteFromTouchLocation(_ location: CGPoint) -> Int?
     {
         let padding = margins.left

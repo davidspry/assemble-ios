@@ -4,12 +4,12 @@
 
 import UIKit
 
+/// A `ParameterMenu` to represent the parameters of the stereo delay effect on the `ParametersViewController`.
+
 struct StereoDelayParameters : ParameterMenu {
     
     var name: String = "STEREO DELAY"
-    
     var toggle: Int32? = kStereoDelayToggle
-    
     var sections: Int = 2
     
     func itemsInSection(_ section: Int) -> Int {

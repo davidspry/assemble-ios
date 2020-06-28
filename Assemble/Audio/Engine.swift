@@ -4,11 +4,13 @@
 
 import AVFoundation
 
+/// A thin `AVAudioEngine` abstraction that automatically connects the Assemble core and responds to route changes in the audio device graph
+
 class Engine
 {
     let engine = AVAudioEngine()
 
-    /// Initialise the underlying AVAudioEngine and capture the format for global access.
+    /// Initialise the underlying AVAudioEngine and set the audio format to be used by the Assemble core
 
     init() {
         Assemble.format = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 2)
@@ -49,7 +51,7 @@ class Engine
         engine.connect(engine.mainMixerNode, to: engine.outputNode, format: Assemble.format)
     }
 
-    /// In the event that the audio output device is changed, the AVAudioEngine needs to be restarted.
+    /// In the event that the audio output device is changed, the `AVAudioEngine` needs to be restarted.
     /// The new audio format is subsequently propagated to the underlying AudioUnit.
 
     @objc private func tryEngineRestart() {

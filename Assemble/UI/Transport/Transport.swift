@@ -4,6 +4,7 @@
 
 import UIKit
 
+/// A container of icons used by `Transport` components.
 struct Icons {
     static let play   = UIImage(systemName: "play.fill", withConfiguration: size)
     static let pause  = UIImage(systemName: "pause", withConfiguration: size)
@@ -15,18 +16,44 @@ struct Icons {
     private static let size = UIImage.SymbolConfiguration.init(pointSize: 25, weight: .semibold)
 }
 
+/// The transport bar, which contains the oscillator selector, the play-pause control, recording controls, and a toggle for the on-screen keyboard.
+
 class Transport : UIView, TransportListener, KeyboardSettingsListener {
 
-    let play = UIButton()
-    let record = UIButton()
-    let keyboard = UIButton()
-    var recording: Bool = false
-    var oscillators: OscillatorSelector!
+    /// The play-pause button
     
-    let buttonWidth: CGFloat = 55
-    let buttonMargin: CGFloat = 25
-    var keyboardState: Bool = false
+    internal let play = UIButton()
+    
+    /// The record button
+    
+    internal let record = UIButton()
+    
+    /// The state of the record button
+    
+    internal var recording: Bool = false
+    
+    /// The on-screen keyboard's visibility toggle
 
+    internal let keyboard = UIButton()
+    
+    /// The oscillator selector component
+
+    internal var oscillators: OscillatorSelector!
+    
+    /// The width of each button on the transport bar
+
+    internal let buttonWidth: CGFloat = 55
+    
+    /// The space between each button on the transport bar
+
+    internal let buttonMargin: CGFloat = 25
+    
+    /// The visibility state of the keyboard. This should be `false` initially.
+
+    internal var keyboardState: Bool = false
+
+    /// The transport's listeners, who are notified when an oscillator is selected and when the keyboard's visibility is toggled.'
+    
     let listeners = MulticastDelegate<KeyboardSettingsListener>()
     
     required init?(coder: NSCoder) {
@@ -44,7 +71,10 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
         NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
 
-    @objc func didPressPlay(sender: UIButton)
+    /// Respond to presses on the play-pause button by updating its visual state and broadcasting the play-pause notification.
+    /// - Parameter sender: A reference to the play-pause button.
+
+    @objc internal func didPressPlay(sender: UIButton)
     {
         let playing = Assemble.core.playOrPause()
         let image = playing ? Icons.pause : Icons.play
@@ -62,11 +92,11 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
         }
     }
     
-    /// Begin a new media recording session or end an existing media recording session
+    /// Initiate a new media recording session or end an existing media recording session
     ///
     /// - Parameter sender: A reference to the record button
 
-    @objc func didPressRecord(sender: UIButton)
+    @objc internal func didPressRecord(sender: UIButton)
     {
         if !recording {
             NotificationCenter.default.post(name: .defineRecording, object: nil)
@@ -88,7 +118,6 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
 
     @objc private func didBeginRecording(_ notification: NSNotification) {
         recording = true
-//        NotificationCenter.default.post(name: .beginRecording, object: nil)
         DispatchQueue.main.async {
             self.record.pulsate()
             self.record.setImage(Icons.record, for: .normal)
@@ -96,8 +125,7 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     }
 
     /// Set the usable state of the record button.
-    ///
-    /// The record button should be disabled during the video encoding stage.
+    /// - Note: The record button should be disabled during the video encoding stage.
     /// - Parameter state: The desired state of the record button. `true` if the button should be active; `false` otherwise.
 
     public func setRecordButtonUsable(_ usable: Bool) {
@@ -115,7 +143,10 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
         }
     }
     
-    @objc func didToggleKeyboard(sender: UIButton)
+    /// Respond to presses on the keyboard button by updating the visual state of the keyboard button and notifying the transport's listeners.
+    /// - Parameter sender: A reference to the keyboard button.
+
+    @objc internal func didToggleKeyboard(sender: UIButton)
     {
         keyboardState = !keyboardState
         let image = keyboardState ? Icons.show : Icons.hide
@@ -132,8 +163,11 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
             }
         }
     }
-    
-    @objc func didSelectOscillator(sender: UISegmentedControl)
+
+    /// Respond to selections detected by the `OscillatorSelector` by notifying the transport's listeners.
+    /// - Parameter sender: A reference to the `OscillatorSelector`.
+
+    @objc internal func didSelectOscillator(sender: UISegmentedControl)
     {
         let index = oscillators.selectedSegmentIndex
         let oscillator = OscillatorShape(rawValue: index) ?? .sine

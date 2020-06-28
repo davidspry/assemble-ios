@@ -4,9 +4,12 @@
 
 import Foundation
 
+/// `KeyboardListener`s are notified by keyboard interfaces when new notes are pressed,
+/// the user's cursor should be moved, or the note at the user's current position on the sequencer should be erased or modified.
+
 protocol KeyboardListener
 {
-    /// This method is called when a note has been pressed by some
+    /// This method should be called when a note has been pressed by some
     /// keyboard interface
     /// - Parameter note: A MIDI note number
     /// - Parameter shape: The `OscillatorShape` of the note
@@ -17,7 +20,7 @@ protocol KeyboardListener
 
     func eraseNote()
     
-    /// This method is called when a navigation command is sent from a
+    /// This method should be called when a navigation command is sent from a
     /// keyboard interface, such as a computer keyboard.
     /// - Parameter direction: The navigation direction
 
@@ -35,10 +38,8 @@ protocol KeyboardListener
     func setOscillator(_ next: Bool)
 }
 
-/**
- This extension provides default implementations for the KeyboardListener protocol,
- thereby relaxing the requirement for subclassers to implement each one.
-*/
+/// This extension provides default implementations for the KeyboardListener protocol,
+/// thereby relaxing the requirement for subclassers to implement each one.
 
 extension KeyboardListener {
     func pressNote(_ note: Int, shape: OscillatorShape) {}

@@ -10,12 +10,23 @@
 import UIKit
 import SpriteKit
 
+/// An `SKSpriteNode` illustrating a dot grid that visualises the shape of the underlying sequencer.
+/// The grid is drawn once and drawn to the screen as a static texture, but it can be redrawn when its properties should change.
+
 class DotGrid : SKSpriteNode
 {
-    var spacing      : CGSize!
-    var currentShape : CGSize!
+    /// The size of each cell on the grid
+    
+    private var spacing: CGSize!
+    
+    /// The shape, (rows, columns), of the dot grid
 
-    func initialise(spacing: CGSize)
+    private var currentShape: CGSize!
+
+    /// Initialise the dot grid.
+    /// - Parameter spacing: The size of each cell on the grid.
+
+    public func initialise(spacing: CGSize)
     {
         self.spacing = spacing
         self.currentShape = Assemble.shape
@@ -28,16 +39,19 @@ class DotGrid : SKSpriteNode
         self.size = grid.size();
     }
     
-    func redrawIfNeeded()
-    {
+    /// Redraw the dot grid if the shape of the sequencer has changed.
+    
+    public func redrawIfNeeded() {
         let shape = Assemble.shape
         if  shape != currentShape {
             redraw()
         }
     }
-    
-    func redraw()
-    {
+
+    /// Redraw the dot grid.
+    /// This method should called when changes are made to the shape of the underlying sequencer or the user interface style.
+
+    public func redraw() {
         print("[DotGrid] Redrawing")
         let shape    = Assemble.shape
         self.texture = DotGrid.drawDotGrid(shape: shape, spacing: spacing);

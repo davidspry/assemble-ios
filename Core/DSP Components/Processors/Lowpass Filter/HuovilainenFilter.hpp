@@ -45,8 +45,7 @@ private:
     std::atomic<float> targetFrequencyNormal;
     float frequency;
     float resonance;
-    
-    
+
 private:
     std::array<float, 6> delay;
     std::array<float, 4> stage;

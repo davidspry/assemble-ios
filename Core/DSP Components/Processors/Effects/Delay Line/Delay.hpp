@@ -113,7 +113,7 @@ private:
     int offsetInSamples = 0;
 
 private:
-    float mix      = 0.35F;
+    float mix      = 0.25F;
     float gain     = 1.00F;
     float feedback = 0.50F;
     float gainLinear = 1.00F;

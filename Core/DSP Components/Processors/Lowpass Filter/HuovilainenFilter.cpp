@@ -56,7 +56,7 @@ void HuovilainenFilter::set(uint64_t parameter, float value)
     }
 }
 
-/// \brief Return an approximation of the tanh function that reduces some number of calculations.
+/// \brief An approximation of the tanh function.
 /// \author John Fitch
 
 float HuovilainenFilter::quicktanh(float x)
@@ -69,19 +69,19 @@ float HuovilainenFilter::quicktanh(float x)
     return sign * std::tanh(x);
 }
 
-void HuovilainenFilter::set(const float cutoff, const float resonance)
+void HuovilainenFilter::set(const float frequency, const float resonance)
 {
-    this->frequency = std::fmax(0.F, cutoff);
-    this->resonance = std::fmax(0.F, std::fmin(resonance, 1.F));
+    this->frequency = Assemble::Utilities::bound(frequency, 0.F, 20E3F);
+    this->resonance = Assemble::Utilities::bound(resonance, 0.F, 1.00F);
 
-    const float FS = cutoff / sampleRate;
-    const float OS = FS * 0.5;
-    const float FF = FS * FS;
-    const float FFF = FF * FS;
-    const float FCR = 1.873 * FFF + 0.4955 * FF - 0.649 * FS + 0.9988;
-    
-    A = -3.9364 * FF + 1.8409 * FS + 0.9968;
-    G = (1.F - std::exp(-(TWO_PI * OS * FCR))) / thermal;
+    const float cutoff = frequency / sampleRate;
+    const float oversampledCutoff = cutoff * 0.5F;
+    const float cutoffSquared = cutoff * cutoff;
+    const float cutoffCubed = cutoffSquared * cutoff;
+    const float F = 1.873F * cutoffCubed + 0.4955F * cutoffSquared - 0.649F * cutoff + 0.9988F;
+
+    A = -3.9364F * cutoffSquared + 1.8409F * cutoff + 0.9968F;
+    G = (1.F - std::exp(-(TWO_PI * oversampledCutoff * F))) / thermal;
     resonanceFour = 4.F * resonance * A;
 }
 

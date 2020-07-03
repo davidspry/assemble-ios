@@ -18,7 +18,7 @@ public:
 public:
     /// \brief Return the width of the Pattern
     
-    inline int width() noexcept { return w; }
+    inline int width() noexcept  { return w; }
     
     /// \brief Return the length of the Pattern
     

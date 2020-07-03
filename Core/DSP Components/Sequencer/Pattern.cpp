@@ -6,8 +6,8 @@
 
 void Pattern::setTimeSignature(const int value, const bool beats)
 {
-    if (value < 1 || value > 7) { return; }
-    
+    if (value < 1 || value > 7) return;
+
     if (beats)
     {
         this->h     = value * ticks;

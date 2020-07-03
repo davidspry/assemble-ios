@@ -8,46 +8,33 @@ Delay::Delay(Clock *clock)
 {
     this->clock = clock;
     bpm = clock->bpm;
+    
     capacity = clock->sampleRate * 8;
     samples.reserve(capacity);
     samples.assign(capacity, 0.F);
+    
     set(kDelayMusicalTime, 4.F);
 }
-
-/// \brief Get the value of the Delay Line's parameters
-/// \param parameter The hexadecimal address of the desired parameter
 
 const float Delay::get(uint64_t parameter)
 {
     switch (parameter)
     {
         case kDelayMix:
-        {
             return mix;
-        }
             
         case kDelayMusicalTime:
-        {
             return targetAsIndex;
-        }
             
         case kDelayFeedback:
-        {
             return feedback;
-        }
             
         case kDelayTimeInMs:
-        {
             return Assemble::Utilities::milliseconds(target, clock->sampleRate);
-        }
 
         default: return 0.0F;
     }
 }
-
-/// \brief Set the parameters of the Delay Line
-/// \param parameter The hexadecimal address of the parameter
-/// \param value The value to set for the selected parameter
 
 void Delay::set(uint64_t parameter, float value)
 {
@@ -65,7 +52,7 @@ void Delay::set(uint64_t parameter, float value)
         }
         case kDelayTimeInMs:
         {
-            const int time = (int) std::floor(Assemble::Utilities::bound(value, 0.F, 4000.F));
+            const int time = (int) std::floorf(Assemble::Utilities::bound(value, 0.F, 4000.F));
             setInMilliseconds(time);
             break;
         }
@@ -131,14 +118,14 @@ void Delay::process(float& sample)
 
     delay = delay + 5E-5F * (target - delay);
     samples[whead] = gain * sample + feedback * samples[rhead];
-    float interpolated = Assemble::Utilities::lerp(rhead, &samples[0], capacity);
+    const float interpolated = Assemble::Utilities::cerp(rhead, &samples[0], capacity);
 
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;
 
     rhead = whead - delay;
-    rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
-    rhead = rhead + static_cast<int>(rhead <  0) * capacity;
+    while (rhead <  0)        rhead = rhead + capacity;
+    while (rhead >= capacity) rhead = rhead - capacity;
 
     sample = (1.0F - gain * mix) * sample + mix * interpolated;
 }

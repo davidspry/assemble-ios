@@ -100,15 +100,9 @@ public class ASCommanderAU : ASAudioUnit
             return String(format: "%.2f", value ?? parameter.value)
         }
 
-        /// Create a new, empty preset.
-        /// Setting the `currentPreset` property loads the preset automatically. Loading an empty preset
-        /// ensures that a preset exists to be saved
+        /// Load the empty factory preset, then print each user preset to the console
 
-        let preset = AUAudioUnitPreset()
-            preset.number = -userPresets.count
-            preset.name = "Init"
-
-        currentPreset = preset
+        loadFactoryPreset(number: 0)
         userPresets.forEach { print("User Preset: Name: \($0.name), Number: \($0.number)") }
     }
     
@@ -268,6 +262,8 @@ public class ASCommanderAU : ASAudioUnit
         return true
     }
     
+    /// Load the empty factory preset and deselect the currently selected user preset
+
     public func loadInitialState() {
         selectedPreset = nil
         loadFactoryPreset(number: 0)

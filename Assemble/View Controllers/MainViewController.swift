@@ -5,6 +5,10 @@
 import UIKit
 import AVFoundation
 
+/// Target requirements
+///     - iOS 13.4: Computer keyboard interface
+///     - iOS 13.0: AudioUnit user presets
+
 class MainViewController : UIViewController, KeyboardSettingsListener
 {
     /// Assemble's audio engine, which wraps the underlying `AVAudioEngine`
@@ -315,9 +319,9 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     // MARK: - State Save/Load Interface
 
     public func beginNewSong() {
-        if Assemble.core.ticking { transport.pressPlayOrPause() }
         Assemble.core.commander?.loadInitialState()
         presetLabel.text = Assemble.core.commander?.currentPreset?.name
+        if Assemble.core.ticking { transport.pressPlayOrPause() }
         updateUIFromState()
     }
     

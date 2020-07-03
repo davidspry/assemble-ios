@@ -13,6 +13,7 @@ void ASCommanderCore::init(double sampleRate)
     if (shouldUpdate)
     {
         synthesiser.setSampleRate(audioRate);
+        vibrato.setSampleRate(audioRate);
         clock.setSampleRate(audioRate);
         noise.setSampleRate(audioRate);
     }

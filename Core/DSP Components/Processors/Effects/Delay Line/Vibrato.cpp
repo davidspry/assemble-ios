@@ -6,12 +6,12 @@
 
 Vibrato::Vibrato()
 {
-    capacity = sampleRate * 2;
+    capacity = std::floorf(sampleRate);
     samples.reserve(capacity);
-    samples.assign(capacity, 0.F);
+    samples.assign (capacity, 0.F);
     
-    set(kVibratoDepth, 0.5F);
-    set(kVibratoSpeed, 0.5F);
+    set(kVibratoDepth, 3.0F);
+    set(kVibratoSpeed, 0.1F);
 }
 
 const float Vibrato::get(uint64_t parameter)

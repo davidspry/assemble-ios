@@ -833,7 +833,7 @@ struct ASCommanderAUParameters
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
-        parameter.value = 0.5
+        parameter.value = 3.0
         return parameter
     }()
     
@@ -849,7 +849,7 @@ struct ASCommanderAUParameters
                                             flags: [.flag_IsReadable, .flag_IsWritable],
                                             valueStrings: nil,
                                             dependentParameters: nil)
-        parameter.value = 0.25
+        parameter.value = 0.10
         return parameter
     }()
     

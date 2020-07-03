@@ -2,8 +2,8 @@
 //  Created by David Spry on 10/5/20.
 //  Copyright © 2020 David Spry. All rights reserved.
 
-#ifndef ASBTTRIANGLE_H
-#define ASBTTRIANGLE_H
+#ifndef ASTRIANGLETABLE_H
+#define ASTRIANGLETABLE_H
 
 #include <array>
 

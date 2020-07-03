@@ -27,11 +27,15 @@ public:
     /// \brief Return a reference to the Note at position (x, y).
     /// The returned reference should be treated as read-only.
     /// All modifications should be performed using the provided methods.
+    /// \pre   A Note exists at position (x, y).
     /// \param x The column to lookup.
     /// \param y The row to lookup.
 
-    const Note& at(int x, int y) const
+    const Note& at(int x, int y) const noexcept(false)
     {
+        if (!exists(x, y))
+            throw "[Matrix] A Note could not be found at position (x, y).";
+
         return vector[find(x, y)];
     }
     
@@ -45,7 +49,7 @@ public:
         while (y < 0) y += h;
         
         if (x > w || y > h)
-            throw "(x,y) is beyond the bounds of the Matrix.";
+            throw "[Matrix] (x,y) is beyond the bounds of the Matrix.";
         
         return x + y * w;
     }
@@ -53,16 +57,21 @@ public:
     /// \brief Return the number of Notes at row y.
     /// \param y The row to lookup.
 
-    int lengthOfRow(int y) noexcept(false)
+    const int lengthOfRow(int y) noexcept(false)
     {
-        if (y > h) throw "Invalid row index.";
+        if (y > h) throw "[Matrix] Invalid row index.";
         
         while (y < 0) y += h;
         
         return lengths[y];
     }
 
-    int find(const int x, const int y) const
+    /// \brief Find the 1-D array index of the Note at the given position, (x, y).
+    /// \param x The x-coordinate of the desired Note
+    /// \param y The y-coordinate of the desired Note
+    /// \return The index of the desired Note if it exists or -1 otherwise.
+
+    const int find(const int x, const int y) const
     {
         const int length = lengths[y];
         if (length == 0) return -1;
@@ -78,7 +87,11 @@ public:
         return -1;
     }
 
-    bool exists(const int x, const int y)
+    /// \brief Indicate whether an active Note exists at the given position, (x, y).
+    /// \param x The x-coordinate of the position to check
+    /// \param y The y-coordinate of the position to check
+
+    const bool exists(const int x, const int y) const
     {
         const int length = lengths[y];
         if (length == 0) return false;
@@ -91,7 +104,10 @@ public:
         return false;
     }
 
-    void clearRow(const int row)
+    /// \brief Set each Note on the given row to null and reset the length value for the given row.
+    /// \param row The index of the row to be cleared
+
+    inline void clearRow(const int row)
     {
         for (size_t i = 0; i < lengths[row]; ++i)
             vector[i].null = true;
@@ -99,12 +115,18 @@ public:
         lengths[row] = 0;
     }
     
-    void reset()
+    /// \brief Reset the Matrix to its initial state with length[r] = 0 for each row, r.
+    
+    inline void reset()
     {
-        vector.assign(N * M, Note());
         for (int i = 0; i < N; ++i)
-            lengths[i] = 0;
+            clearRow(i);
     }
+
+    /// \brief Include the Note defined by the given parameter pack at the given position, (x, y).
+    /// \param x The x-coordinate of the position where the new Note should be added.
+    /// \param y The y-coordinate of the position where the new Note should be added.
+    /// \param arguments A variadic parameter pack defining the Note to be included.
 
     template <typename ...A>
     void include(int x, int y, A... arguments) noexcept(false)
@@ -120,6 +142,10 @@ public:
 
         vector[position].modify(x, y, arguments...);
     }
+
+    /// \brief Erase the Note at the given position and decrement the length of its row.
+    /// \param x The x-coordinate of the Note to be erased.
+    /// \param y The y-coordinate of the Note to be erased.
 
     void erase(const int x, const int y)
     {
@@ -151,6 +177,11 @@ public:
     }
 
 private:
+    /// \brief Swap the contents of the underlying vector at the given indices, a & b.
+    ///        i.e., vector[b] = vector[a] and vector[a] = vector[b]
+    /// \param a The index of the first element
+    /// \param b The index of the second element
+
     void swap(const int a, const int b)
     {
         Note T = vector[a];

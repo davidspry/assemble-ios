@@ -31,7 +31,7 @@ public:
 
 public:
     const float process(float sample);
-    inline void set(const float cutoff, const float resonance);
+    inline void set(const float frequency, const float resonance);
     void setSampleRate(float sampleRate) { this->sampleRate = sampleRate; }
 
 private:

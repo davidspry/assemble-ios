@@ -9,7 +9,7 @@
 #include "ASUtilities.h"
 #include "WaveTable.hpp"
 
-/// \brief A sawtooth oscillator that interpolates from a collection of bandlimited wavetables.
+/// \brief An oscillator that interpolates from a collection of bandlimited wavetables.
 /// \see   Wavetables are stored in `/Core/Utilities/Headers/Wavetables/`
 
 template <WaveTableType W>

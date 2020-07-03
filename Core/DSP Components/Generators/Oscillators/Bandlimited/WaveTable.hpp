@@ -59,14 +59,15 @@ private:
 // ===================================================== //
 // ============== Template implementation ============== //
 // ===================================================== //
+
 template <> inline const int WaveTable<SIN>::length() { return kSineTableLength;     }
 template <> inline const int WaveTable<SQR>::length() { return kSquareTableLength;   }
 template <> inline const int WaveTable<TRI>::length() { return kTriangleTableLength; }
 template <> inline const int WaveTable<SAW>::length() { return kSawtoothTableLength; }
 
-template <> inline const float * WaveTable<SIN>::table()  { return &(wt_sine[0]);                 }
-template <> inline const float * WaveTable<SQR>::table()  { return &(wt_square[tableIndex][0]);   }
-template <> inline const float * WaveTable<TRI>::table()  { return &(wt_triangle[tableIndex][0]); }
-template <> inline const float * WaveTable<SAW>::table()  { return &(wt_sawtooth[tableIndex][0]); }
+template <> inline const float * WaveTable<SIN>::table() { return &(wt_sine[0]);                 }
+template <> inline const float * WaveTable<SQR>::table() { return &(wt_square[tableIndex][0]);   }
+template <> inline const float * WaveTable<TRI>::table() { return &(wt_triangle[tableIndex][0]); }
+template <> inline const float * WaveTable<SAW>::table() { return &(wt_sawtooth[tableIndex][0]); }
 
 #endif

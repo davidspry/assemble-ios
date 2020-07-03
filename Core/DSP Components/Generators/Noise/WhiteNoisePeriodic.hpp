@@ -54,8 +54,8 @@ private:
     int time;
     int seconds;
     float scalar = 2E-2F;
-    const int audible = 10;
-    const int silence = 60;
+    constexpr static int audible = 10;
+    constexpr static int silence = 60;
     constexpr static float noDenormals = 1E-25F;
 
 private:

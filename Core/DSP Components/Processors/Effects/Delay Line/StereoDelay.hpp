@@ -47,7 +47,7 @@ private:
     Delay rdelay;
     
 private:
-    std::atomic<bool> bypassed = {false};
+    std::atomic<bool>  bypassed = {false};
     std::atomic<float> offsetInMs = 4.F;
     
 };

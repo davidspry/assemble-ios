@@ -21,12 +21,12 @@ void ValueTransition::set(float target)
     set(value, target, timeInSeconds);
 }
 
-void ValueTransition::set(float target, float timeInSeconds) noexcept(false)
+void ValueTransition::set(float target, float timeInSeconds) noexcept
 {
     set(value, target, timeInSeconds);
 }
 
-void ValueTransition::set(float value, float target, float timeInSeconds) noexcept(false)
+void ValueTransition::set(float value, float target, float timeInSeconds) noexcept
 {
     value  = std::fmax(0.001F, value);
     target = std::fmax(0.001F, target);

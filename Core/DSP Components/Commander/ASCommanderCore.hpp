@@ -8,13 +8,15 @@
 #define ASCOMMANDERCORE_H
 
 #include "ASHeaders.h"
-#include "ASConstants.h"
 #include "ASEffects.h"
+#include "ASConstants.h"
 
 #include "WhiteNoisePeriodic.hpp"
 #include "Synthesiser.hpp"
 #include "Sequencer.hpp"
 #include "Clock.hpp"
+
+#include "CDSPResampler.h"
 
 /// \brief The interface to the Assemble core. This class coordinates propagates requests and pulls new samples from underlying DSP components.
 
@@ -150,7 +152,13 @@ private:
 
 private:
     float sampleRate;
-    std::array<float, 2> sample;
+    
+    std::vector<r8b::CDSPResampler*> upsamplers;
+    std::vector<r8b::CDSPResampler*> dnsamplers;
+
+    std::array<double, 4096>   buffer;
+    std::array<double*, 2> oversample;
+    std::array<double*, 2> downsample;
 
 private:
     /// \brief A block of memory for storing encoded state that can be passed up to the Swift context

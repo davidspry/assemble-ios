@@ -24,8 +24,8 @@ public:
 public:
     const float get();
     void set(float target);
-    void set(float target, float timeInSeconds) noexcept(false);
-    void set(float value, float target, float timeinSeconds) noexcept(false);
+    void set(float target, float timeInSeconds) noexcept;
+    void set(float value, float target, float timeinSeconds) noexcept;
     void setSampleRate(const float sampleRate);
     inline const float getTarget() { return target; }
     inline const bool complete() { return !(timeInSamples > 0); }

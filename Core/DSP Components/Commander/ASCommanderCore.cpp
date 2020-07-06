@@ -18,6 +18,22 @@ void ASCommanderCore::init(double sampleRate)
         noise.setSampleRate(audioRate);
     }
 
+    for (size_t r = 0; r < 2; ++r)
+    {
+        if (r < upsamplers.size()) delete upsamplers[r];
+        if (r < dnsamplers.size()) delete dnsamplers[r];
+    }
+    
+    upsamplers.clear();
+    dnsamplers.clear();
+    for (size_t r = 0; r < 2; ++r)
+    {
+        const auto capacity = 4096 * (int) OVERSAMPLING;
+        const auto destinationRate = sampleRate * (double) OVERSAMPLING;
+        upsamplers.push_back(new r8b::CDSPResampler24(sampleRate, destinationRate, capacity));
+        dnsamplers.push_back(new r8b::CDSPResampler24(destinationRate, sampleRate, capacity));
+    }
+
     __state__.reserve(2048);
     printf("[ASCommanderCore] Initialising with sample rate %.0fHz\n", audioRate);
 }
@@ -116,25 +132,32 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
             }
         }
 
-        sample = {0.f, 0.f};
-        sample[0] = synthesiser.nextSample();
-        vibrato.process(sample[0]);
-        sample[1] = sample[0];
-        delay.process(sample[0], sample[1]);
-        
-//        ===============================================
-//        NOTE: The following three lines add a periodic white noise
-//        generator into the audio output. The addition of periodic
-//        white noise will be a limitation in the free version of Assemble.
-//        It will be unlockable via an in-app purchase in the final release.
-//        ===============================================
-//        const float whiteNoise = noise.nextSample();
-//        sample[0] += whiteNoise;
-//        sample[1] += whiteNoise;
-//        ===============================================
+        float sample = synthesiser.nextSample();
+        vibrato.process(sample);
+        buffer[t] = sample;
+    }
 
-        for (size_t c = 0; c < channels; c++)
-            output[c][t] = sample[c & 1];
+    const int loversampled = upsamplers.at(0)->process(buffer.data(), sampleCount, oversample[0]);
+    const int roversampled = upsamplers.at(1)->process(buffer.data(), sampleCount, oversample[1]);
+    
+    for (size_t k = 0; k < loversampled; ++k)
+    {
+        float lsample = (float) oversample[0][k];
+        float rsample = (float) oversample[1][k];
+        delay.process(lsample, rsample);
+        oversample[0][k] = (double) lsample;
+        oversample[1][k] = (double) rsample;
+    }
+    
+    const int ldownsampled = dnsamplers.at(0)->process(&(oversample[0][0]), loversampled, downsample[0]);
+    const int rdownsampled = dnsamplers.at(1)->process(&(oversample[1][0]), roversampled, downsample[1]);
+    const size_t size = std::min(static_cast<int>(sampleCount), std::min(ldownsampled, rdownsampled));
+    
+    for (size_t k = 0; k < size; ++k)
+    {
+        const float whiteNoise = 0.F;//noise.nextSample();
+        for (size_t c = 0; c < channels; ++c)
+            output[c & 1][k] = whiteNoise + (float) downsample[c & 1][k];
     }
 }
 

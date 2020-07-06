@@ -19,4 +19,7 @@
 #define PATTERNS 8
 #define SEQUENCER_WIDTH 16
 
+// Effects
+#define OVERSAMPLING 16
+
 #endif

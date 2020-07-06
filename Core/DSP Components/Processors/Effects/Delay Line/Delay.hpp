@@ -39,9 +39,12 @@ public:
 
     inline void setInMusicalTime(float time)
     {
+        this->bpm  = clock->bpm;
         this->time = time;
         target = clock->sampleRate * 60 / clock->bpm * time;
         target = target + offsetInSamples;
+        target = target * (float) OVERSAMPLING;
+        
     }
 
     /// \brief Get a parameter value from the Delay
@@ -76,26 +79,34 @@ public:
         return !(bypassed = !status);
     }
 
-    /// \brief Reduce the input gain of the Delay to 0 gradually
-    
+    /// \brief  Reduce the input gain of the Delay to 0 gradually
+    /// \note   The pseudo-sinusoidal function f(x) = -(x^2 - 1.0)^2 + 1.0 is used to compute the gain.
+    /// \pre    `gainLinear` must be in [0, 1]
+    /// \author Frederick
+    /// <https://www.musicdsp.org/en/latest/Other/166-cheap-pseudo-sinusoidal-lfo.html>
+
     inline void fadeOut() {
-        gainLinear = std::max(0.F, gainLinear - 1E-4F);
-        gain = static_cast<float>(gainLinear > 0.0F) *
-               (0.5F + 0.5F * std::sinf(PI * (gainLinear - 0.5F)));
+        if (gainLinear == 0.F) return;
+        gainLinear = std::max(0.F, gainLinear - taper);
+        gain = -(std::powf((std::powf(gainLinear, 2.F) - 1.F), 2.F)) + 1.F;
     }
     
-    /// \brief Increase the input gain of the Delay to 1 gradually
+    /// \brief  Increase the input gain of the Delay to 1 gradually
+    /// \note   The pseudo-sinusoidal function f(x) = -(x^2 - 1.0)^2 + 1.0 is used to compute the gain.
+    /// \pre    `gainLinear` must be in [0, 1]
+    /// \author Frederick
+    /// <https://www.musicdsp.org/en/latest/Other/166-cheap-pseudo-sinusoidal-lfo.html>
 
     inline void  fadeIn() {
-        gainLinear = std::min(1.F, gainLinear + 1E-4F);
-        gain = static_cast<float>(gainLinear > 0.0F) *
-               (0.5F + 0.5F * std::sinf(PI * (gainLinear - 0.5F)));
+        if (gainLinear == 1.F) return;
+        gainLinear = std::min(1.F, gainLinear + taper);
+        gain = -(std::powf((std::powf(gainLinear, 2.F) - 1.F), 2.F)) + 1.F;
     }
 
 private:
     /// \brief Synchronise the Delay with its Clock's tempo
 
-    inline void update()  { setInMusicalTime(time); }
+    inline void update() { setInMusicalTime(time); }
 
 private:
     /// \brief The writehead as an array index
@@ -118,6 +129,10 @@ private:
     float feedback = 0.50F;
     float gainLinear = 1.00F;
     std::atomic<bool> bypassed = {false};
+
+private:
+    constexpr static float taper = 1E-4F * (1.0F / (float) OVERSAMPLING);
+    constexpr static float speed = 5E-5F * (1.0F / (float) OVERSAMPLING);
 
 private:
     int capacity;

@@ -47,6 +47,31 @@ namespace Assemble::Utilities
         return a + t * (b - a);
     }
 
+    /// \brief Compute four-point, fourth-order Hermite interpolation
+    /// \param index The position in the table to interpolate a value for
+    /// \param table A pointer to an array of floats
+    /// \param capacity The capacity of the table
+    /// \author Laurent de Soras
+
+    [[nodiscard]] static inline const float hermite(const float index, const float *table, const int capacity)
+    {
+        const int   a = (int) index;
+        const float k = index - a;
+        
+        const float xa = table[a];
+        const float xb = table[a - 1 + static_cast<int>((a - 1) <  0) * capacity];
+        const float xc = table[a + 1 - static_cast<int>((a + 1) >= capacity) * capacity];
+        const float xd = table[a + 2 - static_cast<int>((a + 2) >= capacity) * capacity];
+        
+        const float C = (xc - xb) * 0.5F;
+        const float V = (xa - xc);
+        const float W = C + V;
+        const float A = W + V + (xd - xa) * 0.5F;
+        const float B = W + A;
+
+        return ((((A * k) - B) * k + C) * k + xa);
+    }
+
     /// \brief Compute Catmull-Rom cubic interpolation at the given index in the given table
     /// \param index The position in the table to interpolate a value for
     /// \param table A pointed to an array of floats

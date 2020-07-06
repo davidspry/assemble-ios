@@ -6,12 +6,13 @@
 
 Delay::Delay(Clock *clock)
 {
-    this->clock = clock;
     bpm = clock->bpm;
+    this->clock = clock;
     
-    capacity = clock->sampleRate * 8;
+    capacity = static_cast<int>(clock->sampleRate * OVERSAMPLING) * 2;
+
     samples.reserve(capacity);
-    samples.assign(capacity, 0.F);
+    samples.assign (capacity, 0.F);
     
     set(kDelayMusicalTime, 4.F);
 }
@@ -116,13 +117,13 @@ void Delay::process(float& sample)
     if (bypassed) fadeOut();
     else           fadeIn();
 
-    delay = delay + 5E-5F * (target - delay);
     samples[whead] = gain * sample + feedback * samples[rhead];
-    const float interpolated = Assemble::Utilities::cerp(rhead, &samples[0], capacity);
+    const float interpolated = Assemble::Utilities::hermite(rhead, samples.data(), capacity);
 
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;
 
+    delay = delay + speed * (target - delay);
     rhead = whead - delay;
     while (rhead <  0)        rhead = rhead + capacity;
     while (rhead >= capacity) rhead = rhead - capacity;

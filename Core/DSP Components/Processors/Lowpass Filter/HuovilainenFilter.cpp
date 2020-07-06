@@ -10,7 +10,9 @@ void HuovilainenFilter::initialise()
     std::fill(tanhStage.begin(), tanhStage.end(), 0.F);
 
     targetFrequencyNormal.store(1.0F);
-    set(20E3F, 1.0F);
+    targetFrequency.store(20E3F);
+    targetResonance.store(0.0F);
+    set(targetFrequency, targetResonance);
 }
 
 /// \brief Get a parameter value from the Huovilainen Filter

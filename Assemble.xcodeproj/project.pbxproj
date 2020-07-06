@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140404B924B3465E0094EC6B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 140404B024B3465E0094EC6B /* LICENSE */; };
+		140404BA24B3465E0094EC6B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 140404B324B3465E0094EC6B /* README.md */; };
+		140404C024B34D770094EC6B /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140404BE24B34D760094EC6B /* r8bbase.cpp */; };
 		140B63CA2484D70600D571D1 /* MediaRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63C92484D70600D571D1 /* MediaRecorder.swift */; };
 		140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63D32485371100D571D1 /* UIButtonExtensions.swift */; };
 		141DDA51243F81140020386C /* AHREnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA4F243F81140020386C /* AHREnvelope.cpp */; };
@@ -134,6 +137,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		140404AE24B3465E0094EC6B /* CDSPHBDownsampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPHBDownsampler.h; sourceTree = "<group>"; };
+		140404AF24B3465E0094EC6B /* CDSPSincFilterGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPSincFilterGen.h; sourceTree = "<group>"; };
+		140404B024B3465E0094EC6B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		140404B124B3465E0094EC6B /* r8bbase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8bbase.h; sourceTree = "<group>"; };
+		140404B224B3465E0094EC6B /* CDSPProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPProcessor.h; sourceTree = "<group>"; };
+		140404B324B3465E0094EC6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		140404B424B3465E0094EC6B /* CDSPRealFFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPRealFFT.h; sourceTree = "<group>"; };
+		140404B524B3465E0094EC6B /* CDSPFracInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPFracInterpolator.h; sourceTree = "<group>"; };
+		140404B624B3465E0094EC6B /* CDSPBlockConvolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPBlockConvolver.h; sourceTree = "<group>"; };
+		140404B724B3465E0094EC6B /* CDSPResampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPResampler.h; sourceTree = "<group>"; };
+		140404B824B3465E0094EC6B /* CDSPHBUpsampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPHBUpsampler.h; sourceTree = "<group>"; };
+		140404BB24B3469B0094EC6B /* r8bconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8bconf.h; sourceTree = "<group>"; };
+		140404BC24B346B40094EC6B /* CDSPFIRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPFIRFilter.h; sourceTree = "<group>"; };
+		140404BD24B346C60094EC6B /* fft4g.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft4g.h; sourceTree = "<group>"; };
+		140404BE24B34D760094EC6B /* r8bbase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = r8bbase.cpp; sourceTree = "<group>"; };
+		140404BF24B34D770094EC6B /* r8butil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8butil.h; sourceTree = "<group>"; };
 		140B63C92484D70600D571D1 /* MediaRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRecorder.swift; sourceTree = "<group>"; };
 		140B63D32485371100D571D1 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		140B63D6248560FC00D571D1 /* WhiteNoise.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WhiteNoise.hpp; sourceTree = "<group>"; };
@@ -293,6 +312,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140404AC24B3465E0094EC6B /* External */ = {
+			isa = PBXGroup;
+			children = (
+				140404AD24B3465E0094EC6B /* R8Brain */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		140404AD24B3465E0094EC6B /* R8Brain */ = {
+			isa = PBXGroup;
+			children = (
+				140404B624B3465E0094EC6B /* CDSPBlockConvolver.h */,
+				140404BC24B346B40094EC6B /* CDSPFIRFilter.h */,
+				140404B524B3465E0094EC6B /* CDSPFracInterpolator.h */,
+				140404AE24B3465E0094EC6B /* CDSPHBDownsampler.h */,
+				140404B824B3465E0094EC6B /* CDSPHBUpsampler.h */,
+				140404B224B3465E0094EC6B /* CDSPProcessor.h */,
+				140404B424B3465E0094EC6B /* CDSPRealFFT.h */,
+				140404B724B3465E0094EC6B /* CDSPResampler.h */,
+				140404AF24B3465E0094EC6B /* CDSPSincFilterGen.h */,
+				140404BD24B346C60094EC6B /* fft4g.h */,
+				140404C224B351AF0094EC6B /* License-Readme */,
+				140404BE24B34D760094EC6B /* r8bbase.cpp */,
+				140404B124B3465E0094EC6B /* r8bbase.h */,
+				140404BB24B3469B0094EC6B /* r8bconf.h */,
+				140404BF24B34D770094EC6B /* r8butil.h */,
+			);
+			path = R8Brain;
+			sourceTree = "<group>";
+		};
+		140404C224B351AF0094EC6B /* License-Readme */ = {
+			isa = PBXGroup;
+			children = (
+				140404B324B3465E0094EC6B /* README.md */,
+				140404B024B3465E0094EC6B /* LICENSE */,
+			);
+			path = "License-Readme";
+			sourceTree = "<group>";
+		};
 		140B63C82484D6F000D571D1 /* Media Recorder */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,6 +511,7 @@
 		143FB009243F3D990058AE40 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				140404AC24B3465E0094EC6B /* External */,
 				14DC8D232456AF30001FDC43 /* Headers */,
 				14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */,
 				14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */,
@@ -763,13 +822,13 @@
 			children = (
 				143FB018243F41220058AE40 /* Assemble.h */,
 				141DDA5A243F90900020386C /* ASConstants.h */,
-				146EC65A244CBC60009025E4 /* ASHeaders.h */,
-				14AFB899245218A600F5AD3A /* ASUtilities.h */,
 				14AFB8982452155000F5AD3A /* ASEffects.h */,
-				146EC65B244CBE7F009025E4 /* ASOscillators.h */,
 				146EC66A244CC6DC009025E4 /* ASFrequencies.h */,
-				144A11652456CF4A000F2B4C /* ASParameters.h */,
+				146EC65A244CBC60009025E4 /* ASHeaders.h */,
 				143FB006243F30BB0058AE40 /* ASInteroperability.h */,
+				146EC65B244CBE7F009025E4 /* ASOscillators.h */,
+				144A11652456CF4A000F2B4C /* ASParameters.h */,
+				14AFB899245218A600F5AD3A /* ASUtilities.h */,
 				141D5CA42467FE5900FA6CF3 /* Wavetables */,
 			);
 			path = Headers;
@@ -894,6 +953,8 @@
 				14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */,
 				14DAC3922417772E005654EA /* Assets.xcassets in Resources */,
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
+				140404B924B3465E0094EC6B /* LICENSE in Resources */,
+				140404BA24B3465E0094EC6B /* README.md in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
 				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
 				1427E2EF247686340011D102 /* Colours.xcassets in Resources */,
@@ -998,6 +1059,7 @@
 				144A11672457166C000F2B4C /* Clock.cpp in Sources */,
 				1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */,
 				14A51E38247D1C5700ADDCB4 /* NewSongViewController.swift in Sources */,
+				140404C024B34D770094EC6B /* r8bbase.cpp in Sources */,
 				14AE01A2245DFF02003EB586 /* UIImageExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

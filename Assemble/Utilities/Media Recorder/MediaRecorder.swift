@@ -377,7 +377,7 @@ class MediaRecorder
     /// - Parameter context: The context in which the visualisation should be drawn
 
     private func drawWaveform(from data: [[Float]], size: CGSize, in context: CGContext) {
-        let gain:  CGFloat = 1.0
+        let gain:  CGFloat = 0.65
         let width: CGFloat = size.width * 0.5
         let delta: CGFloat = width / CGFloat(data[0].count)
 
@@ -398,7 +398,7 @@ class MediaRecorder
     /// - Parameter context: The context in which the visualisation should be drawn
 
     private func drawLissajous(from data: [[Float]], size: CGSize, in context: CGContext) {
-        let gain: CGFloat = 3.0
+        let gain: CGFloat = 2.0
         let m = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
         let x = m.x + CGFloat(data[0][0]) * m.y
         let y = m.y + CGFloat(data[1][0]) * m.y

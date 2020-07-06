@@ -6,6 +6,7 @@
 #define VIBRATO_HPP
 
 #include "ASHeaders.h"
+#include "ASConstants.h"
 #include "ASUtilities.h"
 #include "ASParameters.h"
 #include "ASOscillators.h"
@@ -35,8 +36,8 @@ private:
     ValueTransition portamento = { 0.5F, 1.0F };
 
 private:
-    inline void fadeOut(const float t) { depth = std::max(t, depth - 0.01F); }
-    inline void  fadeIn(const float t) { depth = std::min(t, depth + 0.01F); }
+    inline void fadeOut(const float t) { depth = std::max(t, depth - taper); }
+    inline void  fadeIn(const float t) { depth = std::min(t, depth + taper); }
     void update();
 
 private:
@@ -44,8 +45,12 @@ private:
     float rhead;
     
 private:
+    constexpr static float scale = 1.00F;
+    constexpr static float taper = 0.01F;
+    
+private:
     int capacity;
-    float scalar = 250.0F;
+    float scalar = 125.0F;
     float sampleRate = 48000.F;
     std::vector<float> samples;
 };

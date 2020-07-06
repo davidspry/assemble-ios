@@ -6,7 +6,7 @@
 
 Vibrato::Vibrato()
 {
-    capacity = std::floorf(sampleRate);
+    capacity = sampleRate;
     samples.reserve(capacity);
     samples.assign (capacity, 0.F);
     
@@ -37,8 +37,9 @@ void Vibrato::set(uint64_t parameter, float value)
         }
         case kVibratoSpeed:
         {
-            speed.store(Assemble::Utilities::bound(value, 0.1F, 15.F));
-            portamento.set(speed.load());
+            const float frequency = Assemble::Utilities::bound(value, 0.1F, 15.F);
+            portamento.set(frequency * scale);
+            speed.store(frequency);
             break;
         }
         case kVibratoDepth:
@@ -74,7 +75,7 @@ void Vibrato::process(float& sample)
 
     samples[whead] = sample;
 
-    sample = Assemble::Utilities::lerp(rhead, &samples.at(0), capacity);
+    sample = Assemble::Utilities::hermite(rhead, samples.data(), capacity);
 
     whead = whead + 1;
     whead = whead - static_cast<int>(whead >= capacity) * capacity;

@@ -8,8 +8,10 @@ class ShareCardViewController: UIViewController {
 
     @IBOutlet weak var windowPanel: UIView!
 
+    @IBOutlet weak var statusLabel: UILabel!
+    
     @IBOutlet weak var fileLabel: UILabel!
-
+    
     @IBOutlet weak var share: UIButton!
     
     var file: URL?
@@ -18,12 +20,25 @@ class ShareCardViewController: UIViewController {
         super.viewDidLoad()
 
         share.isHidden = !(MediaUtilities.canAccessInstagram())
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+
         if let url = file {
             fileLabel.text = url.lastPathComponent
+            MediaUtilities.saveToCameraRoll(url, didTrySaving)
+        }   else {
+            print("[ShareCardViewController] File is nil.")
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    /// Handle the result of saving a file to the camera roll by displaying an appropriate message.
+    /// - Parameter successful: A flag to indicate whether the saving operation was successful or not.
+
+    private func didTrySaving(_ successful: Bool) {
+        DispatchQueue.main.async {
+            let didSave = "The file has been saved to your photo library successfully."
+            let didFail = "The file could not be saved to your photo library."
+            if successful { self.statusLabel.text = didSave }
+            else          { self.statusLabel.text = didFail }
         }
     }
     

@@ -21,6 +21,7 @@ class Waveform: UIView, UIPointerInteractionDelegate {
     private var mode: Visualisation = .waveform
 
     private var updater: CADisplayLink!
+
     private var waveform = CAShapeLayer()
     
     /// `r`, `w` represent indices that define where data should be written to and read from.
@@ -82,7 +83,7 @@ class Waveform: UIView, UIPointerInteractionDelegate {
     /// The samples are accumulated from the tap in buffer sizes of `bufferSize`, but only `points` values
     /// are produced. Each of these values is the arithmetic /// mean of some sub-sequence of `step` samples.
     ///
-    /// For example, `points[k]` is the average of the samples in `floatBuffer[0][k ..< k + step]`.
+    /// For example, `ldata[w][k]` is the average of the samples in `floatBuffer[0][k ..< k + step]`.
     ///
     /// `vDSP_meanv` is from the `Accelerate` framework, which leverages the hardware's capacity for
     /// vectorisation in order to perform tasks like this efficiently.
@@ -103,11 +104,12 @@ class Waveform: UIView, UIPointerInteractionDelegate {
                 for (i, block) in stride(from: 0, to: Int(self.bufferSize), by: self.step).enumerated() {
                     vDSP_meanv(&floatBuffer[L][block], 1, &self.ldata[w][i], vDSP_Length(self.step))
                     vDSP_meanv(&floatBuffer[R][block], 1, &self.rdata[w][i], vDSP_Length(self.step))
-                    OSAtomicOr32(1, &self.n)
                 }
+
+                OSAtomicOr32(1, &self.n)
                 return
             }
-            
+
             else {
                 print("[Waveform] Error! Could not read Assemble buffer.")
                 return
@@ -115,13 +117,13 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         })
     }
     
-    /// Redraw the waveform. This should be called by a CADisplayLink with a suitable high refresh rate.
+    /// Redraw the waveform. This should be called by a `CADisplayLink` with a suitably high refresh rate.
 
     @objc private func redraw() {
         setNeedsDisplay()
     }
     
-    /// Toggle the display modes of the Waveform visualiser
+    /// Toggle the display modes of the waveform visualiser
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -144,8 +146,8 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         }
     }
 
-    /// Plot the sample data as a Lissajous visualisation, where the x coordinate is determined by the left audio channel
-    /// and the y coordinate is determined by the right audio channel.
+    /// Plot the sample data as a Lissajous visualisation, where the x-coordinate of each point is determined
+    /// by the left audio channel and the y-coordinate of each point is determined by the right audio channel.
     /// - Parameter path: The path that should contain the visualisation.
 
     private func drawLissajous(on path: inout CGMutablePath) {
@@ -207,8 +209,7 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         updater = CADisplayLink(target: self, selector: #selector(redraw))
         updater.add(to: .main, forMode: .default)
 
-        /// Each of the stereo channels passes through a buffer.
-        /// Each buffer has two channels for the purpose of achieving "double buffering".
+        /// Each buffer has two channels for the purpose of achieving "double buffering", i.e.,
         /// buffer = [pointer_to_contiguous_floats, pointer_to_contiguous_floats]
 
         ldata.reserveCapacity(2)

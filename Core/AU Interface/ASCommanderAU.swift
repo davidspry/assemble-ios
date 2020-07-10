@@ -100,9 +100,8 @@ public class ASCommanderAU : ASAudioUnit
             return String(format: "%.2f", value ?? parameter.value)
         }
 
-        /// Load the empty factory preset, then print each user preset to the console
+        /// Print each user preset to the console
 
-        loadFactoryPreset(number: 0)
         userPresets.forEach { print("User Preset: Name: \($0.name), Number: \($0.number)") }
     }
     

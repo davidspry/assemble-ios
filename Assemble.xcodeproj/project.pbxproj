@@ -71,6 +71,8 @@
 		149ACC242454330E009DA18F /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC232454330E009DA18F /* KeyboardListener.swift */; };
 		149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2624543615009DA18F /* MulticastDelegate.swift */; };
 		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
+		149B9B2E24B825B1005E42A7 /* IAPVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B9B2D24B825B1005E42A7 /* IAPVerifier.swift */; };
+		149B9B3024B827CB005E42A7 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B9B2F24B827CB005E42A7 /* UserDefaultsKeys.swift */; };
 		14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */; };
 		14A51E38247D1C5700ADDCB4 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51E37247D1C5700ADDCB4 /* NewSongViewController.swift */; };
 		14A51E3A247D1C8B00ADDCB4 /* SaveCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */; };
@@ -248,6 +250,8 @@
 		149ACC232454330E009DA18F /* KeyboardListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
 		149ACC2624543615009DA18F /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsListener.swift; sourceTree = "<group>"; };
+		149B9B2D24B825B1005E42A7 /* IAPVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPVerifier.swift; sourceTree = "<group>"; };
+		149B9B2F24B827CB005E42A7 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		14A3317F24671A61009A1B47 /* ASSquareTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASSquareTable.h; sourceTree = "<group>"; };
 		14A3318024671A6B009A1B47 /* ASTriangleTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTriangleTable.h; sourceTree = "<group>"; };
 		14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASCommanderAUParameters.swift; sourceTree = "<group>"; };
@@ -286,7 +290,6 @@
 		14DAC3942417772E005654EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14DAC3962417772E005654EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14DAC39C241777DF005654EA /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		14DB9E6F2465239E000AAD79 /* Assemble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Assemble.entitlements; sourceTree = "<group>"; };
 		14DB9E70246538E0000AAD79 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ValueTransition.cpp; sourceTree = "<group>"; };
 		14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ValueTransition.hpp; sourceTree = "<group>"; };
@@ -556,7 +559,6 @@
 			isa = PBXGroup;
 			children = (
 				14DAC3962417772E005654EA /* Info.plist */,
-				14DB9E6F2465239E000AAD79 /* Assemble.entitlements */,
 				14DAC3912417772E005654EA /* Assets.xcassets */,
 				1427E2EE247686340011D102 /* Colours.xcassets */,
 				14488DBB24A3312000B44A6C /* DynamicImages.xcassets */,
@@ -671,7 +673,9 @@
 				140B63C82484D6F000D571D1 /* Media Recorder */,
 				14556A7A2472953A00FB2392 /* Notifications */,
 				141DDA55243F85AC0020386C /* Extensions */,
+				149B9B2D24B825B1005E42A7 /* IAPVerifier.swift */,
 				149ACC2624543615009DA18F /* MulticastDelegate.swift */,
+				149B9B2F24B827CB005E42A7 /* UserDefaultsKeys.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -983,6 +987,7 @@
 				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
 				14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */,
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
+				149B9B3024B827CB005E42A7 /* UserDefaultsKeys.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
 				14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */,
 				14C1E4052499047C00980AA9 /* FactoryPresetB.swift in Sources */,
@@ -1024,6 +1029,7 @@
 				14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */,
 				14DAC3892417772C005654EA /* AppDelegate.swift in Sources */,
 				14EFEDA9242E350100242298 /* Keyboard.swift in Sources */,
+				149B9B2E24B825B1005E42A7 /* IAPVerifier.swift in Sources */,
 				143FB00B243F3DD10058AE40 /* UIColorExtensions.swift in Sources */,
 				149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */,
 				1428A2D7247F9C4E00C8B353 /* SongCell.swift in Sources */,

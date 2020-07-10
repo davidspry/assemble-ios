@@ -13,6 +13,27 @@
 class WhiteNoisePeriodic
 {
 public:
+    /// \brief Get the parameter values of the WhiteNoisePeriodic device.
+    /// \param parameter The hexadecimal address of the desired parameter
+
+    const float get(uint64_t parameter)
+    {
+        if (parameter == kIAPToggle001)
+            return static_cast<float>(active);
+        
+        return 0.0F;
+    }
+
+    /// \brief Set the parameters of the WhiteNoisePeriodic device.
+    /// \param parameter The hexadecimal address of the parameter to set
+    /// \param value The value to set for the parameter
+
+    void set(uint64_t parameter, float value)
+    {
+        if (parameter == kIAPToggle001)
+            active = static_cast<bool>(value);
+    }
+    
     void setSampleRate(const float sampleRate)
     {
         if (this->sampleRate != sampleRate)
@@ -23,7 +44,7 @@ public:
     {
         advance();
 
-        if (amplitude > 0.0F)
+        if (active && amplitude > 0.0F)
             return noDenormals + scalar * amplitude * noise.nextSample();
 
         return 0.F;
@@ -46,20 +67,21 @@ private:
             silent = !silent;
         }
 
-        if (!silent) amplitude = std::fmin(1.0F, amplitude + 1E-5F);
-        else         amplitude = std::fmax(0.0F, amplitude - 1E-5F);
+        if (!silent) amplitude = std::fmin(1.0F, amplitude + 5E-6F);
+        else         amplitude = std::fmax(0.0F, amplitude - 5E-6F);
     }
 
 private:
     int time;
     int seconds;
     float scalar = 2E-2F;
-    constexpr static int audible = 10;
-    constexpr static int silence = 60;
+    constexpr static int audible = 15;
+    constexpr static int silence = 45;
     constexpr static float noDenormals = 1E-25F;
 
 private:
-    bool silent = false;
+    bool active = true;
+    bool silent = true;
     float amplitude  = 0.F;
     float sampleRate = 48000.F;
 

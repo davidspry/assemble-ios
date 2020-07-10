@@ -17,8 +17,8 @@ extension Float
     }
     
     /// Map a value from the range [0, 1] to some other range, then round it to the nearest `steps` increment.
-    /// - Parameter range: The range to map the input value to
-    /// - Parameter steps: The value that defines the interval, of which some integer multiple will be returned.
+    /// - Parameter range: The range to map the Float's value to.
+    /// - Parameter steps: The value of which some integer multiple will be returned.
 
     func mapNormal(to range: ClosedRange<Float>, of steps: Float) -> Float
     {
@@ -26,8 +26,8 @@ extension Float
         if  map == 0 { return 0 }
         return (self / steps).rounded(.towardZero) * steps
     }
-    
-    /// Ensure that a Float, `x`, is `A <= x <= B` for any Floats `A`, `B`, where `A <= B`.
+
+    /// Ensure that a Float, `x`, is `A <= x <= B` for any `Float`s `A`, `B` where `A <= B`.
 
     mutating func bound(by range: ClosedRange<Float>)
     {

@@ -161,6 +161,10 @@ private:
     std::array<double*, 2> downsample;
 
 private:
+    /// \brief A flag to enable or disable periodic white noise in the audio output.
+    
+    bool whiteNoiseEnabled = true;
+    
     /// \brief A block of memory for storing encoded state that can be passed up to the Swift context
 
     std::string __state__;

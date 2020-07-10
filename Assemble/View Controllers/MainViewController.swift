@@ -86,13 +86,13 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     var usingDarkTheme: Bool {
         set (isDarkTheme) {
-            let key = "assemble.theme"
+            let key = UserDefaultsKeys.isDarkTheme
             let defaults = UserDefaults()
             defaults.set(isDarkTheme, forKey: key)
         }
 
         get {
-            let key = "assemble.theme"
+            let key = UserDefaultsKeys.isDarkTheme
             let defaults = UserDefaults()
             if     let isDarkTheme = defaults.value(forKey: key) as? Bool {
                 return isDarkTheme
@@ -152,6 +152,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        unlockIfPurchaseVerified()
         
         /// Add the computer keyboard controller in the background
         /// such that it handles keyboard presses but doesn't handle taps.
@@ -244,7 +246,6 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
         switch file?.pathExtension {
         case MediaUtilities.MediaType.video.rawValue:
-             MediaUtilities.saveToCameraRoll(url)
              return performSegue(withIdentifier: "shareCardSegue", sender: url)
         case MediaUtilities.MediaType.audio.rawValue:
              return presentFile(url)
@@ -367,9 +368,10 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     private func loadFactoryPresetsOnFirstUse() {
         let defaults = UserDefaults()
-        let key = "assemble.first.launch"
+        let key = UserDefaultsKeys.isFirstLaunch
         if let isFirstLaunch = defaults.value(forKey: key) as? Bool,
              !(isFirstLaunch) {
+            Assemble.core.commander?.loadFactoryPreset(number: 0)
             return
         }   else { defaults.setValue(false, forKey: key) }
 
@@ -395,6 +397,30 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         sequencer.initialiseFromUnderlyingState()
         tempoLabel.reinitialise()
         patterns.loadStates()
+    }
+    
+    // MARK: - IAP Verification
+    
+    /// Determine whether Assemble's limitations should be turned off by checking whether the user owns
+    /// Assemble's in-app purchase.
+    ///
+    /// If the IAP has been purchased, then the value of the key `UserDefaultsKeys.iap` will be `true`.
+    /// Otherwise, the value of the key will be `nil` (on first launch) or `false`.
+    ///
+    /// The `IAPVerifier` will asynchronously check with Apple's servers in case a refund (or some other change) has occurred.
+
+    private func unlockIfPurchaseVerified() {
+        let defaults = UserDefaults()
+        let key = UserDefaultsKeys.iap
+        if  let verified = defaults.value(forKey: key) as? Bool,
+                verified == true {
+            Assemble.core.setParameter(kIAPToggle001, to: 1)
+        }
+        
+        IAPVerifier.determineOwnership(of: key) { isOwned in
+            let state: Float = isOwned ? 0 : 1
+            Assemble.core.setParameter(kIAPToggle001, to: state)
+        }
     }
     
     // MARK: - Core-UI Synchronisation

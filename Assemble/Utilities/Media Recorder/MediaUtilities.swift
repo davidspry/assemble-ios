@@ -35,14 +35,14 @@ struct MediaUtilities {
         case video = "mp4"
     }
 
-    /// Save the video located at the given URL to the photo library.
+    /// Save the video located at the given URL to the photo library, and request permission for doing so if necessary.
     /// - Parameter file: The URL of the video file to be saved.
 
-    static public func saveToCameraRoll(_ file: URL) {
+    static public func saveToCameraRoll(_ file: URL, _ callback: @escaping (Bool) -> ()?) {
         if PHPhotoLibrary.authorizationStatus() == .notDetermined {
             PHPhotoLibrary.requestAuthorization { status in
-                print("[MediaUtilities] Authorisation status: \(status)")
-                saveToCameraRoll(file)
+                print("[MediaUtilities] Authorisation status: \(status.rawValue)")
+                return saveToCameraRoll(file, callback)
             }
         }
 
@@ -54,11 +54,15 @@ struct MediaUtilities {
                 else if let error = error {
                     print("[MediaUtilities] File could not be saved to the photo library.\n\(error)")
                 }
+
+                callback(didSave && error == nil)
             })
         }
         
         else if PHPhotoLibrary.authorizationStatus() == .denied {
             print("[MediaUtilities] File could not be saved to the photo library because access permission was denied.")
+
+            callback(false)
         }
     }
     

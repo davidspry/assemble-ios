@@ -34,7 +34,6 @@ class MediaRecorder
 
     private var file: AVAudioFile?
 
-    ///
     private let bufferSize: UInt32 = 1024
 
     private weak var engine: AVAudioEngine!
@@ -191,8 +190,6 @@ class MediaRecorder
     /// - Parameter complete:  A completion handler, which will be passed the video after a successful encode, or nil otherwise.
 
     private func generateVideo(for audioFile: URL, then complete: @escaping (URL?) -> ()) {
-        var success = false
-        
         let file: AVAudioFile!
         do    { try file = AVAudioFile(forReading: audioFile) }
         catch { return }
@@ -224,8 +221,8 @@ class MediaRecorder
         writer.startWriting()
         writer.startSession(atSourceTime: CMTime(seconds: 1, preferredTimescale: Int32(framesPerSecond)))
 
-        var frame = 0
-        var total = 0
+        var frame: Int = 0
+        var total: Int = 0
         let queue = DispatchQueue(label: "assemble.video.queue", qos: .default)
         video.requestMediaDataWhenReady(on: queue, using: {
             if video.isReadyForMoreMediaData && frame < Int(videoLengthInFrames)
@@ -254,8 +251,7 @@ class MediaRecorder
             if (frame >= videoLengthInFrames) {
                 video.markAsFinished()
                 writer.finishWriting() {
-                    success = writer.status == .completed && writer.error == nil
-                    if success {
+                    if writer.status == .completed && writer.error == nil {
                         print("[Recorder] Video encoded successfully:\n\(filepath)")
                         self.merge(audio: file.url, video: filepath, then: complete)
                     }

@@ -53,7 +53,7 @@ const bool ASCommanderCore::playOrPause()
 
 void ASCommanderCore::set(uint64_t parameter, const float value)
 {
-    const int type    = (int) parameter / (2 << 7);
+    const int type = (int) parameter / (2 << 7);
 
     switch (type)
     {
@@ -84,6 +84,13 @@ void ASCommanderCore::set(uint64_t parameter, const float value)
         case 0xAA: return sequencer.set(parameter, value);
         case 0xCA: return clock.set(parameter, value);
 
+        /// \brief Set the state of the WhiteNoisePeriodic device by
+        /// broadcasting a value of either 1 or 0 to the address `kIAPToggle001`.
+        /// \param value If the value is 0, then white noise will be enabled.
+        /// If the value is 1, then white noise will be disabled.
+
+        case 0xA0: return noise.set(parameter, value);
+        
         default: return;
     }
 }
@@ -111,6 +118,11 @@ const float ASCommanderCore::get(uint64_t parameter)
                 case 2: return vibrato.get(parameter);
             }
         }
+
+        /// \brief Return the state of the WhiteNoisePeriodic device,
+        /// which corresponds to the in-app purchase with address `kIAPToggle001`.
+        
+        case 0xA0: return noise.get(parameter);
 
         default:   return 0.F;
     }
@@ -155,7 +167,7 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
     
     for (size_t k = 0; k < size; ++k)
     {
-        const float whiteNoise = 0.F;//noise.nextSample();
+        const float whiteNoise = noise.nextSample();
         for (size_t c = 0; c < channels; ++c)
             output[c & 1][k] = whiteNoise + (float) downsample[c & 1][k];
     }

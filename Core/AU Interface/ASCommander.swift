@@ -10,19 +10,19 @@ import AudioUnit
 
     public static var acd = AudioComponentDescription()
 
-    @objc public override init()
+    @objc override public init()
     {
         ASCommander.acd.componentType = kAudioUnitType_Generator
         ASCommander.acd.componentSubType = FourCharCode("ASMB")
         ASCommander.acd.componentManufacturer = FourCharCode("DSPR")
-
+        
         AUAudioUnit.registerSubclass(ASCommanderAU.self,
                                      as: ASCommander.acd,
                                      name: "Assemble",
                                      version: 1);
 
         super.init()
-        
+
         AVAudioUnit.instantiate(with: ASCommander.acd, options: [])
         { (avAudioUnit, error) in
             guard let avAudioUnit = avAudioUnit else { fatalError() }

@@ -9,7 +9,7 @@ Delay::Delay(Clock *clock)
     bpm = clock->bpm;
     this->clock = clock;
     
-    capacity = static_cast<int>(clock->sampleRate * OVERSAMPLING) * 2;
+    capacity = static_cast<int>(clock->sampleRate * OVERSAMPLING) * 3;
 
     samples.reserve(capacity);
     samples.assign (capacity, 0.F);

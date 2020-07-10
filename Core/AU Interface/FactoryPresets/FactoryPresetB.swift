@@ -21,7 +21,7 @@ struct FactoryPresetB
         "type": 1635084142,
         "version": 1,
         "subtype": 1095978306,
-        "preset-number": 2,
+        "preset-number": 3,
         "manufacturer": 1146310738,
         "P0" :
             ([49,

@@ -8,6 +8,12 @@
 /// \brief The following constants define parameter addresses to be used throughout Assemble.
 /// The inclusion of this header file in Assemble.h ensures that the addresses are available in Swift.
 
+// In-app purchase toggles
+// 0xA[IAP ID]
+// ===========================================
+static const int kIAPToggle001            = 0xA001;
+// ===========================================
+
 // Continuous parameters
 // [SEQUENCER] 0xAA0[Parameter]
 // ===========================================
@@ -103,7 +109,8 @@ static const int kVibratoDepth            = 0xEF22;
 // ===========================================
 
 // Discrete parameters
-// Delay Line: Musical Time Factors
+// [DELAY LINE] Musical Time Factors
+// ===========================================
 static const float fDelayWholeNote        = 4.000F;
 static const float fDelayHalfDotted       = 2.500F;
 static const float fDelayHalfNote         = 2.000F;
@@ -115,5 +122,6 @@ static const float fDelaySixteenthDotted  = 0.375F;
 static const float fDelaySixteenthNote    = 0.250F;
 static const float fDelayThirtySecondNote = 0.125F;
 static const float fDelaySixtyFourthNote  = 0.0625F;
+// ===========================================
 
 #endif

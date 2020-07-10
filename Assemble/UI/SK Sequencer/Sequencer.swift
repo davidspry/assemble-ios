@@ -92,7 +92,7 @@ class Sequencer : SKView, KeyboardListener
             if screenLength > 650  { scalar = 24; break }
             if screenLength > 550  { scalar = 22; break }
             else                   { scalar = 20; break }
-        default: fatalError("Unsupported device!")
+        default: fatalError("[Sequencer] Unsupported device.")
         }
 
         let width  = Assemble.patternWidth  * scalar

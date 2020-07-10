@@ -25,7 +25,7 @@ class MulticastDelegate <T>
     /// Remove a delegate from the `MulticastDelegate` store.
     ///
     /// - Parameter delegate: The object who should be removed from the `MulticastDelegate` store
-    /// - Complexity: O(1) in the best and average cases. O(n) in the worst case.
+    /// - Complexity: O(1) in the best and average cases. O(n) (for `n` objects) in the worst case.
 
     func remove(_ delegate: T) {
         delegates.allObjects.reversed().forEach {

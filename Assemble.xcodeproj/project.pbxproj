@@ -113,6 +113,7 @@
 		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
 		14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */; };
 		14F5852F24A4DAB8003F4BC5 /* Assemble.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F5852E24A4DAB8003F4BC5 /* Assemble.png */; };
+		14F5A11D24B8D5790035CC5D /* FactoryPresetC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5A11C24B8D5790035CC5D /* FactoryPresetC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -301,6 +302,7 @@
 		14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDrawing.swift; sourceTree = "<group>"; };
 		14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderCell.swift; sourceTree = "<group>"; };
 		14F5852E24A4DAB8003F4BC5 /* Assemble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble.png; sourceTree = "<group>"; };
+		14F5A11C24B8D5790035CC5D /* FactoryPresetC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -864,6 +866,7 @@
 			children = (
 				14E6551E24718A7100D619F0 /* FactoryPresetA.swift */,
 				14C1E4042499047C00980AA9 /* FactoryPresetB.swift */,
+				14F5A11C24B8D5790035CC5D /* FactoryPresetC.swift */,
 				1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */,
 			);
 			path = FactoryPresets;
@@ -987,6 +990,7 @@
 				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
 				14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */,
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
+				14F5A11D24B8D5790035CC5D /* FactoryPresetC.swift in Sources */,
 				149B9B3024B827CB005E42A7 /* UserDefaultsKeys.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
 				14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */,
@@ -1212,7 +1216,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Assemble/Assets/Assemble.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1243,7 +1247,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Assemble/Assets/Assemble.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (

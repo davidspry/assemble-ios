@@ -376,12 +376,18 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         }   else { defaults.setValue(false, forKey: key) }
 
         DispatchQueue.main.async {
-            let count = Assemble.core.commander?.userPresets.count
-            Assemble.core.commander?.copyFactoryPreset(number: 2)
+            var count = Assemble.core.commander?.userPresets.count
+            Assemble.core.commander?.copyFactoryPreset(number: 3)
             while count == Assemble.core.commander?.userPresets.count {
                 Thread.sleep(forTimeInterval: 0.025)
             }
 
+            count = Assemble.core.commander?.userPresets.count
+            Assemble.core.commander?.copyFactoryPreset(number: 2)
+            while count == Assemble.core.commander?.userPresets.count {
+                Thread.sleep(forTimeInterval: 0.025)
+            }
+            
             Assemble.core.commander?.copyFactoryPreset(number: 1)
             self.presetLabel.text = Assemble.core.commander?.currentPreset?.name
             self.sequencer.initialiseFromUnderlyingState()

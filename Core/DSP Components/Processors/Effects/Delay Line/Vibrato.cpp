@@ -61,12 +61,12 @@ void Vibrato::setSampleRate(float sampleRate)
 
 inline void Vibrato::update()
 {
-    const float x = depth.load();
-    const float y = bypassed ? 0.F : targetDepth.load();
+    const float source = depth.load();
+    const float target = bypassed ? 0.F : targetDepth.load();
     
-    if (x == y) return;
-    if (depth.load() > y) fadeOut(y);
-    else                   fadeIn(y);
+    if (source == target) return;
+    if (source >  target) fadeOut(target);
+    else                   fadeIn(target);
 }
 
 void Vibrato::process(float& sample)
@@ -75,14 +75,17 @@ void Vibrato::process(float& sample)
 
     samples[whead] = sample;
 
-    sample = Assemble::Utilities::hermite(rhead, samples.data(), capacity);
+    sample = Assemble::Utilities::lerp(rhead, samples.data(), capacity);
 
     whead = whead + 1;
-    whead = whead - static_cast<int>(whead >= capacity) * capacity;
+    whead = static_cast<int>(whead < capacity) * whead;
 
     rhead = whead - depth + depth * modulator.nextSample();
-    rhead = rhead + static_cast<int>(rhead <  0) * capacity;
-    rhead = rhead - static_cast<int>(rhead >= capacity) * capacity;
     
+    if (rhead > whead) printf(">\n");
+    
+    while (rhead >= capacity) rhead = rhead - capacity;
+    while (rhead < 0)         rhead = rhead + capacity;
+
     if (!portamento.complete()) modulator.update(portamento.get());
 }

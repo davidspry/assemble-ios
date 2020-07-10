@@ -167,13 +167,13 @@ public class ASCommanderAU : ASAudioUnit
     /// `factoryPresetsState`.
 
     public override var factoryPresets: [AUAudioUnitPreset]? {
-        return [EmptyPreset.preset, FactoryPresetA.preset, FactoryPresetB.preset]
+        return [EmptyPreset.preset, FactoryPresetA.preset, FactoryPresetB.preset, FactoryPresetC.preset]
     }
     
     /// The state of each factory preset
 
     public var factoryPresetsState: [[String:Any]?] {
-        return [EmptyPreset.state, FactoryPresetA.state, FactoryPresetB.state]
+        return [EmptyPreset.state, FactoryPresetA.state, FactoryPresetB.state, FactoryPresetC.state]
     }
     
     /// The current preset of the AudioUnit. Assigning to this property loads the state of a user preset.

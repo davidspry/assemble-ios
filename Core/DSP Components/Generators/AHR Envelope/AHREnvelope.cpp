@@ -19,7 +19,7 @@ void AHREnvelope::set(float attack, float hold, float release)
     holdInSamples    = Assemble::Utilities::samples(hold,   sampleRate);
     releaseInSamples = Assemble::Utilities::samples(release,sampleRate);
 
-    if (time > releaseInSamples) setMode(Recovery);
+    setMode(Recovery);
 }
 
 void AHREnvelope::setSampleRate(float sampleRate)
@@ -86,8 +86,11 @@ const float AHREnvelope::nextSample()
 
         case Release:
         {
-            amplitude = std::powf(computeRelease(time), 3.0F);
-            mode = static_cast<Mode>(Release + static_cast<int>(amplitude <= 0.0F));
+            if (time <= releaseInSamples)
+                amplitude = std::powf(computeRelease(time), 3.0F);
+            
+            mode = static_cast<Mode>(Release + static_cast<int>(time == releaseInSamples) * 1);
+            mode = static_cast<Mode>(Release + static_cast<int>(time >  releaseInSamples) * 2);
             break;
         }
 

@@ -91,8 +91,9 @@ const float HuovilainenFilter::process(float sample)
 {
     float W, E = 1.F;
 
-    if (ahr != nullptr) E = ahr->nextSample();
-    
+    if (ahr != nullptr)
+        E = Assemble::Utilities::bound(ahr->nextSample(), 0.F, 1.F);
+
     set(E * targetFrequency, E * targetResonance);
 
     for (size_t oversampling = 0; oversampling < 1; ++oversampling)

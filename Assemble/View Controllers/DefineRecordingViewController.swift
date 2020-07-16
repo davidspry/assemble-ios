@@ -8,7 +8,7 @@ class DefineRecordingViewController: UIViewController {
 
     @IBOutlet weak var windowPanel: UIView!
 
-    @IBOutlet weak var mediaTypeSelector: UISegmentedControl!
+    @IBOutlet weak var mediaTypeSelector: ASSegmentedControl!
 
     @IBOutlet weak var waveform: UIButton!
 
@@ -53,10 +53,14 @@ class DefineRecordingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupMediaTypeSelector()
+//        setupMediaTypeSelector()
         visualisation = .waveform
-        waveform.isPointerInteractionEnabled = true
-        lissajous.isPointerInteractionEnabled = true
+        mediaTypeSelector.selectedSegmentIndex = 1
+
+        if #available(iOS 13.4, *) {
+            waveform.isPointerInteractionEnabled = true
+            lissajous.isPointerInteractionEnabled = true
+        }
 
         let selector = #selector(didSelectMediaType)
         mediaTypeSelector.addTarget(self, action: selector, for: .valueChanged)
@@ -136,33 +140,33 @@ class DefineRecordingViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    /// Initialise the media type selector.
-    /// The media type selector allows the user to select between audio, square video, and portrait video media.
-
-    private func setupMediaTypeSelector() {
-        setupMediaTypeSelectorFont()
-        styleMediaTypeSelector()
-    }
-    
-    /// Setup the media type selector's font
-
-    private func setupMediaTypeSelectorFont() {
-        let font = UIFont.init(name: "JetBrainsMono-Regular", size: 13)
-        let secondaryColour = UIColor.init(named: "Secondary") ?? UIColor.lightText
-        mediaTypeSelector.setTitleTextAttributes([.foregroundColor : UIColor.white],   for: .selected)
-        mediaTypeSelector.setTitleTextAttributes([.foregroundColor : secondaryColour], for: .normal)
-        mediaTypeSelector.setTitleTextAttributes([.foregroundColor : secondaryColour], for: .highlighted)
-        mediaTypeSelector.setTitleTextAttributes([.font : font as Any], for: .normal)
-        mediaTypeSelector.layoutIfNeeded()
-    }
-    
-    /// Set the background colour and tint colour of the media type selector
-
-    private func styleMediaTypeSelector() {
-        mediaTypeSelector.masksToBounds = false
-        mediaTypeSelector.backgroundColor = UIColor.clear
-        mediaTypeSelector.selectedSegmentTintColor = UIColor.mutedOrange
-        mediaTypeSelector.selectedSegmentIndex = 1
-    }
+//    /// Initialise the media type selector.
+//    /// The media type selector allows the user to select between audio, square video, and portrait video media.
+//
+//    private func setupMediaTypeSelector() {
+//        setupMediaTypeSelectorFont()
+//        styleMediaTypeSelector()
+//    }
+//
+//    /// Setup the media type selector's font
+//
+//    private func setupMediaTypeSelectorFont() {
+//        let font = UIFont.init(name: "JetBrainsMono-Regular", size: 13)
+//        let secondaryColour = UIColor.init(named: "Secondary") ?? UIColor.lightText
+//        mediaTypeSelector.setTitleTextAttributes([.foregroundColor : UIColor.white],   for: .selected)
+//        mediaTypeSelector.setTitleTextAttributes([.foregroundColor : secondaryColour], for: .normal)
+//        mediaTypeSelector.setTitleTextAttributes([.foregroundColor : secondaryColour], for: .highlighted)
+//        mediaTypeSelector.setTitleTextAttributes([.font : font as Any], for: .normal)
+//        mediaTypeSelector.layoutIfNeeded()
+//    }
+//
+//    /// Set the background colour and tint colour of the media type selector
+//
+//    private func styleMediaTypeSelector() {
+//        mediaTypeSelector.masksToBounds = false
+//        mediaTypeSelector.backgroundColor = UIColor.clear
+//        mediaTypeSelector.selectedSegmentTintColor = UIColor.mutedOrange
+//        mediaTypeSelector.selectedSegmentIndex = 1
+//    }
 
 }

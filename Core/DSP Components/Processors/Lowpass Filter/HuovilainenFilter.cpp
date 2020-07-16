@@ -63,7 +63,7 @@ void HuovilainenFilter::set(uint64_t parameter, float value)
 
 float HuovilainenFilter::quicktanh(float x)
 {
-    float sign = x < 0 ? -1.F : 1.F;
+    float sign = x < 0 ? -1.0F : 1.0F;
     
     x = std::abs(x);
     if (x >= 4.0F) return sign;
@@ -83,20 +83,21 @@ void HuovilainenFilter::set(const float frequency, const float resonance)
     const float F = 1.873F * cutoffCubed + 0.4955F * cutoffSquared - 0.649F * cutoff + 0.9988F;
 
     A = -3.9364F * cutoffSquared + 1.8409F * cutoff + 0.9968F;
-    G = (1.F - std::exp(-(TWO_PI * oversampledCutoff * F))) / thermal;
-    resonanceFour = 4.F * resonance * A;
+    G = (1.0F - std::exp(-(TWO_PI * oversampledCutoff * F))) / thermal;
+    resonanceFour = 2.0F * (resonance * A);
 }
 
 const float HuovilainenFilter::process(float sample)
 {
     float W, E = 1.F;
-
-    if (ahr != nullptr)
+    
+    if (ahr != nullptr) {
         E = Assemble::Utilities::bound(ahr->nextSample(), 0.F, 1.F);
+    }
 
     set(E * targetFrequency, E * targetResonance);
 
-    for (size_t oversampling = 0; oversampling < 1; ++oversampling)
+    for (size_t oversampling = 0; oversampling < 2; ++oversampling)
     {
         sample = sample - resonanceFour * delay[5];
         delay[0] = delay[0] + G * (quicktanh(sample * thermal) - tanhStage[0]);
@@ -106,7 +107,8 @@ const float HuovilainenFilter::process(float sample)
         {
             sample = stage[k-1];
             tanhStage[k-1] = quicktanh(sample * thermal);
-            W = k != 3 ? tanhStage[k] : quicktanh(delay[k] * thermal);
+            W = static_cast<int>(k <  3) * tanhStage[k] +
+                static_cast<int>(k == 3) * quicktanh(delay[k] * thermal);
             stage[k] = delay[k] + G * (tanhStage[k-1] - W);
             delay[k] = stage[k];
         }

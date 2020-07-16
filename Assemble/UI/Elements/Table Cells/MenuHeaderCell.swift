@@ -36,8 +36,10 @@ class MenuHeaderCell: UITableViewCell {
     /// - Parameter parameter: The address of a parameter that can has boolean values
 
     func initialise(with parameter: Int32) {
-        toggle.isPointerInteractionEnabled = true
-        toggle.pointerStyleProvider = pointerInteractionStyle(_:_:_:)
+        if #available(iOS 13.4, *) {
+            toggle.isPointerInteractionEnabled = true
+            toggle.pointerStyleProvider = pointerInteractionStyle(_:_:_:)
+        }
 
         let state = Assemble.core.getParameter(parameter)
         self.state = Int(state) == 0 ? false : true
@@ -54,6 +56,7 @@ class MenuHeaderCell: UITableViewCell {
 
     /// Define a pointer interaction style for the cell
 
+    @available(iOS 13.4, *)
     private func pointerInteractionStyle(_ button: UIButton, _ effect: UIPointerEffect, _ shape: UIPointerShape) -> UIPointerStyle? {
         let view = UITargetedPreview(view: button)
         let effect = UIPointerEffect.hover(view)

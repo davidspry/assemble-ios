@@ -38,7 +38,7 @@ public:
     {
         using namespace Assemble::Utilities;
         const float index  = static_cast<float>(wavetable.length()) * phase;
-        const float sample = lerp(index, wavetable.table(), wavetable.length());
+        const float sample = hermite(index, wavetable.table(), wavetable.length());
 
         phase += translation;
         phase += static_cast<int>(phase >= 1.0F) * -1.0F;

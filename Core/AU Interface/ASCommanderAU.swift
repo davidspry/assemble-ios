@@ -234,15 +234,16 @@ public class ASCommanderAU : ASAudioUnit
     
     /// Copy the factory preset with the given index number to the user presets folder and select it.
     /// - Parameter number: The index of the desired factory preset
+    /// - Parameter shouldSelect: Whether the preset should be selected after saving.
 
     @discardableResult
-    public func copyFactoryPreset(number: Int) -> Bool {
+    public func copyFactoryPreset(number: Int, _ shouldSelect: Bool) -> Bool {
         guard let presets = factoryPresets else { return false }
         guard !(number < 0) && number < presets.count else { return false }
         
         currentPreset = presets[number]
         fullStateForDocument = factoryPresetsState[number]
-        saveState(named: currentPreset?.name ?? "Factory Preset")
+        saveState(named: currentPreset?.name ?? "Factory Preset", shouldSelect)
         
         return true
     }
@@ -308,10 +309,11 @@ public class ASCommanderAU : ASAudioUnit
 
     /// Save the current state as a new user preset using the next available number, then select the new preset.
     /// - Parameter name: The name of the preset.
+    /// - Parameter shouldSelect: Whether the preset's index should be selected after saving.
     /// - Complexity: O(N), where `N` is the number of user presets.
 
     @discardableResult
-    public func saveState(named name: String) -> Bool {
+    public func saveState(named name: String, _ shouldSelect: Bool = true) -> Bool {
         let number = nextAvailablePresetNumber()
         let preset = AUAudioUnitPreset()
             preset.name = name
@@ -324,7 +326,7 @@ public class ASCommanderAU : ASAudioUnit
         catch { print(failure); return false }
 
         print(success)
-        selectPresetZero(named: preset.name, after: 25)
+        if shouldSelect { selectPresetZero(named: preset.name, after: 25) }
         return true
     }
     
@@ -424,7 +426,7 @@ public class ASCommanderAU : ASAudioUnit
         
         for pattern in 0 ..< PATTERNS {
             if let data = __interop__GetPatternState(dsp, pattern) {
-                let string = String(cString: data, encoding: .ascii)
+                let string = String(cString: data, encoding: .nonLossyASCII)
                 state["P\(pattern)"] = string
             }
         }

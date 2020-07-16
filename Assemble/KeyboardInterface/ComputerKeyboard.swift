@@ -52,52 +52,53 @@ class ComputerKeyboard : UIViewController, KeyboardSettingsListener
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         for press in presses {
-            KeyboardHandler.parse(press) { action, value in
-                switch (action) {
-                case .navigate:
-                    self.listeners.invoke({ $0.didNavigate(by: value) })
-                    break
-                
-                case .transport:
-                    self.transportListeners.invoke({ $0.pressPlayOrPause() })
-                    break
-                
-                case .place:
-                    self.listeners.invoke({
-                        $0.pressNote(self.octaveAsNoteNumber + value, shape: self.oscillator)
-                    });
-                    break
-
-                case .erase:
-                    self.listeners.invoke({ $0.eraseNote() })
-                    break
-                    
-                case .mode:
-                    Assemble.core.didToggleMode()
-                    break
-
-                case .noctave:
-                    self.listeners.invoke({ $0.setOctave(value) })
-                    break
-                
-                case .uoctave:
-                    self.octave = value
-                    self.settingsListeners.invoke({ $0.didChangeOctave(to: self.octave )})
-                    break
-
-                case .noscillator:
-                    self.listeners.invoke({ $0.setOscillator(Bool(value)) })
-                    break
-
-                case .uoscillator:
-                    self.oscillator = value == 0 ? self.oscillator.previous() : self.oscillator.next()
-                    self.settingsListeners.invoke({ $0.didChangeOscillator(to: self.oscillator)})
-                    break
-
-                default: break
+            if #available(iOS 13.4, *) {
+                KeyboardHandler.parse(press) { action, value in
+                    switch (action) {
+                    case .navigate:
+                        self.listeners.invoke({ $0.didNavigate(by: value) })
+                        break
+                        
+                    case .transport:
+                        self.transportListeners.invoke({ $0.pressPlayOrPause() })
+                        break
+                        
+                    case .place:
+                        self.listeners.invoke({
+                            $0.pressNote(self.octaveAsNoteNumber + value, shape: self.oscillator)
+                        });
+                        break
+                        
+                    case .erase:
+                        self.listeners.invoke({ $0.eraseNote() })
+                        break
+                        
+                    case .mode:
+                        Assemble.core.didToggleMode()
+                        break
+                        
+                    case .noctave:
+                        self.listeners.invoke({ $0.setOctave(value) })
+                        break
+                        
+                    case .uoctave:
+                        self.octave = value
+                        self.settingsListeners.invoke({ $0.didChangeOctave(to: self.octave )})
+                        break
+                        
+                    case .noscillator:
+                        self.listeners.invoke({ $0.setOscillator(Bool(value)) })
+                        break
+                        
+                    case .uoscillator:
+                        self.oscillator = value == 0 ? self.oscillator.previous() : self.oscillator.next()
+                        self.settingsListeners.invoke({ $0.didChangeOscillator(to: self.oscillator)})
+                        break
+                        
+                    default: break
+                    }
                 }
             }
-
         }
     }
 }

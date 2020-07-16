@@ -22,24 +22,26 @@ struct NoteUtilities
     /// subtracted from the decoded ASCII value.
     ///
     /// - SeeAlso:
-    /// `./Core/Components/Sequencer/Note.hpp`
+    /// `./Core/DSP Components/Sequencer/Note.hpp`
     
     public static func decode(from encoded: Substring) -> [Note] {
         var notes = [Note]()
 
-        let range = encoded.split(separator: "#", maxSplits: .max, omittingEmptySubsequences: true)
+        let range = encoded.split(separator: "~", maxSplits: .max, omittingEmptySubsequences: true)
         if !range.isEmpty {
-            for note in range {
-                if (note.count < 5) || (note.first?.asciiValue ?? 0) < 4 {
-                    print("[NoteUtilities] Note encoded with fewer than 4 attributes: \(note.map{ $0.asciiValue })")
+            for substring in range {
+                let note = substring.unicodeScalars
+                if (note.count < 5) || (note.first?.value) ?? 0 < 4 {
+                    let warning = "[NoteUtilities] Note encoded with fewer than 4 attributes:"
+                    print(warning, note.map{ $0.escaped(asASCII: true) })
                     continue
                 }
 
-                let data = note.map { Int($0.asciiValue ?? 1) - 1 }
+                let data = note.map { Int($0.value) - 1 }
                 let xy = CGPoint(x: data[1], y: data[2])
-                let note = data[3]
+                let pitch = data[3]
                 let shape = OscillatorShape.init(rawValue: data[4]) ?? OscillatorShape.sine
-                notes.append((xy, note, shape))
+                notes.append((xy, pitch, shape))
             }
         }
 

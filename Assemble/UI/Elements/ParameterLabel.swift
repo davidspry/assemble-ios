@@ -69,8 +69,10 @@ class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
         self.parameter = parameter
         update()
 
-        let interaction = UIPointerInteraction(delegate: self)
-        self.addInteraction(interaction)
+        if #available(iOS 13.4, *) {
+            let interaction = UIPointerInteraction(delegate: self)
+            addInteraction(interaction)
+        }
     }
     
     /// Re-initialise the label from its existing parameter address
@@ -125,6 +127,7 @@ class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
     
     /// Define a pointer interaction style for the label
 
+    @available(iOS 13.4, *)
     func pointerInteraction(_ interaction: UIPointerInteraction, styleFor region: UIPointerRegion) -> UIPointerStyle? {
         let view = UITargetedPreview(view: self)
         let effect = UIPointerEffect.hover(view, preferredTintMode: .overlay, prefersShadow: true, prefersScaledContent: false)

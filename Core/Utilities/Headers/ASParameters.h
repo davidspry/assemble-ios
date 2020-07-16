@@ -51,6 +51,15 @@ static const int kSawFilterFrequency      = 0xF040;
 static const int kSawFilterResonance      = 0xF041;
 // ===========================================
 
+// [POLYPHONY]
+// ===========================================
+// Polyphony: 0xAB[Osc]0
+static const int kSinBankPolyphony        = 0xAB10;
+static const int kTriBankPolyphony        = 0xAB20;
+static const int kSqrBankPolyphony        = 0xAB30;
+static const int kSawBankPolyphony        = 0xAB40;
+// ===========================================
+
 // [ENVELOPES]
 // ===========================================
 // Amplitude: 0xAE[Osc][Parameter]

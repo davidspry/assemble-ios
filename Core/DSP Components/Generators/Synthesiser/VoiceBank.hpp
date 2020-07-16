@@ -27,8 +27,8 @@ public:
             voices[v].assign(&(oscillators[v]));
         }
         
-        frequency.set(0.75F, 1.0F);
-        resonance.set(0.05F, 1.0F);
+        frequency.set(1.00F, 0.15F);
+        resonance.set(0.05F, 0.15F);
     }
 
 public:
@@ -39,7 +39,7 @@ public:
         voices.at(nextVoice).load(frequency);
 
         nextVoice = nextVoice + 1;
-        nextVoice = nextVoice - static_cast<int>(nextVoice >= N) * N;
+        nextVoice = static_cast<int>(nextVoice < polyphony) * nextVoice;
     }
 
     /// \brief Poll each Voice for its next sample, and poll each ValueTransition for its next value.
@@ -48,11 +48,15 @@ public:
     inline const float nextSample() noexcept
     {
         float sample = 0.0F;
+        const float frequency = this->frequency.get();
+        const float resonance = this->resonance.get();
+        const bool  fcomplete = this->frequency.complete();
+        const bool  rcomplete = this->resonance.complete();
         
         for (auto& voice : voices)
         {
-            if (!frequency.complete()) voice.set(kFrequencyType, frequency.get());
-            if (!resonance.complete()) voice.set(kResonanceType, resonance.get());
+            if (!fcomplete) voice.set(kFrequencyType, frequency);
+            if (!rcomplete) voice.set(kResonanceType, resonance);
 
             sample += voice.nextSample();
         }
@@ -69,7 +73,7 @@ public:
         for (auto& voice : voices)
             voice.setSampleRate(sampleRate);
     }
-    
+
     /// \brief Get the parameter values of the VoiceBank.
     /// \param parameter The hexadecimal address of the desired parameter
 
@@ -85,6 +89,15 @@ public:
             {
                 return voices[0].get(parameter);
             }
+                
+            /// Get the polyphony value for this VoiceBank.
+
+            case 0xAB:
+            {
+                return polyphony.load();
+            }
+
+            /// Get a value from the filter for this VoiceBank.
 
             case 0xF0:
             {
@@ -119,6 +132,16 @@ public:
 
                 return;
             }
+                
+            /// \brief Set the polyphony of the Voice bank. This value defines
+            /// the upper bound on the number of Voices that can be loaded with new
+            /// notes.
+
+            case 0xAB:
+            {
+                const int voices = Assemble::Utilities::bound(value, 1, N);
+                return polyphony.store(voices);
+            }
 
             /// \brief Set the parameters of the ValueTransition objects who
             /// define smooth transitions for each Voice's filter frequency and resonance.
@@ -138,7 +161,8 @@ public:
 
 private:
     int nextVoice = 0;
-    
+    std::atomic<int> polyphony = {N};
+
 private:
     ValueTransition frequency;
     ValueTransition resonance;

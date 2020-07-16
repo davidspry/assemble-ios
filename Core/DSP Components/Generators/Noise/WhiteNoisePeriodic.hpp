@@ -19,7 +19,7 @@ public:
     const float get(uint64_t parameter)
     {
         if (parameter == kIAPToggle001)
-            return static_cast<float>(active);
+            return static_cast<float>(bypassed);
         
         return 0.0F;
     }
@@ -31,7 +31,7 @@ public:
     void set(uint64_t parameter, float value)
     {
         if (parameter == kIAPToggle001)
-            active = static_cast<bool>(value);
+            bypassed = static_cast<bool>(value);
     }
     
     void setSampleRate(const float sampleRate)
@@ -44,7 +44,7 @@ public:
     {
         advance();
 
-        if (active && amplitude > 0.0F)
+        if (!(bypassed) && amplitude > 0.0F)
             return noDenormals + scalar * amplitude * noise.nextSample();
 
         return 0.F;
@@ -74,14 +74,14 @@ private:
 private:
     int time;
     int seconds;
-    float scalar = 2E-2F;
+    float scalar = 5E-2F;
     constexpr static int audible = 15;
     constexpr static int silence = 45;
     constexpr static float noDenormals = 1E-25F;
 
 private:
-    bool active = true;
     bool silent = true;
+    bool bypassed = true;
     float amplitude  = 0.F;
     float sampleRate = 48000.F;
 

@@ -7,9 +7,9 @@ import Foundation
 struct UserDefaultsKeys {
     
     /// A Bool value indicating whether Assemble's IAP (to disable periodic white noise) has been purchased or not.
-    /// - Note: This key contains the IAP's identifier.
+    /// - Note: This key contains the Product ID of Assemble's IAP, 'Assemble Unlocked'.
 
-    static let iap = "assemble.iap.001"
+    static let iap = "io.davidspry.assemble.iap.001"
     
     /// A Bool value indicating whether Assemble is being launched for the first time
 

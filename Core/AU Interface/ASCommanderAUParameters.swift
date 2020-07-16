@@ -29,9 +29,9 @@ struct ASCommanderAUParameters
     static private let defaultEnvelopeH: Float = 0.0
     static private let defaultEnvelopeR: Float = 500.0
     
-    static private let defaultEnvelopeRangeA: ClosedRange<Float> = 1.0...500.0
+    static private let defaultEnvelopeRangeA: ClosedRange<Float> = 0.0...500.0
     static private let defaultEnvelopeRangeH: ClosedRange<Float> = 0.0...500.0
-    static private let defaultEnvelopeRangeR: ClosedRange<Float> = 1.0...3000.0
+    static private let defaultEnvelopeRangeR: ClosedRange<Float> = 5.0...3000.0
     
     static private let defaultFilterFrequency: Float = 1
     static private let defaultFilterResonance: Float = 0

@@ -103,17 +103,17 @@ private:
     /// \brief Compute the attack function at the given time value
     /// \param time The current time value in samples
     
-    inline const float computeAttack(int & time);
+    inline const float computeAttack(uint & time);
     
     /// \brief Compute the release function at the given time value
     /// \param time The current time value in samples
     
-    inline const float computeRelease(int & time);
+    inline const float computeRelease(uint & time);
 
 private:
-    int time;
-    int attackInMs, holdInMs, releaseInMs;
-    int attackInSamples, holdInSamples, releaseInSamples;
+    uint time;
+    int  attackInMs, holdInMs, releaseInMs;
+    int  attackInSamples, holdInSamples, releaseInSamples;
 
 private:
     float amplitude  = 0.F;

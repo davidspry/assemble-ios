@@ -62,13 +62,13 @@ public:
 
     void getNote(const int x, const int y, int* note, int* shape)
     {
-        const Note& datum = sequencer.patterns.at(sequencer.pattern).pattern.at(x, y);
+        const Note* datum = sequencer.patterns.at(sequencer.pattern).pattern.at(x, y);
         
-        if (datum.null)
+        if (datum == nullptr || datum->null)
             return;
 
-        *note  = datum.note;
-        *shape = datum.shape;
+        *note  = datum->note;
+        *shape = datum->shape;
     }
     
     /// \brief Write a note to the sequencer at position (x, y)

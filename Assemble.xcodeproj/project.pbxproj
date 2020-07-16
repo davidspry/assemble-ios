@@ -10,6 +10,8 @@
 		140404B924B3465E0094EC6B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 140404B024B3465E0094EC6B /* LICENSE */; };
 		140404BA24B3465E0094EC6B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 140404B324B3465E0094EC6B /* README.md */; };
 		140404C024B34D770094EC6B /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140404BE24B34D760094EC6B /* r8bbase.cpp */; };
+		1409860224C014D10025157D /* UnlockedFeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860124C014D10025157D /* UnlockedFeaturesViewController.swift */; };
+		1409860424C01BF30025157D /* ASSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860324C01BF30025157D /* ASSegmentedControl.swift */; };
 		140B63CA2484D70600D571D1 /* MediaRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63C92484D70600D571D1 /* MediaRecorder.swift */; };
 		140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63D32485371100D571D1 /* UIButtonExtensions.swift */; };
 		141DDA51243F81140020386C /* AHREnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA4F243F81140020386C /* AHREnvelope.cpp */; };
@@ -26,6 +28,9 @@
 		14280352246C3DC2006775AE /* ParameterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280351246C3DC2006775AE /* ParameterMenu.swift */; };
 		1428A2D5247F8B5400C8B353 /* EmptyPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */; };
 		1428A2D7247F9C4E00C8B353 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D6247F9C4E00C8B353 /* SongCell.swift */; };
+		14347A0924BD709E007ED1CB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14347A0824BD709E007ED1CB /* StoreKit.framework */; };
+		14347A0C24BD8D30007ED1CB /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */; };
+		1437D70724BDE99000315897 /* UnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437D70624BDE99000315897 /* UnlockViewController.swift */; };
 		143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */; };
 		143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */; };
 		143FB005243F301C0058AE40 /* Attribution.md in Resources */ = {isa = PBXBuildFile; fileRef = 143FB004243F301C0058AE40 /* Attribution.md */; };
@@ -156,6 +161,8 @@
 		140404BD24B346C60094EC6B /* fft4g.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft4g.h; sourceTree = "<group>"; };
 		140404BE24B34D760094EC6B /* r8bbase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = r8bbase.cpp; sourceTree = "<group>"; };
 		140404BF24B34D770094EC6B /* r8butil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8butil.h; sourceTree = "<group>"; };
+		1409860124C014D10025157D /* UnlockedFeaturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockedFeaturesViewController.swift; sourceTree = "<group>"; };
+		1409860324C01BF30025157D /* ASSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSegmentedControl.swift; sourceTree = "<group>"; };
 		140B63C92484D70600D571D1 /* MediaRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRecorder.swift; sourceTree = "<group>"; };
 		140B63D32485371100D571D1 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
 		140B63D6248560FC00D571D1 /* WhiteNoise.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WhiteNoise.hpp; sourceTree = "<group>"; };
@@ -183,6 +190,10 @@
 		14280351246C3DC2006775AE /* ParameterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMenu.swift; sourceTree = "<group>"; };
 		1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPreset.swift; sourceTree = "<group>"; };
 		1428A2D6247F9C4E00C8B353 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
+		14347A0824BD709E007ED1CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		14347A0A24BD70A6007ED1CB /* Assemble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Assemble.entitlements; sourceTree = "<group>"; };
+		14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		1437D70624BDE99000315897 /* UnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewController.swift; sourceTree = "<group>"; };
 		143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioUnitBase.m; sourceTree = "<group>"; };
 		143FAFFD243F17DF0058AE40 /* ASAudioUnitBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioUnitBase.h; sourceTree = "<group>"; };
 		143FB000243F2E940058AE40 /* ASAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAudioUnit.h; sourceTree = "<group>"; };
@@ -311,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DB9E71246538E0000AAD79 /* AudioToolbox.framework in Frameworks */,
+				14347A0924BD709E007ED1CB /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +422,7 @@
 				14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */,
 				144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */,
 				140B63D32485371100D571D1 /* UIButtonExtensions.swift */,
+				14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -719,13 +732,13 @@
 			path = "Delay Line";
 			sourceTree = "<group>";
 		};
-		14AFB89A2452361E00F5AD3A /* UIResponder */ = {
+		14AFB89A2452361E00F5AD3A /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
 				14DAC3882417772C005654EA /* AppDelegate.swift */,
 				14DAC38A2417772C005654EA /* SceneDelegate.swift */,
 			);
-			path = UIResponder;
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		14AFB89B2452362400F5AD3A /* View Controllers */ = {
@@ -740,6 +753,8 @@
 				14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */,
 				14488DB924A32F3200B44A6C /* DefineRecordingViewController.swift */,
 				14488DBD24A39C5C00B44A6C /* ShareCardViewController.swift */,
+				1409860124C014D10025157D /* UnlockedFeaturesViewController.swift */,
+				1437D70624BDE99000315897 /* UnlockViewController.swift */,
 				14C1E40624990BA500980AA9 /* HelpViewController.swift */,
 			);
 			path = "View Controllers";
@@ -777,6 +792,7 @@
 		14CA4FE9243EF32A00F3C685 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14347A0824BD709E007ED1CB /* StoreKit.framework */,
 				14DB9E70246538E0000AAD79 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
@@ -811,6 +827,7 @@
 		14DAC3872417772C005654EA /* Assemble */ = {
 			isa = PBXGroup;
 			children = (
+				14347A0A24BD70A6007ED1CB /* Assemble.entitlements */,
 				1458D12B24531DA30093B541 /* Assets */,
 				146B55EB242CDA90001163B3 /* Audio */,
 				149ACC2524543602009DA18F /* Utilities */,
@@ -818,7 +835,7 @@
 				149ACC20245424B0009DA18F /* KeyboardInterface */,
 				14AFB89B2452362400F5AD3A /* View Controllers */,
 				14AFB89C2452363000F5AD3A /* Storyboards */,
-				14AFB89A2452361E00F5AD3A /* UIResponder */,
+				14AFB89A2452361E00F5AD3A /* Delegates */,
 			);
 			path = Assemble;
 			sourceTree = "<group>";
@@ -847,6 +864,7 @@
 				1458D130245328550093B541 /* PaddedLabel.swift */,
 				14D2D5C5246C747C003675C2 /* ParameterLabel.swift */,
 				144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */,
+				1409860324C01BF30025157D /* ASSegmentedControl.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -977,6 +995,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1437D70724BDE99000315897 /* UnlockViewController.swift in Sources */,
 				143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */,
 				14280352246C3DC2006775AE /* ParameterMenu.swift in Sources */,
 				1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */,
@@ -1019,10 +1038,12 @@
 				144D862B246D1F4100F6EDD4 /* TransportListener.swift in Sources */,
 				14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */,
 				141DDA6B243F95D00020386C /* Voice.cpp in Sources */,
+				1409860224C014D10025157D /* UnlockedFeaturesViewController.swift in Sources */,
 				14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */,
 				14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */,
 				141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */,
 				14488DBA24A32F3200B44A6C /* DefineRecordingViewController.swift in Sources */,
+				1409860424C01BF30025157D /* ASSegmentedControl.swift in Sources */,
 				14D3AE982432F3AC0095B587 /* DotGrid.swift in Sources */,
 				141DDA66243F918E0020386C /* SquareOscillator.cpp in Sources */,
 				14C732C824A0568A00FD668F /* MediaUtilities.swift in Sources */,
@@ -1057,6 +1078,7 @@
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
 				14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */,
 				140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */,
+				14347A0C24BD8D30007ED1CB /* CollectionExtension.swift in Sources */,
 				14488DBE24A39C5C00B44A6C /* ShareCardViewController.swift in Sources */,
 				149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */,
 				14280350246C3DB9006775AE /* OscillatorParameters.swift in Sources */,
@@ -1216,13 +1238,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Assemble/Assemble.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_UNROLL_LOOPS = YES;
 				INFOPLIST_FILE = Assemble/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1231,7 +1255,7 @@
 				);
 				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ds.Assemble;
+				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
@@ -1247,13 +1271,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_ENTITLEMENTS = Assemble/Assemble.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_UNROLL_LOOPS = YES;
 				INFOPLIST_FILE = Assemble/Assets/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1262,7 +1288,7 @@
 				);
 				MARKETING_VERSION = 0.2;
 				OTHER_LDFLAGS = "-lc++";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ds.Assemble;
+				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;

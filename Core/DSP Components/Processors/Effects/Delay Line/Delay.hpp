@@ -30,8 +30,9 @@ public:
     
     inline void setInMilliseconds(int time)
     {
-        target = Assemble::Utilities::samples(time, clock->sampleRate);
-        target = target + offsetInSamples;
+        const float sampleRate = clock->sampleRate * (float) OVERSAMPLING;
+        const float target = Assemble::Utilities::samples(time, sampleRate) + offsetInSamples;
+        delay.set(target);
     }
     
     /// \brief Set the delay time as a factor of musical time
@@ -39,12 +40,10 @@ public:
 
     inline void setInMusicalTime(float time)
     {
-        this->bpm  = clock->bpm;
         this->time = time;
-        target = clock->sampleRate * 60 / clock->bpm * time;
-        target = target + offsetInSamples;
-        target = target * (float) OVERSAMPLING;
-        
+        this->bpm  = clock->bpm;
+        const float target = clock->sampleRate * (float) OVERSAMPLING * 60 / bpm * time;
+        delay.set(target + offsetInSamples);
     }
 
     /// \brief Get a parameter value from the Delay
@@ -118,9 +117,7 @@ private:
     float rhead;
 
 private:
-    float delay;
-    float target;
-    int targetAsIndex;
+    int timeTargetIndex;
     int offsetInSamples = 0;
 
 private:
@@ -139,9 +136,10 @@ private:
     std::vector<float> samples;
 
 private:
-    float time;
-    uint16_t bpm;
-    Clock *clock;
+    uint16_t           bpm;
+    float             time;
+    Clock *          clock;
+    ValueTransition  delay = {1E3F, 96E3F, 2.0F};
 };
 
 #endif

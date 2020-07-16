@@ -23,13 +23,19 @@ public:
     
 public:
     const float get();
-    void set(float target);
-    void set(float target, float timeInSeconds) noexcept;
-    void set(float value, float target, float timeinSeconds) noexcept;
-    void setSampleRate(const float sampleRate);
-    inline const float getTarget() { return target; }
-    inline const bool complete() { return !(timeInSamples > 0); }
     
+    void set(float target);
+    
+    void set(float target, float timeInSeconds) noexcept;
+    
+    void set(float value, float target, float timeinSeconds) noexcept;
+    
+    void setSampleRate(const float sampleRate);
+    
+    inline const float getTarget() { return (float) target; }
+    
+    inline const bool complete() { return timeInSamples <= 0; }
+
 private:
     /// @author ROLI Ltd.
     /// =================================================================================
@@ -46,12 +52,12 @@ private:
     }
 
 private:
-    float target = 0.F;
-    float value = 0.F;
-    float delta = 0.F;
+    double target = 0.F;
+    double value = 0.F;
+    double delta = 0.F;
     
 private:
-    float timeInSamples;
+    int   timeInSamples;
     float timeInSeconds = 1.0F;
     float sampleRate = 48000.0F;
 };

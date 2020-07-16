@@ -30,7 +30,7 @@ public:
     /// \brief Assign an Oscillator to the Voice.
     /// \param osc The Oscillator that should correspond with the Voice.
 
-    void assign(Oscillator* osc)
+    inline void assign(Oscillator* osc)
     {
         this->osc = osc;
     }

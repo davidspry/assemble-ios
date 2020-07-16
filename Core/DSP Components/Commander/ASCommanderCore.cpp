@@ -57,11 +57,12 @@ void ASCommanderCore::set(uint64_t parameter, const float value)
 
     switch (type)
     {
-        /// \brief The parameter address types 0xAE, 0xFE, and 0xF0
-        /// address the envelopes and filters. These requests are handled by
-        /// the synthesiser.
+        /// \brief The parameter address types 0xAE, 0xAB, 0xFE, and 0xF0
+        /// address the amplitude envelopes, the voice banks, the filter envelopes, and the filters.
+        /// These requests are passed to the appropriate voice bank by the synthesiser.
 
         case 0xAE:
+        case 0xAB:
         case 0xFE:
         case 0xF0: return synthesiser.set(parameter, value);
         
@@ -83,7 +84,7 @@ void ASCommanderCore::set(uint64_t parameter, const float value)
 
         case 0xAA: return sequencer.set(parameter, value);
         case 0xCA: return clock.set(parameter, value);
-
+            
         /// \brief Set the state of the WhiteNoisePeriodic device by
         /// broadcasting a value of either 1 or 0 to the address `kIAPToggle001`.
         /// \param value If the value is 0, then white noise will be enabled.
@@ -105,6 +106,7 @@ const float ASCommanderCore::get(uint64_t parameter)
         case 0xCA: return clock.get(parameter);
 
         case 0xAE: // Fallthrough
+        case 0xAB: // Fallthrough
         case 0xFE: // Fallthrough
         case 0xF0: return synthesiser.get(parameter);
         
@@ -124,7 +126,7 @@ const float ASCommanderCore::get(uint64_t parameter)
         
         case 0xA0: return noise.get(parameter);
 
-        default:   return 0.F;
+        default: return 0.F;
     }
 }
 
@@ -164,7 +166,7 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
     const int ldownsampled = dnsamplers.at(0)->process(&(oversample[0][0]), loversampled, downsample[0]);
     const int rdownsampled = dnsamplers.at(1)->process(&(oversample[1][0]), roversampled, downsample[1]);
     const size_t size = std::min(static_cast<int>(sampleCount), std::min(ldownsampled, rdownsampled));
-    
+
     for (size_t k = 0; k < size; ++k)
     {
         const float whiteNoise = noise.nextSample();
@@ -175,16 +177,18 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
 
 void ASCommanderCore::loadFromEncodedPatternState(const char* state, const int pattern)
 {
-    const char* n = strchr(state, '#');
-    
+    const char* n = strchr(state, '~');
+
     sequencer.hardReset(pattern);
 
-    /// Decode the Pattern's on-off state
+    // Decode the Pattern's on-off state
+
     const bool status = static_cast<bool>(std::atoi(&state[0]));
     sequencer.activePatterns += static_cast<int>(status);
     sequencer.patterns.at(pattern).set(status);
 
-    /// Decode each encoded Note: "#<NumberOfAttributes><x><y><Note><Shape>"
+    // Decode each encoded Note: "#<NumberOfAttributes><x><y><Note><Shape>"
+
     while (n != nullptr)
     {
         size_t index = n - state;
@@ -194,7 +198,7 @@ void ASCommanderCore::loadFromEncodedPatternState(const char* state, const int p
         const int shape = static_cast<int>((char) *(state + index + 5) - 1);
         sequencer.addOrModifyNonCurrent(pattern, x, y, note, shape);
 
-        n = strchr(n + 1, '#');
+        n = strchr(n + 1, '~');
     }
 }
 
@@ -216,6 +220,8 @@ const char* ASCommanderCore::encodePatternState(const int pattern) noexcept(fals
             std::advance(notes, 1);
         }
     }
+    
+    std::vector<uint8_t> cree(begin(__state__), end(__state__));
 
     return __state__.c_str();
 }

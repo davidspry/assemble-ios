@@ -9,7 +9,7 @@ void AHREnvelope::set(float attack, float hold, float release)
 {
     attack  = Assemble::Utilities::bound(attack,  0.F, 3000.F);
     hold    = Assemble::Utilities::bound(hold,    0.F, 3000.F);
-    release = Assemble::Utilities::bound(release, 0.F, 3000.F);
+    release = Assemble::Utilities::bound(release, 5.F, 3000.F);
 
     attackInMs  = attack;
     holdInMs    = hold;
@@ -19,7 +19,8 @@ void AHREnvelope::set(float attack, float hold, float release)
     holdInSamples    = Assemble::Utilities::samples(hold,   sampleRate);
     releaseInSamples = Assemble::Utilities::samples(release,sampleRate);
 
-    setMode(Recovery);
+    if (!(time < releaseInSamples))
+        setMode(Recovery);
 }
 
 void AHREnvelope::setSampleRate(float sampleRate)
@@ -89,8 +90,8 @@ const float AHREnvelope::nextSample()
             if (time <= releaseInSamples)
                 amplitude = std::powf(computeRelease(time), 3.0F);
             
-            mode = static_cast<Mode>(Release + static_cast<int>(time == releaseInSamples) * 1);
-            mode = static_cast<Mode>(Release + static_cast<int>(time >  releaseInSamples) * 2);
+            mode = static_cast<Mode>(Mode::Release + static_cast<int>(time == releaseInSamples) * 1);
+            mode = static_cast<Mode>(Mode::Release + static_cast<int>(time >  releaseInSamples) * 2);
             break;
         }
 
@@ -110,7 +111,7 @@ const float AHREnvelope::nextSample()
         case Recovery:
         {
             amplitude = Assemble::Utilities::bound(amplitude - 1E-4F, 0.F, 1.F);
-            mode = static_cast<Mode>(Recovery - static_cast<int>(amplitude == 0.0F));
+            mode = static_cast<Mode>(Mode::Recovery - static_cast<int>(amplitude == 0.0F));
         }
 
     }
@@ -119,12 +120,12 @@ const float AHREnvelope::nextSample()
     return amplitude;
 }
 
-const float AHREnvelope::computeAttack(int &time)
+const float AHREnvelope::computeAttack(uint &time)
 {
     return (float) time / (float) (attackInSamples + 1);
 }
 
-const float AHREnvelope::computeRelease(int &time)
+const float AHREnvelope::computeRelease(uint &time)
 {
     return 1.0F - ((float) time / (float) (releaseInSamples + 1));
 }

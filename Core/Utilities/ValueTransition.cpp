@@ -6,14 +6,13 @@
 
 const float ValueTransition::get()
 {
-    if (timeInSamples > 0)
-    {
+    if (timeInSamples > 0) {
         timeInSamples = timeInSamples - 1;
-        value *= delta;
-        return value;
+        value = value * delta;
+        return (float) value;
     }
-    
-    return target;
+
+    return (float) target;
 }
 
 void ValueTransition::set(float target)
@@ -38,7 +37,7 @@ void ValueTransition::set(float value, float target, float timeInSeconds) noexce
         this->value = value;
         this->target = target;
         this->timeInSeconds = timeInSeconds;
-        this->timeInSamples = timeInSeconds * sampleRate;
+        this->timeInSamples = (int) (timeInSeconds * sampleRate);
         computeDelta();
     }
 }
@@ -48,6 +47,6 @@ void ValueTransition::setSampleRate(const float sampleRate)
     if (this->sampleRate != sampleRate)
     {
         this->sampleRate = sampleRate;
-        computeDelta();
+        set(value, target, timeInSeconds);
     }
 }

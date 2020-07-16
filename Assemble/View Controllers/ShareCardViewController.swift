@@ -35,7 +35,7 @@ class ShareCardViewController: UIViewController {
 
     private func didTrySaving(_ successful: Bool) {
         DispatchQueue.main.async {
-            let didSave = "The file has been saved to your photo library successfully."
+            let didSave = "The file has been saved to your photo library."
             let didFail = "The file could not be saved to your photo library."
             if successful { self.statusLabel.text = didSave }
             else          { self.statusLabel.text = didFail }

@@ -16,7 +16,9 @@ extension Transport {
         play.layer.cornerCurve = .continuous
         play.layer.cornerRadius = 15
         play.tintColor = UIColor.init(named: "Foreground") ?? .label
-        play.isPointerInteractionEnabled = true
+        if #available(iOS 13.4, *) {
+            play.isPointerInteractionEnabled = true
+        }
         addSubview(play)
         
         NSLayoutConstraint.activate([
@@ -40,7 +42,9 @@ extension Transport {
         record.layer.cornerCurve = .continuous
         record.layer.cornerRadius = 15
         record.tintColor = .sineNoteColour
-        record.isPointerInteractionEnabled = true
+        if #available(iOS 13.4, *) {
+            record.isPointerInteractionEnabled = true
+        }
         addSubview(record)
         
         NSLayoutConstraint.activate([
@@ -64,7 +68,9 @@ extension Transport {
         keyboard.layer.cornerCurve = .continuous
         keyboard.layer.cornerRadius = 15
         keyboard.tintColor = UIColor.init(named: "Foreground") ?? .label
-        keyboard.isPointerInteractionEnabled = true
+        if #available(iOS 13.4, *) {
+            keyboard.isPointerInteractionEnabled = true
+        }
         addSubview(keyboard)
         
         NSLayoutConstraint.activate([

@@ -19,6 +19,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     private(set) var updater: CADisplayLink!
     
+    /// The class responsible for recording audio and generating video media
+
     private(set) var recorder: MediaRecorder!
     
     /// A view controller that handles presses from an external computer keyboard
@@ -76,7 +78,15 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// A description of the note underlying the user's cursor on the SpriteKit sequencer
 
     @IBOutlet weak var descriptionLabel: PaddedLabel!
+    
+    /// The button that opens the unlock screen, where Assemble's IAP can be purchased or restored.
+    
+    @IBOutlet weak var unlockButton: UIButton!
+    
+    /// The button that opens the unlocked features screen, which is available to owners of Assemble's IAP product.
 
+    @IBOutlet weak var unlockedFeaturesButton: UIButton!
+    
     /// The system's visual theme (light/dark)
 
     private lazy var systemTheme = traitCollection.userInterfaceStyle
@@ -152,6 +162,12 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        /// Define Assemble's main view controller as the presentation context.
+        
+        definesPresentationContext = true
+        
+        /// Determine whether the user owns Assemble's IAP and respond accordingly.
         
         unlockIfPurchaseVerified()
         
@@ -377,18 +393,18 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
         DispatchQueue.main.async {
             var count = Assemble.core.commander?.userPresets.count
-            Assemble.core.commander?.copyFactoryPreset(number: 3)
+            Assemble.core.commander?.copyFactoryPreset(number: 3, false)
             while count == Assemble.core.commander?.userPresets.count {
                 Thread.sleep(forTimeInterval: 0.025)
             }
 
             count = Assemble.core.commander?.userPresets.count
-            Assemble.core.commander?.copyFactoryPreset(number: 2)
+            Assemble.core.commander?.copyFactoryPreset(number: 2, false)
             while count == Assemble.core.commander?.userPresets.count {
                 Thread.sleep(forTimeInterval: 0.025)
             }
             
-            Assemble.core.commander?.copyFactoryPreset(number: 1)
+            Assemble.core.commander?.copyFactoryPreset(number: 1, true)
             self.presetLabel.text = Assemble.core.commander?.currentPreset?.name
             self.sequencer.initialiseFromUnderlyingState()
             self.patterns.loadStates()
@@ -420,13 +436,26 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         let key = UserDefaultsKeys.iap
         if  let verified = defaults.value(forKey: key) as? Bool,
                 verified == true {
+            unlockButton.isHidden = true
+            unlockedFeaturesButton.isHidden = false
             Assemble.core.setParameter(kIAPToggle001, to: 1)
+            
         }
         
-        IAPVerifier.determineOwnership(of: key) { isOwned in
-            let state: Float = isOwned ? 0 : 1
-            Assemble.core.setParameter(kIAPToggle001, to: state)
-        }
+        Assemble.core.setParameter(kIAPToggle001, to: 1)
+        unlockButton.isHidden = true
+        unlockedFeaturesButton.isHidden = false
+
+//        IAPVerifier.verifier.restorePurchases() { owned, identifier in
+//            guard identifier == key else {
+//                return print("[IAPVerifier] Received unknown identifier: \(identifier).")
+//            }
+//
+//            defaults.set(owned, forKey: key)
+//            unlockButton.isHidden = owned
+//            unlockedFeaturesButton.isHidden = !(owned)
+//            Assemble.core.setParameter(kIAPToggle001, to: owned ? 1 : 0)
+//        }
     }
     
     // MARK: - Core-UI Synchronisation
@@ -454,6 +483,9 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
+
+        presentedViewController?.dismiss(animated: true, completion: nil)
+
         if segue.identifier == "persistenceSegue" {
             guard let destination = segue.destination as? PersistenceViewController
             else { return }

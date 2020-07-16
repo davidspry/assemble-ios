@@ -234,8 +234,10 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         
         /// Register an interaction for the iPad's pointer
 
-        let interaction = UIPointerInteraction(delegate: self)
-        addInteraction(interaction)
+        if #available(iOS 13.4, *) {
+            let interaction = UIPointerInteraction(delegate: self)
+            addInteraction(interaction)
+        }
     }
     
     deinit
@@ -247,6 +249,7 @@ class Waveform: UIView, UIPointerInteractionDelegate {
     
     /// Define an interaction with the iPad's pointer
 
+    @available(iOS 13.4, *)
     func pointerInteraction(_ interaction: UIPointerInteraction, styleFor region: UIPointerRegion) -> UIPointerStyle? {
         let view = UITargetedPreview(view: self)
         let effect = UIPointerEffect.highlight(view)

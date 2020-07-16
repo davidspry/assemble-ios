@@ -24,21 +24,21 @@ public:
     }
 
 public:
-    /// \brief Return a reference to the Note at position (x, y).
-    /// The returned reference should be treated as read-only.
+    /// \brief Return a pointer to the Note at position (x, y) or nullptr if the note does not exist.
+    /// The returned pointer should be treated as read-only.
     /// All modifications should be performed using the provided methods.
     /// \pre   A Note exists at position (x, y).
     /// \param x The column to lookup.
     /// \param y The row to lookup.
 
-    const Note& at(int x, int y) const noexcept(false)
+    const Note* at(int x, int y) const
     {
-        if (!exists(x, y))
-            throw "[Matrix] A Note could not be found at position (x, y).";
-
-        return vector[find(x, y)];
+        if (!(exists(x, y)))
+            return nullptr;
+        
+        return &(vector[find(x, y)]);
     }
-    
+
     /// \brief Compute the underlying 1-D array index for the abstract 2-D matrix position, (x, y).
     /// \param x The column to lookup.
     /// \param y The row to lookup.

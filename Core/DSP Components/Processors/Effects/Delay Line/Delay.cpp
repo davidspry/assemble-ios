@@ -9,12 +9,19 @@ Delay::Delay(Clock *clock)
     bpm = clock->bpm;
     this->clock = clock;
     
-    capacity = static_cast<int>(clock->sampleRate * OVERSAMPLING) * 3;
+    const float sampleRate = clock->sampleRate * (float) OVERSAMPLING;
+
+    /// \brief Allocate enough space for the longest delay possible
+    /// \note  1/1 + 25ms at 30bpm: 0.25 * (SR * OS) + (SR * OS) * 60 / 30bpm * 4 beats
+
+    capacity = static_cast<int>(sampleRate) * 8.25F;
 
     samples.reserve(capacity);
     samples.assign (capacity, 0.F);
-    
+
     set(kDelayMusicalTime, 4.F);
+
+    delay.setSampleRate(sampleRate);
 }
 
 const float Delay::get(uint64_t parameter)
@@ -25,13 +32,17 @@ const float Delay::get(uint64_t parameter)
             return mix;
             
         case kDelayMusicalTime:
-            return targetAsIndex;
+            return timeTargetIndex;
             
         case kDelayFeedback:
             return feedback;
             
         case kDelayTimeInMs:
-            return Assemble::Utilities::milliseconds(target, clock->sampleRate);
+        {
+            const float target = delay.getTarget();
+            const float sampleRate = clock->sampleRate * (float) OVERSAMPLING;
+            return Assemble::Utilities::milliseconds(target, sampleRate);
+        }
 
         default: return 0.0F;
     }
@@ -59,8 +70,8 @@ void Delay::set(uint64_t parameter, float value)
         }
         case kDelayMusicalTime:
         {
-            targetAsIndex = static_cast<int>(value);
-            const float time = parseMusicalTimeParameterIndex(targetAsIndex);
+            timeTargetIndex = static_cast<int>(value);
+            const float time = parseMusicalTimeParameterIndex(timeTargetIndex);
             setInMusicalTime(time);
             break;
         }
@@ -84,10 +95,10 @@ const float Delay::parseMusicalTimeParameterIndex(const int index)
         case 0:  return fDelayWholeNote;
         case 1:  return fDelayHalfDotted;
         case 2:  return fDelayHalfNote;
-        case 3:  return fDelayEighthDotted;
-        case 4:  return fDelayEighthNote;
-        case 5:  return fDelayQuarterDotted;
-        case 6:  return fDelayQuarterNote;
+        case 3:  return fDelayQuarterDotted;
+        case 4:  return fDelayQuarterNote;
+        case 5:  return fDelayEighthDotted;
+        case 6:  return fDelayEighthNote;
         case 7:  return fDelaySixteenthDotted;
         case 8:  return fDelaySixteenthNote;
         case 9:  return fDelayThirtySecondNote;
@@ -103,7 +114,8 @@ const float Delay::parseMusicalTimeParameterIndex(const int index)
 
 void Delay::inject(int milliseconds)
 {
-    offsetInSamples = Assemble::Utilities::samples(milliseconds, clock->sampleRate);
+    const float sampleRate = clock->sampleRate * (float) OVERSAMPLING;
+    offsetInSamples = Assemble::Utilities::samples(milliseconds, sampleRate);
     setInMusicalTime(time);
 }
 
@@ -113,7 +125,7 @@ void Delay::inject(int milliseconds)
 void Delay::process(float& sample)
 {
     if (bpm != clock->bpm) update();
-    
+
     if (bypassed) fadeOut();
     else           fadeIn();
 
@@ -123,8 +135,7 @@ void Delay::process(float& sample)
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;
 
-    delay = delay + speed * (target - delay);
-    rhead = whead - delay;
+    rhead = whead - delay.get();
     while (rhead <  0)        rhead = rhead + capacity;
     while (rhead >= capacity) rhead = rhead - capacity;
 

@@ -6,7 +6,7 @@
 
 Vibrato::Vibrato()
 {
-    capacity = sampleRate;
+    capacity = 256;
     samples.reserve(capacity);
     samples.assign (capacity, 0.F);
     
@@ -76,16 +76,14 @@ void Vibrato::process(float& sample)
     samples[whead] = sample;
 
     sample = Assemble::Utilities::lerp(rhead, samples.data(), capacity);
-
+    
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;
 
     rhead = whead - depth + depth * modulator.nextSample();
     
-    if (rhead > whead) printf(">\n");
-    
-    while (rhead >= capacity) rhead = rhead - capacity;
     while (rhead < 0)         rhead = rhead + capacity;
+    while (rhead >= capacity) rhead = rhead - capacity;
 
     if (!portamento.complete()) modulator.update(portamento.get());
 }

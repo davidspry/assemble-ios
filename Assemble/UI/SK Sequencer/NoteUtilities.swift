@@ -16,6 +16,10 @@ struct NoteUtilities
     /// - Parameter encoded: A substring containing encoded Notes.
     ///
     /// - Note:
+    /// Swift treats the string \r\n (scalars 10, 13) as a single character. This can be avoided by
+    /// using the `unicodeScalars` property of the `Substring`, which allows the scalars
+    /// to be read individualy.
+    ///
     /// The value of each note attribute is added with one prior
     /// to encoding in order to preclude the inclusion of zeroes, which are
     /// encoded as a null terminator character. Therefore, one should be
@@ -33,7 +37,7 @@ struct NoteUtilities
                 let note = substring.unicodeScalars
                 if (note.count < 5) || (note.first?.value) ?? 0 < 4 {
                     let warning = "[NoteUtilities] Note encoded with fewer than 4 attributes:"
-                    print(warning, note.map{ $0.escaped(asASCII: true) })
+                    print(warning, note.map { $0.value })
                     continue
                 }
 

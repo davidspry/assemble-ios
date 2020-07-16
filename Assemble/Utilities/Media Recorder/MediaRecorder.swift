@@ -313,12 +313,12 @@ class MediaRecorder
     private func drawAudio(from data: [[Float]], in context: CGContext?, with size: CGSize) {
         guard let context = context else { return }
         let primary: UIColor = UIColor.init(named: "Foreground") ?? .white
-        let secondary: UIColor = primary.withAlphaComponent(0.25)
+        let secondary: UIColor = primary.withAlphaComponent(0.15)
 
         context.setLineCap (.round)
         context.setLineJoin(.round)
         context.setStrokeColor(secondary.cgColor)
-        context.setLineWidth(4.0)
+        context.setLineWidth(3.0)
         drawGrid(in: context, size: size)
         context.strokePath()
         
@@ -339,7 +339,7 @@ class MediaRecorder
     private func drawGrid(in context: CGContext, size: CGSize) {
         let path = CGMutablePath()
         let width = min(size.height, size.width) * 0.6
-        let delta = CGFloat((width / 18).rounded(.up))
+        let delta = CGFloat((width / 36).rounded(.up))
         let m: CGPoint = CGPoint(x: (size.width - width) / 2.0, y: (size.height - width) / 2.0)
 
         for y in stride(from: 0, through: width, by: delta) {
@@ -371,20 +371,33 @@ class MediaRecorder
     /// - Parameter data: A buffer of audio samples
     /// - Parameter size: The total available size for the visualisation
     /// - Parameter context: The context in which the visualisation should be drawn
+    /// - Note: Smooth quad curve algorithm by 'Colinta': <https://stackoverflow.com/a/35229104/9611538>
 
     private func drawWaveform(from data: [[Float]], size: CGSize, in context: CGContext) {
-        let gain:  CGFloat = 0.65
+        let gain:  CGFloat = 1.0
         let width: CGFloat = size.width * 0.5
         let delta: CGFloat = width / CGFloat(data[0].count)
-
+        var previous: CGPoint?
+        var first = true
+        
         let m: CGPoint = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
         var x: CGFloat = m.x - width / 2.0
-        
-        context.move(to: CGPoint(x: x, y: m.y + CGFloat(data[0][0] + data[1][0]) * m.y * gain))
+
         for i in 0 ..< data[0].count {
             let y = m.y + CGFloat(data[0][i] + data[1][i]) * m.y * gain
-            context.addLine(to: CGPoint(x: x, y: y))
+            let point = CGPoint(x: x, y: y)
+            if let previous = previous {
+                let middle = CGPoint(x: (point.x + previous.x) / 2, y: (point.y + previous.y) / 2)
+                if  first { context.addLine(to: middle) }
+                else      { context.addQuadCurve(to: middle, control: previous) }
+                first = false
+            }  else { context.move(to: point) }
+            previous = point
             x = x + delta
+        }
+        
+        if let previous = previous {
+            context.addLine(to: previous)
         }
     }
     
@@ -392,19 +405,30 @@ class MediaRecorder
     /// - Parameter data: A buffer of audio samples
     /// - Parameter size: The total available size for the visualisation
     /// - Parameter context: The context in which the visualisation should be drawn
+    /// - Note: Smooth quad curve algorithm by 'Colinta': <https://stackoverflow.com/a/35229104/9611538>
 
     private func drawLissajous(from data: [[Float]], size: CGSize, in context: CGContext) {
-        let gain: CGFloat = 2.0
+        let gain: CGFloat = 3.0
         let m = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
-        let x = m.x + CGFloat(data[0][0]) * m.y
-        let y = m.y + CGFloat(data[1][0]) * m.y
+        var previous: CGPoint?
+        var first = true
 
-        context.move(to: .init(x: x, y: y))
         for i in 0 ..< data[0].count {
             let x = m.x + CGFloat(data[0][i]) * m.y * gain
             let y = m.y + CGFloat(data[1][i]) * m.y * gain
             let point = CGPoint(x: x, y: y)
-            context.addLine(to: point)
+            if let previous = previous {
+                let middle = CGPoint(x: (point.x + previous.x) / 2,
+                                     y: (point.y + previous.y) / 2)
+                if  first { context.addLine(to: middle) }
+                else      { context.addQuadCurve(to: middle, control: previous) }
+                first = false
+            }  else { context.move(to: point) }
+            previous = point
+        }
+        
+        if let previous = previous {
+            context.addLine(to: previous)
         }
     }
     

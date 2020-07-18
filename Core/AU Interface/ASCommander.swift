@@ -69,12 +69,27 @@ import AudioUnit
         }
     }
     
+    /// Set the value of the given parameter in the Assemble core.
+    /// - Parameter parameter: The hexadecimal address of the parameter.
+    /// - Parameter value: The desired value
+
     func setParameter(_ parameter: Int32, to value: Float) {
         let address = AUParameterAddress(parameter)
         let parameter = commander?.parameterTree?.parameter(withAddress: address)
         if let parameter = parameter { return parameter.value = value }
         commander?.setParameterWithAddress(address, value: value)
     }
+    
+    /// Set the value of the given parameter in the Assemble core.
+    /// - Parameter parameter: The hexadecimal address of the parameter.
+    /// - Parameter value: The desired value. A `true` value evalutates to `1.0`; a `false` value evaluates to `0.0`.
+
+    func setParameter(_ parameter: Int32, to value: Bool) {
+        setParameter(parameter, to: value ? 1.0 : 0.0)
+    }
+
+    /// Return the value of a parameter from the Assemble core.
+    /// - Parameter parameter: The hexadecimal address of the parameter.
 
     func getParameter(_ parameter: Int32) -> Float {
         return commander?.parameter(withAddress: AUParameterAddress(parameter)) ?? 0.0

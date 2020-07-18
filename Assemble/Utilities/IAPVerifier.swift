@@ -4,9 +4,9 @@
 
 import StoreKit
 
-/// A closure executed with the result of a product request and, if possible, the requested `SKProduct`.
+/// A closure executed with the result of a transaction and, if possible, the identifier of the requested `SKProduct`.
 
-public typealias ProductsRequestCompletionHandler = (_ result: Bool, _ identifier: String) -> Void
+public typealias ProductTransactionCallback = (_ result: Bool, _ error: Bool, _ message: String?) -> Void
 
 /// Manage the purchase, restoration, and verification of IAP products.
 /// - Author: Pietro Rea
@@ -14,51 +14,70 @@ public typealias ProductsRequestCompletionHandler = (_ result: Bool, _ identifie
 
 class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
 
-    public static let verifier = IAPVerifier()
+    /// The single, shared instance of the `IAPVerifier`.
     
+    public static let shared = IAPVerifier()
+
     /// The `IAPVerifier`'s `StoreKit` products request
     
     private var request: SKProductsRequest?
     
-    /// The callback to be executed when the outcome of a request has been determined
+    /// The callback to be executed when ownership of the IAP has been confirmed.
     
-    private var callback: ProductsRequestCompletionHandler?
+    public var callback: ProductTransactionCallback?
     
     /// Indicate whether the user can make payments.
     /// - Returns: `true` if the user can make payments, or `false` otherwise.
-
-    private var isAuthorisedForPayment: Bool {
+    
+    public var isAuthorisedForPayment: Bool {
         return SKPaymentQueue.canMakePayments()
     }
     
-    /// Indicate whether the user owns Assemble's IAP product or not
+    /// The `SKProduct` representing Assemble's IAP product.
+    
+    private var product: SKProduct?
 
+    /// Indicate whether the user owns Assemble's IAP product or not.
+    
     private var doesOwnProduct: Bool? = nil
 
     /// A collection of IAP product identifiers in use by the `IAPVerifier`
-
-    public static var identifiers = Set<String>()
+    
+    public static var identifiers: Set<String> = [UserDefaultsKeys.iap]
     
     // MARK: - Initialiser
 
     private override init() {}
     
+    /// Initiate a purchase transaction with Assemble's IAP product.
+    /// - Parameter callback: The closure who should receive the the result of the purchase transaction.
+
+    public func initiatePurchase(_ callback: @escaping ProductTransactionCallback) {
+        if let product = product {
+            self.callback = callback
+            let payment = SKMutablePayment(product: product)
+            SKPaymentQueue.default().add(payment)
+        }
+
+        else {
+            let message = "UNKNOWN: The product could not be found. " +
+                          "Your device may not be connected to the internet."
+            callback(true, false, message)
+        }
+    }
+
     /// Restore all previously completed purchase transactions,
     ///
     /// - Parameter callback: The closure who should receive the result.
 
-    public func restorePurchases(_ callback: @escaping ProductsRequestCompletionHandler) {
+    public func restorePurchase(_ callback: @escaping ProductTransactionCallback) {
         self.callback = callback
         SKPaymentQueue.default().restoreCompletedTransactions()
     }
     
     /// Perform a product request from the App Store and return the result to the given closure.
-    ///
-    /// - Parameter callback: The closure that should receive the App Store's response.
 
-    public func requestProducts(then callback: @escaping ProductsRequestCompletionHandler) {
-        IAPVerifier.identifiers.removeAll()
-        IAPVerifier.identifiers.insert(UserDefaultsKeys.iap)
+    public func requestProducts(_ callback: @escaping ProductTransactionCallback) {
         self.callback = callback
 
         request?.cancel()
@@ -73,16 +92,20 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     /// - Parameter response: Detailed information about the list of products.
 
     public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        var result = false
+
         if response.invalidProductIdentifiers.isNotEmpty {
             let invalidIdentifiers = response.invalidProductIdentifiers
             print("[IAPVerifier] Invalid identifiers requested:\n\(invalidIdentifiers)")
         }
 
-        response.products.forEach {
-            print("[IAPVerifier] Received product: \($0.price.floatValue): \($0.productIdentifier)")
+        response.products.forEach { product in
+            result = true
+            self.product = product
+            print("[IAPVerifier] Received product: \(product.productIdentifier)")
         }
-
-        clearRequestAndHandler()
+        
+        callback?(result, false, product?.regularPrice ?? "")
     }
     
     /// This method is called when a request fails to execute properly.
@@ -92,14 +115,10 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     func request(_ request: SKRequest, didFailWithError error: Error) {
         print("[IAPVerifier] The list of products could not be retrieved.")
         print("[IAPVerifier] Error: \(error.localizedDescription)")
-        clearRequestAndHandler()
-    }
-    
-    /// Nullify the `IAPVerifier`'s `SKProductsRequest ` and `ProductsRequestCompletionHandler`.
-
-    private func clearRequestAndHandler() {
-        request = nil
-        callback = nil
+        
+        if let callback = callback {
+            callback(false, true, error.localizedDescription)
+        }
     }
     
     // MARK: - SKPaymentTransactionObserver
@@ -115,7 +134,7 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
             case .purchased:  processPurchased(transaction)
             case .restored:   processRestored(transaction)
             case .failed:     processFailed(transaction)
-            case .deferred:   print("[IAPVerifier] Deferred transaction")
+            case .deferred:   print("[IAPVerifier] The current transaction has been deferred.")
             @unknown default: fatalError("[IAPVerifier] Unknown SKPaymentTransaction state")
             }
         }
@@ -132,13 +151,27 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         }
     }
     
+    /// This method is called when the user ceases to be entitled to one or more in-app purchases.
+    /// - Parameter queue: The payment queue calling the delegate method.
+    /// - Parameter productIdentifiers: The list of product identifiers with revoked entitlements.
+
+    func paymentQueue(_ queue: SKPaymentQueue, didRevokeEntitlementsForProductIdentifiers productIdentifiers: [String]) {
+        let defaults = UserDefaults()
+        for product in productIdentifiers {
+            defaults.set(false, forKey: product)
+            print("[IAPVerifier] Entitlement revoked for product: \(product)")
+            NotificationCenter.default.post(name: .updateEntitlements, object: product)
+        }
+    }
+    
     /// This method is called when an error occurred while restoring purchases.
     /// - Parameter queue: The payment queue.
     /// - Parameter error: The error that occurred.
 
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         if let error = error as? SKError, error.code != .paymentCancelled {
-            print(error.localizedDescription)
+            print("[IAPVerifier] An error occurred while restoring purchases.")
+            callback?(false, true, "ERROR: \(error.localizedDescription)")
         }
     }
     
@@ -146,9 +179,9 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     /// - Parameter queue: The payment queue.
 
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        if let doesOwnProduct = doesOwnProduct,
-               doesOwnProduct == false {
-            callback?(false, UserDefaultsKeys.iap)
+        if doesOwnProduct == nil || doesOwnProduct == false {
+            let message = "COMPLETE: No previous purchase transactions could be restored."
+            callback?(false, false, message)
         }
     }
     
@@ -156,14 +189,17 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
 
     /// Process successful purchase transactions.
     /// - Parameter transaction: The purchase transaction.
-    
+
     fileprivate func processPurchased(_ transaction: SKPaymentTransaction) {
         doesOwnProduct = true
+        
+        if  let callback = callback {
+            let identifier = transaction.payment.productIdentifier
+            print("[IAPVerifier] Purchase of product \(identifier) succeeded.")
 
-        let identifier = transaction.payment.productIdentifier
-        print("[IAPVerifier] Purchase of product \(identifier) succeeded.")
-
-        SKPaymentQueue.default().finishTransaction(transaction)
+            callback(true, false, "COMPLETE: Purchase transaction processed successfully.")
+            SKPaymentQueue.default().finishTransaction(transaction)
+        }
     }
     
     /// Process failed purchase transactions.
@@ -171,15 +207,19 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     fileprivate func processFailed(_ transaction: SKPaymentTransaction) {
         let identifier = transaction.payment.productIdentifier
-        print("[IAPVerifier] Purchase of product \(identifier) failed.")
-        
         if let error = transaction.error {
+            print("[IAPVerifier] Purchase of product \(identifier) failed.")
             print("[IAPVerifier] Error: \(error.localizedDescription)")
         }
         
-        if let error = transaction.error as? SKError,
-               error.code != .paymentCancelled {
-            print("[IAPVerifier] Push error \(error) to delegate on main thread.")
+        if let error = transaction.error as? SKError {
+            if error.code == .paymentCancelled {
+                callback?(false, false, "COMPLETE: Payment cancelled.")
+            }
+
+            else {
+                callback?(false, true, "ERROR: \(error.localizedDescription)")
+            }
         }
 
         doesOwnProduct = false
@@ -191,10 +231,17 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     fileprivate func processRestored(_ transaction: SKPaymentTransaction) {
         doesOwnProduct = true
-        callback?(true, transaction.payment.productIdentifier)
 
-        print("[IAPVerifier] Product \(transaction.payment.productIdentifier) restored.")
-        SKPaymentQueue.default().finishTransaction(transaction)
+        if  let callback = callback {
+            let url = Bundle.main.appStoreReceiptURL
+            
+            
+            let identifier = transaction.payment.productIdentifier
+            print("[IAPVerifier] Product \(identifier) restored.")
+
+            callback(true, false, "COMPLETE: Product restored successfully.")
+            SKPaymentQueue.default().finishTransaction(transaction)
+        }
     }
     
 }

@@ -74,14 +74,14 @@ private:
 private:
     int time;
     int seconds;
-    float scalar = 5E-2F;
+    float scalar = 4E-2F;
     constexpr static int audible = 15;
-    constexpr static int silence = 45;
+    constexpr static int silence = 60;
     constexpr static float noDenormals = 1E-25F;
 
 private:
     bool silent = true;
-    bool bypassed = true;
+    bool bypassed = false;
     float amplitude  = 0.F;
     float sampleRate = 48000.F;
 

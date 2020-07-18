@@ -177,28 +177,27 @@ void ASCommanderCore::render(unsigned int channels, unsigned int sampleCount, fl
 
 void ASCommanderCore::loadFromEncodedPatternState(const char* state, const int pattern)
 {
-    const char* n = strchr(state, '~');
-
     sequencer.hardReset(pattern);
 
-    // Decode the Pattern's on-off state
+    const char * note = strchr(state, '~');
+
+    /// 1. Decode the Pattern's on-off state
 
     const bool status = static_cast<bool>(std::atoi(&state[0]));
     sequencer.activePatterns += static_cast<int>(status);
     sequencer.patterns.at(pattern).set(status);
 
-    // Decode each encoded Note: "#<NumberOfAttributes><x><y><Note><Shape>"
+    /// 2. Decode each encoded Note: "#<NumberOfAttributes><x><y><Note><Shape>"
 
-    while (n != nullptr)
+    while (note != nullptr)
     {
-        size_t index = n - state;
+        size_t index = note - state;
         const int x     = static_cast<int>((char) *(state + index + 2) - 1);
         const int y     = static_cast<int>((char) *(state + index + 3) - 1);
-        const int note  = static_cast<int>((char) *(state + index + 4) - 1);
+        const int pitch = static_cast<int>((char) *(state + index + 4) - 1);
         const int shape = static_cast<int>((char) *(state + index + 5) - 1);
-        sequencer.addOrModifyNonCurrent(pattern, x, y, note, shape);
-
-        n = strchr(n + 1, '~');
+        sequencer.addOrModifyNonCurrent(pattern, x, y, pitch, shape);
+        note = strchr(note + 1, '~');
     }
 }
 
@@ -220,8 +219,6 @@ const char* ASCommanderCore::encodePatternState(const int pattern) noexcept(fals
             std::advance(notes, 1);
         }
     }
-    
-    std::vector<uint8_t> cree(begin(__state__), end(__state__));
 
     return __state__.c_str();
 }

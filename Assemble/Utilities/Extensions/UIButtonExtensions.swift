@@ -6,6 +6,31 @@ import UIKit
 
 extension UIButton {
     
+    /// Enable a button and set its alpha to 1.0
+    /// - Parameter duration: The animation speed of this action.
+
+    func enable(duration: TimeInterval) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: duration) {
+                self.alpha = 1.0
+                self.isEnabled = true
+            }
+        }
+    }
+    
+    /// Enable a button and set its alpha to the given alpha value.
+    /// - Parameter duration: The animation speed of this action.
+    /// - Parameter alpha: The desired alpha value for the button's layer.
+    
+    func disable(duration: TimeInterval, alpha: CGFloat) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: duration) {
+                self.alpha = alpha
+                self.isEnabled = false
+            }
+        }
+    }
+    
     /// Begin a pulsating animation
     
     func pulsate() {

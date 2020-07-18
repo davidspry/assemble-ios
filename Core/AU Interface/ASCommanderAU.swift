@@ -226,6 +226,7 @@ public class ASCommanderAU : ASAudioUnit
                 if key.prefix(1) == "P" {
                     let data = value as? String ?? ""
                     let pattern = Int32(key.suffix(1)) ?? 0
+//                    print(pattern, data.map { $0.asciiValue ?? 0 })
                     __interop__LoadPatternState(dsp, data, pattern)
                 }
             }
@@ -341,7 +342,9 @@ public class ASCommanderAU : ASAudioUnit
     /// - Parameter delay: The number of milliseconds to wait before beginning the process.
     
     private func selectPresetZero(named name: String, after delay: Int) {
-        var tries = 0
+        var   tries = 0
+        let   error = "[ASCommanderAU] userPresets[0] could not be selected."
+        guard userPresets.isNotEmpty else { return print(error) }
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delay)) {
             while self.userPresets[0].name != name, tries < 20 {
                 Thread.sleep(forTimeInterval: 0.05)

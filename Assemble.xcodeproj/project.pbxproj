@@ -65,6 +65,8 @@
 		146EC662244CC143009025E4 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC660244CC143009025E4 /* Pattern.cpp */; };
 		1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
+		1488BDDF24C301500008087C /* StoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */; };
+		1488BDE124C324CA0008087C /* SKProductExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488BDE024C324CA0008087C /* SKProductExtensions.swift */; };
 		148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148E7E26244D5B72003C1DCF /* Synthesiser.cpp */; };
 		14915BC02434B75B008E8147 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
 		14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
@@ -90,7 +92,7 @@
 		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
 		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
-		14C1E4052499047C00980AA9 /* FactoryPresetB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E4042499047C00980AA9 /* FactoryPresetB.swift */; };
+		14C1E4052499047C00980AA9 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E4042499047C00980AA9 /* FactoryPresetA.swift */; };
 		14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E40624990BA500980AA9 /* HelpViewController.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
 		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
@@ -111,14 +113,14 @@
 		14DB9E71246538E0000AAD79 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DB9E70246538E0000AAD79 /* AudioToolbox.framework */; };
 		14DC8D262456AF6D001FDC43 /* ValueTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */; };
 		14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */; };
-		14E6551F24718A7100D619F0 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6551E24718A7100D619F0 /* FactoryPresetA.swift */; };
+		14E6551F24718A7100D619F0 /* FactoryPresetC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6551E24718A7100D619F0 /* FactoryPresetC.swift */; };
 		14EEB8CB247572FF007F0D37 /* PersistenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EEB8CA247572FF007F0D37 /* PersistenceViewController.swift */; };
 		14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EEB8CC24757455007F0D37 /* PersistenceViewController+.swift */; };
 		14EFEDA9242E350100242298 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
 		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
 		14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */; };
 		14F5852F24A4DAB8003F4BC5 /* Assemble.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F5852E24A4DAB8003F4BC5 /* Assemble.png */; };
-		14F5A11D24B8D5790035CC5D /* FactoryPresetC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5A11C24B8D5790035CC5D /* FactoryPresetC.swift */; };
+		14F5A11D24B8D5790035CC5D /* FactoryPresetB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5A11C24B8D5790035CC5D /* FactoryPresetB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -191,7 +193,6 @@
 		1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPreset.swift; sourceTree = "<group>"; };
 		1428A2D6247F9C4E00C8B353 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		14347A0824BD709E007ED1CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		14347A0A24BD70A6007ED1CB /* Assemble.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Assemble.entitlements; sourceTree = "<group>"; };
 		14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		1437D70624BDE99000315897 /* UnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewController.swift; sourceTree = "<group>"; };
 		143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioUnitBase.m; sourceTree = "<group>"; };
@@ -247,6 +248,8 @@
 		146EC66A244CC6DC009025E4 /* ASFrequencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASFrequencies.h; sourceTree = "<group>"; };
 		1470F72D2432047E00E751B7 /* NoteUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtilities.swift; sourceTree = "<group>"; };
 		1474EC462442114F00D2BA79 /* OscillatorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorShape.swift; sourceTree = "<group>"; };
+		1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfiguration.storekit; sourceTree = "<group>"; };
+		1488BDE024C324CA0008087C /* SKProductExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductExtensions.swift; sourceTree = "<group>"; };
 		1488C85D247432BE00EE9350 /* VoiceBank.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VoiceBank.hpp; sourceTree = "<group>"; };
 		148E7E26244D5B72003C1DCF /* Synthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Synthesiser.cpp; sourceTree = "<group>"; };
 		148E7E27244D5B72003C1DCF /* Synthesiser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Synthesiser.hpp; sourceTree = "<group>"; };
@@ -282,7 +285,7 @@
 		14AFB899245218A600F5AD3A /* ASUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASUtilities.h; sourceTree = "<group>"; };
 		14B2315B24362D970012F32F /* SequencerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerGestures.swift; sourceTree = "<group>"; };
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
-		14C1E4042499047C00980AA9 /* FactoryPresetB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetB.swift; sourceTree = "<group>"; };
+		14C1E4042499047C00980AA9 /* FactoryPresetA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetA.swift; sourceTree = "<group>"; };
 		14C1E40624990BA500980AA9 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
@@ -306,14 +309,14 @@
 		14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ValueTransition.cpp; sourceTree = "<group>"; };
 		14DC8D252456AF6D001FDC43 /* ValueTransition.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ValueTransition.hpp; sourceTree = "<group>"; };
 		14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Medium.ttf"; sourceTree = "<group>"; };
-		14E6551E24718A7100D619F0 /* FactoryPresetA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetA.swift; sourceTree = "<group>"; };
+		14E6551E24718A7100D619F0 /* FactoryPresetC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetC.swift; sourceTree = "<group>"; };
 		14EEB8CA247572FF007F0D37 /* PersistenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceViewController.swift; sourceTree = "<group>"; };
 		14EEB8CC24757455007F0D37 /* PersistenceViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceViewController+.swift"; sourceTree = "<group>"; };
 		14EFEDA8242E350100242298 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDrawing.swift; sourceTree = "<group>"; };
 		14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderCell.swift; sourceTree = "<group>"; };
 		14F5852E24A4DAB8003F4BC5 /* Assemble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble.png; sourceTree = "<group>"; };
-		14F5A11C24B8D5790035CC5D /* FactoryPresetC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetC.swift; sourceTree = "<group>"; };
+		14F5A11C24B8D5790035CC5D /* FactoryPresetB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +426,7 @@
 				144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */,
 				140B63D32485371100D571D1 /* UIButtonExtensions.swift */,
 				14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */,
+				1488BDE024C324CA0008087C /* SKProductExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -473,7 +477,6 @@
 			isa = PBXGroup;
 			children = (
 				14B2315D2436597E0012F32F /* SK Nodes */,
-				1470F72D2432047E00E751B7 /* NoteUtilities.swift */,
 				14ADCBED2436265300822139 /* Sequencer.swift */,
 				14ADCBEB2436233B00822139 /* SequencerScene.swift */,
 				14B2315B24362D970012F32F /* SequencerGestures.swift */,
@@ -691,6 +694,8 @@
 				149B9B2D24B825B1005E42A7 /* IAPVerifier.swift */,
 				149ACC2624543615009DA18F /* MulticastDelegate.swift */,
 				149B9B2F24B827CB005E42A7 /* UserDefaultsKeys.swift */,
+				1470F72D2432047E00E751B7 /* NoteUtilities.swift */,
+				1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -827,7 +832,6 @@
 		14DAC3872417772C005654EA /* Assemble */ = {
 			isa = PBXGroup;
 			children = (
-				14347A0A24BD70A6007ED1CB /* Assemble.entitlements */,
 				1458D12B24531DA30093B541 /* Assets */,
 				146B55EB242CDA90001163B3 /* Audio */,
 				149ACC2524543602009DA18F /* Utilities */,
@@ -882,9 +886,9 @@
 		14E6551D2471897600D619F0 /* FactoryPresets */ = {
 			isa = PBXGroup;
 			children = (
-				14E6551E24718A7100D619F0 /* FactoryPresetA.swift */,
-				14C1E4042499047C00980AA9 /* FactoryPresetB.swift */,
-				14F5A11C24B8D5790035CC5D /* FactoryPresetC.swift */,
+				14C1E4042499047C00980AA9 /* FactoryPresetA.swift */,
+				14F5A11C24B8D5790035CC5D /* FactoryPresetB.swift */,
+				14E6551E24718A7100D619F0 /* FactoryPresetC.swift */,
 				1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */,
 			);
 			path = FactoryPresets;
@@ -981,6 +985,7 @@
 				140404B924B3465E0094EC6B /* LICENSE in Resources */,
 				140404BA24B3465E0094EC6B /* README.md in Resources */,
 				14DAC3902417772C005654EA /* Main.storyboard in Resources */,
+				1488BDDF24C301500008087C /* StoreKitConfiguration.storekit in Resources */,
 				14E6551A2471455300D619F0 /* JetBrainsMono-Medium.ttf in Resources */,
 				1427E2EF247686340011D102 /* Colours.xcassets in Resources */,
 				14488DBC24A3312000B44A6C /* DynamicImages.xcassets in Resources */,
@@ -1005,15 +1010,15 @@
 				14DAC38D2417772C005654EA /* MainViewController.swift in Sources */,
 				14AFB89424520D8800F5AD3A /* Delay.cpp in Sources */,
 				14C38EEB245B29B800180810 /* Transport.swift in Sources */,
-				14E6551F24718A7100D619F0 /* FactoryPresetA.swift in Sources */,
+				14E6551F24718A7100D619F0 /* FactoryPresetC.swift in Sources */,
 				146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */,
 				14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */,
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
-				14F5A11D24B8D5790035CC5D /* FactoryPresetC.swift in Sources */,
+				14F5A11D24B8D5790035CC5D /* FactoryPresetB.swift in Sources */,
 				149B9B3024B827CB005E42A7 /* UserDefaultsKeys.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
 				14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */,
-				14C1E4052499047C00980AA9 /* FactoryPresetB.swift in Sources */,
+				14C1E4052499047C00980AA9 /* FactoryPresetA.swift in Sources */,
 				143FB01E243F52820058AE40 /* ASCommanderCore.cpp in Sources */,
 				14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */,
 				149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */,
@@ -1074,6 +1079,7 @@
 				14A51E3A247D1C8B00ADDCB4 /* SaveCopyViewController.swift in Sources */,
 				14915BC02434B75B008E8147 /* Assemble.swift in Sources */,
 				14DAC38B2417772C005654EA /* SceneDelegate.swift in Sources */,
+				1488BDE124C324CA0008087C /* SKProductExtensions.swift in Sources */,
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
 				14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */,
@@ -1238,7 +1244,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Assemble/Assemble.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1271,7 +1277,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Assemble/Assemble.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -9,12 +9,12 @@ import StoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        SKPaymentQueue.default().add(IAPVerifier.verifier)
+        SKPaymentQueue.default().add(IAPVerifier.shared)
         return true
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        SKPaymentQueue.default().remove(IAPVerifier.verifier)
+        SKPaymentQueue.default().remove(IAPVerifier.shared)
     }
 
     // MARK: UISceneSession Lifecycle

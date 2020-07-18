@@ -27,5 +27,9 @@ extension NSNotification.Name {
     /// Stop a recording session using the `MediaRecorder`
 
     static let stopRecording = NSNotification.Name(rawValue: "ASStopRecording")
+    
+    /// Update special user entitlements to reflect a change in the user's IAP ownership
+    
+    static let updateEntitlements = NSNotification.Name(rawValue: "ASUpdateEntitlements")
 
 }

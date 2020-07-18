@@ -199,10 +199,15 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         
         /// Register to receive notifications from the transport when audio recording should begin or end
         
-        let selector = #selector(useRecorder(_:))
+        var selector = #selector(useRecorder(_:))
         NotificationCenter.default.addObserver(self, selector: selector, name: .beginRecording, object: nil)
         NotificationCenter.default.addObserver(self, selector: selector, name: .stopRecording,  object: nil)
         NotificationCenter.default.addObserver(self, selector: selector, name: .defineRecording, object: nil)
+        
+        /// Register to receive notifications from the `IAPVerifier` about updates made to the user's IAP ownership.
+        
+        selector = #selector(unlockIfPurchaseVerified(_:))
+        NotificationCenter.default.addObserver(self, selector: selector, name: .updateEntitlements, object: nil)
 
         /// Start the `AVAudioEngine`
         
@@ -392,15 +397,19 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         }   else { defaults.setValue(false, forKey: key) }
 
         DispatchQueue.main.async {
+            var tries = 0
             var count = Assemble.core.commander?.userPresets.count
             Assemble.core.commander?.copyFactoryPreset(number: 3, false)
-            while count == Assemble.core.commander?.userPresets.count {
+            while tries < 25, count == Assemble.core.commander?.userPresets.count {
+                tries = tries + 1
                 Thread.sleep(forTimeInterval: 0.025)
             }
 
+            tries = 0
             count = Assemble.core.commander?.userPresets.count
             Assemble.core.commander?.copyFactoryPreset(number: 2, false)
-            while count == Assemble.core.commander?.userPresets.count {
+            while tries < 25, count == Assemble.core.commander?.userPresets.count {
+                tries = tries + 1
                 Thread.sleep(forTimeInterval: 0.025)
             }
             
@@ -429,33 +438,34 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// If the IAP has been purchased, then the value of the key `UserDefaultsKeys.iap` will be `true`.
     /// Otherwise, the value of the key will be `nil` (on first launch) or `false`.
     ///
-    /// The `IAPVerifier` will asynchronously check with Apple's servers in case a refund (or some other change) has occurred.
+    /// - Parameter notification: The `NSNotification` who called this method, if it were called
+    /// by notification, or nil otherwise.
 
-    private func unlockIfPurchaseVerified() {
-        let defaults = UserDefaults()
+    @objc private func unlockIfPurchaseVerified(_ notification: NSNotification? = nil) {
         let key = UserDefaultsKeys.iap
-        if  let verified = defaults.value(forKey: key) as? Bool,
+        if  let verified = UserDefaults().value(forKey: key) as? Bool,
                 verified == true {
-            unlockButton.isHidden = true
-            unlockedFeaturesButton.isHidden = false
-            Assemble.core.setParameter(kIAPToggle001, to: 1)
-            
+            userDidPurchaseIAP()
+        }   else {
+            Assemble.core.setParameter(kIAPToggle001, to: 0)
+            DispatchQueue.main.async {
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+                self.unlockedFeaturesButton.isHidden = true
+                self.unlockButton.isHidden = false
+            }
         }
-        
-        Assemble.core.setParameter(kIAPToggle001, to: 1)
-        unlockButton.isHidden = true
-        unlockedFeaturesButton.isHidden = false
+    }
 
-//        IAPVerifier.verifier.restorePurchases() { owned, identifier in
-//            guard identifier == key else {
-//                return print("[IAPVerifier] Received unknown identifier: \(identifier).")
-//            }
-//
-//            defaults.set(owned, forKey: key)
-//            unlockButton.isHidden = owned
-//            unlockedFeaturesButton.isHidden = !(owned)
-//            Assemble.core.setParameter(kIAPToggle001, to: owned ? 1 : 0)
-//        }
+    /// Unlock Assemble in the case where the user purchases or otherwise owns Assemble's IAP.
+
+    public func userDidPurchaseIAP() {
+        Assemble.core.setParameter(kIAPToggle001, to: 1)
+        UserDefaults().set(true, forKey: UserDefaultsKeys.iap)
+        DispatchQueue.main.async {
+            self.unlockButton.isHidden = true
+            self.unlockedFeaturesButton.isHidden = false
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
+        }
     }
     
     // MARK: - Core-UI Synchronisation
@@ -502,6 +512,13 @@ class MainViewController : UIViewController, KeyboardSettingsListener
         
         else if segue.identifier == "newSongSegue" {
             guard let destination = segue.destination as? NewSongViewController
+            else { return }
+
+            destination.delegate = self
+        }
+        
+        else if segue.identifier == "displayUnlockSegue" {
+            guard let destination = segue.destination as? UnlockViewController
             else { return }
 
             destination.delegate = self

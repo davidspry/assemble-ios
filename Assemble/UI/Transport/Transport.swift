@@ -38,7 +38,7 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     
     /// The oscillator selector component
 
-    internal var oscillators: OscillatorSelector!
+    lazy internal var oscillators = OscillatorSelector(itemWidth: buttonWidth)
     
     /// The width of each button on the transport bar
 

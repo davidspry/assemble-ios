@@ -19,7 +19,7 @@ class Matrix
 public:
     Matrix()
     {
-        vector.assign(N * M, Note());
+         vector.assign(N * M, Note());
         lengths.assign(N, 0);
     }
 

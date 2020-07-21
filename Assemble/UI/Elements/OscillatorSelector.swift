@@ -9,7 +9,7 @@ import UIKit
 class OscillatorSelector: UISegmentedControl {
 
     private var itemWidth: CGFloat = 55
-    private let highlight = UIView()
+    private let highlight: UIView!
     private var highlightX: NSLayoutConstraint!
     private var oscillators = ["SIN", "TRI", "SQR", "SAW"]
     
@@ -17,16 +17,19 @@ class OscillatorSelector: UISegmentedControl {
     /// - Parameter itemWidth: The width of the `OscillatorSelector`'s items.
 
     init(itemWidth: CGFloat) {
+        highlight = UIView()
         super.init(items: oscillators)
         self.itemWidth = itemWidth
         initialise()
     }
 
     override init(frame: CGRect) {
+        highlight = UIView()
         super.init(frame: frame)
     }
 
     required init?(coder: NSCoder) {
+        highlight = UIView()
         super.init(items: oscillators)
         initialise()
     }

@@ -26,6 +26,6 @@ std::pair<int, iterator&> Pattern::window(int x, int y)
 {
     auto window = pattern.window(x, y);
     auto length = pattern.lengthOfRow(y);
-    
+
     return {length, window};
 }

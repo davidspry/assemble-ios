@@ -119,8 +119,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     private func loadVisualTheme() {
         let icon: UIImage?
-        if usingDarkTheme { icon = UIImage.init(systemName: "sun.max.fill") }
-        else              { icon = UIImage.init(systemName: "moon.fill") }
+        if usingDarkTheme { icon = UIImage.init(systemName: "moon.stars.fill") }
+        else              { icon = UIImage.init(systemName: "sun.max.fill") }
         
         themeButton.setImage(icon, for: .normal)
         UIApplication.shared.windows.forEach({
@@ -443,6 +443,9 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     @objc private func unlockIfPurchaseVerified(_ notification: NSNotification? = nil) {
         let key = UserDefaultsKeys.iap
+        #if TESTFLIGHT
+        userDidPurchaseIAP()
+        #else
         if  let verified = UserDefaults().value(forKey: key) as? Bool,
                 verified == true {
             userDidPurchaseIAP()
@@ -454,6 +457,7 @@ class MainViewController : UIViewController, KeyboardSettingsListener
                 self.unlockButton.isHidden = false
             }
         }
+        #endif
     }
 
     /// Unlock Assemble in the case where the user purchases or otherwise owns Assemble's IAP.

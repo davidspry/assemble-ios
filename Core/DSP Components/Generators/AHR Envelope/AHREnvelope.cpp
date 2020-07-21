@@ -19,8 +19,17 @@ void AHREnvelope::set(float attack, float hold, float release)
     holdInSamples    = Assemble::Utilities::samples(hold,   sampleRate);
     releaseInSamples = Assemble::Utilities::samples(release,sampleRate);
 
-    if (!(time < releaseInSamples))
-        setMode(Recovery);
+    if (mode == Mode::Attack && (time > attackInSamples))
+    {
+        if (time < releaseInSamples)
+            setMode(Mode::Release);
+        
+        else
+            setMode(Mode::Recovery);
+    }
+    
+    else if (!(time < releaseInSamples))
+        setMode(Mode::Recovery);
 }
 
 void AHREnvelope::setSampleRate(float sampleRate)

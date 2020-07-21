@@ -88,7 +88,6 @@ extension Transport {
     /// Initialise, observe, and constrain the `OscillatorSelector` component.
     
     func initialiseSegmentedControl() {
-        oscillators = OscillatorSelector(itemWidth: buttonWidth)
         oscillators.addTarget(self, action: #selector(didSelectOscillator), for: .valueChanged)
         addSubview(oscillators)
 

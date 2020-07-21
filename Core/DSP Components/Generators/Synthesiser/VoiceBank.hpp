@@ -172,4 +172,4 @@ private:
     std::array<BandlimitedOscillator<W>, N> oscillators;
 };
 
-#endif
+#endif 

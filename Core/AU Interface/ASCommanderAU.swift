@@ -222,11 +222,11 @@ public class ASCommanderAU : ASAudioUnit
         set (state) {
             guard let state = state else { return }
             super.fullStateForDocument = state
+            print((state["data"] as? Data)?.base64EncodedString())
             for (key, value) in state {
                 if key.prefix(1) == "P" {
                     let data = value as? String ?? ""
                     let pattern = Int32(key.suffix(1)) ?? 0
-//                    print(pattern, data.map { $0.asciiValue ?? 0 })
                     __interop__LoadPatternState(dsp, data, pattern)
                 }
             }

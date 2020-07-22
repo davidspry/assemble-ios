@@ -36,6 +36,9 @@ struct ASCommanderAUParameters
     static private let defaultFilterFrequency: Float = 1
     static private let defaultFilterResonance: Float = 0
     
+    static private let defaultNoiseRange: ClosedRange<Float> = 0.0...1.0
+    static private let defaultNoiseValue: Float = 0
+    
     
     // MARK: - Parameter Groups
     static public let parametersClock =
@@ -69,7 +72,8 @@ struct ASCommanderAUParameters
                                     ASCommanderAUParameters.sinAmpRelease,
                                     ASCommanderAUParameters.sinFilterAttack,
                                     ASCommanderAUParameters.sinFilterHold,
-                                    ASCommanderAUParameters.sinFilterRelease
+                                    ASCommanderAUParameters.sinFilterRelease,
+                                    ASCommanderAUParameters.sinBankNoise
         ])
     
     static public let parametersTriangle =
@@ -81,7 +85,8 @@ struct ASCommanderAUParameters
                                     ASCommanderAUParameters.triAmpRelease,
                                     ASCommanderAUParameters.triFilterAttack,
                                     ASCommanderAUParameters.triFilterHold,
-                                    ASCommanderAUParameters.triFilterRelease
+                                    ASCommanderAUParameters.triFilterRelease,
+                                    ASCommanderAUParameters.triBankNoise
         ])
     
     static public let parametersSquare =
@@ -93,7 +98,8 @@ struct ASCommanderAUParameters
                                     ASCommanderAUParameters.sqrAmpRelease,
                                     ASCommanderAUParameters.sqrFilterAttack,
                                     ASCommanderAUParameters.sqrFilterHold,
-                                    ASCommanderAUParameters.sqrFilterRelease
+                                    ASCommanderAUParameters.sqrFilterRelease,
+                                    ASCommanderAUParameters.sqrBankNoise
         ])
     
     static public let parametersSawtooth =
@@ -105,7 +111,8 @@ struct ASCommanderAUParameters
                                     ASCommanderAUParameters.sawAmpRelease,
                                     ASCommanderAUParameters.sawFilterAttack,
                                     ASCommanderAUParameters.sawFilterHold,
-                                    ASCommanderAUParameters.sawFilterRelease
+                                    ASCommanderAUParameters.sawFilterRelease,
+                                    ASCommanderAUParameters.sawBankNoise
         ])
 
     static public let parametersDelay =
@@ -117,7 +124,8 @@ struct ASCommanderAUParameters
                                     ASCommanderAUParameters.stereoDelayTimeLeft,
                                     ASCommanderAUParameters.stereoDelayTimeRight,
                                     ASCommanderAUParameters.stereoDelayMix,
-                                    ASCommanderAUParameters.stereoDelayOffset
+                                    ASCommanderAUParameters.stereoDelayOffset,
+                                    ASCommanderAUParameters.stereoDelayModulation
         ])
     
     static public let parametersVibrato =
@@ -298,6 +306,24 @@ struct ASCommanderAUParameters
         return parameter
     }()
     
+    // MARK: - Sine Oscillator Noise Parameter
+    
+    static var sinBankNoise: AUParameter = {
+        let parameter =
+            AUParameterTree.createParameter(withIdentifier: "kSinBankNoise",
+                                            name: "[SIN] Noise",
+                                            address: AUParameterAddress(kSinBankNoise),
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
+                                            unit: .generic,
+                                            unitName: nil,
+                                            flags: [.flag_IsReadable, .flag_IsWritable],
+                                            valueStrings: nil,
+                                            dependentParameters: nil)
+        parameter.value = ASCommanderAUParameters.defaultNoiseValue
+        return parameter
+    }()
+    
     // MARK: - Triangle Oscillator Filter Parameters
     
     static var triFilterFrequency: AUParameter = {
@@ -431,6 +457,24 @@ struct ASCommanderAUParameters
                                             valueStrings: nil,
                                             dependentParameters: nil)
         parameter.value = ASCommanderAUParameters.defaultEnvelopeR
+        return parameter
+    }()
+    
+    // MARK: - Triangle Oscillator Noise Parameter
+    
+    static var triBankNoise: AUParameter = {
+        let parameter =
+            AUParameterTree.createParameter(withIdentifier: "kTriBankNoise",
+                                            name: "[TRI] Noise",
+                                            address: AUParameterAddress(kTriBankNoise),
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
+                                            unit: .generic,
+                                            unitName: nil,
+                                            flags: [.flag_IsReadable, .flag_IsWritable],
+                                            valueStrings: nil,
+                                            dependentParameters: nil)
+        parameter.value = ASCommanderAUParameters.defaultNoiseValue
         return parameter
     }()
     
@@ -570,6 +614,24 @@ struct ASCommanderAUParameters
         return parameter
     }()
     
+    // MARK: - Square Oscillator Noise Parameter
+    
+    static var sqrBankNoise: AUParameter = {
+        let parameter =
+            AUParameterTree.createParameter(withIdentifier: "kSqrBankNoise",
+                                            name: "[SQR] Noise",
+                                            address: AUParameterAddress(kSqrBankNoise),
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
+                                            unit: .generic,
+                                            unitName: nil,
+                                            flags: [.flag_IsReadable, .flag_IsWritable],
+                                            valueStrings: nil,
+                                            dependentParameters: nil)
+        parameter.value = ASCommanderAUParameters.defaultNoiseValue
+        return parameter
+    }()
+    
     // MARK: - Sawtooth Oscillator Filter Parameters
     
     static var sawFilterFrequency: AUParameter = {
@@ -706,6 +768,24 @@ struct ASCommanderAUParameters
         return parameter
     }()
     
+    // MARK: - Sawtooth Oscillator Noise Parameter
+    
+    static var sawBankNoise: AUParameter = {
+        let parameter =
+            AUParameterTree.createParameter(withIdentifier: "kSawBankNoise",
+                                            name: "[SAW] Noise",
+                                            address: AUParameterAddress(kSawBankNoise),
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
+                                            unit: .generic,
+                                            unitName: nil,
+                                            flags: [.flag_IsReadable, .flag_IsWritable],
+                                            valueStrings: nil,
+                                            dependentParameters: nil)
+        parameter.value = ASCommanderAUParameters.defaultNoiseValue
+        return parameter
+    }()
+    
     // MARK: - Stereo Delay Parameters
     
     static var stereoDelayToggle: AUParameter = {
@@ -770,6 +850,22 @@ struct ASCommanderAUParameters
                                             valueStrings: nil,
                                             dependentParameters: nil)
         parameter.value = 0.50
+        return parameter
+    }()
+    
+    static var stereoDelayModulation: AUParameter = {
+        let parameter =
+            AUParameterTree.createParameter(withIdentifier: "kDelayModulation",
+                                            name: "Stereo Delay Modulation",
+                                            address: AUParameterAddress(kDelayModulation),
+                                            min: ClosedRange<Float>.normal().lowerBound,
+                                            max: ClosedRange<Float>.normal().upperBound,
+                                            unit: .generic,
+                                            unitName: nil,
+                                            flags: [.flag_IsReadable, .flag_IsWritable],
+                                            valueStrings: nil,
+                                            dependentParameters: nil)
+        parameter.value = 0.0
         return parameter
     }()
     

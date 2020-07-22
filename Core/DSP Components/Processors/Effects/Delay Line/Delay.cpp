@@ -37,6 +37,9 @@ const float Delay::get(uint64_t parameter)
         case kDelayFeedback:
             return feedback;
             
+        case kDelayModulation:
+            return modulation.getTarget() - 1.0F;
+
         case kDelayTimeInMs:
         {
             const float target = delay.getTarget();
@@ -54,12 +57,18 @@ void Delay::set(uint64_t parameter, float value)
     {
         case kStereoDelayToggle:
         {
-            bypassed = static_cast<bool>(value);
+            bypassed.store(static_cast<bool>(value));
             break;
         }
         case kDelayFeedback:
         {
-            feedback = Assemble::Utilities::bound(value, 0.F, 1.F);
+            feedback.store(Assemble::Utilities::bound(value, 0.F, 1.F));
+            break;
+        }
+        case kDelayModulation:
+        {
+            const float depth = Assemble::Utilities::bound(value, 0.F, 1.F);
+            modulation.set(depth + 1.0F);
             break;
         }
         case kDelayTimeInMs:
@@ -136,6 +145,7 @@ void Delay::process(float& sample)
     whead = static_cast<int>(whead < capacity) * whead;
 
     rhead = whead - delay.get();
+    rhead = rhead + scalar * (modulation.get() - 1.0F) * modulator.nextSample();
     while (rhead <  0)        rhead = rhead + capacity;
     while (rhead >= capacity) rhead = rhead - capacity;
 

@@ -29,13 +29,13 @@
                                 <color key="backgroundColor" name="Background"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpm-a2-jAD">
-                                <rect key="frame" x="283" y="212" width="800" height="600"/>
+                                <rect key="frame" x="283" y="187" width="800" height="650"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RPR-f4-Gy7">
-                                        <rect key="frame" x="20" y="15" width="760" height="570"/>
+                                        <rect key="frame" x="20" y="16.5" width="760" height="617.5"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Gmv-zW-OKQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="377.5" height="570"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="377.5" height="617.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="oscillatorsHeader" rowHeight="44" id="SeB-tF-e0W" customClass="OscillatorsHeaderCell" customModule="Assemble" customModuleProvider="target">
@@ -77,10 +77,10 @@
                                                 </connections>
                                             </tableView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SbV-2P-dpF">
-                                                <rect key="frame" x="382.5" y="0.0" width="377.5" height="570"/>
+                                                <rect key="frame" x="382.5" y="0.0" width="377.5" height="617.5"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="mU7-Cz-wCl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="377.5" height="337"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="377.5" height="384.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuHeader" rowHeight="43.5" id="va7-Cu-H8h" customClass="MenuHeaderCell" customModule="Assemble" customModuleProvider="target">
@@ -91,7 +91,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                                                             <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
                                                                             <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
@@ -175,7 +175,7 @@
                                                         </connections>
                                                     </tableView>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="MgH-ME-cXj">
-                                                        <rect key="frame" x="0.0" y="337" width="377.5" height="233"/>
+                                                        <rect key="frame" x="0.0" y="384.5" width="377.5" height="233"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="233" id="90S-qc-lZD"/>
@@ -189,11 +189,13 @@
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="mU7-Cz-wCl" secondAttribute="trailing" id="9tA-An-u6n"/>
                                                     <constraint firstItem="mU7-Cz-wCl" firstAttribute="top" secondItem="SbV-2P-dpF" secondAttribute="top" id="glA-x9-DVg"/>
-                                                    <constraint firstAttribute="bottom" secondItem="MgH-ME-cXj" secondAttribute="bottom" id="gp4-pj-u1Y"/>
                                                     <constraint firstAttribute="trailing" secondItem="MgH-ME-cXj" secondAttribute="trailing" id="xiS-xd-xXI"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstItem="MgH-ME-cXj" firstAttribute="bottom" secondItem="Gmv-zW-OKQ" secondAttribute="bottom" id="n9x-zj-b3j"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" name="BackgroundLight"/>
@@ -202,7 +204,7 @@
                                     <constraint firstAttribute="width" priority="750" constant="800" id="0QF-Bi-FtG"/>
                                     <constraint firstItem="RPR-f4-Gy7" firstAttribute="width" secondItem="Kpm-a2-jAD" secondAttribute="width" multiplier="0.95" id="Ba8-ET-fyV"/>
                                     <constraint firstItem="RPR-f4-Gy7" firstAttribute="height" secondItem="Kpm-a2-jAD" secondAttribute="height" multiplier="0.95" id="Ffn-DQ-p5E"/>
-                                    <constraint firstAttribute="height" constant="600" id="PVZ-ZP-9HM"/>
+                                    <constraint firstAttribute="height" constant="650" id="PVZ-ZP-9HM"/>
                                     <constraint firstItem="RPR-f4-Gy7" firstAttribute="centerY" secondItem="Kpm-a2-jAD" secondAttribute="centerY" id="Plj-KK-MHJ"/>
                                     <constraint firstItem="RPR-f4-Gy7" firstAttribute="centerX" secondItem="Kpm-a2-jAD" secondAttribute="centerX" id="fQ6-fU-Bdp"/>
                                 </constraints>
@@ -263,7 +265,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz" customClass="ParameterLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="32" y="142" width="100" height="15.5"/>
+                                <rect key="frame" x="32" y="142" width="100" height="35.5"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <color key="textColor" name="Foreground"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -283,7 +285,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="640" y="686.5" width="86" height="36"/>
+                                <rect key="frame" x="630" y="686.5" width="106" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
                                 </constraints>

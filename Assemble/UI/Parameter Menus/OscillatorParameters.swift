@@ -6,7 +6,7 @@ import UIKit
 
 /// A `ParameterMenu` to represent the parameters of each oscillator (filter and envelope controls) on the `ParametersViewController`.
 
-struct OscillatorParameters : ParameterMenu {
+struct OscillatorParameters: ParameterMenu {
 
     var name: String = "OSCILLATORS"
     var oscillator: OscillatorShape = .sine
@@ -17,6 +17,7 @@ struct OscillatorParameters : ParameterMenu {
     [
         "LPF Frequency",
         "LPF Resonance",
+        "Noise",
         "VCA Attack",
         "VCA Hold",
         "VCA Release",
@@ -33,6 +34,7 @@ struct OscillatorParameters : ParameterMenu {
             return [
                 (address: kSinFilterFrequency, increment: 0.01, type: .continuousSlow),
                 (address: kSinFilterResonance, increment: 0.01, type: .continuousSlow),
+                (address: kSinBankNoise, increment: 0.01, type: .continuousSlow),
                 (address: kSinAmpAttack, increment: 5.0, type: .discreteFast),
                 (address: kSinAmpHold, increment: 5.0, type: .discreteFast),
                 (address: kSinAmpRelease, increment: 5.0, type: .continuousFast),
@@ -45,6 +47,7 @@ struct OscillatorParameters : ParameterMenu {
             return [
                 (address: kTriFilterFrequency, increment: 0.01, type: .continuousSlow),
                 (address: kTriFilterResonance, increment: 0.01, type: .continuousSlow),
+                (address: kTriBankNoise, increment: 0.01, type: .continuousSlow),
                 (address: kTriAmpAttack, increment: 5.0, type: .discreteFast),
                 (address: kTriAmpHold, increment: 5.0, type: .discreteFast),
                 (address: kTriAmpRelease, increment: 5.0, type: .continuousFast),
@@ -57,6 +60,7 @@ struct OscillatorParameters : ParameterMenu {
             return [
                 (address: kSqrFilterFrequency, increment: 0.01, type: .continuousSlow),
                 (address: kSqrFilterResonance, increment: 0.01, type: .continuousSlow),
+                (address: kSqrBankNoise, increment: 0.01, type: .continuousSlow),
                 (address: kSqrAmpAttack, increment: 5.0, type: .discreteFast),
                 (address: kSqrAmpHold, increment: 5.0, type: .discreteFast),
                 (address: kSqrAmpRelease, increment: 5.0, type: .continuousFast),
@@ -69,6 +73,7 @@ struct OscillatorParameters : ParameterMenu {
             return [
                 (address: kSawFilterFrequency, increment: 0.01, type: .continuousSlow),
                 (address: kSawFilterResonance, increment: 0.01, type: .continuousSlow),
+                (address: kSawBankNoise, increment: 0.01, type: .continuousSlow),
                 (address: kSawAmpAttack, increment: 5.0, type: .discreteFast),
                 (address: kSawAmpHold, increment: 5.0, type: .discreteFast),
                 (address: kSawAmpRelease, increment: 5.0, type: .continuousFast),
@@ -80,13 +85,13 @@ struct OscillatorParameters : ParameterMenu {
         default: fatalError("[OscillatorParameters] Unknown oscillator")
         }
     }
-    
+
     func itemsInSection(_ section: Int) -> Int {
         switch (section)
         {
         case 0: return 1
-        case 1: return 2
-        case 2: fallthrough
+        case 1: return 3
+        case 2: return 3
         case 3: return 3
         default: fatalError("[OscillatorParameters] Unknown section")
         }
@@ -96,8 +101,8 @@ struct OscillatorParameters : ParameterMenu {
         switch (path.section)
         {
         case 1: return labels[path.row]
-        case 2: return labels[path.row + 2]
-        case 3: return labels[path.row + 3 + 2]
+        case 2: return labels[path.row + itemsInSection(1)]
+        case 3: return labels[path.row + itemsInSection(2) + itemsInSection(1)]
         default: fatalError("[OscillatorParameters] Unknown section")
         }
     }
@@ -106,8 +111,8 @@ struct OscillatorParameters : ParameterMenu {
         switch (path.section)
         {
         case 1: return parameters[path.row]
-        case 2: return parameters[path.row + 2]
-        case 3: return parameters[path.row + 3 + 2]
+        case 2: return parameters[path.row + itemsInSection(1)]
+        case 3: return parameters[path.row + itemsInSection(2) + itemsInSection(1)]
         default: fatalError("[OscillatorParameters] Unknown section")
         }
     }

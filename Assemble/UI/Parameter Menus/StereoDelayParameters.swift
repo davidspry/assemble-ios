@@ -16,7 +16,7 @@ struct StereoDelayParameters : ParameterMenu {
         switch (section)
         {
         case 0: return 1
-        case 1: return 5
+        case 1: return 6
         default: fatalError("[StereoDelayParameters] Unknown section")
         }
     }
@@ -26,8 +26,9 @@ struct StereoDelayParameters : ParameterMenu {
         "Time L",
         "Time R",
         "Feedback",
+        "Modulation",
         "Offset",
-        "Mix",
+        "Mix"
     ]
     
     var parameters: [(address: Int32, increment: Float, type: ParameterLabelScale)]
@@ -36,6 +37,7 @@ struct StereoDelayParameters : ParameterMenu {
             (address: kStereoDelayLTime, increment: 1.0, type: .discreteSlow),
             (address: kStereoDelayRTime, increment: 1.0, type: .discreteSlow),
             (address: kDelayFeedback, increment: 0.01, type: .continuousSlow),
+            (address: kDelayModulation, increment: 0.01, type: .continuousSlow),
             (address: kStereoDelayOffset, increment: 1.0, type: .continuousRegular),
             (address: kDelayMix, increment: 0.01, type: .continuousSlow)
         ]

@@ -60,6 +60,16 @@ static const int kSqrBankPolyphony        = 0xAB30;
 static const int kSawBankPolyphony        = 0xAB40;
 // ===========================================
 
+// [NOISE]
+// ===========================================
+// Noise: 0xAC[Osc]0
+static const int kNoiseType               = 0xAC00;
+static const int kSinBankNoise            = 0xAC10;
+static const int kTriBankNoise            = 0xAC20;
+static const int kSqrBankNoise            = 0xAC30;
+static const int kSawBankNoise            = 0xAC40;
+// ===========================================
+
 // [ENVELOPES]
 // ===========================================
 // Amplitude: 0xAE[Osc][Parameter]
@@ -104,6 +114,7 @@ static const int kDelayFeedback           = 0xEF01;
 static const int kDelayTimeInMs           = 0xEF02;
 static const int kDelayMusicalTime        = 0xEF03;
 static const int kDelayMix                = 0xEF04;
+static const int kDelayModulation         = 0xEF05;
 
 // Stereo Delay
 static const int kStereoDelayToggle       = 0xEF10;

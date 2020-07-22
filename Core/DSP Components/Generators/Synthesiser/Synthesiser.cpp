@@ -7,7 +7,7 @@
 void Synthesiser::loadNote(const int note, const int shape)
 {
     const auto& frequency = frequencies[note];
-
+    
     switch (shape)
     {
         case 0x0: return sin.load(frequency);

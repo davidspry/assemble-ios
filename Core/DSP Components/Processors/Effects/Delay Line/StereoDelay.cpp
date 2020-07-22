@@ -40,6 +40,7 @@ void StereoDelay::set(uint64_t parameter, const float value)
         case kDelayMix:
         case kDelayFeedback:
         case kDelayTimeInMs:
+        case kDelayModulation:
         case kDelayMusicalTime:
         {
             ldelay.set(parameter, value);

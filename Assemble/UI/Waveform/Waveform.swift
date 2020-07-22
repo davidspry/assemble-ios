@@ -75,7 +75,13 @@ class Waveform: UIView, UIPointerInteractionDelegate {
     /// - Note: The amplitude of the synthesiser is multiplied by 1/16 in order to prevent the total amplitude from exceeding [-1, 1].
     ///         Therefore, the gain should be thought of as a number between [0, 16] scaled as 16`k`, where `k` is some number in [0, 1].
 
-    private var gain: CGFloat = 0.35 * 16.0
+    private let gain: CGFloat = 0.35 * 16.0
+
+    /// A scalar to adjust the scale of the Lissajous plot visualisation
+    /// - Note: The amplitude of the synthesiser is multiplied by 1/16 in order to prevent the total amplitude from exceeding [-1, 1].
+    ///         Therefore, the gain should be thought of as a number between [0, 16] scaled as 16`k`, where `k` is some number in [0, 1].
+    
+    private let lissajousGain: CGFloat = 0.55 * 16.0
 
     /// Install a tap on the output bus of the Assemble core in order to access the sample data.
     ///
@@ -130,6 +136,8 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         mode = mode == .waveform ? .lissajous : .waveform
     }
 
+    // MARK: - Waveform plot
+    
     /// Plot the sample data across the width of the bounds.
     /// The scale in the y-direction is set by the `gain` property.
     /// - Parameter path: The path that should contain the visualisation.
@@ -145,21 +153,78 @@ class Waveform: UIView, UIPointerInteractionDelegate {
             x = x + delta
         }
     }
+    
+    /// Plot the sample data across the width of the bounds using quadratic Bézier lines.
+    /// The scale in the y-direction is set by the `gain` property.
+    /// - Parameter path: The path that should contain the visualisation.
 
+    private func drawWaveformQuadratic(on path: inout CGMutablePath) {
+        let r: Int = Int(self.r)
+        var x: CGFloat = 0
+        var first = true
+        var previous: CGPoint?
+
+        for i in 0 ..< points {
+            let y = bounds.midY + CGFloat(ldata[r][i] + rdata[r][i]) * bounds.midY * self.gain
+            let point = CGPoint(x: x, y: y)
+            if let previous = previous {
+                let middle = CGPoint.midpoint(of: point, and: previous)
+                first ? path.addLine(to: middle) :
+                        path.addQuadCurve(to: middle, control: previous)
+                first = false
+            }   else { path.move(to: point) }
+            previous = point
+            x = x + delta
+        }
+
+        if let previous = previous {
+            path.addLine(to: previous)
+        }
+    }
+
+    // MARK: - Lissajous plot
+    
     /// Plot the sample data as a Lissajous visualisation, where the x-coordinate of each point is determined
     /// by the left audio channel and the y-coordinate of each point is determined by the right audio channel.
     /// - Parameter path: The path that should contain the visualisation.
 
     private func drawLissajous(on path: inout CGMutablePath) {
         let r: Int = Int(self.r)
-        let x = bounds.midX + CGFloat(ldata[r][0]) * bounds.midY * self.gain
-        let y = bounds.midY + CGFloat(rdata[r][0]) * bounds.midY * self.gain
+        let x = bounds.midX + CGFloat(ldata[r][0]) * bounds.midY * self.lissajousGain
+        let y = bounds.midY + CGFloat(rdata[r][0]) * bounds.midY * self.lissajousGain
         path.move(to: CGPoint(x: x, y: y))
         for i in 0 ..< points {
-            let x = bounds.midX + CGFloat(ldata[r][i]) * bounds.midY * self.gain
-            let y = bounds.midY + CGFloat(rdata[r][i]) * bounds.midY * self.gain
+            let x = bounds.midX + CGFloat(ldata[r][i]) * bounds.midY * self.lissajousGain
+            let y = bounds.midY + CGFloat(rdata[r][i]) * bounds.midY * self.lissajousGain
             let point = CGPoint(x: x, y: y)
             path.addLine(to: point)
+        }
+    }
+    
+    /// Plot the sample data as a Lissajous visualisation using quadratic Bézier lines. Use the left audio channel
+    /// to determine the x-coordinate of each point, and use the right audio channel to determine the y-coordinate of each point.
+    /// - Parameter path: The path that should contain the visualisation.
+
+    private func drawLissajousQuadratic(on path: inout CGMutablePath) {
+        let r: Int = Int(self.r)
+        var first = true
+        var previous: CGPoint?
+        
+        for i in 0 ..< points {
+            let x = bounds.midX + CGFloat(ldata[r][i]) * bounds.midY * self.lissajousGain
+            let y = bounds.midY + CGFloat(rdata[r][i]) * bounds.midY * self.lissajousGain
+            let point = CGPoint(x: x, y: y)
+            if let previous = previous {
+                let middle = CGPoint.midpoint(of: point, and: previous)
+                first ? path.addLine(to: middle) :
+                        path.addQuadCurve(to: middle, control: previous)
+                first = false
+            }   else { path.move(to: point) }
+            previous = point
+        }
+
+        if let previous = previous {
+            path.addLine(to: previous)
         }
     }
 
@@ -179,8 +244,8 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         
         switch (mode)
         {
-        case .waveform:  drawWaveform(on:  &path); break
-        case .lissajous: drawLissajous(on: &path); break
+        case .waveform:  drawWaveformQuadratic (on: &path)
+        case .lissajous: drawLissajousQuadratic(on: &path)
         }
 
         CATransaction.begin()
@@ -189,6 +254,8 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         CATransaction.commit()
     }
 
+    // MARK: - Initialisation
+    
     /// Install an audio tap on the Assemble core and begin to visualise the sample data
 
     public func start() {
@@ -224,8 +291,8 @@ class Waveform: UIView, UIPointerInteractionDelegate {
         rdata[1].assign(repeating: 0.0, count: points)
 
         waveform.lineWidth = 1.5
-        waveform.lineCap = .round
-        waveform.lineJoin = .round
+        waveform.lineCap   = .round
+        waveform.lineJoin  = .round
         waveform.fillColor = UIColor.clear.cgColor
         waveform.strokeColor = UIColor.init(named: "Foreground")?.cgColor ??
                                UIColor.white.cgColor

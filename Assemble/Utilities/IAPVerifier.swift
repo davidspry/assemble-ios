@@ -233,8 +233,6 @@ class IAPVerifier: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         doesOwnProduct = true
 
         if  let callback = callback {
-            let url = Bundle.main.appStoreReceiptURL
-            
             let identifier = transaction.payment.productIdentifier
             print("[IAPVerifier] Product \(identifier) restored.")
 

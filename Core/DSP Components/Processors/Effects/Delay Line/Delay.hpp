@@ -9,6 +9,7 @@
 #include "ASUtilities.h"
 #include "ASConstants.h"
 #include "ASParameters.h"
+#include "ASOscillators.h"
 #include "Clock.hpp"
 
 /// \brief A simple delay line with feedback that uses interpolation in order to smoothly vary between delay lengths.
@@ -121,11 +122,11 @@ private:
     int offsetInSamples = 0;
 
 private:
-    float mix      = 0.25F;
-    float gain     = 1.00F;
-    float feedback = 0.50F;
+    float gain       = 1.00F;
     float gainLinear = 1.00F;
-    std::atomic<bool> bypassed = {false};
+    std::atomic<float> mix      = 0.25F;
+    std::atomic<float> feedback = 0.50F;
+    std::atomic<bool>  bypassed = {false};
 
 private:
     constexpr static float taper = 1E-4F * (1.0F / (float) OVERSAMPLING);
@@ -140,6 +141,13 @@ private:
     float             time;
     Clock *          clock;
     ValueTransition  delay = {1E3F, 96E3F, 2.0F};
+    
+private:
+//    std::atomic<float> modulation = {0.0F};
+    ValueTransition modulation = {1.0, 2.0F, 1.0F};
+    constexpr static float scalar = 512.0F;
+    constexpr static float modulationRate = 2.0F * (1.0F / (float) OVERSAMPLING);
+    BandlimitedOscillator<SIN>  modulator = {modulationRate};
 };
 
 #endif

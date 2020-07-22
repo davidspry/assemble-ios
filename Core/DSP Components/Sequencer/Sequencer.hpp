@@ -61,7 +61,7 @@ public:
 
 public:
     typedef std::vector<Note>::iterator iterator;
-    std::pair<int, iterator&> nextRow();
+    std::pair<int, iterator> nextRow();
     
 private:
     int  findAndSelectFirstActivePattern();

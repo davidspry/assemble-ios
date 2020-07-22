@@ -90,7 +90,7 @@ const float Sequencer::get(uint64_t parameter)
 /// \returns A std::pair containing the number of notes in the current row
 /// and a reference to an iterator over the next row of notes.
 
-std::pair<int, iterator&> Sequencer::nextRow()
+std::pair<int, iterator> Sequencer::nextRow()
 {
     row = std::min(row, patternLength - 1);
     

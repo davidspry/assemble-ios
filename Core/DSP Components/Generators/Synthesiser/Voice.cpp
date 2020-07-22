@@ -37,6 +37,7 @@ void Voice::set(uint64_t parameter, float value)
         case 0xAE: vca.set(parameter, value); return;
         case 0xFE: vcf.set(parameter, value); return;
         case 0xF0: lpf.set(parameter, value); return;
+        case 0xAC: noiseGain.store(value * noiseUpperBound); return;
         default: return;
     }
 }
@@ -55,8 +56,9 @@ const float Voice::nextSample()
 
     float sample, envelope;
     envelope = vca.nextSample();
-    sample = osc->nextSample();
+    sample = osc->nextSample() +
+             noiseGain * noise.nextSample();
     sample = lpf.process(sample);
-    
+
     return envelope * sample;
 }

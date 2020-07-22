@@ -57,13 +57,14 @@ void ASCommanderCore::set(uint64_t parameter, const float value)
 
     switch (type)
     {
-        /// \brief The parameter address types 0xAE, 0xAB, 0xFE, and 0xF0
-        /// address the amplitude envelopes, the voice banks, the filter envelopes, and the filters.
+        /// \brief The parameter address types 0xAE, 0xAB, 0xAC, 0xFE, and 0xF0
+        /// address the amplitude envelopes, the voice banks, the noise parameter, the filter envelopes, and the filters.
         /// These requests are passed to the appropriate voice bank by the synthesiser.
 
-        case 0xAE:
-        case 0xAB:
-        case 0xFE:
+        case 0xAE: // Fallthrough
+        case 0xAB: // Fallthrough
+        case 0xAC: // Fallthrough
+        case 0xFE: // Fallthrough
         case 0xF0: return synthesiser.set(parameter, value);
         
         /// \brief The parameter address type 0xEF addresses an effect processor.
@@ -76,7 +77,7 @@ void ASCommanderCore::set(uint64_t parameter, const float value)
             const int subtype = (int) parameter / (2 << 3) % 16;
             switch (subtype)
             {
-                case 0:
+                case 0: // Fallthrough
                 case 1: return delay.set(parameter, value);
                 case 2: return vibrato.set(parameter, value);
             }
@@ -107,6 +108,7 @@ const float ASCommanderCore::get(uint64_t parameter)
 
         case 0xAE: // Fallthrough
         case 0xAB: // Fallthrough
+        case 0xAC: // Fallthrough
         case 0xFE: // Fallthrough
         case 0xF0: return synthesiser.get(parameter);
         

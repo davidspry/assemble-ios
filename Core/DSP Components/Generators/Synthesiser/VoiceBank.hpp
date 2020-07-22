@@ -57,6 +57,7 @@ public:
         {
             if (!fcomplete) voice.set(kFrequencyType, frequency);
             if (!rcomplete) voice.set(kResonanceType, resonance);
+            if (didUpdateNoiseGain) voice.set(kNoiseType, noiseGain.load());
 
             sample += voice.nextSample();
         }
@@ -89,13 +90,6 @@ public:
             {
                 return voices[0].get(parameter);
             }
-                
-            /// Get the polyphony value for this VoiceBank.
-
-            case 0xAB:
-            {
-                return polyphony.load();
-            }
 
             /// Get a value from the filter for this VoiceBank.
 
@@ -104,6 +98,20 @@ public:
                 const int subtype = (int) parameter % 16;
                 if (subtype == 0) { return frequency.getTarget(); }
                 if (subtype == 1) { return resonance.getTarget(); }
+            }
+                
+            /// Get the polyphony value for this VoiceBank.
+
+            case 0xAB:
+            {
+                return polyphony.load();
+            }
+            
+            /// Get the noise gain value for this VoiceBank.
+
+            case 0xAC:
+            {
+                return noiseGain.load();
             }
             
             default:
@@ -132,16 +140,6 @@ public:
 
                 return;
             }
-                
-            /// \brief Set the polyphony of the Voice bank. This value defines
-            /// the upper bound on the number of Voices that can be loaded with new
-            /// notes.
-
-            case 0xAB:
-            {
-                const int voices = Assemble::Utilities::bound(value, 1, N);
-                return polyphony.store(voices);
-            }
 
             /// \brief Set the parameters of the ValueTransition objects who
             /// define smooth transitions for each Voice's filter frequency and resonance.
@@ -154,14 +152,35 @@ public:
                 if (subtype == 0) { frequency.set(value); return; }
                 if (subtype == 1) { resonance.set(value); return; }
             }
+                
+            /// \brief Set the polyphony of the VoiceBank. This value defines
+            /// the upper bound on the number of Voices that can be loaded with new
+            /// notes.
+
+            case 0xAB:
+            {
+                const int voices = Assemble::Utilities::bound(value, 1, N);
+                return polyphony.store(voices);
+            }
+                
+            /// @brief Set the noise gain value for each Voice in the VoiceBank.
+
+            case 0xAC:
+            {
+                const float gain = Assemble::Utilities::bound(value, 0.0F, 1.0F);
+                didUpdateNoiseGain = true;
+                noiseGain.store(gain);
+            }
 
             default: return;
         }
     }
 
 private:
-    int nextVoice = 0;
-    std::atomic<int> polyphony = {N};
+    int  nextVoice = 0;
+    bool didUpdateNoiseGain = false;
+    std::atomic<int>   polyphony = {N};
+    std::atomic<float> noiseGain = {0.0F};
 
 private:
     ValueTransition frequency;

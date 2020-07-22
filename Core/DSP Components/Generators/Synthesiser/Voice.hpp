@@ -6,6 +6,7 @@
 #define VOICE_HPP
 
 #include "Oscillator.hpp"
+#include "WhiteNoise.hpp"
 #include "AHREnvelope.hpp"
 #include "HuovilainenFilter.hpp"
 
@@ -54,8 +55,14 @@ public:
 
 protected:
     Oscillator        *osc;
+    WhiteNoise       noise;
     AHREnvelope   vca, vcf;
     HuovilainenFilter  lpf = {&vcf};
+    
+private:
+    std::atomic<float> noiseGain = {0.0F};
+    constexpr static float noiseUpperBound = 0.35F;
+    
 };
 
 #endif

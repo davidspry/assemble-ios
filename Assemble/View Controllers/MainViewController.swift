@@ -14,7 +14,7 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// Assemble's audio engine, which wraps the underlying `AVAudioEngine`
 
     let engine = Engine()
-    
+
     /// A `CADisplayLink` that periodically updates the UI
 
     private(set) var updater: CADisplayLink!

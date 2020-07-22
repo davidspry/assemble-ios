@@ -22,10 +22,10 @@ void Pattern::setTimeSignature(const int value, const bool beats)
 }
 
 typedef std::vector<Note>::iterator iterator;
-std::pair<int, iterator&> Pattern::window(int x, int y)
+std::pair<int, iterator> Pattern::window(int x, int y)
 {
-    auto window = pattern.window(x, y);
-    auto length = pattern.lengthOfRow(y);
+    iterator  window = pattern.window(x, y);
+    const int length = pattern.lengthOfRow(y);
 
     return {length, window};
 }

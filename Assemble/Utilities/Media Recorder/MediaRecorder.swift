@@ -387,11 +387,11 @@ class MediaRecorder
             let y = m.y + CGFloat(data[0][i] + data[1][i]) * m.y * gain
             let point = CGPoint(x: x, y: y)
             if let previous = previous {
-                let middle = CGPoint(x: (point.x + previous.x) / 2, y: (point.y + previous.y) / 2)
-                if  first { context.addLine(to: middle) }
-                else      { context.addQuadCurve(to: middle, control: previous) }
+                let middle = CGPoint.midpoint(of: point, and: previous)
+                first ? context.addLine(to: middle) :
+                        context.addQuadCurve(to: middle, control: previous)
                 first = false
-            }  else { context.move(to: point) }
+            }   else { context.move(to: point) }
             previous = point
             x = x + delta
         }
@@ -418,12 +418,11 @@ class MediaRecorder
             let y = m.y + CGFloat(data[1][i]) * m.y * gain
             let point = CGPoint(x: x, y: y)
             if let previous = previous {
-                let middle = CGPoint(x: (point.x + previous.x) / 2,
-                                     y: (point.y + previous.y) / 2)
-                if  first { context.addLine(to: middle) }
-                else      { context.addQuadCurve(to: middle, control: previous) }
+                let middle = CGPoint.midpoint(of: point, and: previous)
+                first ? context.addLine(to: middle) :
+                        context.addQuadCurve(to: middle, control: previous)
                 first = false
-            }  else { context.move(to: point) }
+            }   else { context.move(to: point) }
             previous = point
         }
         

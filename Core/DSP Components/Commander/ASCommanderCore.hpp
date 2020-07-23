@@ -101,6 +101,11 @@ public:
     
     inline void clearCurrentPattern() { sequencer.hardReset(sequencer.pattern); }
 
+    /// \brief Clear the state of the Pattern with the given index.
+    /// \param pattern The index of the Pattern to be cleared.
+
+    inline void clearPatternWithIndex(const int pattern) { sequencer.hardReset(pattern); }
+    
     /// \brief Indicate whether or not the Clock is ticking.
     /// \return `true` if the Clock is ticking; `false` otherwise.
 

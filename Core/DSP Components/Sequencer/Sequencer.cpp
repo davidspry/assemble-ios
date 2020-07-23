@@ -4,35 +4,13 @@
 
 #include "Sequencer.hpp"
 
-Sequencer::Sequencer()
-{
-    patterns.resize(PATTERNS);
-    
-    auto &firstPattern = patterns[pattern];
-    patternLength = firstPattern.length();
-    activePatterns = static_cast<int>(firstPattern.toggle() == true);
-}
-
-void Sequencer::hardReset()
-{
-    row = 0;
-    pattern = 0;
-    activePatterns = 0;
-    for (size_t i = 0; i < PATTERNS; ++i)
-        patterns.at(i).clear();
-}
-
-/// \brief Set a value for a Sequencer parameter
-/// \param parameter The hexadecimal address of the parameter to set
-/// \param value The value to be set
-
 void Sequencer::set(uint64_t parameter, float value)
 {
     switch (parameter)
     {
         case kSequencerMode:
         {
-            mode = static_cast<bool>(value);
+            isSongMode = static_cast<bool>(value);
             return;
         }
 
@@ -65,14 +43,11 @@ void Sequencer::set(uint64_t parameter, float value)
     }
 }
 
-/// \brief Get a parameter value from the Sequencer
-/// \param parameter The hexadecimal address of the desired parameter
-
 const float Sequencer::get(uint64_t parameter)
 {
     switch (parameter)
     {
-        case kSequencerMode:           return (float) mode;
+        case kSequencerMode:           return (float) isSongMode;
         case kSequencerLength:         return (float) patternLength;
         case kSequencerCurrentRow:     return (float) row;
         case kSequencerCurrentPattern: return (float) pattern;
@@ -85,84 +60,71 @@ const float Sequencer::get(uint64_t parameter)
     }
 }
 
-/// \brief Move to the next row, which may be on another Pattern,
-/// and return the next row of notes.
-/// \returns A std::pair containing the number of notes in the current row
-/// and a reference to an iterator over the next row of notes.
-
 std::pair<int, iterator> Sequencer::nextRow()
 {
     row = std::min(row, patternLength - 1);
-    
+
     if ((row + 1) == patternLength)
     {
         row = 0;
-        if (mode && pattern == nextPattern)
+        if (isSongMode && pattern == nextPattern && patterns.at(pattern).advance())
             selectNextActivePattern();
 
-        else
+        else if (pattern != nextPattern)
+        {
             selectPattern(nextPattern);
+            patterns.at(pattern).resetRepeatCounter();
+        }
     }
 
     else   row = (row + 1) % patternLength;
-    
+
     return patterns.at(pattern).window(0, row);
 }
-
-/// \brief Prepare the sequencer to play
-/// \note  If the sequencer is in song mode but the current
-/// pattern isn't active, then the next active pattern should be selected.
-/// If there are no active patterns, pattern mode should be enabled.
-
-void Sequencer::prepare()
-{
-    if (mode && !patterns[pattern].isActive())
-        selectNextActivePattern();
-
-    row = -1;
-}
-
-/// \brief Select a pattern immediately.
-/// \note This method will throw in the case where an invalid pattern index is given.
 
 void Sequencer::selectPattern(const int pattern) noexcept(false)
 {
     if (this->pattern == pattern) return;
 
     if (pattern < 0 || pattern >= PATTERNS)
-        throw "Invalid Pattern index";
+        throw "[Sequencer] Invalid pattern index.";
 
     this->pattern = pattern;
     this->nextPattern = pattern;
     this->patternLength = patterns.at(pattern).length();
 }
 
-/// \brief Select the first active pattern then return the pattern index.
-
-int Sequencer::findAndSelectFirstActivePattern()
-{
-    selectNextActivePattern();
-    
-    return pattern;
-}
-
-/// \brief Select the next active pattern.
-/// Beginning from the current pattern, search each of the sequencer's
-/// patterns linearly until an active pattern has been found.
-/// If no other active patterns are found, then the current pattern
-/// will be selected again. If there are no active patterns, then
-/// pattern mode will be selected.
-
 void Sequencer::selectNextActivePattern()
 {
-    if (activePatterns == 0) { toggle(); return; }
+    if (activePatterns == 0) { toggleMode(); return; }
 
     int p = pattern;
-    for (int i = 0; i < PATTERNS; ++i)
+    for (size_t i = 0; i < PATTERNS; ++i)
     {
         p = (p + 1) % PATTERNS;
         if (patterns.at(p).isActive()) break;
     }
 
     selectPattern(p);
+}
+
+void Sequencer::copy(const int source, const int target)
+{
+    Pattern& s = patterns.at(source);
+    Pattern& t = patterns.at(target);
+
+    t.clear();
+    t.setTimeSignature(s.getTimeSignature());
+    
+    for (size_t k = 0; k < s.length(); ++k)
+    {
+        const auto row = s.window(0, (int) k);
+        std::vector<Note>::iterator notes = row.second;
+        for (size_t i = 0; i < row.first; ++i)
+        {
+            const Note& note = *notes;
+            t.include(note.x, note.y, note.note, note.shape);
+            std::advance(notes, 1);
+        }
+    }
 }

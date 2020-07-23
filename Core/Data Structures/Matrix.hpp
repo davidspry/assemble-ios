@@ -19,8 +19,8 @@ class Matrix
 public:
     Matrix()
     {
-         vector.assign(N * M, Note());
-        lengths.assign(N, 0);
+        length.assign(N, 0);
+        vector.assign(N * M, Note());
     }
 
 public:
@@ -63,7 +63,7 @@ public:
         
         while (y < 0) y += h;
         
-        return lengths[y];
+        return length[y];
     }
 
     /// \brief Find the 1-D array index of the Note at the given position, (x, y).
@@ -73,7 +73,7 @@ public:
 
     const int find(const int x, const int y) const
     {
-        const int length = lengths[y];
+        const int length = this->length[y];
         if (length == 0) return -1;
 
         int index = this->index(0, y);
@@ -93,7 +93,7 @@ public:
 
     const bool exists(const int x, const int y) const
     {
-        const int length = lengths[y];
+        const int length = this->length[y];
         if (length == 0) return false;
         
         int index = this->index(0, y);
@@ -109,10 +109,10 @@ public:
 
     inline void clearRow(const int row)
     {
-        for (size_t i = 0; i < lengths[row]; ++i)
+        for (size_t i = 0; i < length[row]; ++i)
             vector[i].null = true;
 
-        lengths[row] = 0;
+        length[row] = 0;
     }
     
     /// \brief Reset the Matrix to its initial state with length[r] = 0 for each row, r.
@@ -132,12 +132,12 @@ public:
     void include(int x, int y, A... arguments) noexcept(false)
     {
         if (y < 0 || y > M)  throw "[Matrix] Invalid row";
-        if (lengths[y] >= M) throw "[Matrix] Row is full";
+        if (length[y] >= M) throw "[Matrix] Row is full";
         
         int position = find(x, y);
         if (position == -1) {
-            position = index(lengths[y], y);
-            lengths[y] += 1;
+            position = index(length[y], y);
+            length[y] += 1;
         }
 
         vector[position].modify(x, y, arguments...);
@@ -151,11 +151,11 @@ public:
     {
         const int row = index(0, y);
         const int note = find(x, y);
-        const int length = lengths[y];
+        const int length = this->length[y];
         if (note != -1) {
             vector.at(note).null = true;
             swap(note, row + length - 1);
-            lengths[y] -= 1;
+            this->length[y] -= 1;
         }
     }
 
@@ -191,7 +191,7 @@ private:
 
 private:
     std::vector<Note> vector;
-    std::vector<int> lengths;
+    std::vector<int>  length;
 
 public:
     int w = N;

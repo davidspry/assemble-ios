@@ -18,17 +18,38 @@ public:
 public:
     /// @brief Return the width of the Pattern
     
-    inline int width() noexcept  { return w; }
+    inline const int width() noexcept
+    {
+        return W;
+    }
     
     /// @brief Return the length of the Pattern
     
-    inline int length() noexcept { return h; }
+    inline const int length() noexcept
+    {
+        return H;
+    }
     
-    /// @brief Set the time signature of the pattern
-    /// @param value The value to be set
-    /// @param beats Whether the value represents the number of beats or the number of ticks per beat
+    /// @brief Set the time signature of the pattern.
+    /// @param beats The number of beats per bar.
+    /// @param ticks The number of ticks per beat.
 
-    void setTimeSignature(const int value, const bool beats);
+    inline void setTimeSignature(const int beats, const int ticks)
+    {
+        this->beats = beats;
+        this->ticks = ticks;
+        this->H     = beats * ticks;
+    }
+    
+    /// @brief Set the time signature of the pattern.
+    /// @param signature A std::pair containing the desired number of beats and ticks in that order.
+
+    inline void setTimeSignature(const std::pair<int, int> signature)
+    {
+        this->beats = signature.first;
+        this->ticks = signature.second;
+        this->H     = beats * ticks;
+    }
 
     /// @brief Return the time signature, (beats, ticks), as a std::pair
 
@@ -38,11 +59,35 @@ public:
     /// @brief Toggle the on-off state of the Pattern
     /// @return The state of the Pattern after toggling
     
-    inline const bool toggle()   { return (active = !active); }
+    inline const bool toggle()
+    {
+        return (active = !active);
+    }
     
     /// @brief Return the on-off state of the Pattern
     
-    inline const bool isActive() { return active; }
+    inline const bool isActive()
+    {
+        return active;
+    }
+    
+    /// @brief  Advance the pattern's counter and indicate whether it has repeated the specified number of times.
+    /// @return `true` if the pattern has repeated the specified number of times, and `false` otherwise.
+
+    inline const bool advance()
+    {
+        counter = counter + 1;
+        counter = static_cast<int>(counter < repeats) * counter;
+
+        return counter == 0;
+    }
+    
+    /// @brief Reset the pattern's repeat counter.
+
+    inline void resetRepeatCounter()
+    {
+        counter = 0;
+    }
     
     /// @brief Set the on-off state of the Pattern explicitly.
     /// @param state The target state of the Pattern.
@@ -70,7 +115,7 @@ public:
     
 public:
     template <typename ...N>
-    inline void make(int x, int y, N... note) {
+    inline void include(int x, int y, N... note) {
         pattern.include(x, y, note...);
     }
 
@@ -94,16 +139,24 @@ public:
     /// and an iterator pointing to position (x, y).
     /// @note In order to retrieve a row in total, `x` should be 0.
 
-    std::pair<int, iterator> window(int x, int y);
+    inline std::pair<int, iterator> window(const int x, const int y)
+    {
+        iterator  window = pattern.window(x, y);
+        const int length = pattern.lengthOfRow(y);
+
+        return {length, window};
+    }
 
 private:
-    Matrix <SEQUENCER_WIDTH, SEQUENCER_WIDTH> pattern;
+    Matrix<SEQUENCER_WIDTH, SEQUENCER_WIDTH> pattern;
 
 private:
-    int h = SEQUENCER_WIDTH;
-    int w = SEQUENCER_WIDTH;
-    int beats = 4;
-    int ticks = 4;
+    int W       = SEQUENCER_WIDTH;
+    int H       = SEQUENCER_WIDTH;
+    int beats   = 4;
+    int ticks   = 4;
+    int counter = 0;
+    int repeats = 1;
     bool active = false;
     
 friend class ASCommanderCore;

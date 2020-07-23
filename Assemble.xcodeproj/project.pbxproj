@@ -62,7 +62,6 @@
 		1458D131245328550093B541 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D130245328550093B541 /* PaddedLabel.swift */; };
 		1458D13424532F050093B541 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1458D13324532F050093B541 /* StereoDelay.cpp */; };
 		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
-		146EC662244CC143009025E4 /* Pattern.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC660244CC143009025E4 /* Pattern.cpp */; };
 		1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
 		1488BDDF24C301500008087C /* StoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */; };
@@ -241,7 +240,6 @@
 		146EC65B244CBE7F009025E4 /* ASOscillators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASOscillators.h; sourceTree = "<group>"; };
 		146EC65D244CBF49009025E4 /* Sequencer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sequencer.cpp; sourceTree = "<group>"; };
 		146EC65E244CBF49009025E4 /* Sequencer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sequencer.hpp; sourceTree = "<group>"; };
-		146EC660244CC143009025E4 /* Pattern.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Pattern.cpp; sourceTree = "<group>"; };
 		146EC661244CC143009025E4 /* Pattern.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pattern.hpp; sourceTree = "<group>"; };
 		146EC665244CC3B1009025E4 /* Matrix.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		146EC668244CC624009025E4 /* Note.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Note.hpp; sourceTree = "<group>"; };
@@ -601,7 +599,6 @@
 			children = (
 				146EC65D244CBF49009025E4 /* Sequencer.cpp */,
 				146EC65E244CBF49009025E4 /* Sequencer.hpp */,
-				146EC660244CC143009025E4 /* Pattern.cpp */,
 				146EC661244CC143009025E4 /* Pattern.hpp */,
 				146EC668244CC624009025E4 /* Note.hpp */,
 			);
@@ -1064,7 +1061,6 @@
 				149ACC2724543615009DA18F /* MulticastDelegate.swift in Sources */,
 				1428A2D7247F9C4E00C8B353 /* SongCell.swift in Sources */,
 				149ACC1F24542483009DA18F /* ComputerKeyboard.swift in Sources */,
-				146EC662244CC143009025E4 /* Pattern.cpp in Sources */,
 				143FB013243F3E7D0058AE40 /* FourCharCodeExtensions.swift in Sources */,
 				143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */,
 				1458D131245328550093B541 /* PaddedLabel.swift in Sources */,

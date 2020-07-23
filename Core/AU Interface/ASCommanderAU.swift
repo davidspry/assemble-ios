@@ -158,6 +158,13 @@ public class ASCommanderAU : ASAudioUnit
     public func clearCurrentPattern() {
         __interop__ClearCurrentPattern(dsp)
     }
+    
+    /// Clear the pattern with the given index.
+    /// - Parameter index: The index of the pattern to be cleared.
+
+    public func clearPatternWithIndex(_ index: Int) {
+        __interop__ClearPatternWithIndex(dsp, Int32(index))
+    }
 
     public override func shouldAllocateInputBus() -> Bool  { return false }
 
@@ -222,7 +229,6 @@ public class ASCommanderAU : ASAudioUnit
         set (state) {
             guard let state = state else { return }
             super.fullStateForDocument = state
-            print((state["data"] as? Data)?.base64EncodedString())
             for (key, value) in state {
                 if key.prefix(1) == "P" {
                     let data = value as? String ?? ""

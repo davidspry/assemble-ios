@@ -198,7 +198,7 @@ void ASCommanderCore::loadFromEncodedPatternState(const char* state, const int p
         const int y     = static_cast<int>((char) *(state + index + 3) - 1);
         const int pitch = static_cast<int>((char) *(state + index + 4) - 1);
         const int shape = static_cast<int>((char) *(state + index + 5) - 1);
-        sequencer.addOrModifyNonCurrent(pattern, x, y, pitch, shape);
+        sequencer.addOrModifyToPattern(pattern, x, y, pitch, shape);
         note = strchr(note + 1, '~');
     }
 }

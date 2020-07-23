@@ -16,6 +16,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     private var nodeDestination: Int?
 
     private var clearPatternView = UIView()
+    private var patternToBeCleared: Int?
     private let longPressRecogniser = UILongPressGestureRecognizer()
 
     private var states = [Bool]()
@@ -271,14 +272,16 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         guard let node = nodeFromTouchLocation(location) else { return }
         guard let xy   = locationFromNodeIndex(node)     else { return }
 
+        patternToBeCleared = node
         clearPatternView.center = xy
         clearPatternView.center = clearPatternView.center.applying(.init(translationX: 0, y: -25))
         showClearPatternView()
     }
     
     @objc func shouldClearPattern(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .clearCurrentPattern, object: nil)
-        Assemble.core.commander?.clearCurrentPattern()
+        guard let pattern = patternToBeCleared else { return }
+        NotificationCenter.default.post(name: .clearPattern, object: pattern)
+        Assemble.core.commander?.clearPatternWithIndex(pattern)
         set(pattern: pattern, to: false)
         hideClearPatternView()
     }

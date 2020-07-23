@@ -13,71 +13,180 @@
 class Sequencer
 {
 public:
-    Sequencer();
+    /// @brief Construct a sequencer and activate its first pattern.
 
-public:
-    /// \brief Set a parameter value. If the parameter does not exist, nothing will happen.
-    /// \param parameter The address of the parameter to set
-    /// \param value The value to be set
+    Sequencer()
+    {
+        patterns.resize((size_t) PATTERNS);
+        Pattern & firstPattern = patterns[pattern];
+        patternLength  = firstPattern.length();
+        activePatterns = static_cast<int>(firstPattern.toggle() == true);
+    }
+
+    /// @brief Set a parameter value. If the parameter does not exist, nothing will happen.
+    /// @param parameter The address of the parameter to set
+    /// @param value The value to be set
+
     void set(uint64_t parameter, float value);
 
-    /// \brief Return a parameter value. If the parameter does not exist, 0 will be returned.
-    /// \param parameter The address of the parameter whose parameter should be returned.
+    /// @brief Return a parameter value. If the parameter does not exist, 0 will be returned.
+    /// @param parameter The address of the parameter whose parameter should be returned.
+    
     const float get(uint64_t parameter);
 
-public:
-    template <typename ...N>
-    void addOrModify(int x, int y, N... note)
-    {
-        patterns.at(pattern).make(x, y, note...);
-    }
+    /// @brief Prepare the sequencer to begin playback immediately.
+    /// @note  If the current pattern is inactive, the next active pattern will be selected.
+    ///        If no active pattern can be found, then pattern mode will be selected.
 
-    template <typename ...N>
-    void addOrModifyNonCurrent(const int pattern, N... note)
+    inline void prepare()
     {
-        patterns.at(pattern).make(note...);
-    }
+        if (isSongMode && !patterns[pattern].isActive())
+            selectNextActivePattern();
 
-    void erase(const int x, const int y) { patterns.at(pattern).erase(x, y); }
-
-public:
-    void reset() { row =  0; }
-    void prepare();
-    void hardReset();
-    void hardReset(const int pattern)
-    {
-        const auto active = patterns.at(pattern).isActive();
-        patterns.at(pattern).clear();
-        activePatterns = activePatterns - (active ? 1 : 0);
+        row = -1;
     }
     
-    const bool toggle() { return (mode = !mode); }
-    std::pair<int,int> state() { return {row, pattern}; }
+    /// @brief Reset the sequencer's playhead position to 0.
 
-public:
-    int length() { return patternLength; }
-    int currentRow() { return row; }
-    int currentPattern() { return pattern; }
+    inline void reset()
+    {
+        row =  0;
+    }
 
-public:
+    /// @brief Clear and deactivate each pattern and reset the sequencer to its initial state.
+    
+    inline void hardReset()
+    {
+        row = 0;
+        pattern = 0;
+        activePatterns = 0;
+        for (size_t i = 0; i < PATTERNS; ++i)
+            patterns.at(i).clear();
+    }
+    
+    /// @brief Clear and deactivate the pattern with the given pattern index .
+    /// @param pattern The index of the pattern to be cleared.
+    
+    inline void hardReset(const int pattern)
+    {
+        const bool active = patterns.at(pattern).isActive();
+        activePatterns = activePatterns - (active ? 1 : 0);
+        patterns.at(pattern).clear();
+    }
+    
+    /// @brief Set the Note at the given location to have the given properties.
+    /// @param x The x-coordinate of the selected location
+    /// @param y The y-coordinate of the selected location
+    /// @param note A parameter pack containing the properties used to construct a new Note.
+    
+    template <typename ...N>
+    inline void addOrModify(const int x, const int y, N... note)
+    {
+        patterns.at(pattern).include(x, y, note...);
+    }
+
+    /// @brief Set the Note at the given location to have the given properties.
+    /// @param pattern The index of the pattern that should include the given Note.
+    /// @param note A parameter pack containing the properties used to construct a new Note, including its location.
+
+    template <typename ...N>
+    inline void addOrModifyToPattern(const int pattern, N... note)
+    {
+        patterns.at(pattern).include(note...);
+    }
+    
+    /// @brief Copy the state of the given source pattern into the given target pattern.
+    /// @param source The index of the pattern that should be copied.
+    /// @param target The index of the pattern that should be overwritten with the source pattern's state.
+
+    void copy(const int source, const int target);
+
+    /// @brief Erase the contents of the given position, (x, y).
+    /// @param x The x-coordinate of the position whose contents should be erased.
+    /// @param y The y-coordinate of the position whose contents should be erased.
+
+    inline void erase(const int x, const int y)
+    {
+        patterns.at(pattern).erase(x, y);
+    }
+    
+    /// @brief Toggle between the sequencer's modes.
+
+    const bool toggleMode()
+    {
+        return (isSongMode = !(isSongMode));
+    }
+
+    /// @brief Return a pair containing the current row and the current pattern index.
+
+    inline std::pair<int, int> state()
+    {
+        return {row, pattern};
+    }
+
+    /// @brief Return the current pattern's length.
+
+    inline const int length()
+    {
+        return patternLength;
+    }
+    
+    /// @brief Return the sequencer's current row.
+
+    inline const int currentRow()
+    {
+        return row;
+    }
+    
+    /// @brief Return the index of the current pattern.
+    
+    inline const int currentPattern()
+    {
+        return pattern;
+    }
+
     typedef std::vector<Note>::iterator iterator;
+    
+    /// @brief Move to the next row, which may be on another Pattern,
+    /// and return the next row of notes.
+    ///
+    /// @returns A std::pair containing the number of notes in the current row
+    /// and a reference to an iterator over the next row of notes.
+
     std::pair<int, iterator> nextRow();
     
 private:
-    int  findAndSelectFirstActivePattern();
+
+    /// @brief Select the first active pattern then return the pattern index.
+    
+    inline const int findAndSelectFirstActivePattern()
+    {
+        selectNextActivePattern();
+        return pattern;
+    }
+
+    /// @brief Select the next active pattern.
+    /// Beginning from the current pattern, search each of the sequencer's patterns linearly until an active pattern has been found.
+    /// If no other active patterns are found, then the current pattern will be selected again. If there are no active patterns, then
+    /// pattern mode will be selected.
+
     void selectNextActivePattern();
-    void selectPattern(const int);
+    
+    /// \brief Select a pattern immediately.
+    /// \note This method will throw in the case where an invalid pattern index is given.
+
+    inline void selectPattern(const int pattern) noexcept(false);
     
 private:
     std::vector<Pattern> patterns;
     
 private:
-    int row = 0;
-    int pattern = 0;
-    int nextPattern = 0;
-    int patternLength;
-    int activePatterns = 1;
-    bool mode = 1;
+    int  row            = 0;
+    int  pattern        = 0;
+    int  nextPattern    = 0;
+    int  patternLength  = 0;
+    int  activePatterns = 1;
+    bool isSongMode  = true;
     
 friend class ASCommanderCore;
 };

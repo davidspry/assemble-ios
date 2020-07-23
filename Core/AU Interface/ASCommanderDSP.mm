@@ -25,6 +25,11 @@ extern "C" void __interop__ClearCurrentPattern(void *DSP)
     return ((ASCommanderDSP*) DSP)->clearCurrentPattern();
 }
 
+extern "C" void __interop__ClearPatternWithIndex(void *DSP, const int pattern)
+{
+    return ((ASCommanderDSP*) DSP)->clearPatternWithIndex(pattern);
+}
+
 extern "C" void __interop__LoadNote(void *DSP, const int note, const int shape)
 {
     ((ASCommanderDSP*) DSP)->loadNote(note, shape);

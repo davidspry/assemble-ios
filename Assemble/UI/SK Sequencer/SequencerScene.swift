@@ -97,8 +97,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         
         /// Register to receive notifications when the user elects to clear a pattern's contents
 
-        let selector = #selector(clearCurrentPattern(_:))
-        NotificationCenter.default.addObserver(self, selector: selector, name: .clearCurrentPattern, object: nil)
+        let selector = #selector(clearPattern(_:))
+        NotificationCenter.default.addObserver(self, selector: selector, name: .clearPattern, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -265,25 +265,26 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         }
     }
     
-    /// Clear the sequencer scene's current pattern.
+    /// Clear one of the sequencer scene's patterns.
     ///
-    /// Each `NoteShapeNode` is removed from the scene and destroyed,
-    /// and each cell in the current pattern's `noteStrings` array is set to nil.
-    /// This should be called at the same time as the current pattern of the core
-    /// sequencer is reset.
+    /// Each `NoteShapeNode` belonging to the pattern to be cleared
+    /// will be removed from the scene and destroyed, and each cell in the
+    /// pattern's `noteStrings` array will be set to nil. This should be called
+    /// at the same time as the current pattern of the core sequencer is reset.
     ///
     /// - Parameter notification: The `NSNotification` requesting that
-    /// the current pattern should be cleared.
+    /// a pattern should be cleared. The index of the pattern to be cleared is stored
+    /// in the notification's `object` property.
 
-    @objc func clearCurrentPattern(_ notification: NSNotification) {
-        let p = Assemble.core.currentPattern
+    @objc func clearPattern(_ notification: NSNotification) {
+        guard let p = notification.object as? Int else { return }
         DispatchQueue.main.async {
             self.noteShapes[p].forEach { $0.removeFromParent() }
             self.noteShapes[p].removeAll()
         }
 
         DispatchQueue.main.async {
-            self.noteString = nil
+            if Assemble.core.currentPattern == p { self.noteString = nil }
             for y in 0 ..< Int(Assemble.patternHeight) {
                 for x in 0 ..< Int(Assemble.patternWidth) {
                     self.noteStrings[p][y][x] = nil

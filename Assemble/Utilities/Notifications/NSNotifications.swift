@@ -12,9 +12,9 @@ extension NSNotification.Name {
     
     static let playOrPause = NSNotification.Name(rawValue: "ASPlayOrPause")
     
-    /// Clear the current pattern
-    
-    static let clearCurrentPattern = NSNotification.Name(rawValue: "ASClearCurrentPattern")
+    /// Clear the pattern whose index is stored in the `NSNotification`'s `object` property
+
+    static let clearPattern = NSNotification.Name(rawValue: "ASClearPattern")
 
     /// Define a recording session for the `MediaRecorder`
     

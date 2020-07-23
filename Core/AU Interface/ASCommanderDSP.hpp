@@ -47,7 +47,14 @@ const char* __interop__GetPatternState(ASDSPRef, const int pattern);
 
 const bool  __interop__PlayOrPause(ASDSPRef);
 
+/// \brief Clear the state of the sequencer's current pattern.
+
 const void  __interop__ClearCurrentPattern(ASDSPRef);
+
+/// \brief Clear the state of the pattern with the given index.
+/// \param pattern The index of the pattern to be cleared.
+
+const void  __interop__ClearPatternWithIndex(ASDSPRef, const int pattern);
 
 #else
 

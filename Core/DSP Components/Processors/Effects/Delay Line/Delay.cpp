@@ -11,10 +11,10 @@ Delay::Delay(Clock *clock)
     
     const float sampleRate = clock->sampleRate * (float) OVERSAMPLING;
 
-    /// \brief Allocate enough space for the longest delay possible
-    /// \note  1/1 + 25ms at 30bpm: 0.25 * (SR * OS) + (SR * OS) * 60 / 30bpm * 4 beats
+    /// @brief Allocate enough space for the longest delay possible
+    /// @note  1/1 + 25ms at 30bpm: 0.25 * (SR * OS) + (SR * OS) * 60 / 30bpm * 4 beats
 
-    capacity = static_cast<int>(sampleRate) * 8.25F;
+    capacity = static_cast<int>(sampleRate * 8.25F);
 
     samples.reserve(capacity);
     samples.assign (capacity, 0.F);
@@ -22,6 +22,7 @@ Delay::Delay(Clock *clock)
     set(kDelayMusicalTime, 4.F);
 
     delay.setSampleRate(sampleRate);
+    modulation.setSampleRate(sampleRate);
 }
 
 const float Delay::get(uint64_t parameter)
@@ -35,7 +36,7 @@ const float Delay::get(uint64_t parameter)
             return timeTargetIndex;
             
         case kDelayFeedback:
-            return feedback;
+            return feedback.load();
             
         case kDelayModulation:
             return modulation.getTarget() - 1.0F;
@@ -138,7 +139,7 @@ void Delay::process(float& sample)
     if (bypassed) fadeOut();
     else           fadeIn();
 
-    samples[whead] = gain * sample + feedback * samples[rhead];
+    samples[whead] = gain * sample + feedback.load() * samples[rhead];
     const float interpolated = Assemble::Utilities::hermite(rhead, samples.data(), capacity);
 
     whead = whead + 1;

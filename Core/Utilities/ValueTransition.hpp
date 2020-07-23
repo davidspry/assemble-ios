@@ -52,9 +52,9 @@ private:
     }
 
 private:
-    double target = 0.F;
-    double value = 0.F;
-    double delta = 0.F;
+    std::atomic<double> target = 0.F;
+    std::atomic<double> value = 0.F;
+    std::atomic<double> delta = 0.F;
     
 private:
     int   timeInSamples;

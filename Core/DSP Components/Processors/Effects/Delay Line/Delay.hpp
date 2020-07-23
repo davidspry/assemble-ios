@@ -133,20 +133,47 @@ private:
     constexpr static float speed = 5E-5F * (1.0F / (float) OVERSAMPLING);
 
 private:
+    /// @brief The capacity of the delay buffer in samples.
+    
     int capacity;
+
+    /// @brief The delay buffer.
+    
     std::vector<float> samples;
 
 private:
-    uint16_t           bpm;
-    float             time;
-    Clock *          clock;
-    ValueTransition  delay = {1E3F, 96E3F, 2.0F};
+    /// @brief The current tempo of the delay.
+    
+    uint16_t bpm;
+    
+    /// @brief The delay's current musical time factor.
+    
+    float time;
+    
+    /// @brief The delay's clock source.
+    
+    Clock * clock;
     
 private:
-//    std::atomic<float> modulation = {0.0F};
-    ValueTransition modulation = {1.0, 2.0F, 1.0F};
+    /// @brief The delay between the write head and the read head in samples.
+    
+    ValueTransition delay      = {1E3F, 96E3F, 2.0F};
+    
+    /// @brief The modulation depth in [1, 2]. This range should be normalised to [0, 1] when interfacing with external classes.
+   
+    ValueTransition modulation = {1.0F, 2.0F, 1.00F};
+    
+private:
+    /// @brief The factor to scale the depth of the delay modulation effect.
+    
     constexpr static float scalar = 512.0F;
+    
+    /// @brief The frequency of the delay modulation, scaled by the oversampling factor.
+    
     constexpr static float modulationRate = 2.0F * (1.0F / (float) OVERSAMPLING);
+    
+    /// @brief A sine wavetable oscillator to smoothly modulate the delay's read position.
+    
     BandlimitedOscillator<SIN>  modulator = {modulationRate};
 };
 

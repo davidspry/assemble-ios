@@ -270,7 +270,7 @@ class MainViewController : UIViewController, KeyboardSettingsListener
              return performSegue(withIdentifier: "shareCardSegue", sender: url)
         case MediaUtilities.MediaType.audio.rawValue:
              return presentFile(url)
-        default: print("[MediaUtilities] Unknown path extension.")
+        default: print("[MainViewController] Unknown path extension.")
         }
     }
     

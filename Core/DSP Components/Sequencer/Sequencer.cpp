@@ -33,7 +33,7 @@ void Sequencer::set(uint64_t parameter, float value)
             const int pattern = Assemble::Utilities::bound(value, 0, PATTERNS - 1);
             const bool active = patterns.at(pattern).toggle();
             activePatterns = activePatterns + (active ? 1 : -1);
-            printf("Active patterns: %d\n", activePatterns);
+            printf("[Sequencer] Active patterns: %d\n", activePatterns);
             return;
         }
             

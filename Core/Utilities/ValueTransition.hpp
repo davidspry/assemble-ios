@@ -7,10 +7,10 @@
 
 #include "ASHeaders.h"
 
-/// \brief An object representing a value transitioning smoothly between a source and target over a specified number of samples.
+/// @brief An object representing a value transitioning smoothly between a source and target over a specified number of samples.
 
-class ValueTransition {
-
+class ValueTransition
+{
 public:
     ValueTransition()
     { set(0.1F, 1.0F, 1.0F); }
@@ -20,7 +20,7 @@ public:
     
     ValueTransition(float value, float target, float timeInSeconds)
     { set(value, target, timeInSeconds); }
-    
+
 public:
     const float get();
     
@@ -31,10 +31,16 @@ public:
     void set(float value, float target, float timeinSeconds) noexcept;
     
     void setSampleRate(const float sampleRate);
-    
-    inline const float getTarget() { return (float) target; }
-    
-    inline const bool complete() { return timeInSamples <= 0; }
+
+    [[nodiscard]] inline const float getTarget() const noexcept
+    {
+        return (float) target;
+    }
+
+    [[nodiscard]] inline const bool complete() const noexcept
+    {
+        return timeInSamples <= 0;
+    }
 
 private:
     /// @author ROLI Ltd.
@@ -53,12 +59,12 @@ private:
 
 private:
     std::atomic<double> target = 0.F;
-    std::atomic<double> value = 0.F;
-    std::atomic<double> delta = 0.F;
-    
+    std::atomic<double> value  = 0.F;
+    std::atomic<double> delta  = 0.F;
+
 private:
-    int   timeInSamples;
-    float timeInSeconds = 1.0F;
+    float timeInSeconds = 1.00F;
+    int   timeInSamples = 48000;
     float sampleRate = 48000.0F;
 };
 

@@ -1,6 +1,7 @@
 # PRESETS AND DESIGN ASSETS #
 /AUPresets/*
 /Design Assets/*
+/BuildNotes/*
 
 # OS FILES #
 .DS_Store

@@ -28,7 +28,7 @@ public:
         }
         
         frequency.set(1.00F, 0.15F);
-        resonance.set(0.05F, 0.15F);
+        resonance.set(0.00F, 0.15F);
     }
 
 public:

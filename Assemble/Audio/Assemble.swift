@@ -30,7 +30,7 @@ struct Assemble
     }()
     
     /// The shape, (height, width), of the sequencer, in terms of dots on the grid.
-    
+
     public static let shape : CGSize = {
         return CGSize(width: Int(SEQUENCER_WIDTH),
                       height: Assemble.core.length)

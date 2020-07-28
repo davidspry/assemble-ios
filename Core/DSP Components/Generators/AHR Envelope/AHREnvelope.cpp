@@ -19,17 +19,14 @@ void AHREnvelope::set(float attack, float hold, float release)
     holdInSamples    = Assemble::Utilities::samples(hold,   sampleRate);
     releaseInSamples = Assemble::Utilities::samples(release,sampleRate);
 
-    if (mode == Mode::Attack && (time > attackInSamples))
+    if ((mode == Mode::Attack  && !(time < attackInSamples)) ||
+        (mode == Mode::Release && !(time < releaseInSamples)))
     {
-        if (time < releaseInSamples)
-            setMode(Mode::Release);
-        
-        else
-            setMode(Mode::Recovery);
+        time.store(computeReleaseInverse());
+        setMode(Mode::Release);
     }
     
-    else if (!(time < releaseInSamples))
-        setMode(Mode::Recovery);
+    shouldUpdate.store(false);
 }
 
 void AHREnvelope::setSampleRate(float sampleRate)
@@ -45,9 +42,15 @@ void AHREnvelope::prepare()
 {
     amplitude = std::fmax(0.0F, amplitude);
     
-    time = (amplitude > 0.0F) ? computeTimeOnRetrigger() : 0;
-    
-    setMode(Attack);
+    time = 0;
+
+    if (shouldUpdate.load() == true)
+        set(attackInMs, holdInMs, releaseInMs);
+
+    if (amplitude > 0.0F)
+        time = computeTimeOnRetrigger();
+
+    setMode(Mode::Attack);
 }
 
 const float AHREnvelope::get(uint64_t parameter)
@@ -64,12 +67,14 @@ const float AHREnvelope::get(uint64_t parameter)
 
 void AHREnvelope::set(uint64_t parameter, float value)
 {
+    shouldUpdate.store(true);
+
     const int subtype = (int) parameter % 16;
     switch (subtype)
     {
-        case 0x0: set(value, holdInMs, releaseInMs);   return;
-        case 0x1: set(attackInMs, value, releaseInMs); return;
-        case 0x2: set(attackInMs, holdInMs, value);    return;
+        case 0x0: attackInMs  = value; return;
+        case 0x1: holdInMs    = value; return;
+        case 0x2: releaseInMs = value; return;
         default:  return;
     }
 }
@@ -80,7 +85,7 @@ const float AHREnvelope::nextSample()
     {
         case Attack:
         {
-            amplitude = std::powf(computeAttack(time), 3.0F);
+            amplitude = std::powf(computeAttack(time.load()), 3.0F);
             mode = static_cast<Mode>(Mode::Attack + static_cast<int>(amplitude >= 1.0F));
             break;
         }
@@ -97,7 +102,7 @@ const float AHREnvelope::nextSample()
         case Release:
         {
             if (time <= releaseInSamples)
-                amplitude = std::powf(computeRelease(time), 3.0F);
+                amplitude = std::powf(computeRelease(time.load()), 3.0F);
             
             mode = static_cast<Mode>(Mode::Release + static_cast<int>(time == releaseInSamples) * 1);
             mode = static_cast<Mode>(Mode::Release + static_cast<int>(time >  releaseInSamples) * 2);
@@ -129,12 +134,12 @@ const float AHREnvelope::nextSample()
     return amplitude;
 }
 
-const float AHREnvelope::computeAttack(uint &time)
+const float AHREnvelope::computeAttack(uint time)
 {
     return (float) time / (float) (attackInSamples + 1);
 }
 
-const float AHREnvelope::computeRelease(uint &time)
+const float AHREnvelope::computeRelease(uint time)
 {
     return 1.0F - ((float) time / (float) (releaseInSamples + 1));
 }

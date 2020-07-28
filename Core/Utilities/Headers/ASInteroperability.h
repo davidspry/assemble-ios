@@ -7,13 +7,9 @@
 #pragma once
 
 #ifdef __OBJC__
-
-#define AS_SWIFT_TYPE __attribute((swift_newtype(struct)))
-
+    #define AS_SWIFT_TYPE __attribute((swift_newtype(struct)))
 #else
-
-#define AS_SWIFT_TYPE
-
+    #define AS_SWIFT_TYPE
 #endif
 
-typedef void* ASDSPRef AS_SWIFT_TYPE;
+typedef void * ASDSPRef AS_SWIFT_TYPE;

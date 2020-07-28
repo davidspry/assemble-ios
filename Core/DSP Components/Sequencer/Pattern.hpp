@@ -148,11 +148,11 @@ public:
     }
 
 private:
-    Matrix<SEQUENCER_WIDTH, SEQUENCER_WIDTH> pattern;
+    Matrix<SEQUENCER_WIDTH, SEQUENCER_HEIGHT> pattern;
 
 private:
     int W       = SEQUENCER_WIDTH;
-    int H       = SEQUENCER_WIDTH;
+    int H       = SEQUENCER_HEIGHT;
     int beats   = 4;
     int ticks   = 4;
     int counter = 0;

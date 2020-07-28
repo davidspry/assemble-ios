@@ -10,8 +10,8 @@ Vibrato::Vibrato()
     samples.reserve(capacity);
     samples.assign (capacity, 0.F);
     
-    set(kVibratoDepth, 3.0F);
-    set(kVibratoSpeed, 0.1F);
+    set(kVibratoSpeed, 3.00F);
+    set(kVibratoDepth, 0.15F);
 }
 
 const float Vibrato::get(uint64_t parameter)
@@ -38,15 +38,15 @@ void Vibrato::set(uint64_t parameter, float value)
         case kVibratoSpeed:
         {
             const float frequency = Assemble::Utilities::bound(value, 0.1F, 15.F);
-            portamento.set(frequency * scale);
             speed.store(frequency);
+            portamento.set(frequency * scale);
             break;
         }
         case kVibratoDepth:
         {
-            targetDepth.store(Assemble::Utilities::bound(value, 0.0F, 1.0F));
-            depthNormal.store(targetDepth.load());
-            targetDepth.store(value * scalar);
+            const float depth = Assemble::Utilities::bound(value, 0.0F, 1.0F);
+            depthNormal.store(depth);
+            targetDepth.store(depth * scalar);
             break;
         }
         default: return;
@@ -75,15 +75,16 @@ void Vibrato::process(float& sample)
 
     samples[whead] = sample;
 
-    sample = Assemble::Utilities::lerp(rhead, samples.data(), capacity);
+    sample = Assemble::Utilities::hermite(rhead, samples.data(), capacity);
     
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;
 
     rhead = whead - depth + depth * modulator.nextSample();
+    rhead = rhead - 5.0F;
     
     while (rhead < 0)         rhead = rhead + capacity;
     while (rhead >= capacity) rhead = rhead - capacity;
 
-    if (!portamento.complete()) modulator.update(portamento.get());
+    if (!portamento.complete()) modulator.update (portamento.get());
 }

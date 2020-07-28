@@ -1,52 +1,26 @@
 //  Assemble
-//  Created by David Spry on 12/4/20.
+//  Created by David Spry on 26/7/20.
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
 
-/// A container of icons used by `Transport` components.
-struct Icons {
-    static let play   = UIImage(systemName: "play.fill", withConfiguration: size)
-    static let pause  = UIImage(systemName: "pause", withConfiguration: size)
-    static let show   = UIImage(systemName: "circle.fill", withConfiguration: size)
-    static let hide   = UIImage(systemName: "circle", withConfiguration: size)
-    static let record = UIImage(systemName: "circle.fill", withConfiguration: size)
-    static let bypass = UIImage(systemName: "circle", withConfiguration: size)
-    static let saving = UIImage(systemName: "slowmo", withConfiguration: size)
-    private static let size = UIImage.SymbolConfiguration.init(pointSize: 25, weight: .semibold)
-}
-
 /// The transport bar, which contains the oscillator selector, the play-pause control, recording controls, and a toggle for the on-screen keyboard.
 
-class Transport : UIView, TransportListener, KeyboardSettingsListener {
+class TransportiOS : UIView, TransportListener, KeyboardSettingsListener {
 
-    /// The play-pause button
-    
     internal let play = UIButton()
     
-    /// The record button
-    
-    internal let record = UIButton()
-    
-    /// The state of the record button
-    
-    internal var recording: Bool = false
-    
-    /// The on-screen keyboard's visibility toggle
-
     internal let keyboard = UIButton()
     
-    /// The oscillator selector component
-
     lazy internal var oscillators = OscillatorSelector(itemWidth: buttonWidth)
     
     /// The width of each button on the transport bar
-
-    internal let buttonWidth: CGFloat = 55
+    
+    internal let buttonWidth: CGFloat = 50
     
     /// The space between each button on the transport bar
 
-    internal let buttonMargin: CGFloat = 25
+    internal let buttonMargin: CGFloat = 8
     
     /// The visibility state of the keyboard. This should be `false` initially.
 
@@ -59,16 +33,9 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         translatesAutoresizingMaskIntoConstraints = false
-        initialiseRecordButton()
         initialisePlayButton()
         initialiseSegmentedControl()
         initialiseKeyboardButton()
-
-        /// Register to be notified when a media recording session begins
-
-        let selector = #selector(didBeginRecording(_:))
-        let notification = NSNotification.Name.beginRecording
-        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
 
     /// Respond to presses on the play-pause button by updating its visual state and broadcasting the play-pause notification.
@@ -88,57 +55,6 @@ class Transport : UIView, TransportListener, KeyboardSettingsListener {
                 UIView.animate(withDuration: 0.1, animations: {
                     self.play.imageView?.layer.setAffineTransform(.init(scaleX: 1, y: 1))
                 })
-            }
-        }
-    }
-    
-    /// Initiate a new media recording session or end an existing media recording session
-    ///
-    /// - Parameter sender: A reference to the record button
-
-    @objc internal func didPressRecord(sender: UIButton)
-    {
-        if !recording {
-            NotificationCenter.default.post(name: .defineRecording, object: nil)
-        }
-
-        else {
-            recording = false
-            DispatchQueue.main.async {
-                self.record.pulsateEnd()
-                self.record.setImage(Icons.bypass, for: .normal)
-                NotificationCenter.default.post(name: .stopRecording, object: nil)
-            }
-        }
-    }
-    
-    /// Respond to a newly initiated media recording session by setting the visual state of the record button
-    ///
-    /// - Parameter notification: The `NSNotification` who triggered the callback
-
-    @objc private func didBeginRecording(_ notification: NSNotification) {
-        recording = true
-        DispatchQueue.main.async {
-            self.record.pulsate()
-            self.record.setImage(Icons.record, for: .normal)
-        }
-    }
-
-    /// Set the usable state of the record button.
-    /// - Note: The record button should be disabled during the video encoding stage.
-    /// - Parameter state: The desired state of the record button. `true` if the button should be active; `false` otherwise.
-
-    public func setRecordButtonUsable(_ usable: Bool) {
-        let image = usable ? Icons.bypass : Icons.saving
-
-        DispatchQueue.main.async {
-            self.record.isUserInteractionEnabled = usable
-            if  usable { self.record.rotateClockwiseEnd() }
-            if !usable { self.record.rotateClockwise() }
-            
-            UIView.animate(withDuration: 0.25) {
-                self.record.alpha = usable ? 1.0 : 0.50
-                self.record.setImage(image, for: .normal)
             }
         }
     }

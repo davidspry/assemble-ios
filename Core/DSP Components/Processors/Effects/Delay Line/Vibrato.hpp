@@ -25,7 +25,7 @@ public:
     const float get(uint64_t parameter);
 
 private:
-    std::atomic<bool> bypassed = {false};
+    std::atomic<bool>  bypassed = {false};
     std::atomic<float> speed;
     std::atomic<float> depth;
     std::atomic<float> targetDepth;
@@ -47,10 +47,10 @@ private:
 private:
     constexpr static float scale = 1.00F;
     constexpr static float taper = 0.01F;
+    constexpr static float scalar = 125.0F;
     
 private:
     int capacity;
-    float scalar = 125.0F;
     float sampleRate = 48000.F;
     std::vector<float> samples;
 };

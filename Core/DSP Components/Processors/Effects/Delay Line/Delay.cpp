@@ -139,8 +139,8 @@ void Delay::process(float& sample)
     if (bypassed) fadeOut();
     else           fadeIn();
 
-    samples[whead] = gain * sample + feedback.load() * samples[rhead];
     const float interpolated = Assemble::Utilities::hermite(rhead, samples.data(), capacity);
+    samples[whead] = gain * sample + feedback.load() * interpolated;
 
     whead = whead + 1;
     whead = static_cast<int>(whead < capacity) * whead;

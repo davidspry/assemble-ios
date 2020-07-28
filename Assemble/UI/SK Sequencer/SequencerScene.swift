@@ -76,7 +76,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         row.initialise(spacing: spacing)
         grid.initialise(spacing: spacing)
 
-        DispatchQueue.main.async(execute: {
+        DispatchQueue.main.async {
             let patterns = Int(PATTERNS)
             let W = Int(SEQUENCER_WIDTH)
             let H = Assemble.core.length
@@ -89,7 +89,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
             for k in 0 ..< patterns {
                 self.noteStrings[k].append(contentsOf: Array.init(repeating: empty, count: H))
             }
-        })
+        }
 
         addChild(grid);
         addChild(row);

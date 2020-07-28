@@ -11,15 +11,37 @@
 #define LN100       4.6051701859
 #define LN20E3      9.9034875525
 
-// Synthesiser
-#define POLYPHONY   8
-#define OSCILLATORS 4
+// ASSEMBLE LIGHT (IOS)
+// ====================
 
-// Sequencer
-#define PATTERNS 8
-#define SEQUENCER_WIDTH 16
+#ifdef LIGHT
+    // Synthesiser
+    #define POLYPHONY        6
+    #define OSCILLATORS      4
 
-// Effects
-#define OVERSAMPLING 16
+    // Sequencer
+    #define PATTERNS         3
+    #define SEQUENCER_WIDTH  8
+    #define SEQUENCER_HEIGHT 16
 
+    // Effects
+    #define OVERSAMPLING     8
+
+// ASSEMBLE (IPADOS)
+// =================
+
+#else
+    // Synthesiser
+    #define POLYPHONY        8
+    #define OSCILLATORS      4
+
+    // Sequencer
+    #define PATTERNS         8
+    #define SEQUENCER_WIDTH  16
+    #define SEQUENCER_HEIGHT 16
+
+    // Effects
+    #define OVERSAMPLING     16
+
+#endif
 #endif

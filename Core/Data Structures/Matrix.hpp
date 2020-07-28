@@ -19,7 +19,7 @@ class Matrix
 public:
     Matrix()
     {
-        length.assign(N, 0);
+        length.assign(M, 0);
         vector.assign(N * M, Note());
     }
 
@@ -119,7 +119,7 @@ public:
     
     inline void reset()
     {
-        for (int i = 0; i < N; ++i)
+        for (int i = 0; i < M; ++i)
             clearRow(i);
     }
 
@@ -132,7 +132,7 @@ public:
     void include(int x, int y, A... arguments) noexcept(false)
     {
         if (y < 0 || y > M)  throw "[Matrix] Invalid row";
-        if (length[y] >= M) throw "[Matrix] Row is full";
+        if (length[y] >= N) throw "[Matrix] Row is full";
         
         int position = find(x, y);
         if (position == -1) {

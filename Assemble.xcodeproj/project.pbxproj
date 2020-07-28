@@ -28,8 +28,11 @@
 		14280352246C3DC2006775AE /* ParameterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280351246C3DC2006775AE /* ParameterMenu.swift */; };
 		1428A2D5247F8B5400C8B353 /* EmptyPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */; };
 		1428A2D7247F9C4E00C8B353 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D6247F9C4E00C8B353 /* SongCell.swift */; };
+		1432630C24CDB94500B173C4 /* TransportViewIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432630A24CDB67900B173C4 /* TransportViewIOS.swift */; };
+		1432630D24CDB94800B173C4 /* TransportIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1432630824CDB65F00B173C4 /* TransportIOS.swift */; };
 		14347A0924BD709E007ED1CB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14347A0824BD709E007ED1CB /* StoreKit.framework */; };
 		14347A0C24BD8D30007ED1CB /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */; };
+		14376A1124CF2834001F5405 /* OptionsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14376A0F24CF26AD001F5405 /* OptionsScrollView.swift */; };
 		1437D70724BDE99000315897 /* UnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437D70624BDE99000315897 /* UnlockViewController.swift */; };
 		143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */; };
 		143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */; };
@@ -55,6 +58,9 @@
 		144D8631246D3C4900F6EDD4 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */; };
 		144D8633246D4BA300F6EDD4 /* OscillatorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */; };
 		144D8638246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */; };
+		144DFA7B24CEA1A900B25073 /* OptionsViewControllerIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DFA7924CEA1A600B25073 /* OptionsViewControllerIOS.swift */; };
+		144DFA7E24CEA90100B25073 /* BoxedSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144DFA7D24CEA90100B25073 /* BoxedSelector.swift */; };
+		14524B9124CF01F300715628 /* NormalParameterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14524B9024CF01F300715628 /* NormalParameterLabel.swift */; };
 		14556A7C2472954900FB2392 /* NSNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14556A7B2472954900FB2392 /* NSNotifications.swift */; };
 		1458D1282452C5110093B541 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D1272452C5110093B541 /* KeyboardHandler.swift */; };
 		1458D12A24531D9C0093B541 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */; };
@@ -95,6 +101,104 @@
 		14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E40624990BA500980AA9 /* HelpViewController.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
 		14C38EED245B2A1F00180810 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
+		14C4670424CD90150090F660 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4670324CD90150090F660 /* AppDelegate.swift */; };
+		14C4670624CD90150090F660 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4670524CD90150090F660 /* SceneDelegate.swift */; };
+		14C4670824CD90150090F660 /* MainViewControllerIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4670724CD90150090F660 /* MainViewControllerIOS.swift */; };
+		14C4670B24CD90150090F660 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C4670924CD90150090F660 /* Main.storyboard */; };
+		14C4671024CD90190090F660 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C4670E24CD90190090F660 /* LaunchScreen.storyboard */; };
+		14C4671524CD908D0090F660 /* ASComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB022243F67500058AE40 /* ASComponent.swift */; };
+		14C4671624CD90970090F660 /* ASCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB020243F63620058AE40 /* ASCommander.swift */; };
+		14C4671724CD90990090F660 /* ASCommanderAU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB016243F400B0058AE40 /* ASCommanderAU.swift */; };
+		14C4671824CD909E0090F660 /* ASCommanderDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01B243F50520058AE40 /* ASCommanderDSP.mm */; };
+		14C4671924CD90A10090F660 /* ASCommanderAUParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */; };
+		14C4671A24CD90A70090F660 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E4042499047C00980AA9 /* FactoryPresetA.swift */; };
+		14C4671B24CD90A90090F660 /* FactoryPresetB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5A11C24B8D5790035CC5D /* FactoryPresetB.swift */; };
+		14C4671C24CD90AC0090F660 /* FactoryPresetC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6551E24718A7100D619F0 /* FactoryPresetC.swift */; };
+		14C4671D24CD90AF0090F660 /* EmptyPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */; };
+		14C4671E24CD90B70090F660 /* Attribution.md in Resources */ = {isa = PBXBuildFile; fileRef = 143FB004243F301C0058AE40 /* Attribution.md */; };
+		14C4671F24CD90BC0090F660 /* ASAudioUnitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */; };
+		14C4672024CD90C10090F660 /* ASAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */; };
+		14C4672124CD90C30090F660 /* ASDSPBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB007243F360D0058AE40 /* ASDSPBase.mm */; };
+		14C4672224CD90D30090F660 /* Delay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89224520D8800F5AD3A /* Delay.cpp */; };
+		14C4672324CD90D70090F660 /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
+		14C4672424CD90DA0090F660 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1458D13324532F050093B541 /* StereoDelay.cpp */; };
+		14C4672524CD90DF0090F660 /* HuovilainenFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA6D243F96470020386C /* HuovilainenFilter.cpp */; };
+		14C4672624CD90E50090F660 /* AHREnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA4F243F81140020386C /* AHREnvelope.cpp */; };
+		14C4672724CD90E80090F660 /* Synthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148E7E26244D5B72003C1DCF /* Synthesiser.cpp */; };
+		14C4672824CD90EB0090F660 /* Voice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA69243F95D00020386C /* Voice.cpp */; };
+		14C4672924CD90F50090F660 /* SawtoothOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA64243F918E0020386C /* SawtoothOscillator.cpp */; };
+		14C4672A24CD90F80090F660 /* SquareOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA60243F918D0020386C /* SquareOscillator.cpp */; };
+		14C4672B24CD90FA0090F660 /* TriangleOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA62243F918E0020386C /* TriangleOscillator.cpp */; };
+		14C4672C24CD90FD0090F660 /* SineOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141DDA5C243F91610020386C /* SineOscillator.cpp */; };
+		14C4672D24CD91080090F660 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 144A11662457166C000F2B4C /* Clock.cpp */; };
+		14C4672E24CD910D0090F660 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
+		14C4672F24CD91130090F660 /* ASCommanderCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01C243F52820058AE40 /* ASCommanderCore.cpp */; };
+		14C4673024CD91190090F660 /* ValueTransition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14DC8D242456AF6D001FDC43 /* ValueTransition.cpp */; };
+		14C4673124CD91250090F660 /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140404BE24B34D760094EC6B /* r8bbase.cpp */; };
+		14C4673224CD912B0090F660 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 140404B324B3465E0094EC6B /* README.md */; };
+		14C4673324CD912E0090F660 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 140404B024B3465E0094EC6B /* LICENSE */; };
+		14C4673424CD913F0090F660 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC3912417772E005654EA /* Assets.xcassets */; };
+		14C4673524CD914B0090F660 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1427E2EE247686340011D102 /* Colours.xcassets */; };
+		14C4673624CD914F0090F660 /* DynamicImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14488DBB24A3312000B44A6C /* DynamicImages.xcassets */; };
+		14C4673724CD91790090F660 /* Assemble.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F5852E24A4DAB8003F4BC5 /* Assemble.png */; };
+		14C4673824CD917E0090F660 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12C24531FFD0093B541 /* License.txt */; };
+		14C4673924CD91810090F660 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */; };
+		14C4673A24CD91840090F660 /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */; };
+		14C4673B24CD918A0090F660 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
+		14C4673C24CD918D0090F660 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DAC39C241777DF005654EA /* Engine.swift */; };
+		14C4673D24CD918F0090F660 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
+		14C4673E24CD919B0090F660 /* IAPVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B9B2D24B825B1005E42A7 /* IAPVerifier.swift */; };
+		14C4673F24CD919E0090F660 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2624543615009DA18F /* MulticastDelegate.swift */; };
+		14C4674024CD91A10090F660 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B9B2F24B827CB005E42A7 /* UserDefaultsKeys.swift */; };
+		14C4674124CD91A30090F660 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
+		14C4674224CD91A80090F660 /* StoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */; };
+		14C4674324CD91B50090F660 /* BoolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE019B245DA04C003EB586 /* BoolExtensions.swift */; };
+		14C4674424CD91BC0090F660 /* MediaRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63C92484D70600D571D1 /* MediaRecorder.swift */; };
+		14C4674524CD91BC0090F660 /* MediaUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C732C724A0568A00FD668F /* MediaUtilities.swift */; };
+		14C4674624CD91BC0090F660 /* NSNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14556A7B2472954900FB2392 /* NSNotifications.swift */; };
+		14C4674724CD91BC0090F660 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */; };
+		14C4674824CD91BC0090F660 /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */; };
+		14C4674924CD91BC0090F660 /* CGSizeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB00E243F3DE40058AE40 /* CGSizeExtensions.swift */; };
+		14C4674A24CD91BC0090F660 /* FloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB010243F3E2A0058AE40 /* FloatExtensions.swift */; };
+		14C4674B24CD91BC0090F660 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE01A1245DFF02003EB586 /* UIImageExtensions.swift */; };
+		14C4674C24CD91BC0090F660 /* FourCharCodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */; };
+		14C4674D24CD91BC0090F660 /* UIBezierPathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */; };
+		14C4674E24CD91BC0090F660 /* ClosedRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */; };
+		14C4674F24CD91BC0090F660 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */; };
+		14C4675024CD91BC0090F660 /* UISegmentedControlExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */; };
+		14C4675124CD91BC0090F660 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */; };
+		14C4675224CD91BC0090F660 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63D32485371100D571D1 /* UIButtonExtensions.swift */; };
+		14C4675324CD91BC0090F660 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */; };
+		14C4675424CD91BC0090F660 /* SKProductExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488BDE024C324CA0008087C /* SKProductExtensions.swift */; };
+		14C4675524CD91CD0090F660 /* ParameterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14280351246C3DC2006775AE /* ParameterMenu.swift */; };
+		14C4675624CD91CD0090F660 /* OscillatorParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428034F246C3DB9006775AE /* OscillatorParameters.swift */; };
+		14C4675724CD91CD0090F660 /* StereoDelayParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D862C246D3A9300F6EDD4 /* StereoDelayParameters.swift */; };
+		14C4675824CD91CD0090F660 /* VibratoParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D862E246D3B2A00F6EDD4 /* VibratoParameters.swift */; };
+		14C4675924CD91D00090F660 /* PatternOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149A1D2D2459E0C900F083D0 /* PatternOverview.swift */; };
+		14C4675A24CD91D30090F660 /* Sequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBED2436265300822139 /* Sequencer.swift */; };
+		14C4675B24CD91D30090F660 /* SequencerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ADCBEB2436233B00822139 /* SequencerScene.swift */; };
+		14C4675C24CD91D30090F660 /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
+		14C4675D24CD91D70090F660 /* NoteShapeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9D243313210095B587 /* NoteShapeNode.swift */; };
+		14C4675E24CD91D70090F660 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
+		14C4675F24CD91D70090F660 /* DotGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE972432F3AC0095B587 /* DotGrid.swift */; };
+		14C4676024CD91D70090F660 /* DotGridRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D3AE9B2433088E0095B587 /* DotGridRow.swift */; };
+		14C4676124CD91D90090F660 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
+		14C4676224CD91D90090F660 /* TransportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEC245B2A1F00180810 /* TransportViews.swift */; };
+		14C4676324CD91DC0090F660 /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
+		14C4676424CD91E00090F660 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
+		14C4676524CD91E00090F660 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
+		14C4676624CD91E00090F660 /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
+		14C4676724CD91E30090F660 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D130245328550093B541 /* PaddedLabel.swift */; };
+		14C4676824CD91E30090F660 /* ParameterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2D5C5246C747C003675C2 /* ParameterLabel.swift */; };
+		14C4676924CD91E30090F660 /* OscillatorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */; };
+		14C4676A24CD91E30090F660 /* ASSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860324C01BF30025157D /* ASSegmentedControl.swift */; };
+		14C4676B24CD91E70090F660 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1428A2D6247F9C4E00C8B353 /* SongCell.swift */; };
+		14C4676C24CD91E70090F660 /* ParameterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D4C74C246EAB3B00B7180C /* ParameterCell.swift */; };
+		14C4676D24CD91E70090F660 /* MenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */; };
+		14C4676E24CD91E70090F660 /* OscillatorsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */; };
+		14C4676F24CD92080090F660 /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC232454330E009DA18F /* KeyboardListener.swift */; };
+		14C4677024CD920C0090F660 /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
+		14C4677124CD920F0090F660 /* TransportListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144D862A246D1F4100F6EDD4 /* TransportListener.swift */; };
 		14C732C824A0568A00FD668F /* MediaUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C732C724A0568A00FD668F /* MediaUtilities.swift */; };
 		14CE044C2457367E00B0220C /* Waveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14CE044B2457367E00B0220C /* Waveform.swift */; };
 		14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D2D5C5246C747C003675C2 /* ParameterLabel.swift */; };
@@ -191,8 +295,11 @@
 		14280351246C3DC2006775AE /* ParameterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterMenu.swift; sourceTree = "<group>"; };
 		1428A2D4247F8B5400C8B353 /* EmptyPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPreset.swift; sourceTree = "<group>"; };
 		1428A2D6247F9C4E00C8B353 /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
+		1432630824CDB65F00B173C4 /* TransportIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportIOS.swift; sourceTree = "<group>"; };
+		1432630A24CDB67900B173C4 /* TransportViewIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViewIOS.swift; sourceTree = "<group>"; };
 		14347A0824BD709E007ED1CB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		14376A0F24CF26AD001F5405 /* OptionsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsScrollView.swift; sourceTree = "<group>"; };
 		1437D70624BDE99000315897 /* UnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewController.swift; sourceTree = "<group>"; };
 		143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioUnitBase.m; sourceTree = "<group>"; };
 		143FAFFD243F17DF0058AE40 /* ASAudioUnitBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioUnitBase.h; sourceTree = "<group>"; };
@@ -227,6 +334,9 @@
 		144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorSelector.swift; sourceTree = "<group>"; };
 		144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorsHeaderCell.swift; sourceTree = "<group>"; };
+		144DFA7924CEA1A600B25073 /* OptionsViewControllerIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewControllerIOS.swift; sourceTree = "<group>"; };
+		144DFA7D24CEA90100B25073 /* BoxedSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxedSelector.swift; sourceTree = "<group>"; };
+		14524B9024CF01F300715628 /* NormalParameterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalParameterLabel.swift; sourceTree = "<group>"; };
 		14556A7B2472954900FB2392 /* NSNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNotifications.swift; sourceTree = "<group>"; };
 		1458D1272452C5110093B541 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JetBrainsMono-Regular.ttf"; sourceTree = "<group>"; };
@@ -287,6 +397,13 @@
 		14C1E40624990BA500980AA9 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
 		14C38EEC245B2A1F00180810 /* TransportViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportViews.swift; sourceTree = "<group>"; };
+		14C4670124CD90150090F660 /* Assemble Light.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Assemble Light.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14C4670324CD90150090F660 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		14C4670524CD90150090F660 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		14C4670724CD90150090F660 /* MainViewControllerIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerIOS.swift; sourceTree = "<group>"; };
+		14C4670A24CD90150090F660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		14C4670F24CD90190090F660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		14C4671124CD90190090F660 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14C732C724A0568A00FD668F /* MediaUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUtilities.swift; sourceTree = "<group>"; };
 		14CE044B2457367E00B0220C /* Waveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waveform.swift; sourceTree = "<group>"; };
 		14D2D5C5246C747C003675C2 /* ParameterLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterLabel.swift; sourceTree = "<group>"; };
@@ -318,6 +435,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		14C466FE24CD90150090F660 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14DAC3822417772C005654EA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,6 +595,24 @@
 			path = "Parameter Menus";
 			sourceTree = "<group>";
 		};
+		1432630724CDB65200B173C4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				144DFA7C24CEA8E700B25073 /* Elements */,
+				1432630E24CDBAC500B173C4 /* Transport iOS */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		1432630E24CDBAC500B173C4 /* Transport iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1432630824CDB65F00B173C4 /* TransportIOS.swift */,
+				1432630A24CDB67900B173C4 /* TransportViewIOS.swift */,
+			);
+			path = "Transport iOS";
+			sourceTree = "<group>";
+		};
 		1436CE51245404A000670E3E /* SK Sequencer */ = {
 			isa = PBXGroup;
 			children = (
@@ -561,6 +703,16 @@
 				144D8637246D7C4200F6EDD4 /* OscillatorsHeaderCell.swift */,
 			);
 			path = "Table Cells";
+			sourceTree = "<group>";
+		};
+		144DFA7C24CEA8E700B25073 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				14524B9024CF01F300715628 /* NormalParameterLabel.swift */,
+				144DFA7D24CEA90100B25073 /* BoxedSelector.swift */,
+				14376A0F24CF26AD001F5405 /* OptionsScrollView.swift */,
+			);
+			path = Elements;
 			sourceTree = "<group>";
 		};
 		14556A7A2472953A00FB2392 /* Notifications */ = {
@@ -791,6 +943,45 @@
 			path = Transport;
 			sourceTree = "<group>";
 		};
+		14C4670224CD90150090F660 /* Assemble-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1432630724CDB65200B173C4 /* UI */,
+				14C4677524CD94F90090F660 /* Delegates */,
+				14C4677424CD94F00090F660 /* View Controllers */,
+				14C4677324CD94E70090F660 /* Storyboards */,
+				14C4671124CD90190090F660 /* Info.plist */,
+			);
+			path = "Assemble-iOS";
+			sourceTree = "<group>";
+		};
+		14C4677324CD94E70090F660 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				14C4670924CD90150090F660 /* Main.storyboard */,
+				14C4670E24CD90190090F660 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		14C4677424CD94F00090F660 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				14C4670724CD90150090F660 /* MainViewControllerIOS.swift */,
+				144DFA7924CEA1A600B25073 /* OptionsViewControllerIOS.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		14C4677524CD94F90090F660 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				14C4670324CD90150090F660 /* AppDelegate.swift */,
+				14C4670524CD90150090F660 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		14CA4FE9243EF32A00F3C685 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,6 +1004,7 @@
 			children = (
 				143FAFF7243F066C0058AE40 /* Core */,
 				14DAC3872417772C005654EA /* Assemble */,
+				14C4670224CD90150090F660 /* Assemble-iOS */,
 				14DAC3862417772C005654EA /* Products */,
 				14CA4FE9243EF32A00F3C685 /* Frameworks */,
 			);
@@ -822,6 +1014,7 @@
 			isa = PBXGroup;
 			children = (
 				14DAC3852417772C005654EA /* Assemble.app */,
+				14C4670124CD90150090F660 /* Assemble Light.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -916,6 +1109,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		14C4670024CD90150090F660 /* Assemble Light */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14C4671424CD90190090F660 /* Build configuration list for PBXNativeTarget "Assemble Light" */;
+			buildPhases = (
+				14C466FD24CD90150090F660 /* Sources */,
+				14C466FE24CD90150090F660 /* Frameworks */,
+				14C466FF24CD90150090F660 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Assemble Light";
+			productName = "Assemble-iOS";
+			productReference = 14C4670124CD90150090F660 /* Assemble Light.app */;
+			productType = "com.apple.product-type.application";
+		};
 		14DAC3842417772C005654EA /* Assemble */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14DAC3992417772E005654EA /* Build configuration list for PBXNativeTarget "Assemble" */;
@@ -941,10 +1151,13 @@
 		14DAC37D2417772C005654EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "David Spry";
 				TargetAttributes = {
+					14C4670024CD90150090F660 = {
+						CreatedOnToolsVersion = 11.6;
+					};
 					14DAC3842417772C005654EA = {
 						CreatedOnToolsVersion = 11.3.1;
 						LastSwiftMigration = 1140;
@@ -965,11 +1178,32 @@
 			projectRoot = "";
 			targets = (
 				14DAC3842417772C005654EA /* Assemble */,
+				14C4670024CD90150090F660 /* Assemble Light */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		14C466FF24CD90150090F660 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14C4673324CD912E0090F660 /* LICENSE in Resources */,
+				14C4671024CD90190090F660 /* LaunchScreen.storyboard in Resources */,
+				14C4673224CD912B0090F660 /* README.md in Resources */,
+				14C4673424CD913F0090F660 /* Assets.xcassets in Resources */,
+				14C4673524CD914B0090F660 /* Colours.xcassets in Resources */,
+				14C4673724CD91790090F660 /* Assemble.png in Resources */,
+				14C4673824CD917E0090F660 /* License.txt in Resources */,
+				14C4673924CD91810090F660 /* JetBrainsMono-Regular.ttf in Resources */,
+				14C4674224CD91A80090F660 /* StoreKitConfiguration.storekit in Resources */,
+				14C4673624CD914F0090F660 /* DynamicImages.xcassets in Resources */,
+				14C4673A24CD91840090F660 /* JetBrainsMono-Medium.ttf in Resources */,
+				14C4671E24CD90B70090F660 /* Attribution.md in Resources */,
+				14C4670B24CD90150090F660 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14DAC3832417772C005654EA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -993,6 +1227,104 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		14C466FD24CD90150090F660 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14C4675324CD91BC0090F660 /* CollectionExtension.swift in Sources */,
+				14C4672824CD90EB0090F660 /* Voice.cpp in Sources */,
+				14C4676224CD91D90090F660 /* TransportViews.swift in Sources */,
+				14C4674F24CD91BC0090F660 /* UIViewControllerExtensions.swift in Sources */,
+				14C4676524CD91E00090F660 /* KeyboardDrawing.swift in Sources */,
+				14C4671C24CD90AC0090F660 /* FactoryPresetC.swift in Sources */,
+				144DFA7E24CEA90100B25073 /* BoxedSelector.swift in Sources */,
+				14C4675B24CD91D30090F660 /* SequencerScene.swift in Sources */,
+				14C4670824CD90150090F660 /* MainViewControllerIOS.swift in Sources */,
+				14C4672524CD90DF0090F660 /* HuovilainenFilter.cpp in Sources */,
+				14C4672F24CD91130090F660 /* ASCommanderCore.cpp in Sources */,
+				14C4672924CD90F50090F660 /* SawtoothOscillator.cpp in Sources */,
+				14C4672024CD90C10090F660 /* ASAudioUnit.mm in Sources */,
+				14C4673D24CD918F0090F660 /* OscillatorShape.swift in Sources */,
+				14C4671D24CD90AF0090F660 /* EmptyPreset.swift in Sources */,
+				14C4674624CD91BC0090F660 /* NSNotifications.swift in Sources */,
+				144DFA7B24CEA1A900B25073 /* OptionsViewControllerIOS.swift in Sources */,
+				14376A1124CF2834001F5405 /* OptionsScrollView.swift in Sources */,
+				14C4674B24CD91BC0090F660 /* UIImageExtensions.swift in Sources */,
+				14C4676824CD91E30090F660 /* ParameterLabel.swift in Sources */,
+				14C4674824CD91BC0090F660 /* CGPointExtensions.swift in Sources */,
+				14C4671624CD90970090F660 /* ASCommander.swift in Sources */,
+				14C4677124CD920F0090F660 /* TransportListener.swift in Sources */,
+				14C4676024CD91D70090F660 /* DotGridRow.swift in Sources */,
+				14C4675624CD91CD0090F660 /* OscillatorParameters.swift in Sources */,
+				14C4675F24CD91D70090F660 /* DotGrid.swift in Sources */,
+				14C4672C24CD90FD0090F660 /* SineOscillator.cpp in Sources */,
+				14C4675224CD91BC0090F660 /* UIButtonExtensions.swift in Sources */,
+				14C4673024CD91190090F660 /* ValueTransition.cpp in Sources */,
+				1432630D24CDB94800B173C4 /* TransportIOS.swift in Sources */,
+				14C4674424CD91BC0090F660 /* MediaRecorder.swift in Sources */,
+				14C4674024CD91A10090F660 /* UserDefaultsKeys.swift in Sources */,
+				14C4672E24CD910D0090F660 /* Sequencer.cpp in Sources */,
+				14C4674524CD91BC0090F660 /* MediaUtilities.swift in Sources */,
+				14C4677024CD920C0090F660 /* KeyboardSettingsListener.swift in Sources */,
+				14C4672124CD90C30090F660 /* ASDSPBase.mm in Sources */,
+				14C4675E24CD91D70090F660 /* CellSelectShape.swift in Sources */,
+				14C4671B24CD90A90090F660 /* FactoryPresetB.swift in Sources */,
+				14C4676B24CD91E70090F660 /* SongCell.swift in Sources */,
+				14C4676324CD91DC0090F660 /* Waveform.swift in Sources */,
+				14C4675924CD91D00090F660 /* PatternOverview.swift in Sources */,
+				14C4674A24CD91BC0090F660 /* FloatExtensions.swift in Sources */,
+				14C4676124CD91D90090F660 /* Transport.swift in Sources */,
+				14C4675524CD91CD0090F660 /* ParameterMenu.swift in Sources */,
+				14C4674124CD91A30090F660 /* NoteUtilities.swift in Sources */,
+				14C4672424CD90DA0090F660 /* StereoDelay.cpp in Sources */,
+				14C4675424CD91BC0090F660 /* SKProductExtensions.swift in Sources */,
+				14C4672324CD90D70090F660 /* Vibrato.cpp in Sources */,
+				14C4671F24CD90BC0090F660 /* ASAudioUnitBase.m in Sources */,
+				14C4671A24CD90A70090F660 /* FactoryPresetA.swift in Sources */,
+				14C4674924CD91BC0090F660 /* CGSizeExtensions.swift in Sources */,
+				14C4674C24CD91BC0090F660 /* FourCharCodeExtensions.swift in Sources */,
+				14C4672224CD90D30090F660 /* Delay.cpp in Sources */,
+				14C4673C24CD918D0090F660 /* Engine.swift in Sources */,
+				14C4672D24CD91080090F660 /* Clock.cpp in Sources */,
+				14C4675D24CD91D70090F660 /* NoteShapeNode.swift in Sources */,
+				14C4675A24CD91D30090F660 /* Sequencer.swift in Sources */,
+				14C4670424CD90150090F660 /* AppDelegate.swift in Sources */,
+				1432630C24CDB94500B173C4 /* TransportViewIOS.swift in Sources */,
+				14C4675124CD91BC0090F660 /* UIViewExtensions.swift in Sources */,
+				14C4674E24CD91BC0090F660 /* ClosedRangeExtensions.swift in Sources */,
+				14C4673B24CD918A0090F660 /* Assemble.swift in Sources */,
+				14C4675024CD91BC0090F660 /* UISegmentedControlExtensions.swift in Sources */,
+				14C4671824CD909E0090F660 /* ASCommanderDSP.mm in Sources */,
+				14C4676D24CD91E70090F660 /* MenuHeaderCell.swift in Sources */,
+				14C4675C24CD91D30090F660 /* SequencerGestures.swift in Sources */,
+				14C4674324CD91B50090F660 /* BoolExtensions.swift in Sources */,
+				14C4673124CD91250090F660 /* r8bbase.cpp in Sources */,
+				14C4676624CD91E00090F660 /* KeyboardTouches.swift in Sources */,
+				14C4675724CD91CD0090F660 /* StereoDelayParameters.swift in Sources */,
+				14C4676424CD91E00090F660 /* Keyboard.swift in Sources */,
+				14C4671924CD90A10090F660 /* ASCommanderAUParameters.swift in Sources */,
+				14C4672B24CD90FA0090F660 /* TriangleOscillator.cpp in Sources */,
+				14C4676A24CD91E30090F660 /* ASSegmentedControl.swift in Sources */,
+				14C4676724CD91E30090F660 /* PaddedLabel.swift in Sources */,
+				14C4672A24CD90F80090F660 /* SquareOscillator.cpp in Sources */,
+				14C4670624CD90150090F660 /* SceneDelegate.swift in Sources */,
+				14C4676E24CD91E70090F660 /* OscillatorsHeaderCell.swift in Sources */,
+				14C4674724CD91BC0090F660 /* UIColorExtensions.swift in Sources */,
+				14C4676F24CD92080090F660 /* KeyboardListener.swift in Sources */,
+				14C4673E24CD919B0090F660 /* IAPVerifier.swift in Sources */,
+				14C4672724CD90E80090F660 /* Synthesiser.cpp in Sources */,
+				14C4672624CD90E50090F660 /* AHREnvelope.cpp in Sources */,
+				14C4671724CD90990090F660 /* ASCommanderAU.swift in Sources */,
+				14C4671524CD908D0090F660 /* ASComponent.swift in Sources */,
+				14C4676924CD91E30090F660 /* OscillatorSelector.swift in Sources */,
+				14C4675824CD91CD0090F660 /* VibratoParameters.swift in Sources */,
+				14C4673F24CD919E0090F660 /* MulticastDelegate.swift in Sources */,
+				14C4674D24CD91BC0090F660 /* UIBezierPathExtensions.swift in Sources */,
+				14C4676C24CD91E70090F660 /* ParameterCell.swift in Sources */,
+				14524B9124CF01F300715628 /* NormalParameterLabel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14DAC3812417772C005654EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1101,6 +1433,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		14C4670924CD90150090F660 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14C4670A24CD90150090F660 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		14C4670E24CD90190090F660 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14C4670F24CD90190090F660 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		14DAC38E2417772C005654EA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1120,6 +1468,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		14C4671224CD90190090F660 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2VC5BW82H;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					LIGHT,
+					"DEBUG=1",
+				);
+				INFOPLIST_FILE = "Assemble-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "-lc++";
+				OTHER_SWIFT_FLAGS = "-DTARGET_IOS -DTESTFLIGHT";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.davidspry.assemble-light";
+				PRODUCT_NAME = "Assemble Light";
+				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		14C4671324CD90190090F660 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = W2VC5BW82H;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = LIGHT;
+				INFOPLIST_FILE = "Assemble-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.0;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = "";
+				OTHER_LDFLAGS = "-lc++";
+				OTHER_SWIFT_FLAGS = "-DTARGET_IOS -DTESTFLIGHT";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.davidspry.assemble-light";
+				PRODUCT_NAME = "Assemble Light";
+				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		14DAC3972417772E005654EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1243,7 +1651,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1259,7 +1667,7 @@
 				);
 				MARKETING_VERSION = 0.0;
 				OTHER_LDFLAGS = "-lc++";
-				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT";
+				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT -DTARGET_IPADOS";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1279,7 +1687,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1296,7 +1704,7 @@
 				);
 				MARKETING_VERSION = 0.0;
 				OTHER_LDFLAGS = "-lc++";
-				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT";
+				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT -DTARGET_IPADOS";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1311,6 +1719,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		14C4671424CD90190090F660 /* Build configuration list for PBXNativeTarget "Assemble Light" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14C4671224CD90190090F660 /* Debug */,
+				14C4671324CD90190090F660 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		14DAC3802417772C005654EA /* Build configuration list for PBXProject "Assemble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

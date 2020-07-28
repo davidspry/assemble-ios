@@ -125,7 +125,7 @@ private:
     float gain       = 1.00F;
     float gainLinear = 1.00F;
     std::atomic<float> mix      = 0.25F;
-    std::atomic<float> feedback = 0.50F;
+    std::atomic<float> feedback = 0.55F;
     std::atomic<bool>  bypassed = {false};
 
 private:
@@ -157,11 +157,11 @@ private:
 private:
     /// @brief The delay between the write head and the read head in samples.
     
-    ValueTransition delay      = {1E3F, 96E3F, 2.0F};
+    ValueTransition delay = {1E3F, 96E3F, 2.0F};
     
     /// @brief The modulation depth in [1, 2]. This range should be normalised to [0, 1] when interfacing with external classes.
    
-    ValueTransition modulation = {1.0F, 2.0F, 1.00F};
+    ValueTransition modulation = {1.0F, 1.0F, 1.00F};
     
 private:
     /// @brief The factor to scale the depth of the delay modulation effect.

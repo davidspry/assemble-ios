@@ -63,10 +63,6 @@ namespace Assemble::Utilities
         const float xc = table[(a + 1) % capacity];
         const float xd = table[(a + 2) % capacity];
         
-//        const float xb = table[a - 1 + static_cast<int>((a - 1) <  0) * capacity];
-//        const float xc = table[a + 1 - static_cast<int>((a + 1) >= capacity) * capacity];
-//        const float xd = table[a + 2 - static_cast<int>((a + 2) >= capacity) * capacity];
-        
         const float C = (xc - xb) * 0.5F;
         const float V = (xa - xc);
         const float W = C + V;

@@ -165,11 +165,22 @@ public class ASCommanderAU : ASAudioUnit
     public func clearPatternWithIndex(_ index: Int) {
         __interop__ClearPatternWithIndex(dsp, Int32(index))
     }
+    
+    /// Clear all patterns in the underlying sequencer, then active the first pattern.
+
+    public func clearAllPatterns() {
+        let patterns = Int(PATTERNS)
+        for i in 0 ..< patterns {
+            clearPatternWithIndex(i)
+        }
+
+        setParameterWithAddress(AUParameterAddress(kSequencerPatternState), value: 0)
+    }
 
     public override func shouldAllocateInputBus() -> Bool  { return false }
 
     public override func shouldClearOutputBuffer() -> Bool { return false }
-    
+
     /// Factory presets are associated with an associative state array, `[String:Any]`, in
     /// `factoryPresetsState`.
 

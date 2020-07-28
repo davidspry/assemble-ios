@@ -44,11 +44,11 @@ class OscillatorSelector: UISegmentedControl {
         selectedSegmentIndex = 0
         masksToBounds = false
         
-        let clear = UIImage(color: .clear, size: .init(width: 1, height: bounds.height))
+        let clear = UIImage(color: .clear, size: CGSize(width: 1.0, height: bounds.height))
         setBackgroundImage(clear, for: .normal, barMetrics: .default)
         setDividerImage(clear)
         setFontAttributes()
-        
+
         highlight.translatesAutoresizingMaskIntoConstraints = false
         highlight.backgroundColor = .sineNoteColour
         highlight.layer.cornerCurve = .continuous
@@ -85,6 +85,7 @@ class OscillatorSelector: UISegmentedControl {
             highlight.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
 
+        highlightX.constant = itemWidth * 0.5
         highlight.layoutIfNeeded()
     }
     

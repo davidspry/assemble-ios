@@ -9,6 +9,8 @@ extension Keyboard
 {
     override func draw(_ layer: CALayer, in ctx: CGContext)
     {
+        if !(initialised) { return }
+        
         /// Ensure that the current user interface style applies to all drawing instructions
 
         self.traitCollection.performAsCurrent {
@@ -22,11 +24,14 @@ extension Keyboard
 
     internal func initialisePaths()
     {
-        setNeedsLayout()
+        layer.setNeedsLayout()
         updateConstraintsIfNeeded()
         for octave in 0 ..< octaves {
             makeOctave(CGFloat(octave))
         }
+        
+        initialised = true
+        layer.setNeedsDisplay()
     }
     
     /// Update and draw the given octave of the keyboard to the screen.

@@ -52,7 +52,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     }
 
     private let scalar = CGFloat(0.55)
-    lazy private var rows = CGFloat(patterns / 4)
+    lazy private var rows = max(1, CGFloat(patterns / 4))
     lazy private var cols = CGFloat(patterns / Int(rows))
     lazy private var radius = min(0.5 * bounds.height / rows, 0.5 * bounds.width / cols)
     lazy private var diameter = radius * 2

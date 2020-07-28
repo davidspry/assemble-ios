@@ -21,12 +21,12 @@ class ASSegmentedControl: UISegmentedControl {
         stylise()
     }
     
-    private func stylise() {
+    internal func stylise() {
         setCustomFont()
         setCustomAppearance()
     }
     
-    private func setCustomFont() {
+    internal func setCustomFont() {
         let font = UIFont.init(name: "JetBrainsMono-Regular", size: 13)
         let secondaryColour = UIColor.init(named: "Secondary") ?? UIColor.lightText
         setTitleTextAttributes([.foregroundColor : UIColor.white],   for: .selected)
@@ -35,8 +35,8 @@ class ASSegmentedControl: UISegmentedControl {
         setTitleTextAttributes([.font : font as Any], for: .normal)
         layoutIfNeeded()
     }
-    
-    private func setCustomAppearance() {
+
+    internal func setCustomAppearance() {
         masksToBounds = false
         backgroundColor = UIColor.clear
         selectedSegmentTintColor = UIColor.mutedOrange

@@ -83,13 +83,13 @@ class Sequencer : SKView, KeyboardListener
 
         switch Assemble.device {
         case .pad:
-            if screenLength > 1300 { scalar = 34; break }
-            if screenLength > 1100 { scalar = 31; break }
+            if screenLength > 1300 { scalar = 35; break }
+            if screenLength > 1100 { scalar = 32; break }
             if screenLength > 1000 { scalar = 28; break }
             else                   { scalar = 28; break }
         case .phone:
-            if screenLength > 850  { scalar = 25; break }
-            if screenLength > 650  { scalar = 24; break }
+            if screenLength > 850  { scalar = 30; break }
+            if screenLength > 650  { scalar = 26; break }
             if screenLength > 550  { scalar = 22; break }
             else                   { scalar = 20; break }
         default: fatalError("[Sequencer] Unsupported device.")

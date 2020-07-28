@@ -50,7 +50,18 @@ public:
 
     inline const int computeTimeOnRetrigger()
     {
-        return attackInSamples * std::cbrt(amplitude);
+        return (int) ((double) attackInSamples * std::cbrt(amplitude));
+    }
+    
+    /// \brief Compute the inverse function of the release curve in order to yield
+    /// the time value that will maintain the current amplitude. This should be called
+    /// if the envelope's properties are changed and an envelope in its attack phase
+    /// should enter its release phase.
+    /// \return The time value for the release curve that corresponds with the envelope's current amplitude value.
+
+    inline const int computeReleaseInverse()
+    {
+        return (int) ((double) releaseInSamples - (double) releaseInSamples * std::cbrt(amplitude));
     }
     
     /// \brief Indicate whether the envelope is closed or not.
@@ -103,20 +114,23 @@ private:
     /// \brief Compute the attack function at the given time value
     /// \param time The current time value in samples
     
-    inline const float computeAttack(uint & time);
+    inline const float computeAttack(uint time);
     
     /// \brief Compute the release function at the given time value
     /// \param time The current time value in samples
     
-    inline const float computeRelease(uint & time);
+    inline const float computeRelease(uint time);
 
 private:
-    uint time;
+    std::atomic<uint> time = {0};
+    std::atomic<bool> shouldUpdate = {false};
+
+private:
     int  attackInMs, holdInMs, releaseInMs;
     int  attackInSamples, holdInSamples, releaseInSamples;
 
 private:
-    float amplitude  = 0.F;
+    float amplitude  = 0.0F;
     float sampleRate = 48000.F;
 };
 

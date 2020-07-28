@@ -17,6 +17,10 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     internal let keyOffColour: UIColor? = UIColor.init(named: "Secondary")
     
+    /// Whether or not the `Keyboard` has been initialised and is ready for drawing.
+
+    internal var initialised = false
+    
     /// The number of points to translate the keyboard's view by during its show/hide animation
 
     public let visibilityTranslation: CGFloat = 50
@@ -32,7 +36,7 @@ class Keyboard : UIView, KeyboardSettingsListener
     /// The keyboard's settings listeners, who are notified when the keyboard's octave is changed
 
     public let settingsListeners = MulticastDelegate<KeyboardSettingsListener>()
-
+    
     /// The keyboard's current octave
 
     private(set) var octave: Int = 3
@@ -147,8 +151,9 @@ class Keyboard : UIView, KeyboardSettingsListener
     /// Initialise the keyboard and its controls, then hide it from view.
     /// - Parameter frame: The frame in which to draw the keyboard
 
-    internal func initialise(in frame: CGRect) {
-        isMultipleTouchEnabled = false;
+    public func initialise(in frame: CGRect) {
+        isHidden = true
+        isMultipleTouchEnabled = false
         initialiseControls(in: frame)
         initialisePaths()
         didToggleKeyboardDisplay(false)
@@ -159,12 +164,12 @@ class Keyboard : UIView, KeyboardSettingsListener
 
     func didToggleKeyboardDisplay(_ show: Bool) {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.15) {
+            UIView.animate(withDuration: 0.15, animations: {
                 self.alpha = show ? 1.0 : 0.0
                 let dy: CGFloat = show ? 0 : self.visibilityTranslation
                 let translation = CGAffineTransform(translationX: 0, y: dy)
                 self.layer.setAffineTransform(translation)
-            }
+            }) { complete in self.isHidden = false }
         }
     }
 
@@ -207,12 +212,16 @@ class Keyboard : UIView, KeyboardSettingsListener
     }
     
     public required init?(coder: NSCoder) {
-        super.init(coder: coder);
-        initialise(in: bounds)
+        super.init(coder: coder)
+        translatesAutoresizingMaskIntoConstraints = false
+        DispatchQueue.main.async {
+            self.initialise(in: self.bounds)
+        }
     }
 
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        translatesAutoresizingMaskIntoConstraints = false
         initialise(in: frame)
     }
 

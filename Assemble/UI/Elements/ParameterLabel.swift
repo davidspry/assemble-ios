@@ -33,7 +33,7 @@ class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
     internal var parameterRange: ClosedRange<AUValue> = .normal()
     internal var parameterScale: Float = ParameterLabelScale.continuousFast.rawValue
     internal var parameterStep: Float = 0.1
-    
+
     /// The hexadecimal address of the Assemble core parameter.
 
     internal var parameter: Int32? {
@@ -53,6 +53,10 @@ class ParameterLabel: PaddedLabel, UIPointerInteractionDelegate {
             case .milliseconds: format = "%.0fms"
             default:            format = "%.2f"
             }
+
+            isUserInteractionEnabled = true
+            isExclusiveTouch = true
+            isEnabled = true
 
             update()
         }

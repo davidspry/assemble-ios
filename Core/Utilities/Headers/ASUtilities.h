@@ -77,7 +77,7 @@ namespace Assemble::Utilities
     /// \param table A pointed to an array of floats
     /// \param capacity The capacity of the table
 
-    [[nodiscard]] static inline const float cerp(const float index, const float *table, const int capacity)
+    [[nodiscard]] static inline const float camullrom(const float index, const float *table, const int capacity)
     {
         const int a = (int) index;
         const int b = a + 1 - static_cast<int>((a + 1) >= capacity) * capacity;

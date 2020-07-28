@@ -12,10 +12,10 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
 
     private var lastTappedNode: Int?
     private var lastTappedTime: TimeInterval?
-    private var tapSpeedThreshold: TimeInterval = 0.4
+    private var tapSpeedThreshold: TimeInterval = 0.3
     private var nodeDestination: Int?
 
-    private var clearPatternView = UIView()
+    private var clearPatternView = PatternOptions()
     private var patternToBeCleared: Int?
     private let longPressRecogniser = UILongPressGestureRecognizer()
 
@@ -65,7 +65,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
 
         establishClearPatternView()
         longPressRecogniser.delegate = self
-        longPressRecogniser.minimumPressDuration  = 0.4
+        longPressRecogniser.minimumPressDuration  = 0.3
         longPressRecogniser.numberOfTouchesRequired = 1
         longPressRecogniser.cancelsTouchesInView = true
         longPressRecogniser.addTarget(self, action: #selector(handleLongPress(_:)))
@@ -271,13 +271,15 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         guard self.bounds.contains(location) else { return }
         guard let node = nodeFromTouchLocation(location) else { return }
         guard let xy   = locationFromNodeIndex(node)     else { return }
-
+        let roomAbove  = convert(xy, to: UIScreen.main.coordinateSpace).y > 75
+        
+        nextPattern = pattern
         patternToBeCleared = node
-        clearPatternView.center = xy
-        clearPatternView.center = clearPatternView.center.applying(.init(translationX: 0, y: -25))
+        clearPatternView.center.x = xy.x
+        clearPatternView.center.y = xy.y + (roomAbove ? -40 : 40)
         showClearPatternView()
     }
-    
+
     @objc func shouldClearPattern(_ sender: UIButton) {
         guard let pattern = patternToBeCleared else { return }
         NotificationCenter.default.post(name: .clearPattern, object: pattern)
@@ -289,20 +291,9 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     // MARK: - Clear Pattern View
     
     private func establishClearPatternView() {
-        let w: CGFloat = 30
-        let h: CGFloat = 25
-        let button = UIButton(frame: frame)
-        let size = UIImage.SymbolConfiguration(pointSize: w)
-        let frame = CGRect(x: 0, y: 0, width: w, height: h)
+        let frame = CGRect(x: 0, y: 0, width: 105, height: 30)
 
-        button.frame = frame
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(shouldClearPattern), for: .touchDown)
-        button.setImage(UIImage(systemName: "xmark.rectangle.fill",
-                                withConfiguration: size), for: .normal)
-
-        clearPatternView.frame = frame
-        clearPatternView.addSubview(button)
+        clearPatternView.initialise(in: frame)
         clearPatternView.isHidden = true
         addSubview(clearPatternView)
         bringSubviewToFront(clearPatternView)

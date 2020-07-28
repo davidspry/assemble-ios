@@ -67,6 +67,8 @@
 		1458D12E24531FFD0093B541 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12C24531FFD0093B541 /* License.txt */; };
 		1458D131245328550093B541 /* PaddedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1458D130245328550093B541 /* PaddedLabel.swift */; };
 		1458D13424532F050093B541 /* StereoDelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1458D13324532F050093B541 /* StereoDelay.cpp */; };
+		1463900D24D00FA500929B78 /* PatternOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463900C24D00FA500929B78 /* PatternOptions.swift */; };
+		1463900E24D00FA800929B78 /* PatternOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463900C24D00FA500929B78 /* PatternOptions.swift */; };
 		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
 		1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
@@ -346,6 +348,7 @@
 		1458D13324532F050093B541 /* StereoDelay.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StereoDelay.cpp; sourceTree = "<group>"; };
 		145CDEE02467BD0B001A56B1 /* BandlimitedOscillator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BandlimitedOscillator.hpp; sourceTree = "<group>"; };
 		145CDEE12467BDEF001A56B1 /* WaveTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WaveTable.hpp; sourceTree = "<group>"; };
+		1463900C24D00FA500929B78 /* PatternOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternOptions.swift; sourceTree = "<group>"; };
 		146EC65A244CBC60009025E4 /* ASHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASHeaders.h; sourceTree = "<group>"; };
 		146EC65B244CBE7F009025E4 /* ASOscillators.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASOscillators.h; sourceTree = "<group>"; };
 		146EC65D244CBF49009025E4 /* Sequencer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sequencer.cpp; sourceTree = "<group>"; };
@@ -817,6 +820,7 @@
 		149A1D2C2459E0AE00F083D0 /* PatternOverview */ = {
 			isa = PBXGroup;
 			children = (
+				1463900C24D00FA500929B78 /* PatternOptions.swift */,
 				149A1D2D2459E0C900F083D0 /* PatternOverview.swift */,
 			);
 			path = PatternOverview;
@@ -1320,6 +1324,7 @@
 				14C4675824CD91CD0090F660 /* VibratoParameters.swift in Sources */,
 				14C4673F24CD919E0090F660 /* MulticastDelegate.swift in Sources */,
 				14C4674D24CD91BC0090F660 /* UIBezierPathExtensions.swift in Sources */,
+				1463900E24D00FA800929B78 /* PatternOptions.swift in Sources */,
 				14C4676C24CD91E70090F660 /* ParameterCell.swift in Sources */,
 				14524B9124CF01F300715628 /* NormalParameterLabel.swift in Sources */,
 			);
@@ -1345,6 +1350,7 @@
 				149ACC2224543082009DA18F /* UIViewControllerExtensions.swift in Sources */,
 				14F5A11D24B8D5790035CC5D /* FactoryPresetB.swift in Sources */,
 				149B9B3024B827CB005E42A7 /* UserDefaultsKeys.swift in Sources */,
+				1463900D24D00FA500929B78 /* PatternOptions.swift in Sources */,
 				143FB021243F63620058AE40 /* ASCommander.swift in Sources */,
 				14D2D5C6246C747D003675C2 /* ParameterLabel.swift in Sources */,
 				14C1E4052499047C00980AA9 /* FactoryPresetA.swift in Sources */,

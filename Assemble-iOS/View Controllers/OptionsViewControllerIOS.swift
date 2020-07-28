@@ -62,7 +62,7 @@ class OptionsViewControlleriOS: UIViewController, UIScrollViewDelegate {
         windowPanel.layer.setAffineTransform(transformHide)
         
         scrollView.delegate = self
-        scrollView.canCancelContentTouches = false
+        scrollView.canCancelContentTouches = true
     }
 
     override func viewDidAppear(_ animated: Bool) {

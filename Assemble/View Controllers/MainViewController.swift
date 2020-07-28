@@ -119,8 +119,8 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     private func loadVisualTheme() {
         let icon: UIImage?
-        if usingDarkTheme { icon = UIImage.init(systemName: "moon.stars.fill") }
-        else              { icon = UIImage.init(systemName: "sun.max.fill") }
+        if usingDarkTheme { icon = UIImage.init(systemName: "sun.max.fill") }
+        else              { icon = UIImage.init(systemName: "moon.fill") }
         
         themeButton.setImage(icon, for: .normal)
         UIApplication.shared.windows.forEach({

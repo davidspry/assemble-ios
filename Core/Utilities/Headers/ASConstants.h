@@ -20,7 +20,7 @@
     #define OSCILLATORS      4
 
     // Sequencer
-    #define PATTERNS         3
+    #define PATTERNS         4
     #define SEQUENCER_WIDTH  8
     #define SEQUENCER_HEIGHT 16
 

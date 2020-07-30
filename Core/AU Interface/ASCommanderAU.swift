@@ -153,12 +153,26 @@ public class ASCommanderAU : ASAudioUnit
         __interop__EraseNote(dsp, Int32(x), Int32(y))
     }
     
-    /// Clear the sequencer's current pattern.
-
-    public func clearCurrentPattern() {
-        __interop__ClearCurrentPattern(dsp)
+    /// Copy the pattern with the given index.
+    /// - Parameter index: The index of the pattern to be copied.
+    
+    public func copyPatternWithIndex(_ index: Int) {
+        __interop__CopyPatternWithIndex(dsp, Int32(index))
     }
     
+    /// Indicate whether a copied pattern state exists in the core.
+
+    public func copiedPatternStateExists() -> Bool {
+        return __interop__CopiedPatternStateExists(dsp)
+    }
+    
+    /// Paste a previously copied pattern state into the pattern with the given index.
+    /// - Parameter index: The index of the pattern whose state should be replaced with the previously copied state.
+    
+    public func pasteIntoPatternWithIndex(_ index: Int) {
+        __interop__PastePatternWithIndex(dsp, Int32(index))
+    }
+
     /// Clear the pattern with the given index.
     /// - Parameter index: The index of the pattern to be cleared.
 
@@ -425,6 +439,8 @@ public class ASCommanderAU : ASAudioUnit
     
     /// Find the counterpart of the given preset in the `userPresets` array and select it
     /// to be the current preset.
+    /// - Parameter name:   The name of the desired preset.
+    /// - Parameter number: The  number of the desired preset.
 
     private func findAndSelectPreset(named name: String, number: Int) {
         DispatchQueue.main.async {
@@ -451,6 +467,21 @@ public class ASCommanderAU : ASAudioUnit
             }
         }
 
+        return state
+    }
+    
+    /// Encode the state of the pattern with the given index from the core.
+    /// Each pattern's state is encoded to a string of characters from the ASCII set.
+    /// - Parameter pattern: The index of the pattern whose state should be returned.
+
+    public func getCoreState(of pattern: Int) -> [String : Any]? {
+        var state = [String:Any]()
+        
+        if let data = __interop__GetPatternState(dsp, Int32(pattern)) {
+            let string = String(cString: data, encoding: .nonLossyASCII)
+            state["P\(pattern)"] = string
+        }
+        
         return state
     }
 }

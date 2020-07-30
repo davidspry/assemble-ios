@@ -15,8 +15,8 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     private var tapSpeedThreshold: TimeInterval = 0.3
     private var nodeDestination: Int?
 
-    private var clearPatternView = PatternOptions()
-    private var patternToBeCleared: Int?
+    private var patternOptions = PatternOptions()
+    private var lastSelectedPattern: Int?
     private let longPressRecogniser = UILongPressGestureRecognizer()
 
     private var states = [Bool]()
@@ -90,7 +90,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
                 layer.allowsEdgeAntialiasing = true
                 layer.rasterizationScale = 2.0 * UIScreen.main.scale
                 layer.fillColor = patternOffColour.cgColor
-                self.layer.insertSublayer(layer, below: clearPatternView.layer)
+                self.layer.insertSublayer(layer, below: patternOptions.layer)
                 shapes.append(layer)
                 states.append(false)
             }
@@ -103,6 +103,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
 
     public func loadStates() {
         DispatchQueue.main.async {
+            self.hidePatternOptionsView()
             for pattern in 0 ..< self.patterns {
                 Assemble.core.setParameter(kSequencerCurrentPattern, to: Float(pattern))
                 let state = Bool(Int(Assemble.core.getParameter(kSequencerPatternState)))
@@ -231,7 +232,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         guard let touch = touches.first else { return }
         guard let node = nodeFromTouchLocation(touch.location(in: self)) else { return }
         guard node > -1 && node < patterns else { return }
-        hideClearPatternView()
+        hidePatternOptionsView()
         handleTap(on: node)
     }
 
@@ -274,52 +275,73 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         let roomAbove  = convert(xy, to: UIScreen.main.coordinateSpace).y > 75
         
         nextPattern = pattern
-        patternToBeCleared = node
-        clearPatternView.center.x = xy.x
-        clearPatternView.center.y = xy.y + (roomAbove ? -40 : 40)
-        showClearPatternView()
+        lastSelectedPattern = node
+        patternOptions.center.x = xy.x
+        patternOptions.center.y = xy.y + (roomAbove ? -40 : 40)
+        showPatternOptionsView()
     }
 
-    @objc func shouldClearPattern(_ sender: UIButton) {
-        guard let pattern = patternToBeCleared else { return }
+    @objc func didClearPattern(_ sender: UIButton) {
+        guard let pattern = lastSelectedPattern else { return }
         NotificationCenter.default.post(name: .clearPattern, object: pattern)
         Assemble.core.commander?.clearPatternWithIndex(pattern)
         set(pattern: pattern, to: false)
-        hideClearPatternView()
+        hidePatternOptionsView()
     }
     
-    // MARK: - Clear Pattern View
+    // MARK: - PatternOptions View
     
     private func establishClearPatternView() {
         let frame = CGRect(x: 0, y: 0, width: 105, height: 30)
 
-        clearPatternView.initialise(in: frame)
-        clearPatternView.isHidden = true
-        addSubview(clearPatternView)
-        bringSubviewToFront(clearPatternView)
+        patternOptions.initialise(in: frame)
+        patternOptions.delegate = self
+        patternOptions.isHidden = true
+        addSubview(patternOptions)
+        bringSubviewToFront(patternOptions)
     }
 
-    func showClearPatternView() {
+    func showPatternOptionsView() {
         DispatchQueue.main.async {
-            self.clearPatternView.isHidden = false
-            self.clearPatternView.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+            self.patternOptions.isHidden = false
+            self.patternOptions.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
             UIView.animate(withDuration: 0.1) {
-                self.clearPatternView.layer.setAffineTransform(.init(scaleX: 1.0, y: 1.0))
+                self.patternOptions.layer.setAffineTransform(.init(scaleX: 1.0, y: 1.0))
             }
         }
     }
     
-    func hideClearPatternView() {
+    func hidePatternOptionsView() {
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.1) {
-                self.clearPatternView.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
-                self.clearPatternView.isHidden = true
-            }
+            self.patternOptions.reset()
+            UIView.animate(withDuration: 0.1, animations: {
+                self.patternOptions.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+            }, completion: { complete in self.patternOptions.isHidden = true })
         }
     }
     
-    // MARK: Clear Pattern View End -
+    // MARK: - PatternOptions Delegation
     
+    /// Instruct the core to copy the state of the last selected Pattern.
+
+    internal func initiateCopy() {
+        guard let pattern = lastSelectedPattern else { return }
+        Assemble.core.commander?.copyPatternWithIndex(pattern)
+        hidePatternOptionsView()
+    }
+    
+    /// Instruct the core to paste a previously copied Pattern state into the last selected Pattern,
+    /// then post a notification in order that the `SKSequencer` synchronises with the core.
+
+    internal func initiatePaste() {
+        guard let pattern = lastSelectedPattern else { return }
+        Assemble.core.commander?.pasteIntoPatternWithIndex(pattern)
+        NotificationCenter.default.post(name: .updatePattern, object: pattern)
+        hidePatternOptionsView()
+    }
+    
+    // MARK: - HitTest
+
     /// Include subviews who fall outside the bounds of the view in the hit test. In Assemble,
     /// this allows the clear pattern icon to be pressed if it happens to appear outside the bounds of the
     /// pattern overview's `UIView`.
@@ -337,7 +359,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
             return result
         }
 
-        hideClearPatternView()
+        hidePatternOptionsView()
         return super.hitTest(point, with: event)
     }
 }

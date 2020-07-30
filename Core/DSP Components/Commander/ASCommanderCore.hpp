@@ -96,11 +96,21 @@ public:
     /// Otherwise, the Sequencer should reset to its initial state for the current Pattern.
 
     const bool playOrPause();
-    
-    /// \brief Clear the state of the current Pattern.
-    
-    inline void clearCurrentPattern() { sequencer.hardReset(sequencer.pattern); }
 
+    /// \brief Copy the state of the Pattern with the given index.
+    /// \param pattern The index of the Pattern to be copied.
+
+    inline void copyPatternWithIndex(const int pattern) { sequencer.copy(pattern); }
+    
+    /// \brief Indicate whether a copied pattern state exists in the sequencer.
+
+    inline const bool copiedPatternStateExists() { return sequencer.copiedStateExists(); }
+    
+    /// \brief Paste a previously copied pattern state into the pattern with the given index.
+    /// \param pattern The index of the Pattern whose state should be replaced with the previously copied state.
+
+    inline void pastePatternWithIndex(const int pattern) { sequencer.paste(pattern); }
+    
     /// \brief Clear the state of the Pattern with the given index.
     /// \param pattern The index of the Pattern to be cleared.
 
@@ -109,7 +119,7 @@ public:
     /// \brief Indicate whether or not the Clock is ticking.
     /// \return `true` if the Clock is ticking; `false` otherwise.
 
-    const bool clockIsTicking() { return clock.isTicking();  }
+    inline const bool clockIsTicking() { return clock.isTicking();  }
 
     /// \brief From an encoded Pattern state, decode the on-off state and each Note, and initialise
     /// the corresponding Pattern accordingly.

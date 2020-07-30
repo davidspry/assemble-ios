@@ -60,6 +60,7 @@ public:
         row = 0;
         pattern = 0;
         activePatterns = 0;
+        deleteCopiedPattern();
         for (size_t i = 0; i < PATTERNS; ++i)
             patterns.at(i).clear();
     }
@@ -72,6 +73,14 @@ public:
         const bool active = patterns.at(pattern).isActive();
         activePatterns = activePatterns - (active ? 1 : 0);
         patterns.at(pattern).clear();
+    }
+
+    /// @brief Delete the Sequencer's copied pattern and set its pointer to nullptr.
+
+    inline void deleteCopiedPattern()
+    {
+        delete copiedPattern;
+        copiedPattern = nullptr;
     }
     
     /// @brief Set the Note at the given location to have the given properties.
@@ -95,11 +104,23 @@ public:
         patterns.at(pattern).include(note...);
     }
     
-    /// @brief Copy the state of the given source pattern into the given target pattern.
+    /// @brief Copy the state of the given source pattern into the Sequencer's spare Pattern.
     /// @param source The index of the pattern that should be copied.
-    /// @param target The index of the pattern that should be overwritten with the source pattern's state.
 
-    void copy(const int source, const int target);
+    void copy(const int source);
+    
+    /// @brief Copy a previously copied Pattern state into the Pattern with the given index.
+    /// @param target The index of the pattern whose state should be replaced with the previously copied state.
+    /// @pre   A previously copied state exists. This can be ascertained using the method `copiedStateExists`.
+    
+    void paste(const int target);
+    
+    /// @brief Indicate whether a copied Pattern state exists and is accessible by the Sequencer.
+
+    inline const bool copiedStateExists()
+    {
+        return copiedPattern != nullptr;
+    }
 
     /// @brief Erase the contents of the given position, (x, y).
     /// @param x The x-coordinate of the position whose contents should be erased.
@@ -179,6 +200,7 @@ private:
     
 private:
     std::vector<Pattern> patterns;
+    Pattern*        copiedPattern;
     
 private:
     int  row            = 0;

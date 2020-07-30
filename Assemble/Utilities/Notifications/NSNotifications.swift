@@ -15,6 +15,10 @@ extension NSNotification.Name {
     /// Clear the pattern whose index is stored in the `NSNotification`'s `object` property
 
     static let clearPattern = NSNotification.Name(rawValue: "ASClearPattern")
+    
+    /// Update the representation pattern whose index is stored in the `NSNotification`'s `object` property
+
+    static let updatePattern = NSNotification.Name(rawValue: "ASUpdatePattern")
 
     /// Define a recording session for the `MediaRecorder`
     

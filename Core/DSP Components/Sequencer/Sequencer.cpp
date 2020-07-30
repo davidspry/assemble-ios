@@ -108,23 +108,18 @@ void Sequencer::selectNextActivePattern()
     selectPattern(p);
 }
 
-void Sequencer::copy(const int source, const int target)
+void Sequencer::copy(const int source)
 {
-    Pattern& s = patterns.at(source);
-    Pattern& t = patterns.at(target);
-
-    t.clear();
-    t.setTimeSignature(s.getTimeSignature());
+    if (copiedPattern == nullptr)
+        copiedPattern = new Pattern();
     
-    for (size_t k = 0; k < s.length(); ++k)
-    {
-        const auto row = s.window(0, (int) k);
-        std::vector<Note>::iterator notes = row.second;
-        for (size_t i = 0; i < row.first; ++i)
-        {
-            const Note& note = *notes;
-            t.include(note.x, note.y, note.note, note.shape);
-            std::advance(notes, 1);
-        }
-    }
+    const Pattern& pattern = patterns.at(source);
+    
+    copiedPattern->clone(pattern);
+}
+
+void Sequencer::paste(const int target)
+{
+    const Pattern& source = *(copiedPattern);
+    patterns.at(target).clone(source);
 }

@@ -20,14 +20,24 @@ extern "C" const bool __interop__PlayOrPause(void *DSP)
     return ((ASCommanderDSP*) DSP)->playOrPause();
 }
 
-extern "C" void __interop__ClearCurrentPattern(void *DSP)
+extern "C" void __interop__CopyPatternWithIndex(void *DSP, const int pattern)
 {
-    return ((ASCommanderDSP*) DSP)->clearCurrentPattern();
+    ((ASCommanderDSP*) DSP)->copyPatternWithIndex(pattern);
+}
+
+extern "C" bool __interop__CopiedPatternStateExists(void *DSP)
+{
+    return ((ASCommanderDSP*) DSP)->copiedPatternStateExists();
+}
+
+extern "C" void __interop__PastePatternWithIndex(void *DSP, const int pattern)
+{
+    ((ASCommanderDSP*) DSP)->pastePatternWithIndex(pattern);
 }
 
 extern "C" void __interop__ClearPatternWithIndex(void *DSP, const int pattern)
 {
-    return ((ASCommanderDSP*) DSP)->clearPatternWithIndex(pattern);
+    ((ASCommanderDSP*) DSP)->clearPatternWithIndex(pattern);
 }
 
 extern "C" void __interop__LoadNote(void *DSP, const int note, const int shape)

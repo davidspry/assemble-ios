@@ -69,7 +69,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         spacing.width  = size.width  / Assemble.patternWidth
         spacing.height = size.height / Assemble.patternHeight
         
-        backgroundColor = UIColor.init(named: "Background")!
+        backgroundColor = UIColor.init(named: "Background") ?? UIColor.clear
         anchorPoint = CGPoint(x: 0.5, y: 0.5);
         scaleMode = .aspectFit;
 
@@ -95,12 +95,13 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         addChild(row);
         addChild(cursor);
         
-        /// Register to receive notifications when the user elects to clear a pattern's contents
+        /// Register to receive notifications when the user elects to clear or update a pattern's representation.
 
-        let selector = #selector(clearPattern(_:))
-        NotificationCenter.default.addObserver(self, selector: selector, name: .clearPattern, object: nil)
+        let NC = NotificationCenter.default
+        NC.addObserver(self, selector: #selector(clearPattern(_:)),  name: .clearPattern, object: nil)
+        NC.addObserver(self, selector: #selector(updatePattern(_:)), name: .updatePattern, object: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         print("[SequencerScene] Required init is unimplemented.")
@@ -276,33 +277,61 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     /// a pattern should be cleared. The index of the pattern to be cleared is stored
     /// in the notification's `object` property.
 
-    @objc func clearPattern(_ notification: NSNotification) {
-        guard let p = notification.object as? Int else { return }
-        DispatchQueue.main.async {
-            self.noteShapes[p].forEach { $0.removeFromParent() }
-            self.noteShapes[p].removeAll()
-        }
-
-        DispatchQueue.main.async {
-            if Assemble.core.currentPattern == p { self.noteString = nil }
-            for y in 0 ..< Int(Assemble.patternHeight) {
-                for x in 0 ..< Int(Assemble.patternWidth) {
-                    self.noteStrings[p][y][x] = nil
-                }
-            }
-        }
+    @discardableResult
+    @objc func clearPattern(_ notification: NSNotification) -> Bool {
+        guard let index = notification.object as? Int else { return false }
+        clearPatternAsynchronously(at: index)
+        return true
     }
     
-    /// Poll the Assemble core for its state and initialise the scene from its contents.
+    /// Clear one of the sequencer scene's patterns.
+    /// - Parameter index: The index of the pattern whose representation should be reset
+    /// - Parameter callback: An optional closure that may be executed after the nominated pattern has been reset.
+
+    @discardableResult
+    internal func clearPatternAsynchronously(at index: Int, then callback: (() -> ())? = nil) -> Bool {
+        guard (0 ..< noteShapes.count).contains(index) else { return false }
+
+        DispatchQueue.main.async {
+            self.noteShapes[index].forEach { $0.removeFromParent() }
+            self.noteShapes[index].removeAll()
+            if Assemble.core.currentPattern == index { self.noteString = nil }
+            for y in 0 ..< Int(Assemble.patternHeight) {
+                for x in 0 ..< Int(Assemble.patternWidth) {
+                    self.noteStrings[index][y][x] = nil
+                }
+            }
+
+            callback?()
+        }
+
+        return true
+    }
+    
+    /// Update the representation of the pattern whose index is stored in
+    /// the given `NSNotification`'s `object` property.
     ///
-    /// - Note: Each state string begins with a character that denotes whether the underlying Pattern
-    /// is active or not. This character should be dropped from the data before passing it to the NoteUtilities
-    /// class for decoding.
+    /// This method is triggered whenever a Pattern's state is replaced with a copied Pattern state in the core.
+    ///
+    /// - Parameter notification: The `NSNotification` requesting that a pattern's representation
+    /// should be updated. The index of the pattern to be updated is stored in the notification's `object` property.
 
-    public func initialiseFromUnderlyingState() {
-        guard let state = Assemble.core.commander?.collateCoreState() else { return }
-        reset()
+    @discardableResult
+    @objc func updatePattern(_ notification: NSNotification) -> Bool {
+        guard let index = notification.object as? Int else { return false }
+        guard let state = Assemble.core.commander?.getCoreState(of: index) else { return false }
+        clearPatternAsynchronously(at: index, then: { self.initialiseFromState(state) })
+        return true
+    }
 
+    /// Initialise the sequencer scene from the given state data.
+    ///
+    /// The key of each state string is a string of the form *PK*, where K is the index of the Pattern who should adopt the state.
+    ///
+    /// - Note: Each state string begins with a character that denotes whether the underlying Pattern is active or not.
+    /// This character should be dropped from the data before passing it to the NoteUtilities class for decoding.
+    
+    public func initialiseFromState(_ state: [String : Any]) {
         for (key, data) in state {
             let data = (data as? String)?.dropFirst() ?? ""
             let pattern = Int(key.suffix(1))
@@ -312,7 +341,14 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
                 addOrModifyNote(xy: note.xy, note: note.note, oscillator: note.shape, pattern: pattern)
             }
         }
+    }
 
+    /// Poll the Assemble core for its total state and initialise the scene from its contents.
+
+    public func initialiseFromUnderlyingState() {
+        guard let state = Assemble.core.commander?.collateCoreState() else { return }
+        reset()
+        initialiseFromState(state)
         updateNoteString()
     }
 
@@ -332,14 +368,8 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         grid.redrawIfNeeded()
         noteString = noteStrings[Assemble.core.currentPattern][selected.ny][selected.nx]
         DispatchQueue.main.async {
-            self.noteShapes[self.pattern].forEach { node in
-                node.isHidden = true
-            }
-            
-            self.noteShapes[pattern].forEach { node in
-                node.isHidden = false
-            }
-
+            self.noteShapes[self.pattern].forEach { $0.isHidden = true }
+            self.noteShapes[pattern].forEach { $0.isHidden = false }
             self.pattern = pattern
         }
     }

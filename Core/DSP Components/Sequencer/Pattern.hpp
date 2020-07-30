@@ -53,9 +53,11 @@ public:
 
     /// @brief Return the time signature, (beats, ticks), as a std::pair
 
-    inline std::pair<int,int> getTimeSignature() { return {beats, ticks}; }
+    inline std::pair<int,int> getTimeSignature() const
+    {
+        return {beats, ticks};
+    }
 
-public:
     /// @brief Toggle the on-off state of the Pattern
     /// @return The state of the Pattern after toggling
     
@@ -97,7 +99,6 @@ public:
         active = state;
     }
 
-public:
     /// @brief Erase the contents of the underlying Matrix at position (x, y)
     /// @param x The x-coordinate of the target position
     /// @param y The y-coordinate of the target position
@@ -113,22 +114,27 @@ public:
         beats = ticks = 4;
     }
     
-public:
+    /// @brief Include a Note (either by insertion or modification) with the given location and properties.
+    /// @param x The x-coordinate of the target position
+    /// @param y The y-coordinate of the target position
+    /// @param note A parameter pack including the properties necessary to construct or modify a Note.
+
     template <typename ...N>
-    inline void include(int x, int y, N... note) {
+    inline void include(int x, int y, N... note)
+    {
         pattern.include(x, y, note...);
     }
-
-private:
-    /// @brief Return a reference to the Pattern's underlying std::vector<Note> for persistence purposes.
-    /// This is intended for use exclusively by ASCommanderCore, which is a friend class.
     
-    inline const std::vector<Note>& state()
+    /// @brief Conform totally to the state of the given Pattern.
+    /// @param source The Pattern whose state should be cloned.
+
+    void clone(const Pattern& source)
     {
-        return pattern.state();
+        counter = 0;
+        pattern.clone(source.pattern);
+        setTimeSignature(source.getTimeSignature());
     }
     
-public:
     typedef std::vector<Note>::iterator iterator;
 
     /// @brief Return a "window" onto the Matrix at position (x, y), as well as
@@ -145,6 +151,15 @@ public:
         const int length = pattern.lengthOfRow(y);
 
         return {length, window};
+    }
+    
+private:
+    /// @brief Return a reference to the Pattern's underlying std::vector<Note> for persistence purposes.
+    /// This is intended for use exclusively by ASCommanderCore, which is a friend class.
+    
+    inline const std::vector<Note>& state()
+    {
+        return pattern.state();
     }
 
 private:

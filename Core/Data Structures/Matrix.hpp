@@ -24,6 +24,18 @@ public:
     }
 
 public:
+    /// @brief Conform to the state of the given Matrix.
+    /// @param source The Matrix whose state should be cloned and conformed with.
+
+    void clone(const Matrix& source)
+    {
+        w = source.w;
+        h = source.h;
+        
+        vector = std::vector<Note>(source.vector);
+        length = std::vector<int> (source.length);
+    }
+    
     /// \brief Return a pointer to the Note at position (x, y) or nullptr if the note does not exist.
     /// The returned pointer should be treated as read-only.
     /// All modifications should be performed using the provided methods.

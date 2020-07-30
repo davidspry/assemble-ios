@@ -47,9 +47,19 @@ const char* __interop__GetPatternState(ASDSPRef, const int pattern);
 
 const bool  __interop__PlayOrPause(ASDSPRef);
 
-/// \brief Clear the state of the sequencer's current pattern.
+/// \brief Copy the state of the pattern with the given index.
+/// \param pattern The index of the pattern to be copied.
 
-const void  __interop__ClearCurrentPattern(ASDSPRef);
+const void  __interop__CopyPatternWithIndex(ASDSPRef, const int pattern);
+
+/// \brief Indicate whether a copied pattern state exists in the core.
+
+const bool  __interop__CopiedPatternStateExists(ASDSPRef);
+
+/// \brief Paste a previously copied pattern state into the pattern with the given index.
+/// \param pattern The index of the pattern where the previously copied state should be pasted.
+
+const void  __interop__PastePatternWithIndex(ASDSPRef, const int pattern);
 
 /// \brief Clear the state of the pattern with the given index.
 /// \param pattern The index of the pattern to be cleared.

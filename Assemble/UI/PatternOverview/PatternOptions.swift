@@ -12,34 +12,33 @@ class PatternOptions: UIView {
     private var componentsAreAttached = false
     
     private let buttonWidth = 30
+    private let buttonMargin = 5
     
-    private let copier = UIButton(type: .system)
+    private let copier = ColouredButton(title: "C", .offWhite, .lightBlack)
+    private let paster = ColouredButton(title: "P", .offWhite, .lightBlack)
+    private let eraser = ColouredButton(title: "X", .sineNoteColour, .offWhite)
 
-    private let paster = UIButton(type: .system)
-    
-    private let eraser = UIButton(type: .system)
-    
-    private var patternForCopying: Int?
-    
-    private var patternForPasting: Int?
-
-//    private let repeatParameter = ParameterLabel()
-    
     public weak var delegate: PatternOverview?
 
-    public func initialise(in frame: CGRect) {
+    public func initialise() {
         if componentsAreAttached { return }
         componentsAreAttached = true
         assignButtonsWithActions()
-        updatePasteButton()
         styliseButtons()
+        update()
 
+        #if LIGHT
+            let size = CGSize.square(buttonWidth)
+        #else
+            let size = CGSize(width: buttonWidth, height: 3 * buttonWidth + 2 * buttonMargin)
+        #endif
+
+        self.frame = CGRect(origin: .zero, size: size)
         self.setNeedsDisplay()
-        self.frame = frame
     }
     
     public func reset() {
-        updatePasteButton()
+        update()
     }
     
     private func assignButtonsWithActions() {
@@ -49,37 +48,31 @@ class PatternOptions: UIView {
     }
     
     private func styliseButtons() {
-        let font  = UIFont(name: "JetBrainsMono-Medium", size: 13)
-        let trait = UITraitCollection(userInterfaceStyle: .light)
-        let light = UIColor.systemGray6.resolvedColor(with: trait)
-        let dark  = UIColor.init(named: "Secondary")?.resolvedColor(with: trait)
-        let buttons = [(copier, "C", light, dark),
-                       (paster, "P", light, dark),
-                       (eraser, "X", UIColor.sineNoteColour, light)]
+        #if LIGHT
+            let buttons = [eraser]
+        #else
+            let buttons = [copier, paster, eraser]
+        #endif
 
-        for (i, (button, title, backgroundColour, textColour)) in buttons.enumerated()
-        {
-            button.frame = CGRect(x: i * (buttonWidth + 5), y: 0, width: buttonWidth, height: buttonWidth)
-            button.layer.cornerCurve  = .continuous
-            button.layer.cornerRadius = 10
-
-            button.titleLabel?.font = font
-            button.setTitle(title, for: .normal)
-            button.backgroundColor = backgroundColour
-            button.setTitleColor(textColour, for: .normal)
-            button.titleLabel?.textAlignment = .left
-
-            addSubview(button)
-            bringSubviewToFront(button)
+        for (i, button) in buttons.enumerated() {
+            let origin   = CGPoint(x: .zero, y: i * (buttonWidth + buttonMargin))
+            button.frame = CGRect(origin: origin, size: .square(buttonWidth))
+            addSubviewToFront(button)
         }
     }
     
-    internal func updatePasteButton() {
-        let canCopy = Assemble.core.commander?.copiedPatternStateExists()
-        paster.alpha = (canCopy ?? false) ? 1.0 : 0.35
+    internal func update() {
+        guard let commander = Assemble.core.commander else { return }
+        let canCopy = commander.copiedPatternStateExists()
         
-        if #available(iOS 13.4, *) {
-            paster.isPointerInteractionEnabled = canCopy ?? false
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.15) {
+                self.paster.alpha = canCopy ? 1.0 : 0.35
+
+                if #available(iOS 13.4, *) {
+                    self.paster.isPointerInteractionEnabled = canCopy
+                }
+            }
         }
     }
 
@@ -89,7 +82,7 @@ class PatternOptions: UIView {
         }
         
         delegate.initiateCopy()
-        updatePasteButton()
+        update()
     }
     
     @objc internal func didPressPaste(_ sender: UIButton) {

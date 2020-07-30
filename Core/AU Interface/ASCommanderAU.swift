@@ -183,11 +183,7 @@ public class ASCommanderAU : ASAudioUnit
     /// Clear all patterns in the underlying sequencer, then active the first pattern.
 
     public func clearAllPatterns() {
-        let patterns = Int(PATTERNS)
-        for i in 0 ..< patterns {
-            clearPatternWithIndex(i)
-        }
-
+        __interop__ClearAllPatterns(dsp)
         setParameterWithAddress(AUParameterAddress(kSequencerPatternState), value: 0)
     }
 

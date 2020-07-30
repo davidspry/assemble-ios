@@ -61,6 +61,10 @@ const bool  __interop__CopiedPatternStateExists(ASDSPRef);
 
 const void  __interop__PastePatternWithIndex(ASDSPRef, const int pattern);
 
+/// \brief Clear the state of each pattern.
+
+const void  __interop__ClearAllPatterns(ASDSPRef);
+
 /// \brief Clear the state of the pattern with the given index.
 /// \param pattern The index of the pattern to be cleared.
 

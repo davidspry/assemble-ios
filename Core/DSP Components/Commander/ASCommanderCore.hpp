@@ -111,6 +111,10 @@ public:
 
     inline void pastePatternWithIndex(const int pattern) { sequencer.paste(pattern); }
     
+    /// \brief Clear the state of the Sequencer, resetting each of its Patterns.
+
+    inline void clearAllPatterns() { sequencer.hardReset(); }
+    
     /// \brief Clear the state of the Pattern with the given index.
     /// \param pattern The index of the Pattern to be cleared.
 

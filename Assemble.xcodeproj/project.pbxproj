@@ -34,6 +34,8 @@
 		14347A0C24BD8D30007ED1CB /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */; };
 		14376A1124CF2834001F5405 /* OptionsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14376A0F24CF26AD001F5405 /* OptionsScrollView.swift */; };
 		1437D70724BDE99000315897 /* UnlockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437D70624BDE99000315897 /* UnlockViewController.swift */; };
+		143D4D8524D2F2120005F311 /* ColouredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143D4D8424D2F2120005F311 /* ColouredButton.swift */; };
+		143D4D8624D2F2120005F311 /* ColouredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143D4D8424D2F2120005F311 /* ColouredButton.swift */; };
 		143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */; };
 		143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB001243F2EAF0058AE40 /* ASAudioUnit.mm */; };
 		143FB005243F301C0058AE40 /* Attribution.md in Resources */ = {isa = PBXBuildFile; fileRef = 143FB004243F301C0058AE40 /* Attribution.md */; };
@@ -303,6 +305,7 @@
 		14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		14376A0F24CF26AD001F5405 /* OptionsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsScrollView.swift; sourceTree = "<group>"; };
 		1437D70624BDE99000315897 /* UnlockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockViewController.swift; sourceTree = "<group>"; };
+		143D4D8424D2F2120005F311 /* ColouredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColouredButton.swift; sourceTree = "<group>"; };
 		143FAFFC243F17DF0058AE40 /* ASAudioUnitBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAudioUnitBase.m; sourceTree = "<group>"; };
 		143FAFFD243F17DF0058AE40 /* ASAudioUnitBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAudioUnitBase.h; sourceTree = "<group>"; };
 		143FB000243F2E940058AE40 /* ASAudioUnit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAudioUnit.h; sourceTree = "<group>"; };
@@ -1063,6 +1066,7 @@
 				14D2D5C5246C747C003675C2 /* ParameterLabel.swift */,
 				144D8632246D4BA300F6EDD4 /* OscillatorSelector.swift */,
 				1409860324C01BF30025157D /* ASSegmentedControl.swift */,
+				143D4D8424D2F2120005F311 /* ColouredButton.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -1243,6 +1247,7 @@
 				14C4671C24CD90AC0090F660 /* FactoryPresetC.swift in Sources */,
 				144DFA7E24CEA90100B25073 /* BoxedSelector.swift in Sources */,
 				14C4675B24CD91D30090F660 /* SequencerScene.swift in Sources */,
+				143D4D8624D2F2120005F311 /* ColouredButton.swift in Sources */,
 				14C4670824CD90150090F660 /* MainViewControllerIOS.swift in Sources */,
 				14C4672524CD90DF0090F660 /* HuovilainenFilter.cpp in Sources */,
 				14C4672F24CD91130090F660 /* ASCommanderCore.cpp in Sources */,
@@ -1402,6 +1407,7 @@
 				143FB013243F3E7D0058AE40 /* FourCharCodeExtensions.swift in Sources */,
 				143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */,
 				1458D131245328550093B541 /* PaddedLabel.swift in Sources */,
+				143D4D8524D2F2120005F311 /* ColouredButton.swift in Sources */,
 				14556A7C2472954900FB2392 /* NSNotifications.swift in Sources */,
 				143FB008243F360D0058AE40 /* ASDSPBase.mm in Sources */,
 				149ACC1B24542209009DA18F /* UIBezierPathExtensions.swift in Sources */,
@@ -1496,7 +1502,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
-				OTHER_SWIFT_FLAGS = "-DTARGET_IOS -DTESTFLIGHT";
+				OTHER_SWIFT_FLAGS = "-DLIGHT -DTESTFLIGHT";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.davidspry.assemble-light";
 				PRODUCT_NAME = "Assemble Light";
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
@@ -1525,7 +1531,7 @@
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
-				OTHER_SWIFT_FLAGS = "-DTARGET_IOS -DTESTFLIGHT";
+				OTHER_SWIFT_FLAGS = "-DLIGHT -DTESTFLIGHT";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.davidspry.assemble-light";
 				PRODUCT_NAME = "Assemble Light";
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
@@ -1673,7 +1679,7 @@
 				);
 				MARKETING_VERSION = 0.0;
 				OTHER_LDFLAGS = "-lc++";
-				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT -DTARGET_IPADOS";
+				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1710,7 +1716,7 @@
 				);
 				MARKETING_VERSION = 0.0;
 				OTHER_LDFLAGS = "-lc++";
-				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT -DTARGET_IPADOS";
+				OTHER_SWIFT_FLAGS = "-DTESTFLIGHT";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

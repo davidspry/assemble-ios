@@ -21,7 +21,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
 
     private var states = [Bool]()
     private var shapes = [CAShapeLayer]()
-    private let patterns: Int = Int(PATTERNS)
+    private let patterns = Int(PATTERNS)
     
     /// The index of the node representing the current pattern.
 
@@ -71,12 +71,17 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         longPressRecogniser.addTarget(self, action: #selector(handleLongPress(_:)))
         addGestureRecognizer(longPressRecogniser)
 
-        let callbackPlayPause = #selector(handlePlayPauseNotification(_:))
+        let callbackPlayPause = #selector(handlePlayPauseNotification)
         NotificationCenter.default.addObserver(self, selector: callbackPlayPause, name: .playOrPause, object: nil)
 
+        initialisePatternShapes()
+        loadStates()
+    }
+    
+    private func initialisePatternShapes() {
         for r in stride(from: 0, to: rows, by: 1) {
             for c in stride(from: 0, to: cols, by: 1) {
-                let path = UIBezierPath()
+                let path  = UIBezierPath()
                 let layer = CAShapeLayer()
                 
                 let x = c * diameter + radius
@@ -90,13 +95,12 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
                 layer.allowsEdgeAntialiasing = true
                 layer.rasterizationScale = 2.0 * UIScreen.main.scale
                 layer.fillColor = patternOffColour.cgColor
+
                 self.layer.insertSublayer(layer, below: patternOptions.layer)
                 shapes.append(layer)
                 states.append(false)
             }
         }
-
-        loadStates()
     }
     
     /// Poll the core for the state of each pattern. This should be called whenever a song is loaded.
@@ -272,12 +276,13 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         guard self.bounds.contains(location) else { return }
         guard let node = nodeFromTouchLocation(location) else { return }
         guard let xy   = locationFromNodeIndex(node)     else { return }
-        let roomAbove  = convert(xy, to: UIScreen.main.coordinateSpace).y > 75
-        
+        let roomAbove  = convert(xy, to: UIScreen.main.coordinateSpace).y > 85
+        let dy         = 2 + radius + patternOptions.bounds.midY
+
         nextPattern = pattern
         lastSelectedPattern = node
         patternOptions.center.x = xy.x
-        patternOptions.center.y = xy.y + (roomAbove ? -40 : 40)
+        patternOptions.center.y = xy.y + (roomAbove ? -dy : dy)
         showPatternOptionsView()
     }
 
@@ -292,9 +297,7 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     // MARK: - PatternOptions View
     
     private func establishClearPatternView() {
-        let frame = CGRect(x: 0, y: 0, width: 105, height: 30)
-
-        patternOptions.initialise(in: frame)
+        patternOptions.initialise()
         patternOptions.delegate = self
         patternOptions.isHidden = true
         addSubview(patternOptions)
@@ -304,18 +307,22 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     func showPatternOptionsView() {
         DispatchQueue.main.async {
             self.patternOptions.isHidden = false
-            self.patternOptions.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+            self.patternOptions.scaleBy(x: 0.1, y: 0.1)
             UIView.animate(withDuration: 0.1) {
-                self.patternOptions.layer.setAffineTransform(.init(scaleX: 1.0, y: 1.0))
+                self.patternOptions.scaleBy(x: 1.0, y: 1.0)
+                self.shapes.enumerated().forEach { index, node in
+                    node.opacity = (index == self.lastSelectedPattern) ? 1.0 : 0.15
+                }
             }
         }
     }
-    
+
     func hidePatternOptionsView() {
         DispatchQueue.main.async {
             self.patternOptions.reset()
             UIView.animate(withDuration: 0.1, animations: {
-                self.patternOptions.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+                self.patternOptions.scaleBy(x: 0.1, y: 0.1)
+                self.shapes.forEach { $0.opacity = 1.0 }
             }, completion: { complete in self.patternOptions.isHidden = true })
         }
     }

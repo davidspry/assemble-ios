@@ -9,7 +9,9 @@ import UIKit
 extension UIColor
 {
     static public let mutedOrange        = #colorLiteral(red: 0.6419845223, green: 0.2693073153, blue: 0.2306851745, alpha: 1)
-    static public let offWhite           = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    static public let offWhite           = #colorLiteral(red: 0.9215686275, green: 0.9215686275, blue: 0.9215686275, alpha: 1)
+    static public let snow               = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    static public let lightBlack         = #colorLiteral(red: 0.137254902, green: 0.137254902, blue: 0.137254902, alpha: 1)
     
     static public let sineNoteColour     = #colorLiteral(red: 0.8941176471, green: 0.3647058824, blue: 0.3137254902, alpha: 1)
     static public let squareNoteColour   = #colorLiteral(red: 0.2235294118, green: 0.4941176471, blue: 0.3450980392, alpha: 1)

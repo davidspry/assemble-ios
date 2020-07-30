@@ -17,7 +17,7 @@ extension SequencerScene
     ///
     /// - Parameter sender: The `UIButton` that was pressed
     
-    @objc func binPressed(sender: UIButton) {
+    @objc func didPressErase(sender: UIButton) {
         guard let xy = noteToErase else { return }
         eraseNote(xy)
         hideEraseNoteView()
@@ -39,7 +39,7 @@ extension SequencerScene
             return
         }
         eraseButtonView.center = viewPointFromIndices(selected)
-        eraseButtonView.center = eraseButtonView.center.applying(.init(translationX: 0, y: -25))
+        eraseButtonView.center.translate(x: 0, y: -35)
         noteToErase = selected
         
         showEraseNoteView()

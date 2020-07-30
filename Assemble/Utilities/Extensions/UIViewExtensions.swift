@@ -32,5 +32,22 @@ extension UIView {
             else        { layer.cornerCurve = .circular   }
         }
     }
+    
+    /// Add the given `UIView` as a subview, then bring it to the front of the subview stack.
+    /// - Parameter view: The `UIView` to be added as a subview.
+
+    func addSubviewToFront(_ view: UIView) {
+        addSubview(view)
+        bringSubviewToFront(view)
+    }
+    
+    /// Scale the view's transform.
+    /// - Parameter x: The x-axis scale factor.
+    /// - Parameter y: The y-axis scale factor.
+
+    func scaleBy(x: CGFloat, y: CGFloat) {
+        let  transform = CGAffineTransform(scaleX: x, y: y)
+        self.layer.setAffineTransform(transform)
+    }
 
 }

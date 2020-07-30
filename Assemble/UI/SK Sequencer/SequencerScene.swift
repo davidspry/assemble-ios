@@ -62,7 +62,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         super.init(size: size);
         
         longPressRecogniser.delegate = self
-        longPressRecogniser.minimumPressDuration = 0.8
+        longPressRecogniser.minimumPressDuration = 0.2
         longPressRecogniser.numberOfTouchesRequired = 1
         longPressRecogniser.cancelsTouchesInView = false
 
@@ -77,18 +77,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         grid.initialise(spacing: spacing)
 
         DispatchQueue.main.async {
-            let patterns = Int(PATTERNS)
-            let W = Int(SEQUENCER_WIDTH)
-            let H = Assemble.core.length
-            let empty: [String?] = Array.init(repeating: nil, count: W)
-            self.cursor.position = self.pointFromIndices(self.selected)
-            self.noteShapes.reserveCapacity(patterns)
-            self.noteStrings.reserveCapacity(patterns)
-            self.noteShapes.append(contentsOf: Array.init(repeating: [], count: patterns))
-            self.noteStrings.append(contentsOf: Array.init(repeating: [], count: patterns))
-            for k in 0 ..< patterns {
-                self.noteStrings[k].append(contentsOf: Array.init(repeating: empty, count: H))
-            }
+            self.initialise()
         }
 
         addChild(grid);
@@ -106,27 +95,40 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         super.init(coder: aDecoder)
         print("[SequencerScene] Required init is unimplemented.")
     }
+    
+    private func initialise() {
+        let patterns = Int(PATTERNS)
+        let W = Int(SEQUENCER_WIDTH)
+        let H = Assemble.core.length
+        let empty: [String?] = Array.init(repeating: nil, count: W)
+        
+        self.cursor.position = self.pointFromIndices(self.selected)
+        
+        self.noteShapes.reserveCapacity(patterns)
+        self.noteStrings.reserveCapacity(patterns)
+        self.noteShapes.append(contentsOf: Array.init(repeating: [], count: patterns))
+        self.noteStrings.append(contentsOf: Array.init(repeating: [], count: patterns))
+        
+        for k in 0 ..< patterns {
+            self.noteStrings[k].append(contentsOf: Array.init(repeating: empty, count: H))
+        }
+    }
 
     /// Initialise the long press gesture recogniser and the note erase button when the `SequencerScene` attaches to the `Sequencer` `SKView`.
 
     override func didMove(to view: SKView) {
         view.addGestureRecognizer(self.longPressRecogniser)
         longPressRecogniser.addTarget(self, action: #selector(SequencerScene.longPressed(_:)))
-        
-        let w: CGFloat = 30
-        let h: CGFloat = 25
-        let size = UIImage.SymbolConfiguration(pointSize: w)
-        let frame = CGRect(x: 0, y: 0, width: w, height: h)
-        let button = UIButton(frame: frame)
-            button.frame = frame
-            button.tintColor = .white
-            button.addTarget(self, action: #selector(binPressed), for: .touchDown)
-            button.setImage(UIImage(systemName: "xmark.rectangle.fill", withConfiguration: size), for: .normal)
+
+        let frame = CGRect(origin: .zero, size: .square(30))
+        let button = ColouredButton(backgroundColour: .sineNoteColour, textColour: .offWhite)
+            button.setTitle("X", for: .normal)
+            button.addTarget(self, action: #selector(didPressErase), for: .touchUpInside)
 
         eraseButtonView.frame = frame
-        eraseButtonView.addSubview(button)
         eraseButtonView.isHidden = true
-        view.addSubview(eraseButtonView)
+        eraseButtonView.addSubview(button)
+        view.addSubviewToFront(eraseButtonView)
     }
 
     /// Redraw the sequencer scene's background colour.
@@ -191,9 +193,9 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     func showEraseNoteView() {
         DispatchQueue.main.async {
             self.eraseButtonView.isHidden = false
-            self.eraseButtonView.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+            self.eraseButtonView.scaleBy(x: 0.1, y: 0.1)
             UIView.animate(withDuration: 0.1) {
-                self.eraseButtonView.layer.setAffineTransform(.init(scaleX: 1.0, y: 1.0))
+                self.eraseButtonView.scaleBy(x: 1.0, y: 1.0)
             }
         }
     }
@@ -203,7 +205,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     func hideEraseNoteView() {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.1) {
-                self.eraseButtonView.layer.setAffineTransform(.init(scaleX: 0.1, y: 0.1))
+                self.eraseButtonView.scaleBy(x: 0.1, y: 0.1)
                 self.eraseButtonView.isHidden = true
             }
         }

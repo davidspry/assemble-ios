@@ -35,6 +35,11 @@ extern "C" void __interop__PastePatternWithIndex(void *DSP, const int pattern)
     ((ASCommanderDSP*) DSP)->pastePatternWithIndex(pattern);
 }
 
+extern "C" void __interop__ClearAllPatterns(void *DSP)
+{
+    ((ASCommanderDSP*) DSP)->clearAllPatterns();
+}
+
 extern "C" void __interop__ClearPatternWithIndex(void *DSP, const int pattern)
 {
     ((ASCommanderDSP*) DSP)->clearPatternWithIndex(pattern);

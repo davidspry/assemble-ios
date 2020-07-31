@@ -67,7 +67,7 @@ class PatternOptions: UIView {
         
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.15) {
-                self.paster.alpha = canCopy ? 1.0 : 0.35
+                self.paster.alpha = canCopy ? 1.0 : 0.30
 
                 if #available(iOS 13.4, *) {
                     self.paster.isPointerInteractionEnabled = canCopy

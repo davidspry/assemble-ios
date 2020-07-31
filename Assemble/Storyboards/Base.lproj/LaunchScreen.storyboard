@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -15,11 +15,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assemble.png" translatesAutoresizingMaskIntoConstraints="NO" id="qsC-xh-3FH">
-                                <rect key="frame" x="558" y="387" width="250" height="250"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assemble" translatesAutoresizingMaskIntoConstraints="NO" id="qsC-xh-3FH">
+                                <rect key="frame" x="550.5" y="379.5" width="265" height="265"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Jeq-QZ-mj0"/>
-                                    <constraint firstAttribute="width" constant="250" id="gQa-dG-tAT"/>
+                                    <constraint firstAttribute="height" constant="265" id="Jeq-QZ-mj0"/>
+                                    <constraint firstAttribute="width" constant="265" id="gQa-dG-tAT"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Assemble.png" width="27.937854766845703" height="27.937854766845703"/>
+        <image name="Assemble" width="250" height="250"/>
     </resources>
 </document>

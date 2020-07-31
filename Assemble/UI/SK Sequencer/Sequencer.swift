@@ -83,8 +83,8 @@ class Sequencer : SKView, KeyboardListener
 
         switch Assemble.device {
         case .pad:
-            if screenLength > 1300 { scalar = 34; break }
-            if screenLength > 1100 { scalar = 32; break }
+            if screenLength > 1300 { scalar = 36; break }
+            if screenLength > 1100 { scalar = 31; break }
             if screenLength > 1000 { scalar = 28; break }
             else                   { scalar = 28; break }
         case .phone:

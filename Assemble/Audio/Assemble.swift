@@ -41,4 +41,5 @@ struct Assemble
     public static var device: UIUserInterfaceIdiom {
         return UIDevice.current.userInterfaceIdiom
     }
+
 }

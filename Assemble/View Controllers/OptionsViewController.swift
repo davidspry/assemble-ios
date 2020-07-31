@@ -4,7 +4,7 @@
 
 import UIKit
 
-class UnlockedFeaturesViewController: UIViewController {
+class OptionsViewController: UIViewController {
 
     private let voices: [Float] = [2, 4, 8]
 

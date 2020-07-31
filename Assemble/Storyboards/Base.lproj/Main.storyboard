@@ -91,7 +91,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7S-IN-f91">
-                                                                            <rect key="frame" x="16" y="14" width="24.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="39" height="15"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                                                             <color key="textColor" name="Foreground"/>
                                                                             <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parameter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NA-DA-wCE">
-                                                                            <rect key="frame" x="16" y="14" width="60.5" height="15.5"/>
+                                                                            <rect key="frame" x="16" y="14.5" width="70.5" height="15"/>
                                                                             <color key="tintColor" name="Foreground"/>
                                                                             <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                                             <nil key="textColor"/>
@@ -201,7 +201,7 @@
                                 <color key="backgroundColor" name="BackgroundLight"/>
                                 <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="750" constant="750" id="0QF-Bi-FtG"/>
+                                    <constraint firstAttribute="width" priority="750" constant="785" id="0QF-Bi-FtG"/>
                                     <constraint firstItem="RPR-f4-Gy7" firstAttribute="width" secondItem="Kpm-a2-jAD" secondAttribute="width" multiplier="0.95" id="Ba8-ET-fyV"/>
                                     <constraint firstItem="RPR-f4-Gy7" firstAttribute="height" secondItem="Kpm-a2-jAD" secondAttribute="height" multiplier="0.95" id="Ffn-DQ-p5E"/>
                                     <constraint firstAttribute="height" constant="650" id="PVZ-ZP-9HM"/>
@@ -248,6 +248,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-15-iez" userLabel="New Button">
+                                <rect key="frame" x="474" y="25" width="65" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="9AL-N0-aos"/>
+                                    <constraint firstAttribute="height" constant="50" id="bam-iJ-lGl"/>
+                                </constraints>
+                                <color key="tintColor" name="Foreground"/>
+                                <state key="normal" image="plus" catalog="system">
+                                    <color key="titleColor" name="Foreground"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
+                                </state>
+                                <connections>
+                                    <segue destination="RxF-37-PEB" kind="presentation" identifier="newSongSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="YvT-CO-U67"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j" userLabel="Save Button">
+                                <rect key="frame" x="827" y="25" width="65" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="BaZ-3G-8Wh"/>
+                                    <constraint firstAttribute="width" constant="65" id="I94-B9-QK7"/>
+                                </constraints>
+                                <color key="tintColor" name="Foreground"/>
+                                <state key="normal" image="arrow.down.to.line" catalog="system">
+                                    <color key="titleColor" name="Foreground"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
+                                </state>
+                                <connections>
+                                    <segue destination="j2K-Js-ZUO" kind="presentation" identifier="saveCopySegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="xnq-cW-egW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-LA-bfh" userLabel="Presets Button">
+                                <rect key="frame" x="539" y="32" width="288" height="36"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal">
+                                    <color key="titleColor" name="Foreground"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Bsw-oE-hDs" kind="presentation" identifier="persistenceSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="37L-ZL-Axj"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Init" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zG-sF-KW1">
+                                <rect key="frame" x="539" y="32" width="288" height="36"/>
+                                <color key="backgroundColor" name="BackgroundLight"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="5dc-Hv-7Aw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
+                                <color key="textColor" name="Foreground"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2r-1G-AL6" customClass="Keyboard" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="499" y="828" width="368" height="85"/>
                                 <color key="backgroundColor" name="Background"/>
@@ -265,7 +330,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ulx-iT-Ybz" customClass="ParameterLabel" customModule="Assemble" customModuleProvider="target">
-                                <rect key="frame" x="32" y="142" width="100" height="35.5"/>
+                                <rect key="frame" x="32" y="141" width="100" height="35"/>
                                 <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="13"/>
                                 <color key="textColor" name="Foreground"/>
                                 <color key="highlightedColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -284,7 +349,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLACEHOLDER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OmY-3G-tcI" customClass="PaddedLabel" customModule="Assemble" customModuleProvider="target">
                                 <rect key="frame" x="630" y="686.5" width="106" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zFP-Wh-lUJ"/>
@@ -331,73 +396,8 @@
                                     <constraint firstAttribute="height" constant="55" id="Oxd-NU-iBq"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9m-15-iez" userLabel="New Button">
-                                <rect key="frame" x="474" y="23" width="65" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="9AL-N0-aos"/>
-                                    <constraint firstAttribute="height" constant="50" id="bam-iJ-lGl"/>
-                                </constraints>
-                                <color key="tintColor" name="Foreground"/>
-                                <state key="normal" image="plus" catalog="system">
-                                    <color key="titleColor" name="Foreground"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
-                                </state>
-                                <connections>
-                                    <segue destination="RxF-37-PEB" kind="presentation" identifier="newSongSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="YvT-CO-U67"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qbC-Vu-c5j" userLabel="Save Button">
-                                <rect key="frame" x="827" y="23" width="65" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="BaZ-3G-8Wh"/>
-                                    <constraint firstAttribute="width" constant="65" id="I94-B9-QK7"/>
-                                </constraints>
-                                <color key="tintColor" name="Foreground"/>
-                                <state key="normal" image="arrow.down.to.line" catalog="system">
-                                    <color key="titleColor" name="Foreground"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
-                                </state>
-                                <connections>
-                                    <segue destination="j2K-Js-ZUO" kind="presentation" identifier="saveCopySegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="xnq-cW-egW"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mow-LA-bfh" userLabel="Presets Button">
-                                <rect key="frame" x="539" y="32" width="288" height="32"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
-                                    <color key="titleColor" name="Foreground"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="Bsw-oE-hDs" kind="presentation" identifier="persistenceSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="37L-ZL-Axj"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Init" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zG-sF-KW1">
-                                <rect key="frame" x="539" y="32" width="288" height="32"/>
-                                <color key="backgroundColor" name="BackgroundLight"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="5dc-Hv-7Aw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
-                                <color key="textColor" name="Foreground"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="continuousCorners" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </label>
                             <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f3D-RJ-dah">
-                                <rect key="frame" x="32" y="106" width="100" height="28"/>
+                                <rect key="frame" x="32" y="106" width="100" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="dne-3z-nWL"/>
                                 </constraints>
@@ -409,36 +409,41 @@
                                     <action selector="didChangeMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pzl-Xt-w6a"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-P7-LJq" userLabel="Parameters Button">
-                                <rect key="frame" x="1285" y="23" width="65" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="YU9-Og-NOE"/>
-                                    <constraint firstAttribute="height" constant="50" id="kF3-NI-bOp"/>
-                                </constraints>
-                                <color key="tintColor" name="Foreground"/>
-                                <state key="normal" image="slider.horizontal.3" catalog="system">
-                                    <color key="titleColor" name="Foreground"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
-                                </state>
-                                <connections>
-                                    <segue destination="MYq-JU-ftL" kind="presentation" identifier="displayParameters" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0Db-aO-7p0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XT2-lY-yN7" userLabel="Theme Button">
-                                <rect key="frame" x="1212" y="23" width="65" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="dZ8-db-pgH"/>
-                                    <constraint firstAttribute="width" constant="65" id="yGq-Bc-0g9"/>
-                                </constraints>
-                                <color key="tintColor" name="Foreground"/>
-                                <state key="normal" image="moon.fill" catalog="system">
-                                    <color key="titleColor" name="Foreground"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
-                                </state>
-                                <connections>
-                                    <action selector="didSetTheme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLr-n5-qkP"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="CM9-FN-UOS">
+                                <rect key="frame" x="1212" y="25" width="138" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XT2-lY-yN7" userLabel="Theme Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="dZ8-db-pgH"/>
+                                            <constraint firstAttribute="width" constant="65" id="yGq-Bc-0g9"/>
+                                        </constraints>
+                                        <color key="tintColor" name="Foreground"/>
+                                        <state key="normal" image="moon.fill" catalog="system">
+                                            <color key="titleColor" name="Foreground"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didSetTheme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eLr-n5-qkP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ea2-P7-LJq" userLabel="Parameters Button">
+                                        <rect key="frame" x="73" y="0.0" width="65" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="65" id="YU9-Og-NOE"/>
+                                            <constraint firstAttribute="height" constant="50" id="kF3-NI-bOp"/>
+                                        </constraints>
+                                        <color key="tintColor" name="Foreground"/>
+                                        <state key="normal" image="slider.horizontal.3" catalog="system">
+                                            <color key="titleColor" name="Foreground"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25" weight="semibold"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="MYq-JU-ftL" kind="presentation" identifier="displayParameters" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="0Db-aO-7p0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="toK-Td-YeI" userLabel="Help Button">
                                 <rect key="frame" x="16" y="942" width="65" height="50"/>
                                 <constraints>
@@ -492,8 +497,6 @@
                         <color key="backgroundColor" name="Background"/>
                         <constraints>
                             <constraint firstItem="qbC-Vu-c5j" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="2ob-Lz-NiG"/>
-                            <constraint firstItem="XT2-lY-yN7" firstAttribute="centerY" secondItem="ea2-P7-LJq" secondAttribute="centerY" id="3KQ-xm-NiL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="right" secondItem="ea2-P7-LJq" secondAttribute="right" constant="16" id="6Wr-oy-5ua"/>
                             <constraint firstAttribute="bottom" secondItem="fcH-Ja-kdM" secondAttribute="bottom" constant="32" id="AIq-09-Jx1"/>
                             <constraint firstAttribute="bottom" secondItem="Z1n-M5-aq6" secondAttribute="bottom" constant="40" id="BUz-DE-yER"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="top" secondItem="OJS-ew-lo6" secondAttribute="bottom" constant="8" id="BaF-Bz-xIA"/>
@@ -501,10 +504,11 @@
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="width" secondItem="f3D-RJ-dah" secondAttribute="width" id="Etg-Pz-DsQ"/>
                             <constraint firstItem="fcH-Ja-kdM" firstAttribute="leading" secondItem="toK-Td-YeI" secondAttribute="trailing" constant="8" id="HBA-Pu-MEr"/>
                             <constraint firstAttribute="right" secondItem="O4G-8C-h7M" secondAttribute="right" constant="32" id="HYP-ga-pcb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CM9-FN-UOS" secondAttribute="trailing" constant="16" id="IRX-Dk-Bh9"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="height" secondItem="1zG-sF-KW1" secondAttribute="height" id="JqA-dH-aNF"/>
+                            <constraint firstItem="CM9-FN-UOS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="QhM-NT-Q5i"/>
                             <constraint firstItem="Z1n-M5-aq6" firstAttribute="top" secondItem="X2r-1G-AL6" secondAttribute="bottom" constant="16" id="R9f-RX-Bfk"/>
                             <constraint firstItem="qbC-Vu-c5j" firstAttribute="left" secondItem="1zG-sF-KW1" secondAttribute="right" id="U0C-u8-9rw"/>
-                            <constraint firstItem="ea2-P7-LJq" firstAttribute="left" secondItem="XT2-lY-yN7" secondAttribute="right" constant="8" id="UFf-M9-YDo"/>
                             <constraint firstItem="Ulx-iT-Ybz" firstAttribute="top" secondItem="f3D-RJ-dah" secondAttribute="bottom" constant="8" id="Wn2-LC-p8R"/>
                             <constraint firstItem="j9m-15-iez" firstAttribute="right" secondItem="1zG-sF-KW1" secondAttribute="left" id="X8s-2z-Wpr"/>
                             <constraint firstItem="1zG-sF-KW1" firstAttribute="width" secondItem="OJS-ew-lo6" secondAttribute="width" multiplier="0.75" id="YHI-ep-bHL"/>
@@ -513,7 +517,6 @@
                             <constraint firstAttribute="bottom" secondItem="toK-Td-YeI" secondAttribute="bottom" constant="32" id="axz-oB-HM2"/>
                             <constraint firstItem="K3i-2N-gT6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="bMX-6h-yq7"/>
                             <constraint firstItem="OmY-3G-tcI" firstAttribute="centerX" secondItem="OJS-ew-lo6" secondAttribute="centerX" id="erf-Cv-JDh"/>
-                            <constraint firstItem="ea2-P7-LJq" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="fWQ-fw-1xH"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="width" secondItem="1zG-sF-KW1" secondAttribute="width" id="fdt-Gl-NNF"/>
                             <constraint firstItem="j9m-15-iez" firstAttribute="centerY" secondItem="Mow-LA-bfh" secondAttribute="centerY" id="jDH-2n-ciy"/>
                             <constraint firstItem="Mow-LA-bfh" firstAttribute="centerY" secondItem="1zG-sF-KW1" secondAttribute="centerY" id="ld4-mg-w7N"/>
@@ -706,24 +709,24 @@
                                 <rect key="frame" x="395.5" y="344.5" width="575" height="335"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE/COPY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d4-5Y-r3e">
-                                        <rect key="frame" x="48" y="32" width="89.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="86.5" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="RP8-E7-D6n">
-                                        <rect key="frame" x="48" y="171" width="479" height="47"/>
+                                        <rect key="frame" x="48" y="170.5" width="479" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAVE Save the current song and optionally update its name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzi-gJ-bdL">
-                                                <rect key="frame" x="0.0" y="0.0" width="479" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="479" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COPY Copy the current song and save it with the given name." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ler-mH-deg">
-                                                <rect key="frame" x="0.0" y="31.5" width="479" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="479" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -732,7 +735,7 @@
                                         </subviews>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="SONG NAME" textAlignment="center" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Eja-6C-lcl">
-                                        <rect key="frame" x="37.5" y="83" width="500" height="48"/>
+                                        <rect key="frame" x="37.5" y="82.5" width="500" height="48"/>
                                         <color key="backgroundColor" red="0.56862745100000001" green="0.1960784314" blue="0.1764705882" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <constraints>
@@ -800,7 +803,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mvd-Zf-Oyb">
-                                        <rect key="frame" x="508.5" y="32.5" width="18.5" height="18.5"/>
+                                        <rect key="frame" x="508.5" y="32" width="18.5" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <state key="normal" image="multiply" catalog="system">
                                             <color key="titleColor" name="Foreground"/>
@@ -877,24 +880,24 @@
                                 <rect key="frame" x="408" y="389.5" width="550" height="245"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEW SONG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hco-Sf-L8f">
-                                        <rect key="frame" x="48" y="32" width="87" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="77" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="2gO-Zi-zx8">
-                                        <rect key="frame" x="48" y="83" width="454" height="47"/>
+                                        <rect key="frame" x="48" y="82.5" width="454" height="46"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beginning a new song will clear the sequencer." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Di-pr-oRi">
-                                                <rect key="frame" x="0.0" y="0.0" width="454" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="454" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like to begin a new song?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcv-Pb-yyO">
-                                                <rect key="frame" x="0.0" y="31.5" width="454" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="454" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -952,7 +955,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8pY-tJ-oUo">
-                                        <rect key="frame" x="483.5" y="32.5" width="18.5" height="18.5"/>
+                                        <rect key="frame" x="483.5" y="32" width="18.5" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <state key="normal" image="multiply" catalog="system">
                                             <color key="titleColor" name="Foreground"/>
@@ -1564,7 +1567,7 @@
                                 <rect key="frame" x="383" y="334.5" width="600" height="355"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pB-xx-r0H" userLabel="Close">
-                                        <rect key="frame" x="533.5" y="32.5" width="18.5" height="18.5"/>
+                                        <rect key="frame" x="533.5" y="32" width="18.5" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <state key="normal" image="multiply" catalog="system">
                                             <color key="titleColor" name="Foreground"/>
@@ -1575,45 +1578,45 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UNLOCK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9F-PW-KI2">
-                                        <rect key="frame" x="48" y="32" width="66.5" height="19"/>
+                                        <rect key="frame" x="48" y="32" width="58" height="18.5"/>
                                         <color key="tintColor" name="Foreground"/>
                                         <fontDescription key="fontDescription" name="JetBrainsMono-Medium" family="JetBrains Mono" pointSize="16"/>
                                         <color key="textColor" name="Foreground"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="gcC-4v-WJr">
-                                        <rect key="frame" x="48" y="83" width="504" height="141.5"/>
+                                        <rect key="frame" x="48" y="82.5" width="504" height="139"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assemble can be unlocked with a single, non-recurring payment." textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaR-Bo-gOm">
-                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlocking Assemble supports future development, disables the " textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pu-SF-unq">
-                                                <rect key="frame" x="0.0" y="31.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="31" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="white noise that is periodically mixed in with the audio output," textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iq8-Se-jdO">
-                                                <rect key="frame" x="0.0" y="63" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="62" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="and enables access to an additional options menu that includes" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-qo-ffo">
-                                                <rect key="frame" x="0.0" y="94.5" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="93" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="polyphony scaling for each oscillator." textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAf-lF-4Nw">
-                                                <rect key="frame" x="0.0" y="126" width="504" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="124" width="504" height="15"/>
                                                 <color key="tintColor" name="Foreground"/>
                                                 <fontDescription key="fontDescription" name="JetBrainsMono-Regular" family="JetBrains Mono" pointSize="13"/>
                                                 <color key="textColor" name="Secondary"/>
@@ -1776,10 +1779,10 @@
             </objects>
             <point key="canvasLocation" x="-508.19912152269399" y="830.859375"/>
         </scene>
-        <!--Unlocked Features View Controller-->
+        <!--Options View Controller-->
         <scene sceneID="hwQ-I4-Els">
             <objects>
-                <viewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="kzX-oS-xWv" customClass="UnlockedFeaturesViewController" customModule="Assemble" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="kzX-oS-xWv" customClass="OptionsViewController" customModule="Assemble" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="CLB-ui-f2e">
                         <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

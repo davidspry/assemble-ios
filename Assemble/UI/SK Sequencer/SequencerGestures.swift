@@ -45,6 +45,16 @@ extension SequencerScene
         showEraseNoteView()
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive event: UIEvent) -> Bool {
+        if !eraseButtonView.isHidden,
+            let touch = event.allTouches?.first,
+            eraseButtonView.point(inside: touch.location(in: eraseButtonView), with: nil) {
+            return false
+        }
+        
+        return true
+    }
+    
     // MARK: - Touch callbacks
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

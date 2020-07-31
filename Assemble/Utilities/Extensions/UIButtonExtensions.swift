@@ -31,6 +31,18 @@ extension UIButton {
         }
     }
     
+    func disableSelectionHighlight() {
+        DispatchQueue.main.async {
+            self.adjustsImageWhenHighlighted = false
+        }
+    }
+    
+    func enableSelectionHighlight() {
+        DispatchQueue.main.async {
+            self.adjustsImageWhenHighlighted = true
+        }
+    }
+    
     /// Begin a pulsating animation
     
     func pulsate() {

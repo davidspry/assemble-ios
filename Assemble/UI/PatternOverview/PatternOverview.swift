@@ -308,11 +308,9 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         DispatchQueue.main.async {
             self.patternOptions.isHidden = false
             self.patternOptions.scaleBy(x: 0.1, y: 0.1)
+            self.setPatternBrightnessForSelection()
             UIView.animate(withDuration: 0.1) {
                 self.patternOptions.scaleBy(x: 1.0, y: 1.0)
-                self.shapes.enumerated().forEach { index, node in
-                    node.opacity = (index == self.lastSelectedPattern) ? 1.0 : 0.15
-                }
             }
         }
     }
@@ -320,10 +318,42 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
     func hidePatternOptionsView() {
         DispatchQueue.main.async {
             self.patternOptions.reset()
-            UIView.animate(withDuration: 0.1, animations: {
+            self.restorePatternBrightnessAfterSelection()
+            UIView.animate(withDuration: 0.1) {
                 self.patternOptions.scaleBy(x: 0.1, y: 0.1)
-                self.shapes.forEach { $0.opacity = 1.0 }
-            }, completion: { complete in self.patternOptions.isHidden = true })
+                self.patternOptions.isHidden = true
+            }
+        }
+    }
+    
+    private func setPatternBrightnessForSelection() {
+        let isDarkMode = self.traitCollection.userInterfaceStyle == .dark
+
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.2) {
+                CATransaction.begin()
+                for i in 0 ..< self.shapes.count {
+                    let selected = i == self.lastSelectedPattern
+                    if      selected   { self.shapes[i].fillColor = self.activeColour.cgColor  }
+                    else if isDarkMode { self.shapes[i].opacity = self.states[i] ? 0.25 : 0.50 }
+                    else               { self.shapes[i].opacity = self.states[i] ? 0.75 : 0.25 }
+                }
+                CATransaction.commit()
+            }
+        }
+    }
+    
+    private func restorePatternBrightnessAfterSelection() {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.2) {
+                CATransaction.begin()
+                for i in 0 ..< self.shapes.count {
+                    self.shapes[i].opacity = 1.0
+                    self.shapes[i].fillColor = self.states[i] ? self.patternOnColour.cgColor :
+                                                                self.patternOffColour.cgColor
+                }
+                CATransaction.commit()
+            }
         }
     }
     
@@ -345,6 +375,25 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         Assemble.core.commander?.pasteIntoPatternWithIndex(pattern)
         NotificationCenter.default.post(name: .updatePattern, object: pattern)
         hidePatternOptionsView()
+    }
+    
+    // MARK: - UITraitCollection update callback
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if !patternOptions.isHidden { setPatternBrightnessForSelection() }
+    }
+
+    // MARK: - UIGestureRecogniser delegate
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive event: UIEvent) -> Bool {
+        if !patternOptions.isHidden,
+            let touch = event.allTouches?.first,
+            patternOptions.point(inside: touch.location(in: patternOptions), with: nil) {
+            return false
+        }
+        
+        return true
     }
     
     // MARK: - HitTest

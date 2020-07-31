@@ -282,10 +282,13 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     @discardableResult
     @objc func clearPattern(_ notification: NSNotification) -> Bool {
         guard let index = notification.object as? Int else { return false }
-        clearPatternAsynchronously(at: index)
-        return true
+        return clearPatternAsynchronously(at: index, then: {
+            if index == self.pattern {
+                self.hideEraseNoteView()
+            }
+        })
     }
-    
+
     /// Clear one of the sequencer scene's patterns.
     /// - Parameter index: The index of the pattern whose representation should be reset
     /// - Parameter callback: An optional closure that may be executed after the nominated pattern has been reset.

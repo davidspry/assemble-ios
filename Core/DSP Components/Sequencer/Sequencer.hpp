@@ -60,14 +60,13 @@ public:
         row = 0;
         pattern = 0;
         activePatterns = 0;
-        deleteCopiedPattern();
         for (size_t i = 0; i < PATTERNS; ++i)
             patterns.at(i).clear();
     }
     
     /// @brief Clear and deactivate the pattern with the given pattern index .
     /// @param pattern The index of the pattern to be cleared.
-    
+
     inline void hardReset(const int pattern)
     {
         const bool active = patterns.at(pattern).isActive();

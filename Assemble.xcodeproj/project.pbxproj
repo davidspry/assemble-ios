@@ -10,7 +10,7 @@
 		140404B924B3465E0094EC6B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 140404B024B3465E0094EC6B /* LICENSE */; };
 		140404BA24B3465E0094EC6B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 140404B324B3465E0094EC6B /* README.md */; };
 		140404C024B34D770094EC6B /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140404BE24B34D760094EC6B /* r8bbase.cpp */; };
-		1409860224C014D10025157D /* UnlockedFeaturesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860124C014D10025157D /* UnlockedFeaturesViewController.swift */; };
+		1409860224C014D10025157D /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860124C014D10025157D /* OptionsViewController.swift */; };
 		1409860424C01BF30025157D /* ASSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860324C01BF30025157D /* ASSegmentedControl.swift */; };
 		140B63CA2484D70600D571D1 /* MediaRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63C92484D70600D571D1 /* MediaRecorder.swift */; };
 		140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63D32485371100D571D1 /* UIButtonExtensions.swift */; };
@@ -74,8 +74,10 @@
 		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
 		1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
+		14874C6A24D3C2EF00C2869A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14874C6924D3C2EF00C2869A /* Assets.xcassets */; };
 		1488BDDF24C301500008087C /* StoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */; };
 		1488BDE124C324CA0008087C /* SKProductExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488BDE024C324CA0008087C /* SKProductExtensions.swift */; };
+		148D5D9224D4256C0063E179 /* AssembleLight.png in Resources */ = {isa = PBXBuildFile; fileRef = 148D5D9124D4256C0063E179 /* AssembleLight.png */; };
 		148E7E28244D5B72003C1DCF /* Synthesiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 148E7E26244D5B72003C1DCF /* Synthesiser.cpp */; };
 		14915BC02434B75B008E8147 /* Assemble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BBF2434B75B008E8147 /* Assemble.swift */; };
 		14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14915BC12434BB3A008E8147 /* CellSelectShape.swift */; };
@@ -141,10 +143,8 @@
 		14C4673124CD91250090F660 /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140404BE24B34D760094EC6B /* r8bbase.cpp */; };
 		14C4673224CD912B0090F660 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 140404B324B3465E0094EC6B /* README.md */; };
 		14C4673324CD912E0090F660 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 140404B024B3465E0094EC6B /* LICENSE */; };
-		14C4673424CD913F0090F660 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14DAC3912417772E005654EA /* Assets.xcassets */; };
 		14C4673524CD914B0090F660 /* Colours.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1427E2EE247686340011D102 /* Colours.xcassets */; };
 		14C4673624CD914F0090F660 /* DynamicImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14488DBB24A3312000B44A6C /* DynamicImages.xcassets */; };
-		14C4673724CD91790090F660 /* Assemble.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F5852E24A4DAB8003F4BC5 /* Assemble.png */; };
 		14C4673824CD917E0090F660 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12C24531FFD0093B541 /* License.txt */; };
 		14C4673924CD91810090F660 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1458D12924531D9C0093B541 /* JetBrainsMono-Regular.ttf */; };
 		14C4673A24CD91840090F660 /* JetBrainsMono-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14E655192471455300D619F0 /* JetBrainsMono-Medium.ttf */; };
@@ -226,7 +226,6 @@
 		14EFEDA9242E350100242298 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDA8242E350100242298 /* Keyboard.swift */; };
 		14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */; };
 		14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */; };
-		14F5852F24A4DAB8003F4BC5 /* Assemble.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F5852E24A4DAB8003F4BC5 /* Assemble.png */; };
 		14F5A11D24B8D5790035CC5D /* FactoryPresetB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F5A11C24B8D5790035CC5D /* FactoryPresetB.swift */; };
 /* End PBXBuildFile section */
 
@@ -270,7 +269,7 @@
 		140404BD24B346C60094EC6B /* fft4g.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft4g.h; sourceTree = "<group>"; };
 		140404BE24B34D760094EC6B /* r8bbase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = r8bbase.cpp; sourceTree = "<group>"; };
 		140404BF24B34D770094EC6B /* r8butil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8butil.h; sourceTree = "<group>"; };
-		1409860124C014D10025157D /* UnlockedFeaturesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockedFeaturesViewController.swift; sourceTree = "<group>"; };
+		1409860124C014D10025157D /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		1409860324C01BF30025157D /* ASSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSegmentedControl.swift; sourceTree = "<group>"; };
 		140B63C92484D70600D571D1 /* MediaRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRecorder.swift; sourceTree = "<group>"; };
 		140B63D32485371100D571D1 /* UIButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtensions.swift; sourceTree = "<group>"; };
@@ -362,9 +361,11 @@
 		146EC66A244CC6DC009025E4 /* ASFrequencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASFrequencies.h; sourceTree = "<group>"; };
 		1470F72D2432047E00E751B7 /* NoteUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtilities.swift; sourceTree = "<group>"; };
 		1474EC462442114F00D2BA79 /* OscillatorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorShape.swift; sourceTree = "<group>"; };
+		14874C6924D3C2EF00C2869A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfiguration.storekit; sourceTree = "<group>"; };
 		1488BDE024C324CA0008087C /* SKProductExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductExtensions.swift; sourceTree = "<group>"; };
 		1488C85D247432BE00EE9350 /* VoiceBank.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VoiceBank.hpp; sourceTree = "<group>"; };
+		148D5D9124D4256C0063E179 /* AssembleLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AssembleLight.png; sourceTree = "<group>"; };
 		148E7E26244D5B72003C1DCF /* Synthesiser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Synthesiser.cpp; sourceTree = "<group>"; };
 		148E7E27244D5B72003C1DCF /* Synthesiser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Synthesiser.hpp; sourceTree = "<group>"; };
 		148E7E2B244D5C88003C1DCF /* Clock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Clock.hpp; sourceTree = "<group>"; };
@@ -436,7 +437,6 @@
 		14EFEDA8242E350100242298 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		14EFEDAA242E61BC00242298 /* KeyboardDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardDrawing.swift; sourceTree = "<group>"; };
 		14F41E91246D81E9007FEC62 /* MenuHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuHeaderCell.swift; sourceTree = "<group>"; };
-		14F5852E24A4DAB8003F4BC5 /* Assemble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assemble.png; sourceTree = "<group>"; };
 		14F5A11C24B8D5790035CC5D /* FactoryPresetB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -771,6 +771,24 @@
 			path = "Data Structures";
 			sourceTree = "<group>";
 		};
+		14874C6824D3C2DE00C2869A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				14C4671124CD90190090F660 /* Info.plist */,
+				14874C6924D3C2EF00C2869A /* Assets.xcassets */,
+				148D5D9024D4255C0063E179 /* Images */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		148D5D9024D4255C0063E179 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				148D5D9124D4256C0063E179 /* AssembleLight.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		148E7E25244D5B65003C1DCF /* Synthesiser */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,7 +932,7 @@
 				14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */,
 				14488DB924A32F3200B44A6C /* DefineRecordingViewController.swift */,
 				14488DBD24A39C5C00B44A6C /* ShareCardViewController.swift */,
-				1409860124C014D10025157D /* UnlockedFeaturesViewController.swift */,
+				1409860124C014D10025157D /* OptionsViewController.swift */,
 				1437D70624BDE99000315897 /* UnlockViewController.swift */,
 				14C1E40624990BA500980AA9 /* HelpViewController.swift */,
 			);
@@ -950,16 +968,16 @@
 			path = Transport;
 			sourceTree = "<group>";
 		};
-		14C4670224CD90150090F660 /* Assemble-iOS */ = {
+		14C4670224CD90150090F660 /* Assemble-Light */ = {
 			isa = PBXGroup;
 			children = (
+				14874C6824D3C2DE00C2869A /* Assets */,
 				1432630724CDB65200B173C4 /* UI */,
 				14C4677524CD94F90090F660 /* Delegates */,
 				14C4677424CD94F00090F660 /* View Controllers */,
 				14C4677324CD94E70090F660 /* Storyboards */,
-				14C4671124CD90190090F660 /* Info.plist */,
 			);
-			path = "Assemble-iOS";
+			path = "Assemble-Light";
 			sourceTree = "<group>";
 		};
 		14C4677324CD94E70090F660 /* Storyboards */ = {
@@ -1011,7 +1029,7 @@
 			children = (
 				143FAFF7243F066C0058AE40 /* Core */,
 				14DAC3872417772C005654EA /* Assemble */,
-				14C4670224CD90150090F660 /* Assemble-iOS */,
+				14C4670224CD90150090F660 /* Assemble-Light */,
 				14DAC3862417772C005654EA /* Products */,
 				14CA4FE9243EF32A00F3C685 /* Frameworks */,
 			);
@@ -1109,7 +1127,6 @@
 		14F5852B24A4D90D003F4BC5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				14F5852E24A4DAB8003F4BC5 /* Assemble.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1199,14 +1216,14 @@
 				14C4673324CD912E0090F660 /* LICENSE in Resources */,
 				14C4671024CD90190090F660 /* LaunchScreen.storyboard in Resources */,
 				14C4673224CD912B0090F660 /* README.md in Resources */,
-				14C4673424CD913F0090F660 /* Assets.xcassets in Resources */,
+				14874C6A24D3C2EF00C2869A /* Assets.xcassets in Resources */,
 				14C4673524CD914B0090F660 /* Colours.xcassets in Resources */,
-				14C4673724CD91790090F660 /* Assemble.png in Resources */,
 				14C4673824CD917E0090F660 /* License.txt in Resources */,
 				14C4673924CD91810090F660 /* JetBrainsMono-Regular.ttf in Resources */,
 				14C4674224CD91A80090F660 /* StoreKitConfiguration.storekit in Resources */,
 				14C4673624CD914F0090F660 /* DynamicImages.xcassets in Resources */,
 				14C4673A24CD91840090F660 /* JetBrainsMono-Medium.ttf in Resources */,
+				148D5D9224D4256C0063E179 /* AssembleLight.png in Resources */,
 				14C4671E24CD90B70090F660 /* Attribution.md in Resources */,
 				14C4670B24CD90150090F660 /* Main.storyboard in Resources */,
 			);
@@ -1217,7 +1234,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1458D12E24531FFD0093B541 /* License.txt in Resources */,
-				14F5852F24A4DAB8003F4BC5 /* Assemble.png in Resources */,
 				14DAC3952417772E005654EA /* LaunchScreen.storyboard in Resources */,
 				14DAC3922417772E005654EA /* Assets.xcassets in Resources */,
 				143FB005243F301C0058AE40 /* Attribution.md in Resources */,
@@ -1383,7 +1399,7 @@
 				144D862B246D1F4100F6EDD4 /* TransportListener.swift in Sources */,
 				14D3AE9E243313210095B587 /* NoteShapeNode.swift in Sources */,
 				141DDA6B243F95D00020386C /* Voice.cpp in Sources */,
-				1409860224C014D10025157D /* UnlockedFeaturesViewController.swift in Sources */,
+				1409860224C014D10025157D /* OptionsViewController.swift in Sources */,
 				14EFEDAB242E61BC00242298 /* KeyboardDrawing.swift in Sources */,
 				14AE019C245DA04C003EB586 /* BoolExtensions.swift in Sources */,
 				141DDA5E243F91610020386C /* SineOscillator.cpp in Sources */,
@@ -1492,7 +1508,7 @@
 					LIGHT,
 					"DEBUG=1",
 				);
-				INFOPLIST_FILE = "Assemble-iOS/Info.plist";
+				INFOPLIST_FILE = "Assemble-Light/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1521,7 +1537,7 @@
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = LIGHT;
-				INFOPLIST_FILE = "Assemble-iOS/Info.plist";
+				INFOPLIST_FILE = "Assemble-Light/Assets/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1663,7 +1679,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1699,7 +1715,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

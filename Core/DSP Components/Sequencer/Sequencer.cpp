@@ -121,5 +121,6 @@ void Sequencer::copy(const int source)
 void Sequencer::paste(const int target)
 {
     const Pattern& source = *(copiedPattern);
+
     patterns.at(target).clone(source);
 }

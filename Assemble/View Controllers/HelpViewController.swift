@@ -94,7 +94,7 @@ class HelpViewController: UIViewController {
         """
         Assemble's sequencer has two modes: PATTERN MODE, and SONG MODE. These modes are selectable by pressing the mode button, which is located in the top-left corner of the screen.
 
-        A sequence is built from patterns. When the sequencer is using PATTERN MODE, the selected pattern will play repeatedly. When the sequencer is in SONG MODE, each active pattern will play sequentially.
+        A sequence is built from patterns. When the sequencer is in PATTERN MODE, the selected pattern will play repeatedly. When the sequencer is in SONG MODE, each active pattern will play sequentially beginning from the first active pattern.
 
         Each of the eight available patterns is represented by a cirular icon in the pattern overview, which is located in the bottom-right corner of the screen.
 
@@ -102,7 +102,7 @@ class HelpViewController: UIViewController {
 
         To select a pattern for editing or playback, tap its icon in the pattern overview. If the sequencer is playing, then the newly selected pattern will be enqueued. Otherwise, the newly selected pattern will be displayed immediately. The icon of the currently selected pattern has a white border. The icon of an enqueued pattern has a pulsating white border.
 
-        To clear a pattern, press upon its icon in the pattern overview until a delete button appears. Pressing the delete button will clear the pattern and deactivate it.
+        To copy or clear a pattern, or to paste a previously copied pattern, press upon a pattern's icon in the pattern overview until the pattern options menu appears. Pressing the button marked 'C' will copy the selected pattern. Pressing the button marked 'P' will paste a previously copied pattern onto the selected pattern. Pressing the button marked 'X' will clear and deactivate the selected pattern.
         \n\n
         """
 

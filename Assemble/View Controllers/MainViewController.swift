@@ -442,10 +442,10 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// by notification, or nil otherwise.
 
     @objc private func unlockIfPurchaseVerified(_ notification: NSNotification? = nil) {
-        let key = UserDefaultsKeys.iap
         #if TESTFLIGHT
         userDidPurchaseIAP()
         #else
+        let key = UserDefaultsKeys.iap
         if  let verified = UserDefaults().value(forKey: key) as? Bool,
                 verified == true {
             userDidPurchaseIAP()

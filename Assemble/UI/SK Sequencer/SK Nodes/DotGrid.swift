@@ -83,12 +83,12 @@ class DotGrid : SKSpriteNode
     internal class func drawGrid(rows: Int, columns: Int, spacing: CGSize) -> CGPath
     {
         var path = UIBezierPath();
-        UIColor.init(named: "Foreground")?.setFill()
+        UIColor.white.setFill()
 
         for y in 1...rows {
             drawRow(on: &path, at: CGFloat(y), columns: columns, spacing: spacing);
         }
-        
+
         path.lineWidth = 2.0
         path.fill();
         

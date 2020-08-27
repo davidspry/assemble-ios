@@ -87,16 +87,9 @@ class Sequencer : SKView, KeyboardListener
         let screenSize = UIScreen.main.bounds
         let screenLength = max(screenSize.height, screenSize.width)
         let landscapeHeight = min(screenSize.height, screenSize.width)
-//        let scalar: CGFloat =
 
         switch Assemble.device {
-        case .pad:
-            scalar = floor(landscapeHeight / Assemble.patternHeight * 0.6)
-            print(scalar)
-//            if screenLength > 1300 { scalar = 37; break }
-//            if screenLength > 1100 { scalar = 31; break }
-//            if screenLength > 1000 { scalar = 28; break }
-//            else                   { scalar = 28; break }
+        case .pad: scalar = floor(landscapeHeight / Assemble.patternHeight * 0.6)
         case .phone:
             if screenLength > 850  { scalar = 30; break }
             if screenLength > 650  { scalar = 26; break }

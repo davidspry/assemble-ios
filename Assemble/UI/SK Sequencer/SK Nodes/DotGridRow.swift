@@ -76,7 +76,7 @@ class DotGridRow: SKSpriteNode
             path.addArc(withCenter: dot, radius: r, startAngle: 0, endAngle: 360, clockwise: true)
         }
 
-        UIColor.init(named: "Foreground")?.setFill()
+        UIColor.white.setFill()
         path.lineWidth = 2.0
         path.fill();
 

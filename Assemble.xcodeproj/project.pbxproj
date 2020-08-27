@@ -106,12 +106,6 @@
 		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
 		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
-		14B542B724F61D8500629F1E /* CANoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B542B624F61D8500629F1E /* CANoteNode.swift */; };
-		14B542B824F61D8500629F1E /* CANoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B542B624F61D8500629F1E /* CANoteNode.swift */; };
-		14BFDB2424F3CFF200138EC2 /* CASequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2324F3CFF200138EC2 /* CASequencer.swift */; };
-		14BFDB2524F3CFF200138EC2 /* CASequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2324F3CFF200138EC2 /* CASequencer.swift */; };
-		14BFDB2724F3D0A600138EC2 /* CAGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2624F3D0A600138EC2 /* CAGrid.swift */; };
-		14BFDB2824F3D0A600138EC2 /* CAGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2624F3D0A600138EC2 /* CAGrid.swift */; };
 		14C1E4052499047C00980AA9 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E4042499047C00980AA9 /* FactoryPresetA.swift */; };
 		14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E40624990BA500980AA9 /* HelpViewController.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
@@ -410,9 +404,6 @@
 		14AFB899245218A600F5AD3A /* ASUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASUtilities.h; sourceTree = "<group>"; };
 		14B2315B24362D970012F32F /* SequencerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerGestures.swift; sourceTree = "<group>"; };
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
-		14B542B624F61D8500629F1E /* CANoteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CANoteNode.swift; sourceTree = "<group>"; };
-		14BFDB2324F3CFF200138EC2 /* CASequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CASequencer.swift; sourceTree = "<group>"; };
-		14BFDB2624F3D0A600138EC2 /* CAGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGrid.swift; sourceTree = "<group>"; };
 		14C1E4042499047C00980AA9 /* FactoryPresetA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetA.swift; sourceTree = "<group>"; };
 		14C1E40624990BA500980AA9 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
@@ -511,14 +502,6 @@
 				140404B024B3465E0094EC6B /* LICENSE */,
 			);
 			path = "License-Readme";
-			sourceTree = "<group>";
-		};
-		1404405D24F3E6190018914F /* Nodes */ = {
-			isa = PBXGroup;
-			children = (
-				14B542B624F61D8500629F1E /* CANoteNode.swift */,
-			);
-			path = Nodes;
 			sourceTree = "<group>";
 		};
 		140B63C82484D6F000D571D1 /* Media Recorder */ = {
@@ -982,16 +965,6 @@
 			path = "SK Nodes";
 			sourceTree = "<group>";
 		};
-		14BFDB2224F3CFD400138EC2 /* Sequencer */ = {
-			isa = PBXGroup;
-			children = (
-				1404405D24F3E6190018914F /* Nodes */,
-				14BFDB2324F3CFF200138EC2 /* CASequencer.swift */,
-				14BFDB2624F3D0A600138EC2 /* CAGrid.swift */,
-			);
-			path = Sequencer;
-			sourceTree = "<group>";
-		};
 		14C38EE9245B29A100180810 /* Transport */ = {
 			isa = PBXGroup;
 			children = (
@@ -1150,7 +1123,6 @@
 				1436CE5224541BB800670E3E /* Keyboard */,
 				14CE044A2457366900B0220C /* Waveform */,
 				14C38EE9245B29A100180810 /* Transport */,
-				14BFDB2224F3CFD400138EC2 /* Sequencer */,
 				1436CE51245404A000670E3E /* SK Sequencer */,
 				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
 				1428034E246C3D9A006775AE /* Parameter Menus */,
@@ -1333,7 +1305,6 @@
 				14C4676324CD91DC0090F660 /* Waveform.swift in Sources */,
 				14C4675924CD91D00090F660 /* PatternOverview.swift in Sources */,
 				14C4674A24CD91BC0090F660 /* FloatExtensions.swift in Sources */,
-				14B542B824F61D8500629F1E /* CANoteNode.swift in Sources */,
 				14C4676124CD91D90090F660 /* Transport.swift in Sources */,
 				14C4675524CD91CD0090F660 /* ParameterMenu.swift in Sources */,
 				14C4674124CD91A30090F660 /* NoteUtilities.swift in Sources */,
@@ -1346,7 +1317,6 @@
 				14C4674C24CD91BC0090F660 /* FourCharCodeExtensions.swift in Sources */,
 				14C4672224CD90D30090F660 /* Delay.cpp in Sources */,
 				14C4673C24CD918D0090F660 /* Engine.swift in Sources */,
-				14BFDB2824F3D0A600138EC2 /* CAGrid.swift in Sources */,
 				14C4672D24CD91080090F660 /* Clock.cpp in Sources */,
 				14C4675D24CD91D70090F660 /* NoteShapeNode.swift in Sources */,
 				14C4675A24CD91D30090F660 /* Sequencer.swift in Sources */,
@@ -1365,7 +1335,6 @@
 				14C4675724CD91CD0090F660 /* StereoDelayParameters.swift in Sources */,
 				14C4676424CD91E00090F660 /* Keyboard.swift in Sources */,
 				14C4671924CD90A10090F660 /* ASCommanderAUParameters.swift in Sources */,
-				14BFDB2524F3CFF200138EC2 /* CASequencer.swift in Sources */,
 				14C4672B24CD90FA0090F660 /* TriangleOscillator.cpp in Sources */,
 				14C4676A24CD91E30090F660 /* ASSegmentedControl.swift in Sources */,
 				14C4676724CD91E30090F660 /* PaddedLabel.swift in Sources */,
@@ -1396,7 +1365,6 @@
 				1437D70724BDE99000315897 /* UnlockViewController.swift in Sources */,
 				143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */,
 				14280352246C3DC2006775AE /* ParameterMenu.swift in Sources */,
-				14BFDB2424F3CFF200138EC2 /* CASequencer.swift in Sources */,
 				1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */,
 				14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */,
 				14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */,
@@ -1428,10 +1396,8 @@
 				14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */,
 				141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */,
 				143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */,
-				14B542B724F61D8500629F1E /* CANoteNode.swift in Sources */,
 				1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */,
 				14AE01A4245E014D003EB586 /* UISegmentedControlExtensions.swift in Sources */,
-				14BFDB2724F3D0A600138EC2 /* CAGrid.swift in Sources */,
 				141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */,
 				14DAC39D241777DF005654EA /* Engine.swift in Sources */,
 				14D4C74D246EAB3B00B7180C /* ParameterCell.swift in Sources */,

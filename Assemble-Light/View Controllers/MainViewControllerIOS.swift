@@ -3,11 +3,14 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
+import StoreKit
 
 class MainViewControlleriOS: UIViewController, KeyboardSettingsListener {
 
     let engine = Engine()
 
+    let launchTime: CFTimeInterval = CACurrentMediaTime()
+    
     let modeStrings = ["PATTERN MODE", "SONG MODE"]
     
     /// The y-axis centre constraint of the SpriteKit sequencer.
@@ -70,6 +73,11 @@ class MainViewControlleriOS: UIViewController, KeyboardSettingsListener {
         UIApplication.shared.windows.forEach({
             $0.overrideUserInterfaceStyle = usingDarkTheme ? .dark : .light
         })
+        
+        let elapsed = CACurrentMediaTime() - launchTime
+        if  elapsed > 300 {
+            SKStoreReviewController.requestReview()
+        }
     }
     
     override func viewDidLoad() {
@@ -126,17 +134,16 @@ class MainViewControlleriOS: UIViewController, KeyboardSettingsListener {
     // MARK: - Core-UI Synchronisation
 
     @objc func refreshInterface() {
-        descriptionLabel.text = sequencer.UI.noteString
+        descriptionLabel.text = sequencer.skScene.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
 
         let isSongMode = Int(Assemble.core.getParameter(kSequencerMode))
         mode.setTitle(modeStrings[isSongMode & 1], for: .normal)
 
-        sequencer.UI.patternDidChange(to: Assemble.core.currentPattern)
-        patterns.setNeedsDisplay()
-
-        let row = Assemble.core.currentRow
-        sequencer.UI.row.moveTo(row: row)
+        sequencer.skScene.patternDidChange(to: Assemble.core.currentPattern)
+        sequencer.skScene.row.moveTo(row: Assemble.core.currentRow)
+        
+        patterns.redrawIfNeeded()
     }
 
     private func unlockAssembleCore() {

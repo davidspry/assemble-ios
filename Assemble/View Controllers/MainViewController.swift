@@ -38,6 +38,10 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     
     /// The SpriteKit sequencer representation
 
+//    @IBOutlet weak var sequencer: Sequencer!
+    
+    /// The CoreAnimation sequencer representation
+
     @IBOutlet weak var sequencer: Sequencer!
     
     /// The real-time audio visualisation view
@@ -478,17 +482,16 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// This is intended to be called continually at regular intervals.
 
     @objc func refreshInterface() {
-        descriptionLabel.text = sequencer.UI.noteString
+        descriptionLabel.text = sequencer.skScene.noteString
         descriptionLabel.isHidden = descriptionLabel.text == nil
 
         let mode = Int(Assemble.core.getParameter(kSequencerMode))
         modeButton.setTitle(modeStrings[mode & 1], for: .normal)
 
-        sequencer.UI.patternDidChange(to: Assemble.core.currentPattern)
-        patterns.setNeedsDisplay()
-
-        let row = Assemble.core.currentRow
-        sequencer.UI.row.moveTo(row: row)
+        sequencer.skScene.patternDidChange(to: Assemble.core.currentPattern)
+        sequencer.skScene.row.moveTo(row: Assemble.core.currentRow)
+        
+        patterns.redrawIfNeeded()
     }
     
     // MARK: - Storyboard Navigation

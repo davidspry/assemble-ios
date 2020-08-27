@@ -239,14 +239,17 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         hidePatternOptionsView()
         handleTap(on: node)
     }
-
-    override func draw(_ rect: CGRect) {}
-    override func draw(_ layer: CALayer, in ctx: CGContext) {
+    
+    public func redrawIfNeeded() {
         let currentPattern = Assemble.core.currentPattern
         if pattern != currentPattern {
             pattern = currentPattern
+            setNeedsDisplay()
         }
     }
+
+    override func draw(_ rect: CGRect) {}
+    override func draw(_ layer: CALayer, in ctx: CGContext) {}
     
     /// When a play/pause notification is received, unify the current pattern and the next pattern.
     ///

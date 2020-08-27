@@ -22,6 +22,7 @@ class CellSelectShape : SKShapeNode
     /// This should be called when a change is made to the user interface style.
 
     public func redraw() {
+        print("[CellSelectShape] Redrawing")
         strokeColor = UIColor.init(named: "Foreground")!
     }
 }

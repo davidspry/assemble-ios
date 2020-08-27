@@ -10,6 +10,7 @@
 		140404B924B3465E0094EC6B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 140404B024B3465E0094EC6B /* LICENSE */; };
 		140404BA24B3465E0094EC6B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 140404B324B3465E0094EC6B /* README.md */; };
 		140404C024B34D770094EC6B /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 140404BE24B34D760094EC6B /* r8bbase.cpp */; };
+		1404405F24F3E9AD0018914F /* CAShapeLayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1404405E24F3E9AD0018914F /* CAShapeLayerExtensions.swift */; };
 		1409860224C014D10025157D /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860124C014D10025157D /* OptionsViewController.swift */; };
 		1409860424C01BF30025157D /* ASSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1409860324C01BF30025157D /* ASSegmentedControl.swift */; };
 		140B63CA2484D70600D571D1 /* MediaRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B63C92484D70600D571D1 /* MediaRecorder.swift */; };
@@ -50,6 +51,7 @@
 		143FB01F243F60180058AE40 /* ASCommanderDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 143FB01B243F50520058AE40 /* ASCommanderDSP.mm */; };
 		143FB021243F63620058AE40 /* ASCommander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB020243F63620058AE40 /* ASCommander.swift */; };
 		143FB023243F67500058AE40 /* ASComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143FB022243F67500058AE40 /* ASComponent.swift */; };
+		14468F0A24F679A500F0D8B3 /* CAShapeLayerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1404405E24F3E9AD0018914F /* CAShapeLayerExtensions.swift */; };
 		14488DBA24A32F3200B44A6C /* DefineRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14488DB924A32F3200B44A6C /* DefineRecordingViewController.swift */; };
 		14488DBC24A3312000B44A6C /* DynamicImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14488DBB24A3312000B44A6C /* DynamicImages.xcassets */; };
 		14488DBE24A39C5C00B44A6C /* ShareCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14488DBD24A39C5C00B44A6C /* ShareCardViewController.swift */; };
@@ -91,6 +93,7 @@
 		149ACC2924543AE9009DA18F /* KeyboardSettingsListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149ACC2824543AE9009DA18F /* KeyboardSettingsListener.swift */; };
 		149B9B2E24B825B1005E42A7 /* IAPVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B9B2D24B825B1005E42A7 /* IAPVerifier.swift */; };
 		149B9B3024B827CB005E42A7 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B9B2F24B827CB005E42A7 /* UserDefaultsKeys.swift */; };
+		149C6F5224EE49D30065EA84 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14DB9E70246538E0000AAD79 /* AudioToolbox.framework */; };
 		14A36FD72463D8FE00D85393 /* ASCommanderAUParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A36FD62463D8FE00D85393 /* ASCommanderAUParameters.swift */; };
 		14A51E38247D1C5700ADDCB4 /* NewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51E37247D1C5700ADDCB4 /* NewSongViewController.swift */; };
 		14A51E3A247D1C8B00ADDCB4 /* SaveCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A51E39247D1C8B00ADDCB4 /* SaveCopyViewController.swift */; };
@@ -103,6 +106,12 @@
 		14AFB89724520D9100F5AD3A /* Vibrato.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14AFB89524520D9100F5AD3A /* Vibrato.cpp */; };
 		14B2315C24362D970012F32F /* SequencerGestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315B24362D970012F32F /* SequencerGestures.swift */; };
 		14B2315F243660940012F32F /* KeyboardTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2315E243660940012F32F /* KeyboardTouches.swift */; };
+		14B542B724F61D8500629F1E /* CANoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B542B624F61D8500629F1E /* CANoteNode.swift */; };
+		14B542B824F61D8500629F1E /* CANoteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B542B624F61D8500629F1E /* CANoteNode.swift */; };
+		14BFDB2424F3CFF200138EC2 /* CASequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2324F3CFF200138EC2 /* CASequencer.swift */; };
+		14BFDB2524F3CFF200138EC2 /* CASequencer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2324F3CFF200138EC2 /* CASequencer.swift */; };
+		14BFDB2724F3D0A600138EC2 /* CAGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2624F3D0A600138EC2 /* CAGrid.swift */; };
+		14BFDB2824F3D0A600138EC2 /* CAGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BFDB2624F3D0A600138EC2 /* CAGrid.swift */; };
 		14C1E4052499047C00980AA9 /* FactoryPresetA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E4042499047C00980AA9 /* FactoryPresetA.swift */; };
 		14C1E40724990BA500980AA9 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C1E40624990BA500980AA9 /* HelpViewController.swift */; };
 		14C38EEB245B29B800180810 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C38EEA245B29B800180810 /* Transport.swift */; };
@@ -269,6 +278,7 @@
 		140404BD24B346C60094EC6B /* fft4g.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft4g.h; sourceTree = "<group>"; };
 		140404BE24B34D760094EC6B /* r8bbase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = r8bbase.cpp; sourceTree = "<group>"; };
 		140404BF24B34D770094EC6B /* r8butil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8butil.h; sourceTree = "<group>"; };
+		1404405E24F3E9AD0018914F /* CAShapeLayerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAShapeLayerExtensions.swift; sourceTree = "<group>"; };
 		1409860124C014D10025157D /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		1409860324C01BF30025157D /* ASSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASSegmentedControl.swift; sourceTree = "<group>"; };
 		140B63C92484D70600D571D1 /* MediaRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaRecorder.swift; sourceTree = "<group>"; };
@@ -400,6 +410,9 @@
 		14AFB899245218A600F5AD3A /* ASUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASUtilities.h; sourceTree = "<group>"; };
 		14B2315B24362D970012F32F /* SequencerGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencerGestures.swift; sourceTree = "<group>"; };
 		14B2315E243660940012F32F /* KeyboardTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardTouches.swift; sourceTree = "<group>"; };
+		14B542B624F61D8500629F1E /* CANoteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CANoteNode.swift; sourceTree = "<group>"; };
+		14BFDB2324F3CFF200138EC2 /* CASequencer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CASequencer.swift; sourceTree = "<group>"; };
+		14BFDB2624F3D0A600138EC2 /* CAGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGrid.swift; sourceTree = "<group>"; };
 		14C1E4042499047C00980AA9 /* FactoryPresetA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryPresetA.swift; sourceTree = "<group>"; };
 		14C1E40624990BA500980AA9 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		14C38EEA245B29B800180810 /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
@@ -445,6 +458,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				149C6F5224EE49D30065EA84 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +513,14 @@
 			path = "License-Readme";
 			sourceTree = "<group>";
 		};
+		1404405D24F3E6190018914F /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				14B542B624F61D8500629F1E /* CANoteNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
 		140B63C82484D6F000D571D1 /* Media Recorder */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,20 +563,21 @@
 			isa = PBXGroup;
 			children = (
 				14AE019B245DA04C003EB586 /* BoolExtensions.swift */,
-				143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */,
+				1404405E24F3E9AD0018914F /* CAShapeLayerExtensions.swift */,
 				143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */,
 				143FB00E243F3DE40058AE40 /* CGSizeExtensions.swift */,
-				143FB010243F3E2A0058AE40 /* FloatExtensions.swift */,
-				14AE01A1245DFF02003EB586 /* UIImageExtensions.swift */,
-				143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */,
-				149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */,
 				149ACC1C2454222D009DA18F /* ClosedRangeExtensions.swift */,
-				149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */,
-				14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */,
-				144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */,
-				140B63D32485371100D571D1 /* UIButtonExtensions.swift */,
 				14347A0B24BD8D30007ED1CB /* CollectionExtension.swift */,
+				143FB010243F3E2A0058AE40 /* FloatExtensions.swift */,
+				143FB012243F3E7D0058AE40 /* FourCharCodeExtensions.swift */,
 				1488BDE024C324CA0008087C /* SKProductExtensions.swift */,
+				149ACC1A24542209009DA18F /* UIBezierPathExtensions.swift */,
+				140B63D32485371100D571D1 /* UIButtonExtensions.swift */,
+				143FB00A243F3DD10058AE40 /* UIColorExtensions.swift */,
+				14AE01A1245DFF02003EB586 /* UIImageExtensions.swift */,
+				14AE01A3245E014D003EB586 /* UISegmentedControlExtensions.swift */,
+				149ACC2124543082009DA18F /* UIViewControllerExtensions.swift */,
+				144D8630246D3C4900F6EDD4 /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -959,6 +982,16 @@
 			path = "SK Nodes";
 			sourceTree = "<group>";
 		};
+		14BFDB2224F3CFD400138EC2 /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				1404405D24F3E6190018914F /* Nodes */,
+				14BFDB2324F3CFF200138EC2 /* CASequencer.swift */,
+				14BFDB2624F3D0A600138EC2 /* CAGrid.swift */,
+			);
+			path = Sequencer;
+			sourceTree = "<group>";
+		};
 		14C38EE9245B29A100180810 /* Transport */ = {
 			isa = PBXGroup;
 			children = (
@@ -1117,6 +1150,7 @@
 				1436CE5224541BB800670E3E /* Keyboard */,
 				14CE044A2457366900B0220C /* Waveform */,
 				14C38EE9245B29A100180810 /* Transport */,
+				14BFDB2224F3CFD400138EC2 /* Sequencer */,
 				1436CE51245404A000670E3E /* SK Sequencer */,
 				149A1D2C2459E0AE00F083D0 /* PatternOverview */,
 				1428034E246C3D9A006775AE /* Parameter Menus */,
@@ -1284,6 +1318,7 @@
 				14C4675F24CD91D70090F660 /* DotGrid.swift in Sources */,
 				14C4672C24CD90FD0090F660 /* SineOscillator.cpp in Sources */,
 				14C4675224CD91BC0090F660 /* UIButtonExtensions.swift in Sources */,
+				14468F0A24F679A500F0D8B3 /* CAShapeLayerExtensions.swift in Sources */,
 				14C4673024CD91190090F660 /* ValueTransition.cpp in Sources */,
 				1432630D24CDB94800B173C4 /* TransportIOS.swift in Sources */,
 				14C4674424CD91BC0090F660 /* MediaRecorder.swift in Sources */,
@@ -1298,6 +1333,7 @@
 				14C4676324CD91DC0090F660 /* Waveform.swift in Sources */,
 				14C4675924CD91D00090F660 /* PatternOverview.swift in Sources */,
 				14C4674A24CD91BC0090F660 /* FloatExtensions.swift in Sources */,
+				14B542B824F61D8500629F1E /* CANoteNode.swift in Sources */,
 				14C4676124CD91D90090F660 /* Transport.swift in Sources */,
 				14C4675524CD91CD0090F660 /* ParameterMenu.swift in Sources */,
 				14C4674124CD91A30090F660 /* NoteUtilities.swift in Sources */,
@@ -1310,6 +1346,7 @@
 				14C4674C24CD91BC0090F660 /* FourCharCodeExtensions.swift in Sources */,
 				14C4672224CD90D30090F660 /* Delay.cpp in Sources */,
 				14C4673C24CD918D0090F660 /* Engine.swift in Sources */,
+				14BFDB2824F3D0A600138EC2 /* CAGrid.swift in Sources */,
 				14C4672D24CD91080090F660 /* Clock.cpp in Sources */,
 				14C4675D24CD91D70090F660 /* NoteShapeNode.swift in Sources */,
 				14C4675A24CD91D30090F660 /* Sequencer.swift in Sources */,
@@ -1328,6 +1365,7 @@
 				14C4675724CD91CD0090F660 /* StereoDelayParameters.swift in Sources */,
 				14C4676424CD91E00090F660 /* Keyboard.swift in Sources */,
 				14C4671924CD90A10090F660 /* ASCommanderAUParameters.swift in Sources */,
+				14BFDB2524F3CFF200138EC2 /* CASequencer.swift in Sources */,
 				14C4672B24CD90FA0090F660 /* TriangleOscillator.cpp in Sources */,
 				14C4676A24CD91E30090F660 /* ASSegmentedControl.swift in Sources */,
 				14C4676724CD91E30090F660 /* PaddedLabel.swift in Sources */,
@@ -1358,6 +1396,7 @@
 				1437D70724BDE99000315897 /* UnlockViewController.swift in Sources */,
 				143FB002243F2EAF0058AE40 /* ASAudioUnit.mm in Sources */,
 				14280352246C3DC2006775AE /* ParameterMenu.swift in Sources */,
+				14BFDB2424F3CFF200138EC2 /* CASequencer.swift in Sources */,
 				1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */,
 				14D3AE9C2433088E0095B587 /* DotGridRow.swift in Sources */,
 				14F41E92246D81E9007FEC62 /* MenuHeaderCell.swift in Sources */,
@@ -1389,8 +1428,10 @@
 				14ADCBEC2436233B00822139 /* SequencerScene.swift in Sources */,
 				141DDA6F243F96470020386C /* HuovilainenFilter.cpp in Sources */,
 				143FAFFE243F17DF0058AE40 /* ASAudioUnitBase.m in Sources */,
+				14B542B724F61D8500629F1E /* CANoteNode.swift in Sources */,
 				1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */,
 				14AE01A4245E014D003EB586 /* UISegmentedControlExtensions.swift in Sources */,
+				14BFDB2724F3D0A600138EC2 /* CAGrid.swift in Sources */,
 				141DDA67243F918E0020386C /* TriangleOscillator.cpp in Sources */,
 				14DAC39D241777DF005654EA /* Engine.swift in Sources */,
 				14D4C74D246EAB3B00B7180C /* ParameterCell.swift in Sources */,
@@ -1438,6 +1479,7 @@
 				1488BDE124C324CA0008087C /* SKProductExtensions.swift in Sources */,
 				14ADCBEE2436265300822139 /* Sequencer.swift in Sources */,
 				14915BC22434BB3A008E8147 /* CellSelectShape.swift in Sources */,
+				1404405F24F3E9AD0018914F /* CAShapeLayerExtensions.swift in Sources */,
 				14EEB8CD24757455007F0D37 /* PersistenceViewController+.swift in Sources */,
 				140B63D42485371100D571D1 /* UIButtonExtensions.swift in Sources */,
 				14347A0C24BD8D30007ED1CB /* CollectionExtension.swift in Sources */,
@@ -1501,8 +1543,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					LIGHT,
@@ -1514,7 +1557,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
@@ -1532,8 +1575,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PREPROCESSOR_DEFINITIONS = LIGHT;
@@ -1543,7 +1587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_CFLAGS = "";
 				OTHER_CPLUSPLUSFLAGS = "";
 				OTHER_LDFLAGS = "-lc++";
@@ -1679,7 +1723,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1693,7 +1737,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "-lc++";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
@@ -1715,7 +1759,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1730,12 +1774,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "-lc++";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = TESTFLIGHT;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_BRIDGING_HEADER = ./Core/Utilities/Headers/Assemble.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

@@ -3,6 +3,7 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
+import StoreKit
 
 class OptionsViewControlleriOS: UIViewController, UIScrollViewDelegate {
 
@@ -175,8 +176,10 @@ class OptionsViewControlleriOS: UIViewController, UIScrollViewDelegate {
         }
 
         let isDarkTheme = sender.selectedSegmentIndex == 0
-        delegate.usingDarkTheme = isDarkTheme ? true : false
-        delegate.loadVisualTheme()
+        if  isDarkTheme != delegate.usingDarkTheme {
+            delegate.usingDarkTheme = isDarkTheme ? true : false
+            delegate.loadVisualTheme()
+        }
     }
 
     @IBAction func didSetEnvelope(_ sender: UISegmentedControl) {
@@ -274,7 +277,12 @@ class OptionsViewControlleriOS: UIViewController, UIScrollViewDelegate {
             UIView.animate(withDuration: 0.25, animations: {
                 self.backgroundLayer.alpha = .zero
                 self.windowPanel.layer.setAffineTransform(self.transformHide)
-            }) { complete in self.dismiss(animated: false, completion: nil) }
+            }) { complete in self.dismiss(animated: false, completion: {
+                let elapsed = CACurrentMediaTime() - (self.delegate?.launchTime ?? 0)
+                if  elapsed > 300 {
+                    SKStoreReviewController.requestReview()
+                }
+            }) }
         }
     }
     
@@ -300,7 +308,12 @@ class OptionsViewControlleriOS: UIViewController, UIScrollViewDelegate {
                 UIView.animate(withDuration: 0.25, animations: {
                     self.backgroundLayer.alpha = .zero
                     self.windowPanel.layer.setAffineTransform(self.transformHide)
-                }) { complete in self.dismiss(animated: false, completion: nil) }
+                }) { complete in self.dismiss(animated: false, completion: {
+                    let elapsed = CACurrentMediaTime() - (self.delegate?.launchTime ?? 0)
+                    if  elapsed > 300 {
+                        SKStoreReviewController.requestReview()
+                    }
+                }) }
             }
         }
     }

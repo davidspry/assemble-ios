@@ -3,6 +3,7 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
+import StoreKit
 
 class UnlockViewController: UIViewController {
     
@@ -58,7 +59,9 @@ class UnlockViewController: UIViewController {
     internal func productWasPurchasedOrRestored() {
         DispatchQueue.main.async {
             self.delegate?.userDidPurchaseIAP()
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: {
+                SKStoreReviewController.requestReview()
+            })
         }
     }
     

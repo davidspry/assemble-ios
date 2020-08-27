@@ -69,7 +69,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
         spacing.width  = size.width  / Assemble.patternWidth
         spacing.height = size.height / Assemble.patternHeight
         
-        backgroundColor = UIColor.init(named: "Background") ?? UIColor.clear
+        backgroundColor = UIColor.clear
         anchorPoint = CGPoint(x: 0.5, y: 0.5);
         scaleMode = .aspectFit;
 
@@ -135,7 +135,7 @@ class SequencerScene : SKScene, UIGestureRecognizerDelegate
     /// This function should be called when changes are made to the user interface style.
 
     public func redraw() {
-        backgroundColor = UIColor.init(named: "Background")!
+        backgroundColor = SKColor.clear
     }
 
     /// Reset the sequencer scene by removing every note node and setting every note description to nil.

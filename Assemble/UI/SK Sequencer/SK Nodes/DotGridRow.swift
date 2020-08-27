@@ -23,20 +23,24 @@ class DotGridRow: SKSpriteNode
     public func initialise(spacing: CGSize) {
         self.spacing = spacing
 
+        self.colorBlendFactor = 1.0
+        self.color = UIColor.init(named: "Foreground")!
+        
         guard let grid = DotGridRow.drawDotGridRow(spacing: spacing)
         else { return }
-        
+
         self.texture = grid;
-        self.color = SKColor.clear;
-        self.size = grid.size();
+        self.size    = grid.size();
     }
     
     /// Redraw the row.
     /// This should be called when a change is made to the user interface style.
 
     public func redraw() {
-        self.texture = DotGridRow.drawDotGridRow(spacing: spacing)
         print("[DotGridRow] Redrawing")
+        let color  = UIColor.init(named: "Foreground")!
+        let action = SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: 0.5)
+        run(action)
     }
 
     class func drawDotGridRow(spacing: CGSize) -> SKTexture?
@@ -62,14 +66,14 @@ class DotGridRow: SKSpriteNode
     
     internal class func drawRow(columns: Int, spacing: CGSize) -> CGPath
     {
-        let path = UIBezierPath();
-        let r: CGFloat = 4;
+        let path = UIBezierPath()
+        let r: CGFloat = 4
         
         for x in 1...columns
         {
-            let dot = CGPoint(x: CGFloat(x) * spacing.width, y: spacing.height);
+            let dot = CGPoint(x: CGFloat(x) * spacing.width, y: spacing.height)
             path.move(to: dot)
-            path.addArc(withCenter: dot, radius: r, startAngle: 0, endAngle: 360, clockwise: true);
+            path.addArc(withCenter: dot, radius: r, startAngle: 0, endAngle: 360, clockwise: true)
         }
 
         UIColor.init(named: "Foreground")?.setFill()

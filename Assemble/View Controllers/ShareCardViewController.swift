@@ -3,6 +3,7 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
+import StoreKit
 
 class ShareCardViewController: UIViewController {
 
@@ -37,8 +38,11 @@ class ShareCardViewController: UIViewController {
         DispatchQueue.main.async {
             let didSave = "The file has been saved to your photo library."
             let didFail = "The file could not be saved to your photo library."
-            if successful { self.statusLabel.text = didSave }
-            else          { self.statusLabel.text = didFail }
+            if !successful { self.statusLabel.text = didFail }
+            else {
+                self.statusLabel.text = didSave
+                SKStoreReviewController.requestReview()
+            }
         }
     }
     

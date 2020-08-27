@@ -31,12 +31,14 @@ class DotGrid : SKSpriteNode
         self.spacing = spacing
         self.currentShape = Assemble.shape
 
+        self.colorBlendFactor = 1.0
+        self.color = UIColor.init(named: "Foreground")!
+        
         guard let grid = DotGrid.drawDotGrid(shape: currentShape, spacing: spacing)
         else { return; }
 
         self.texture = grid;
-        self.color = SKColor.clear;
-        self.size = grid.size();
+        self.size  = grid.size();
     }
     
     /// Redraw the dot grid if the shape of the sequencer has changed.
@@ -53,8 +55,9 @@ class DotGrid : SKSpriteNode
 
     public func redraw() {
         print("[DotGrid] Redrawing")
-        let shape    = Assemble.shape
-        self.texture = DotGrid.drawDotGrid(shape: shape, spacing: spacing);
+        let color  = UIColor.init(named: "Foreground")!
+        let action = SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: 0.5)
+        run(action)
     }
     
     class func drawDotGrid(shape: CGSize, spacing: CGSize) -> SKTexture?
@@ -95,7 +98,7 @@ class DotGrid : SKSpriteNode
     internal class func drawRow(on path: inout UIBezierPath, at y: CGFloat, columns: Int, spacing: CGSize)
     {
         let t: CGFloat = CGFloat(Assemble.core.getParameter(kSequencerTicks))
-        let r: CGFloat = (y - 1).remainder(dividingBy: t) == 0 ? 3 : 2;
+        let r: CGFloat = (y - 1).remainder(dividingBy: t) == 0 ? 4 : 2;
         for x in 1...columns
         {
             let centre = CGPoint(x: CGFloat(x) * spacing.width, y: y * spacing.height);

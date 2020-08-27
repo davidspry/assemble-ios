@@ -22,9 +22,9 @@ class NoteShapeNode : SKShapeNode
 
     public func recolour(type: OscillatorShape)
     {
-        self.colour = UIColor.from(type);
-        strokeColor = colour;
-        fillColor   = colour;
-        isAntialiased = true;
+        self.colour = UIColor.from(type)
+        strokeColor = colour
+        fillColor   = colour
+        isAntialiased = true
     }
 }

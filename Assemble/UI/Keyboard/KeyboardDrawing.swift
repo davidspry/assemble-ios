@@ -43,15 +43,15 @@ extension Keyboard
         let stroke: CGFloat = keyStroke
 
         CATransaction.begin()
-        CATransaction.setAnimationDuration(0.65)
+        CATransaction.setAnimationDuration(0.75)
 
         for whiteKey in 0...6
         {
             let pressed = whiteKeyPressed(whiteKey, octave: octave)
             let colour = pressed ? keyOnColour : keyOffColour
             shapeLayers[previousKeys + whiteKey].lineWidth = pressed ? 1.0 : stroke;
-            shapeLayers[previousKeys + whiteKey].strokeColor = colour?.cgColor;
             shapeLayers[previousKeys + whiteKey].fillColor = colour?.cgColor;
+            shapeLayers[previousKeys + whiteKey].strokeColor = colour?.cgColor;
         }
 
         for (i, blackKey) in [1, 2, 4, 5, 6].enumerated()
@@ -59,8 +59,8 @@ extension Keyboard
             let pressed = blackKeyPressed(blackKey, octave: octave)
             let colour = pressed ? keyOnColour : keyOffColour
             shapeLayers[previousKeys + 7 + i].lineWidth = pressed ? 1.0 : stroke;
-            shapeLayers[previousKeys + 7 + i].strokeColor = colour?.cgColor;
             shapeLayers[previousKeys + 7 + i].fillColor = colour?.cgColor;
+            shapeLayers[previousKeys + 7 + i].strokeColor = colour?.cgColor;
         }
 
         CATransaction.commit()
@@ -109,7 +109,7 @@ extension Keyboard
             shapeLayers.append(shapeLayer)
     
             shapeLayer.path = path.cgPath
-            shapeLayer.fillColor = keyOffColour?.cgColor;
+            shapeLayer.fillColor = keyOffColour?.cgColor
             shapeLayer.strokeColor = keyOffColour?.cgColor
             shapeLayer.lineWidth = stroke;
             layer.addSublayer(shapeLayer)

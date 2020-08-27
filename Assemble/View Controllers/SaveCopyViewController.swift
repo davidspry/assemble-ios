@@ -3,6 +3,7 @@
 //  Copyright © 2020 David Spry. All rights reserved.
 
 import UIKit
+import StoreKit
 
 class SaveCopyViewController: UIViewController, UITextFieldDelegate {
 
@@ -96,7 +97,9 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
         guard let name = songName.text
         else { return print("[SaveCopyViewController] Song name is nil") }
         delegate?.saveState(named: name)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            SKStoreReviewController.requestReview()
+        })
     }
     
     /// Copy the current state to a new preset with the given name
@@ -105,11 +108,15 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
         guard let name = songName.text
         else { return print("[SaveCopyViewController] Song name is nil") }
         delegate?.copyState(named: name)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            SKStoreReviewController.requestReview()
+        })
     }
     
     @IBAction func didPressClose(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+        
+        })
     }
     
     // MARK: - UITextField Delegate

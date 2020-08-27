@@ -12,54 +12,60 @@ class Sequencer : SKView, KeyboardListener
 {
     /// The sequencer scene
 
-    private(set) var UI : SequencerScene!
+    private(set) var skScene : SequencerScene!
 
     required init?(coder: NSCoder)
     {
         super.init(coder: coder)
         
+        allowsTransparency = true
+        backgroundColor = SKColor.clear
         determineSizeForDevice()
-        
+
         if needsUpdateConstraints() {
-            updateConstraints();
-            layoutIfNeeded();
+            updateConstraints()
+            layoutIfNeeded()
         }
-
-        UI = SequencerScene(size: self.bounds.size)
-
-        presentScene(UI);
+        
+        
+        skScene = SequencerScene(size: bounds.size)
+        presentScene(skScene)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
     }
     
     // MARK: - Keyboard Listener callbacks
     
     func pressNote(_ note: Int, shape: OscillatorShape) {
-        UI.addOrModifyNote(xy: UI.selected, note: note, oscillator: shape)
-        Assemble.core.addOrModifyNote(xy: UI.selected, note: note, shape: shape)
+        skScene.addOrModifyNote(xy: skScene.selected, note: note, oscillator: shape)
+        Assemble.core.addOrModifyNote(xy: skScene.selected, note: note, shape: shape)
     }
     
     func eraseNote() {
-        UI.eraseNote(UI.selected)
-        Assemble.core.eraseNote(xy: UI.selected)
+        skScene.eraseNote(skScene.selected)
+        Assemble.core.eraseNote(xy: skScene.selected)
     }
     
     func setOctave(_ octave: Int) {
-        guard let note = Assemble.core.note(at: UI.selected) else { return }
+        guard let note = Assemble.core.note(at: skScene.selected) else { return }
         let pitch = NoteUtilities.modify(note: note.note, withOctave: octave)
-        UI.addOrModifyNote(xy: UI.selected, note: pitch, oscillator: note.shape)
-        Assemble.core.addOrModifyNote(xy: UI.selected, note: pitch, shape: note.shape)
+        skScene.addOrModifyNote(xy: skScene.selected, note: pitch, oscillator: note.shape)
+        Assemble.core.addOrModifyNote(xy: skScene.selected, note: pitch, shape: note.shape)
         Assemble.core.pressNote(pitch, shape: note.shape)
     }
     
     func setOscillator(_ next: Bool) {
-        guard let note = Assemble.core.note(at: UI.selected) else { return }
+        guard let note = Assemble.core.note(at: skScene.selected) else { return }
         let oscillator = next ? note.shape.next() : note.shape.previous()
-        UI.addOrModifyNote(xy: UI.selected, note: note.note, oscillator: oscillator)
-        Assemble.core.addOrModifyNote(xy: UI.selected, note: note.note, shape: oscillator)
+        skScene.addOrModifyNote(xy: skScene.selected, note: note.note, oscillator: oscillator)
+        Assemble.core.addOrModifyNote(xy: skScene.selected, note: note.note, shape: oscillator)
         Assemble.core.pressNote(note.note, shape: oscillator)
     }
     
     func didNavigate(by direction: Int) {
-        UI.didNavigate(by: direction)
+        skScene.didNavigate(by: direction)
     }
     
     // MARK: Keyboard Listener end -
@@ -70,7 +76,7 @@ class Sequencer : SKView, KeyboardListener
     /// Sequencer.
 
     func initialiseFromUnderlyingState() {
-        UI.initialiseFromUnderlyingState()
+        skScene.initialiseFromUnderlyingState()
     }
     
     /// Determine the appropriate size of the `SequencerScene` from the device's screen size.
@@ -80,13 +86,17 @@ class Sequencer : SKView, KeyboardListener
         var scalar: CGFloat = 0.0
         let screenSize = UIScreen.main.bounds
         let screenLength = max(screenSize.height, screenSize.width)
+        let landscapeHeight = min(screenSize.height, screenSize.width)
+//        let scalar: CGFloat =
 
         switch Assemble.device {
         case .pad:
-            if screenLength > 1300 { scalar = 36; break }
-            if screenLength > 1100 { scalar = 31; break }
-            if screenLength > 1000 { scalar = 28; break }
-            else                   { scalar = 28; break }
+            scalar = floor(landscapeHeight / Assemble.patternHeight * 0.6)
+            print(scalar)
+//            if screenLength > 1300 { scalar = 37; break }
+//            if screenLength > 1100 { scalar = 31; break }
+//            if screenLength > 1000 { scalar = 28; break }
+//            else                   { scalar = 28; break }
         case .phone:
             if screenLength > 850  { scalar = 30; break }
             if screenLength > 650  { scalar = 26; break }
@@ -97,7 +107,7 @@ class Sequencer : SKView, KeyboardListener
 
         let width  = Assemble.patternWidth  * scalar
         let height = Assemble.patternHeight * scalar
-        self.widthAnchor.constraint(equalToConstant: width).isActive = true;
+        self.widthAnchor .constraint(equalToConstant: width) .isActive = true;
         self.heightAnchor.constraint(equalToConstant: height).isActive = true;
         self.bounds.size = .init(width: width, height: height)
     }
@@ -126,9 +136,9 @@ class Sequencer : SKView, KeyboardListener
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        UI.cursor.redraw()
-        UI.grid.redraw()
-        UI.row.redraw()
-        UI.redraw()
+        skScene.cursor.redraw()
+        skScene.grid.redraw()
+        skScene.row.redraw()
+        skScene.redraw()
     }
 }

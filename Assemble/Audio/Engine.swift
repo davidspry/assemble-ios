@@ -13,12 +13,27 @@ class Engine
     /// Initialise the underlying AVAudioEngine and set the audio format to be used by the Assemble core
 
     init() {
+        initialiseAudioSession()
+
         Assemble.format = AVAudioFormat(standardFormatWithSampleRate: 48000, channels: 2)
+
         connect(Assemble.core)
 
+        registerForNotifications()
+    }
+    
+    /// Setup the `AVAudioSession` prior to starting the `Engine`.
+    
+    internal func initialiseAudioSession() {
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+    }
+    
+    /// Register to receive notifications when the audio graph is updated.
+
+    internal func registerForNotifications() {
         let route = AVAudioSession.routeChangeNotification
-        let callback: Selector = #selector(audioRouteDidChange(_:))
-        let configuration: NSNotification.Name = .AVAudioEngineConfigurationChange
+        let callback = #selector(audioRouteDidChange(_:))
+        let configuration = NSNotification.Name.AVAudioEngineConfigurationChange
         NotificationCenter.default.removeObserver(self, name: route, object: nil)
         NotificationCenter.default.removeObserver(self, name: configuration, object: nil)
         NotificationCenter.default.addObserver(self, selector: callback, name: route, object: nil)

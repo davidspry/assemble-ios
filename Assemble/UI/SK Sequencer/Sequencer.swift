@@ -89,7 +89,7 @@ class Sequencer : SKView, KeyboardListener
         let landscapeHeight = min(screenSize.height, screenSize.width)
 
         switch Assemble.device {
-        case .pad: scalar = floor(landscapeHeight / Assemble.patternHeight * 0.6)
+        case .pad:   scalar = floor(landscapeHeight / Assemble.patternHeight * 0.60)
         case .phone:
             if screenLength > 850  { scalar = 30; break }
             if screenLength > 650  { scalar = 26; break }

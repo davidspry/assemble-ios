@@ -74,8 +74,10 @@ class PatternOverview: UIView, UIGestureRecognizerDelegate, TransportListener {
         let callbackPlayPause = #selector(handlePlayPauseNotification)
         NotificationCenter.default.addObserver(self, selector: callbackPlayPause, name: .playOrPause, object: nil)
 
-        initialisePatternShapes()
-        loadStates()
+        DispatchQueue.main.async {
+            self.initialisePatternShapes()
+            self.loadStates()
+        }
     }
     
     private func initialisePatternShapes() {

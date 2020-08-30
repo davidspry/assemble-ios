@@ -74,7 +74,7 @@ private:
 private:
     int time;
     int seconds;
-    float scalar = 4E-2F;
+    float scalar = 15E-3F;
     constexpr static int audible = 15;
     constexpr static int silence = 60;
     constexpr static float noDenormals = 1E-25F;

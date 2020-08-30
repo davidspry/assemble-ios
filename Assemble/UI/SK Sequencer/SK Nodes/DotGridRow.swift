@@ -38,9 +38,7 @@ class DotGridRow: SKSpriteNode
 
     public func redraw() {
         print("[DotGridRow] Redrawing")
-        let color  = UIColor.init(named: "Foreground")!
-        let action = SKAction.colorize(with: color, colorBlendFactor: 1.0, duration: 0.5)
-        run(action)
+        self.color = UIColor.init(named: "Foreground")!
     }
 
     class func drawDotGridRow(spacing: CGSize) -> SKTexture?

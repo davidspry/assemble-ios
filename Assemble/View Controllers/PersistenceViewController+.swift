@@ -18,7 +18,7 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let presets = Assemble.core.commander?.userPresets,
+        guard let presets = Assemble.core.commander?.songs,
                 !(presets.isEmpty) else { return 1 }
         return    presets.count
     }
@@ -27,8 +27,8 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as? SongCell
         else { return .init() }
         
-        guard let count   = Assemble.core.commander?.userPresets.count,
-              let presets = Assemble.core.commander?.userPresets,
+        guard let count   = Assemble.core.commander?.songs.count,
+              let presets = Assemble.core.commander?.songs,
               (count == 0 || indexPath.row < count) else { return cell }
 
         if  presets.isEmpty { return noSavedSongsCell(from: cell) }
@@ -43,7 +43,7 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = delegate else { print("[PersistenceViewController] Delegate is nil"); return }
-        guard let count = Assemble.core.commander?.userPresets.count,
+        guard let count = Assemble.core.commander?.songs.count,
                   count > 0, indexPath.row < count else { return }
 
         delegate.loadState(indexPath.row)
@@ -51,7 +51,7 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let presets = Assemble.core.commander?.userPresets,
+        guard let presets = Assemble.core.commander?.songs,
                   presets.count > 0 else { return nil }
 
         let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, didComplete in
@@ -70,8 +70,8 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
     /// Delete the preset represented at the given `IndexPath` and update the table and the sequencer as appropriate to reflect the change.
 
     private func deleteRow(from table: UITableView, at path: IndexPath) -> Bool {
-        guard let count   = Assemble.core.commander?.userPresets.count,
-              let presets = Assemble.core.commander?.userPresets,
+        guard let count   = Assemble.core.commander?.songs.count,
+              let presets = Assemble.core.commander?.songs,
                 !(presets.isEmpty), path.row < count else { return false }
             
         let preset = presets[path.row]
@@ -80,7 +80,7 @@ extension PersistenceViewController : UITableViewDelegate, UITableViewDataSource
 
         DispatchQueue.main.async {
             var tries = 0
-            while Assemble.core.commander?.userPresets.count == count, tries < 25 {
+            while Assemble.core.commander?.songs.count == count, tries < 25 {
                 Thread.sleep(forTimeInterval: 0.05)
                 tries = tries + 1
             }

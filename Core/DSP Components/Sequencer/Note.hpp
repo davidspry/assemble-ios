@@ -12,10 +12,10 @@ struct Note
     Note() {}
     
     /// @brief Construct a Note with the given position, pitch, and oscillator index.
-    /// @param x: The x-coordinate of the Note.
-    /// @param y: The x-coordinate of the Note.
-    /// @param note: The MIDI note number of the Note's pitch.
-    /// @param shape: The Note's oscillator index.
+    /// @param x The x-coordinate of the Note.
+    /// @param y The x-coordinate of the Note.
+    /// @param note The MIDI note number of the Note's pitch.
+    /// @param shape The Note's oscillator index.
     
     Note(int x, int y, int note, int shape)
     {
@@ -23,10 +23,10 @@ struct Note
     }
 
     /// @brief Modify the Note's properties.
-    /// @param x: The x-coordinate of the Note.
-    /// @param y: The x-coordinate of the Note.
-    /// @param note: The MIDI note number of the Note's pitch.
-    /// @param shape: The Note's oscillator index.
+    /// @param x The x-coordinate of the Note.
+    /// @param y The x-coordinate of the Note.
+    /// @param note The MIDI note number of the Note's pitch.
+    /// @param shape The Note's oscillator index.
 
     void modify(int x, int y, int note, int shape)
     {

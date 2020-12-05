@@ -19,7 +19,7 @@ class SaveCopyViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         songName.delegate = self
-        songName.text = Assemble.core.commander?.currentPreset?.name
+        songName.text = Assemble.core.commander?.preset?.name
         panelPosition = windowPanel.frame.origin.y
         
         let notifyShow = UIResponder.keyboardWillShowNotification

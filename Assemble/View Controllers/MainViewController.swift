@@ -346,12 +346,12 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
     public func beginNewSong() {
         Assemble.core.commander?.loadInitialState()
-        presetLabel.text = Assemble.core.commander?.currentPreset?.name
+        presetLabel.text = Assemble.core.commander?.preset?.name
         if Assemble.core.ticking { transport.pressPlayOrPause() }
         updateUIFromState()
     }
     
-    /// Load the user preset with the index `position` in the underlying `userPresets` array
+    /// Load the user preset with the index `position` in the underlying `presets` array
     /// and subsequently update the UI to reflect it.
 
     public func loadState(_ position: Int) {
@@ -364,13 +364,13 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// - Parameter name: The desired name for the preset
 
     public func saveState(named name: String) {
-        guard let preset = Assemble.core.commander?.currentPreset
-        else { return print("[MainViewController] CurrentPreset is nil") }
+        guard let preset = Assemble.core.commander?.preset
+        else { return print("[MainViewController] `preset` property is nil") }
 
-        let renamed = name != preset.name
+        var renamed = name != preset.name
         if !renamed { Assemble.core.commander?.saveCurrentPreset() }
-        else        { Assemble.core.commander?.renamePreset(preset, to: name) }
-        presetLabel.text = name
+        else        { renamed = Assemble.core.commander?.renamePreset(preset, to: name) ?? false }
+        presetLabel.text = renamed ? name : presetLabel.text
     }
 
     /// Create a new preset with the given name and save the new preset.
@@ -402,23 +402,23 @@ class MainViewController : UIViewController, KeyboardSettingsListener
 
         DispatchQueue.main.async {
             var tries = 0
-            var count = Assemble.core.commander?.userPresets.count
+            var count = Assemble.core.commander?.songs.count
             Assemble.core.commander?.copyFactoryPreset(number: 3, false)
-            while tries < 25, count == Assemble.core.commander?.userPresets.count {
+            while tries < 25, count == Assemble.core.commander?.songs.count {
                 tries = tries + 1
                 Thread.sleep(forTimeInterval: 0.025)
             }
 
             tries = 0
-            count = Assemble.core.commander?.userPresets.count
+            count = Assemble.core.commander?.songs.count
             Assemble.core.commander?.copyFactoryPreset(number: 2, false)
-            while tries < 25, count == Assemble.core.commander?.userPresets.count {
+            while tries < 25, count == Assemble.core.commander?.songs.count {
                 tries = tries + 1
                 Thread.sleep(forTimeInterval: 0.025)
             }
             
             Assemble.core.commander?.copyFactoryPreset(number: 1, true)
-            self.presetLabel.text = Assemble.core.commander?.currentPreset?.name
+            self.presetLabel.text = Assemble.core.commander?.preset?.name
             self.sequencer.initialiseFromUnderlyingState()
             self.patterns.loadStates()
             self.tempoLabel.reinitialise()
@@ -428,7 +428,7 @@ class MainViewController : UIViewController, KeyboardSettingsListener
     /// Update all UI elements in order that they reflect the underlying state.
     
     private func updateUIFromState() {
-        presetLabel.text = Assemble.core.commander?.currentPreset?.name
+        presetLabel.text = Assemble.core.commander?.preset?.name
         sequencer.initialiseFromUnderlyingState()
         tempoLabel.reinitialise()
         patterns.loadStates()

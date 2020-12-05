@@ -2,6 +2,7 @@
 //  ============================
 //  Copyright © 2020 David Spry. All rights reserved.
 
+import Disk
 import CoreAudio
 import AVFoundation
 
@@ -101,10 +102,27 @@ public class ASCommanderAU : ASAudioUnit
         }
 
         /// Print each user preset to the console
-
-        userPresets.forEach { print("User Preset: Name: \($0.name), Number: \($0.number)") }
+        userPresets.forEach { print("PRESET | Name: \($0.name) Number: \($0.number)") }
+        fetchSongs()
+        
+        
+        
     }
-    
+
+    /// Retrieve all files from the Songs directory that can be decoded as `Preset` structs.
+
+    internal func fetchSongs() {
+        do {
+            self.songs = []
+            let  files = try Disk.retrieve("Songs/", from: .documents, as: [Data].self)
+                 files.forEach {
+                 do { let song = try JSONDecoder().decode(Preset.self, from: $0)
+                      self.songs.append(song)
+                 }    catch {}
+            }
+        }   catch { print("[ASCommanderAU] Disk could not retrieve data from the Songs directory") }
+    }
+
     /// Play or pause the sequencer by toggling the state of the underlying clock.
     /// - Returns: `true` if the clock begins to tick; `false` otherwise
 
@@ -213,15 +231,30 @@ public class ASCommanderAU : ASAudioUnit
     public override var currentPreset: AUAudioUnitPreset? {
         didSet {
             guard let preset = currentPreset else { return }
+            print("[ASCommanderAU] Setting `currentPreset` property")
             do    { fullStateForDocument = try presetState(for: preset) }
             catch { print("[ASCommanderAU] The selected preset is not stored locally.") }
         }
     }
     
+    /// The current preset of the AudioUnit, using a custom, decodable `Preset` type.
+    /// - Parameter preset: The preset whose state should be loaded.
+    
+    public var preset: Preset? {
+        didSet {
+            guard let preset = preset else { return }
+            fullStateForDocument = preset.deserialisePreset()
+        }
+    }
+
     /// The index of the currently selected preset.
-    /// This index can be used to select the preset from the `userPresets` array.
+    /// This index can be used to select the preset from the `presets` array.
 
     public var selectedPreset: Int?
+    
+    /// An array containing `Presets` decoded from the `json` files located in the 'Documents/Songs' directory.
+
+    public var songs = [Preset]()
 
     public override var supportsUserPresets: Bool { return true }
 
@@ -266,14 +299,8 @@ public class ASCommanderAU : ASAudioUnit
 
     @discardableResult
     public func copyFactoryPreset(number: Int, _ shouldSelect: Bool) -> Bool {
-        guard let presets = factoryPresets else { return false }
-        guard !(number < 0) && number < presets.count else { return false }
-        
-        currentPreset = presets[number]
-        fullStateForDocument = factoryPresetsState[number]
-        saveState(named: currentPreset?.name ?? "Factory Preset", shouldSelect)
-        
-        return true
+        return loadFactoryPreset(number: number) &&
+               saveState(named: preset?.name ?? "Factory Preset", shouldSelect)
     }
     
     /// Load a factory preset
@@ -281,11 +308,15 @@ public class ASCommanderAU : ASAudioUnit
 
     @discardableResult
     public func loadFactoryPreset(number: Int) -> Bool {
-        guard let presets = factoryPresets else { return false }
+        guard let state = factoryPresetsState[number],
+              let presets = factoryPresets else { return false }
         guard !(number < 0) && number < presets.count else { return false }
+        
+        let presetName   = presets[number].name
+        let presetNumber = presets[number].number
 
-        currentPreset = presets[number]
-        fullStateForDocument = factoryPresetsState[number]
+        preset = Preset(named: presetName, numbered: presetNumber, state: state)
+        fullStateForDocument = state
 
         return true
     }
@@ -307,31 +338,51 @@ public class ASCommanderAU : ASAudioUnit
 
     @discardableResult
     public func loadFromPreset(number: Int) -> Bool {
-        guard !(number < 0) && number < userPresets.count else { return false }
+        guard !(number < 0) && number < songs.count else { return false }
 
         selectedPreset = number
-        currentPreset = userPresets[number]
+        preset = songs[number]
 
         return true
     }
-    
+
+    /// Use Disk to write the given preset to the Documents folder, then publish the result to the given callback function.
+    /// - Parameter preset: The `Preset` to be saved.
+    /// - Parameter callback: The function who should receive the result of saving, including any error that occurs.
+
+    internal func save(_ preset: Preset, then callback: @escaping (Bool, Error?) -> ()) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            do    { try Disk.save(preset, to: .documents, as: preset.filepath) }
+            catch { callback(false, error) }
+
+            self.songs.insert(preset, at: 0)
+            callback(true, nil)
+        }
+    }
+
     /// Save the currently loaded preset and re-select it as the current preset.
     ///
     /// - Note: The `userPresets` array appears to be sorted by modification date in descending order,
     /// so the most recently created or modified presets appear first in the list.
+    /// - Note: For the reason given above, the `presets` array prepends all newly saved or modified items
+    /// in order to mimic the behaviour of the `userPresets` implementation.
 
     @discardableResult
     public func saveCurrentPreset() -> Bool {
-        guard let preset = currentPreset else { return false }
+        guard let preset = self.preset else { return false }
         
-        let failure = "[ASCommanderAU] User preset \(preset.number): \(preset.name) failed to saved."
-        let success = "[ASCommanderAU] User preset \(preset.number): \(preset.name) saved successfully."
-        
-        do    { try saveUserPreset(preset) }
-        catch { print(failure); return false }
-        
-        print(success)
-        selectPresetZero(named: preset.name, after: 25)
+        let presetLabel = "[ASCommanderAU] User preset \(preset.number): \(preset.name)"
+        let failure = "\(presetLabel) failed to saved."
+        let success = "\(presetLabel) saved successfully."
+
+        save(preset) { didSave, error in
+            if let error = error { print(error) }
+            if !didSave { return print(failure) }
+            
+            print(success)
+            self.selectPresetZeroImmediately()
+        }
+
         return true
     }
 
@@ -342,19 +393,24 @@ public class ASCommanderAU : ASAudioUnit
 
     @discardableResult
     public func saveState(named name: String, _ shouldSelect: Bool = true) -> Bool {
+        guard let state = fullStateForDocument else { return false }
         let number = nextAvailablePresetNumber()
-        let preset = AUAudioUnitPreset()
-            preset.name = name
-            preset.number = number
+        let preset = Preset(named: name, numbered: number, state: state)
+        
+        let presetLabel = "[ASCommanderAU] User preset \(preset.number): \(preset.name)"
+        let failure = "\(presetLabel) failed to saved."
+        let success = "\(presetLabel) saved successfully."
 
-        let failure = "[ASCommanderAU] User preset \(preset.number): \(preset.name) failed to saved."
-        let success = "[ASCommanderAU] User preset \(preset.number): \(preset.name) saved successfully."
+        save(preset) { didSave, error in
+            if let error = error { print(error) }
+            if !didSave { return print(failure) }
 
-        do    { try saveUserPreset(preset) }
-        catch { print(failure); return false }
-
-        print(success)
-        if shouldSelect { selectPresetZero(named: preset.name, after: 25) }
+            print(success)
+            if shouldSelect {
+                self.selectPresetZeroImmediately()
+            }
+        }
+        
         return true
     }
     
@@ -369,41 +425,45 @@ public class ASCommanderAU : ASAudioUnit
     /// - Parameter delay: The number of milliseconds to wait before beginning the process.
     
     private func selectPresetZero(named name: String, after delay: Int) {
-        var   tries = 0
-        let   error = "[ASCommanderAU] userPresets[0] could not be selected."
-        guard userPresets.isNotEmpty else { return print(error) }
+        var tries = 0
+        let error = "[ASCommanderAU] userPresets[0] could not be selected."
+        guard songs.isNotEmpty else { return print(error) }
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delay)) {
-            while self.userPresets[0].name != name, tries < 20 {
+            while (self.songs.first?.name ?? "") != name, tries < 20 {
                 Thread.sleep(forTimeInterval: 0.05)
                 tries = tries + 1
             }
             
             if tries < 20 { print("[ASCommanderAU] Selecting Preset #0 after \(tries) thread sleeps.") }
             else          { print("[ASCommanderAU] The specified number of tries were exceeded.") }
-            self.loadFromPreset(number: 0)
-            self.selectedPreset = 0
+            self.selectPresetZeroImmediately()
         }
     }
     
+    /// Select the newest preset from index 0 immediately.
+    
+    private func selectPresetZeroImmediately() {
+        self.loadFromPreset(number: 0)
+        self.selectedPreset = 0
+    }
+    
     /// Return the next available preset number in linear time.
-    ///
-    /// Each unique preset should have a unique number. Unfortunately Apple's implementations
-    /// of preset saving does not allow presets to be updated with new names or numbers.
+    /// - Note: Each unique preset should have a unique number.
 
     private func nextAvailablePresetNumber() -> Int {
-        let presets = userPresets.sorted { $0.number > $1.number }
-        guard let first = presets.first, let last = presets.last else { return -1 }
+        let presets = songs.sorted { $0.number < $1.number }
+        guard let first = presets.first, let last = presets.last else { return 1 }
 
-        if first.number  < -1            { return first.number + 1 }
-        if -last.number == presets.count { return last.number - 1  }
+        if first.number  > 1            { return first.number - 1 }
+        if last.number == presets.count { return last.number + 1  }
         
         for k in 0 ..< presets.count {
+            let number = k + 1
             let preset = presets[k]
-            let number = -(k + 1)
             if  preset.number != number { return number }
         }
 
-        return -(userPresets.count + 1)
+        return songs.count + 1
     }
 
     /// Rename the given preset with the given name, then re-select the preset.
@@ -416,9 +476,13 @@ public class ASCommanderAU : ASAudioUnit
     /// - Parameter name:   The desired name for the preset.
 
     @discardableResult
-    public func renamePreset(_ preset: AUAudioUnitPreset, to name: String) -> Bool {
-        guard  saveState(named: name) else { return false }
-        return deletePreset(preset)
+    public func renamePreset(_ preset: Preset, to name: String) -> Bool {
+        self.preset = Preset(named: name, from: preset)
+        deletePreset(preset)
+        saveCurrentPreset()
+        
+        fetchSongs()
+        return true
     }
 
     /// Delete the given preset
@@ -426,24 +490,24 @@ public class ASCommanderAU : ASAudioUnit
     /// - Returns: `true` if the preset was deleted correctly; `false` otherwise.
 
     @discardableResult
-    public func deletePreset(_ preset: AUAudioUnitPreset) -> Bool {
-        do    { try deleteUserPreset(preset) }
+    public func deletePreset(_ preset: Preset) -> Bool {
+        do    { try Disk.remove(preset.filepath, from: .documents) }
         catch { return false }
-        
+
+        songs.removeAll { $0.number == preset.number && $0.name == preset.name }
         return true
     }
     
-    /// Find the counterpart of the given preset in the `userPresets` array and select it
-    /// to be the current preset.
+    /// Select the preset with the given properties from the `presets` array.
     /// - Parameter name:   The name of the desired preset.
     /// - Parameter number: The  number of the desired preset.
 
     private func findAndSelectPreset(named name: String, number: Int) {
         DispatchQueue.main.async {
-            for k in 0 ..< self.userPresets.count {
-                if self.userPresets[k].number == number &&
-                   self.userPresets[k].name == name {
-                    self.currentPreset = self.userPresets[k]
+            for k in 0 ..< self.songs.count {
+                if self.songs[k].number == number &&
+                   self.songs[k].name == name {
+                    self.preset = self.songs[k]
                     return
                 }
             }

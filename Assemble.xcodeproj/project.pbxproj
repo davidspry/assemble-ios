@@ -81,6 +81,8 @@
 		146EC65F244CBF49009025E4 /* Sequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 146EC65D244CBF49009025E4 /* Sequencer.cpp */; };
 		1470F72E2432047E00E751B7 /* NoteUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470F72D2432047E00E751B7 /* NoteUtilities.swift */; };
 		1474EC472442114F00D2BA79 /* OscillatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EC462442114F00D2BA79 /* OscillatorShape.swift */; };
+		147AC5CB257BABE200C0481D /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC5CA257BABE200C0481D /* ArrayExtensions.swift */; };
+		147AC5CC257BABE200C0481D /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147AC5CA257BABE200C0481D /* ArrayExtensions.swift */; };
 		14874C6A24D3C2EF00C2869A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14874C6924D3C2EF00C2869A /* Assets.xcassets */; };
 		1488BDDF24C301500008087C /* StoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */; };
 		1488BDE124C324CA0008087C /* SKProductExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1488BDE024C324CA0008087C /* SKProductExtensions.swift */; };
@@ -369,6 +371,7 @@
 		146EC66A244CC6DC009025E4 /* ASFrequencies.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASFrequencies.h; sourceTree = "<group>"; };
 		1470F72D2432047E00E751B7 /* NoteUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteUtilities.swift; sourceTree = "<group>"; };
 		1474EC462442114F00D2BA79 /* OscillatorShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OscillatorShape.swift; sourceTree = "<group>"; };
+		147AC5CA257BABE200C0481D /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		14874C6924D3C2EF00C2869A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1488BDDE24C301500008087C /* StoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfiguration.storekit; sourceTree = "<group>"; };
 		1488BDE024C324CA0008087C /* SKProductExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKProductExtensions.swift; sourceTree = "<group>"; };
@@ -558,6 +561,7 @@
 		141DDA55243F85AC0020386C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				147AC5CA257BABE200C0481D /* ArrayExtensions.swift */,
 				14AE019B245DA04C003EB586 /* BoolExtensions.swift */,
 				1404405E24F3E9AD0018914F /* CAShapeLayerExtensions.swift */,
 				143FB00C243F3DD90058AE40 /* CGPointExtensions.swift */,
@@ -1312,6 +1316,7 @@
 				14C4675224CD91BC0090F660 /* UIButtonExtensions.swift in Sources */,
 				14468F0A24F679A500F0D8B3 /* CAShapeLayerExtensions.swift in Sources */,
 				14C4673024CD91190090F660 /* ValueTransition.cpp in Sources */,
+				147AC5CC257BABE200C0481D /* ArrayExtensions.swift in Sources */,
 				1432630D24CDB94800B173C4 /* TransportIOS.swift in Sources */,
 				14C4674424CD91BC0090F660 /* MediaRecorder.swift in Sources */,
 				14C4674024CD91A10090F660 /* UserDefaultsKeys.swift in Sources */,
@@ -1473,6 +1478,7 @@
 				14488DBE24A39C5C00B44A6C /* ShareCardViewController.swift in Sources */,
 				1411F99D257B34170033BE3E /* Preset.swift in Sources */,
 				149ACC1D2454222D009DA18F /* ClosedRangeExtensions.swift in Sources */,
+				147AC5CB257BABE200C0481D /* ArrayExtensions.swift in Sources */,
 				14280350246C3DB9006775AE /* OscillatorParameters.swift in Sources */,
 				14EEB8CB247572FF007F0D37 /* PersistenceViewController.swift in Sources */,
 				14280342246C1B27006775AE /* ParametersViewController.swift in Sources */,

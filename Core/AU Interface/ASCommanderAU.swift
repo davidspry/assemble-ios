@@ -101,26 +101,79 @@ public class ASCommanderAU : ASAudioUnit
             return String(format: "%.2f", value ?? parameter.value)
         }
 
-        /// Print each user preset to the console
-        userPresets.forEach { print("PRESET | Name: \($0.name) Number: \($0.number)") }
+        /// Collect any presets made with Apple's user presets system, then populate the `songs` array.
+        
+        scanForLegacyPresets()
         fetchSongs()
-        
-        
-        
+    }
+    
+    /// Fetch any songs made using Apple's User Presets system.
+
+    internal func scanForLegacyPresets() {
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        guard let aupresets = directory.first?.appendingPathComponent("AUPresets") else { return }
+
+        do {
+            let content = try FileManager.default.contentsOfDirectory(at: aupresets, includingPropertiesForKeys: nil)
+            let presets = content.filter { $0.pathExtension == "aupreset" }
+            presets.forEach { url in
+                do  {
+                    let data = try Data(contentsOf: url)
+                    let archive = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+                    if let song = archive as? NSDictionary {
+                        let preset = Preset(from: song)
+                        try Disk.save(preset, to: .documents, as: preset.filepath)
+                        try Disk.move(url, to: aupresets.appendingPathComponent("Imported")
+                                                        .appendingPathComponent(url.lastPathComponent))
+                    }
+                }
+
+                catch {}
+            }
+        }
+        catch {}
+    }
+    
+    /// Assign positive preset numbers to any presets with non-positive numbers.
+
+    internal func ensurePositivePresetNumbers() {
+        let nonpositives = songs.filter { $0.number < 1 }
+        songs.removeAll { $0.number < 1 }
+
+        nonpositives.forEach { song in
+            let number = nextAvailablePresetNumber()
+            let preset = Preset(named: song.name, numbered: number, state: song.deserialisePreset())
+            songs.append(preset)
+
+            do { try Disk.save(preset, to: .documents, as: preset.filepath)
+                 deletePreset(song)
+            }    catch { }
+        }
     }
 
     /// Retrieve all files from the Songs directory that can be decoded as `Preset` structs.
 
     internal func fetchSongs() {
-        do {
-            self.songs = []
-            let  files = try Disk.retrieve("Songs/", from: .documents, as: [Data].self)
-                 files.forEach {
-                 do { let song = try JSONDecoder().decode(Preset.self, from: $0)
-                      self.songs.append(song)
-                 }    catch {}
-            }
-        }   catch { print("[ASCommanderAU] Disk could not retrieve data from the Songs directory") }
+        DispatchQueue.main.async {
+            do {
+                let  files = try Disk.retrieve("Songs/", from: .documents, as: [Data].self)
+                     files.forEach {
+                     do { let song = try JSONDecoder().decode(Preset.self, from: $0)
+                          self.songs.append(song)
+                     }    catch {}
+                }
+            }   catch { print("[ASCommanderAU] Disk could not retrieve data from the Songs directory") }
+
+            self.ensurePositivePresetNumbers()
+            self.songs.sort { x, y in x.modified > y.modified }
+        }
+    }
+    
+    /// Clear and repopulate the `songs` array.
+
+    internal func refreshSongsArray() {
+        self.songs   = []
+        self.fetchSongs()
     }
 
     /// Play or pause the sequencer by toggling the state of the underlying clock.
@@ -346,14 +399,35 @@ public class ASCommanderAU : ASAudioUnit
         return true
     }
 
-    /// Use Disk to write the given preset to the Documents folder, then publish the result to the given callback function.
+    /// Use Disk to write the given preset to the Documents folder synchronously.
+    /// - Parameter preset: The `Preset` to be saved.
+
+    internal func saveSynchronously(_ preset: Preset) -> Bool {
+        do    { try Disk.save(preset, to: .documents, as: preset.filepath) }
+        catch { return false }
+        
+        if let duplicate =
+            songs.firstIndex(where: { $0.number == preset.number && $0.name == preset.name }) {
+            songs.remove(at: duplicate)
+        }
+        
+        songs.insert(preset, at: 0)
+        return true
+    }
+
+    /// Use Disk to write the given preset to the Documents folder asynchronously, then publish the result to the given callback function.
     /// - Parameter preset: The `Preset` to be saved.
     /// - Parameter callback: The function who should receive the result of saving, including any error that occurs.
 
-    internal func save(_ preset: Preset, then callback: @escaping (Bool, Error?) -> ()) {
+    internal func saveAsynchronously(_ preset: Preset, then callback: @escaping (Bool, Error?) -> ()) {
         DispatchQueue.global(qos: .userInitiated).async {
             do    { try Disk.save(preset, to: .documents, as: preset.filepath) }
             catch { callback(false, error) }
+
+            if let duplicate =
+                self.songs.firstIndex(where: { $0.number == preset.number && $0.name == preset.name }) {
+                self.songs.remove(at: duplicate)
+            }
 
             self.songs.insert(preset, at: 0)
             callback(true, nil)
@@ -369,21 +443,24 @@ public class ASCommanderAU : ASAudioUnit
 
     @discardableResult
     public func saveCurrentPreset() -> Bool {
-        guard let preset = self.preset else { return false }
-        
+        guard let state  = fullStateForDocument,
+              let preset = self.preset else { return false }
+
         let presetLabel = "[ASCommanderAU] User preset \(preset.number): \(preset.name)"
         let failure = "\(presetLabel) failed to saved."
         let success = "\(presetLabel) saved successfully."
 
-        save(preset) { didSave, error in
-            if let error = error { print(error) }
-            if !didSave { return print(failure) }
-            
+        let modified = Preset(named: preset.name, numbered: preset.number, state: state)
+        if saveSynchronously(modified) {
+            selectPresetZeroImmediately()
             print(success)
-            self.selectPresetZeroImmediately()
+            return true
         }
 
-        return true
+        else {
+            print(failure)
+            return false
+        }
     }
 
     /// Save the current state as a new user preset using the next available number, then select the new preset.
@@ -401,16 +478,51 @@ public class ASCommanderAU : ASAudioUnit
         let failure = "\(presetLabel) failed to saved."
         let success = "\(presetLabel) saved successfully."
 
-        save(preset) { didSave, error in
-            if let error = error { print(error) }
-            if !didSave { return print(failure) }
-
+        if saveSynchronously(preset) {
+            if shouldSelect { selectPresetZeroImmediately() }
             print(success)
-            if shouldSelect {
-                self.selectPresetZeroImmediately()
-            }
+            return true
         }
         
+        else {
+            print(failure)
+            return false
+        }
+    }
+    
+    /// Rename the given preset with the given name, then re-select the preset.
+    ///
+    /// In order to rename a preset, it must be saved as a new preset with the new name,
+    /// then the original preset file must be deleted. Apple's implementation of `saveUserPreset`
+    /// will duplicate an `AUAudioUnitPreset` if its `name` property has been changed.
+    ///
+    /// - Parameter preset: The preset to rename
+    /// - Parameter name:   The desired name for the preset.
+
+    @discardableResult
+    public func renamePreset(_ preset: Preset, to name: String) -> Bool {
+        guard let state = fullStateForDocument else { return false }
+        self.preset = Preset(named: name, numbered: preset.number, state: state)
+        deletePreset(preset)
+        saveCurrentPreset()
+        return true
+    }
+
+    /// Delete the given preset
+    /// - Parameter preset: The preset to be deleted
+    /// - Returns: `true` if the preset was deleted correctly; `false` otherwise.
+
+    @discardableResult
+    public func deletePreset(_ preset: Preset) -> Bool {
+        do    { try Disk.remove(preset.filepath, from: .documents) }
+        catch { return false }
+
+        songs.removeAll {
+            $0.number == preset.number &&
+            $0.name   == preset.name   &&
+            $0.modified == preset.modified
+        }
+
         return true
     }
     
@@ -464,38 +576,6 @@ public class ASCommanderAU : ASAudioUnit
         }
 
         return songs.count + 1
-    }
-
-    /// Rename the given preset with the given name, then re-select the preset.
-    ///
-    /// In order to rename a preset, it must be saved as a new preset with the new name,
-    /// then the original preset file must be deleted. Apple's implementation of `saveUserPreset`
-    /// will duplicate an `AUAudioUnitPreset` if its `name` property has been changed.
-    ///
-    /// - Parameter preset: The preset to rename
-    /// - Parameter name:   The desired name for the preset.
-
-    @discardableResult
-    public func renamePreset(_ preset: Preset, to name: String) -> Bool {
-        self.preset = Preset(named: name, from: preset)
-        deletePreset(preset)
-        saveCurrentPreset()
-        
-        fetchSongs()
-        return true
-    }
-
-    /// Delete the given preset
-    /// - Parameter preset: The preset to be deleted
-    /// - Returns: `true` if the preset was deleted correctly; `false` otherwise.
-
-    @discardableResult
-    public func deletePreset(_ preset: Preset) -> Bool {
-        do    { try Disk.remove(preset.filepath, from: .documents) }
-        catch { return false }
-
-        songs.removeAll { $0.number == preset.number && $0.name == preset.name }
-        return true
     }
     
     /// Select the preset with the given properties from the `presets` array.

@@ -352,10 +352,11 @@ public class ASCommanderAU : ASAudioUnit
 
     @discardableResult
     public func copyFactoryPreset(number: Int, _ shouldSelect: Bool) -> Bool {
-        return loadFactoryPreset(number: number) &&
-               saveState(named: preset?.name ?? "Factory Preset", shouldSelect)
+        let loaded = loadFactoryPreset(number: number)
+        guard let preset = self.preset else { return false }
+        return loaded && saveState(named: preset.name, shouldSelect)
     }
-    
+
     /// Load a factory preset
     /// - Parameter number: The index of the desired factory preset
 
@@ -368,8 +369,7 @@ public class ASCommanderAU : ASAudioUnit
         let presetName   = presets[number].name
         let presetNumber = presets[number].number
 
-        preset = Preset(named: presetName, numbered: presetNumber, state: state)
-        fullStateForDocument = state
+        self.preset = Preset(named: presetName, numbered: presetNumber, state: state)
 
         return true
     }

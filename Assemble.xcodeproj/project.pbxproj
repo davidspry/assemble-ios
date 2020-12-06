@@ -534,6 +534,7 @@
 			isa = PBXGroup;
 			children = (
 				1411F99C257B34170033BE3E /* Preset.swift */,
+				14E6551D2471897600D619F0 /* FactoryPresets */,
 			);
 			path = Presets;
 			sourceTree = "<group>";
@@ -713,7 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				1411F99B257B34070033BE3E /* Presets */,
-				14E6551D2471897600D619F0 /* FactoryPresets */,
 				143FB022243F67500058AE40 /* ASComponent.swift */,
 				143FB020243F63620058AE40 /* ASCommander.swift */,
 				143FB016243F400B0058AE40 /* ASCommanderAU.swift */,
@@ -1718,7 +1718,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1732,7 +1732,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "-lc++";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = io.davidspry.assemble;
@@ -1754,7 +1754,7 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = W2VC5BW82H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1769,7 +1769,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lc++";
 				OTHER_SWIFT_FLAGS = "";
